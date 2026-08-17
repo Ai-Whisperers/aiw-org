@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>AI Whisperers — Org Dashboard</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  :root {
+    --bg: #0f1115; --bg-card: #1a1d24; --border: #2a2f3a;
+    --text: #e4e6eb; --text-dim: #8a8f9c; --text-bright: #ffffff;
+    --accent: #7834c0; --accent2: #af7ac9; --ok: #34c759; --warn: #d2ae3f; --err: #ff453a;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    background: var(--bg); color: var(--text);
+    padding: 24px; max-width: 1400px; margin: 0 auto; line-height: 1.5;
+  }
+  header { border-bottom: 1px solid var(--border); padding-bottom: 16px; margin-bottom: 24px; display: flex; justify-content: space-between; align-items: center; }
+  h1 { font-size: 20px; color: var(--text-bright); font-weight: 600; }
+  h1 small { color: var(--text-dim); font-weight: 400; font-size: 13px; margin-left: 8px; }
+  .stamp { font-size: 12px; color: var(--text-dim); }
+  .stamp code { background: var(--bg-card); padding: 2px 6px; border-radius: 3px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px; }
+  .card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: 16px; }
+  .card h2 { font-size: 14px; color: var(--accent2); margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center; }
+  .card h2 .meta { font-size: 11px; color: var(--text-dim); font-weight: 400; }
+  .row { display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px dashed var(--border); font-size: 13px; }
+  .row:last-child { border-bottom: 0; }
+  .label { color: var(--text-dim); }
+  .value { color: var(--text); font-variant-numeric: tabular-nums; }
+  .ok { color: var(--ok); }
+  .warn { color: var(--warn); }
+  .err { color: var(--err); }
+  .pill { display: inline-block; padding: 1px 8px; border-radius: 10px; font-size: 11px; font-weight: 500; }
+  .pill-ok { background: rgba(52, 199, 89, 0.15); color: var(--ok); }
+  .pill-warn { background: rgba(210, 174, 63, 0.15); color: var(--warn); }
+  .pill-err { background: rgba(255, 69, 58, 0.15); color: var(--err); }
+  .pill-dim { background: var(--border); color: var(--text-dim); }
+  table { width: 100%; border-collapse: collapse; font-size: 12px; }
+  th, td { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--border); }
+  th { color: var(--text-dim); font-weight: 500; font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; cursor: pointer; user-select: none; }
+  th:hover { color: var(--text); }
+  th.sort-asc::after { content: " ▲"; color: var(--accent2); }
+  th.sort-desc::after { content: " ▼"; color: var(--accent2); }
+  tr:hover td { background: rgba(255,255,255,0.02); }
+  tr.hidden { display: none; }
+  tr.filter-match { background: rgba(120, 52, 192, 0.1); }
+  .bigstat { font-size: 28px; font-weight: 600; color: var(--text-bright); margin: 4px 0; font-variant-numeric: tabular-nums; }
+  .bigstat-sub { font-size: 12px; color: var(--text-dim); }
+  .status-ok::before { content: "● "; color: var(--ok); }
+  .status-warn::before { content: "● "; color: var(--warn); }
+  .status-err::before { content: "● "; color: var(--err); }
+  .empty { color: var(--text-dim); font-style: italic; font-size: 12px; }
+  footer { margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--border); color: var(--text-dim); font-size: 11px; text-align: center; }
+  a { color: var(--accent2); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  code { font-family: 'SF Mono', Menlo, Consolas, monospace; font-size: 12px; }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 600px) { .grid-2 { grid-template-columns: 1fr; } }
+</style>
+<script>
+/* === Interactive dashboard JS === */
+(function() {
+  // Global filter input (search box) — affects all tables
+  const filterInput = document.getElementById('filter-input');
+  if (filterInput) {
+    filterInput.addEventListener('input', applyGlobalFilter);
+  }
+
+  // Per-table filter checkboxes
+  document.querySelectorAll('.filter-checkbox, .filter-mcp, .filter-state, .filter-kanban').forEach(cb => {
+    cb.addEventListener('change', applyAllFilters);
+  });
+
+  // Sortable headers
+  document.querySelectorAll('th[data-sort]').forEach(th => {
+    th.addEventListener('click', () => sortTable(th));
+  });
+
+  // Map table id → checkbox class
+  const tableFilters = {
+    'cron-table': 'filter-checkbox',
+    'mcp-table': 'filter-mcp',
+    'state-table': 'filter-state',
+    'kanban-table': 'filter-kanban',
+  };
+
+  function applyGlobalFilter() {
+    applyAllFilters();
+  }
+
+  function applyAllFilters() {
+    const q = (filterInput?.value || '').toLowerCase();
+    Object.entries(tableFilters).forEach(([tableId, checkboxClass]) => {
+      const table = document.getElementById(tableId);
+      if (!table) return;
+      const allowed = new Set(
+        Array.from(document.querySelectorAll('.' + checkboxClass + ':checked')).map(cb => cb.value)
+      );
+      table.querySelectorAll('tbody tr[data-filter]').forEach(row => {
+        const tags = (row.dataset.filter || '').split(' ');
+        const text = row.textContent.toLowerCase();
+        const matchesQuery = !q || text.includes(q);
+        const matchesStatus = allowed.size === 0 || Array.from(allowed).some(a => tags.includes(a));
+        row.classList.toggle('hidden', !(matchesQuery && matchesStatus));
+      });
+    });
+    updateCounts();
+  }
+
+  function updateCounts() {
+    document.querySelectorAll('[data-table-count]').forEach(el => {
+      const tableId = el.dataset.tableCount;
+      const rows = document.querySelectorAll(`#${tableId} tr[data-filter]:not(.hidden)`).length;
+      const total = document.querySelectorAll(`#${tableId} tr[data-filter]`).length;
+      el.textContent = `${rows} / ${total}`;
+    });
+  }
+
+  function sortTable(th) {
+    const table = th.closest('table');
+    const tbody = table.querySelector('tbody');
+    const rows = Array.from(tbody.querySelectorAll('tr[data-filter]'));
+    const idx = Array.from(th.parentNode.children).indexOf(th);
+    const asc = !th.classList.contains('sort-asc');
+    th.parentNode.querySelectorAll('th').forEach(other => {
+      other.classList.remove('sort-asc', 'sort-desc');
+    });
+    th.classList.add(asc ? 'sort-asc' : 'sort-desc');
+    rows.sort((a, b) => {
+      const av = a.children[idx]?.textContent || '';
+      const bv = b.children[idx]?.textContent || '';
+      const an = parseFloat(av), bn = parseFloat(bv);
+      if (!isNaN(an) && !isNaN(bn)) return asc ? an - bn : bn - an;
+      return asc ? av.localeCompare(bv) : bv.localeCompare(av);
+    });
+    rows.forEach(r => tbody.appendChild(r));
+  }
+
+  // Init
+  updateCounts();
+})();
+</script>
+</head>
+<body>
+<header>
+  <div>
+    <h1>AI Whisperers Paraguay EAS <small>Org Dashboard</small></h1>
+  </div>
+  <div style="display:flex;gap:16px;align-items:center">
+    <input type="text" id="filter-input" placeholder="Filter..." style="background:var(--bg-card);color:var(--text);border:1px solid var(--border);border-radius:4px;padding:6px 10px;font-size:13px;width:200px">
+    <div class="stamp">
+      <code>__STAMP__</code>
+    </div>
+  </div>
+</header>
+
+<!-- ==================== TOP STATS ==================== -->
+<div class="grid" style="margin-bottom: 16px;">
+  <div class="card">
+    <h2>Revenue (MRR) <span class="meta">live</span></h2>
+    <div class="bigstat">$__MRR__</div>
+    <div class="bigstat-sub">ARR run rate: $__ARR__</div>
+  </div>
+  <div class="card">
+    <h2>Runway <span class="meta">months</span></h2>
+    <div class="bigstat __RUNWAY_CLASS__">__RUNWAY__</div>
+    <div class="bigstat-sub">at current burn (~$__BURN__/mo)</div>
+  </div>
+  <div class="card">
+    <h2>Active client sites <span class="meta">Swarm</span></h2>
+    <div class="bigstat">__SITES__</div>
+    <div class="bigstat-sub">under *.paragu-ai.com</div>
+  </div>
+  <div class="card">
+    <h2>Open PRs <span class="meta">org-wide</span></h2>
+    <div class="bigstat">__PRS__</div>
+    <div class="bigstat-sub">__PRS_OLD__ oldest awaiting review</div>
+  </div>
+</div>
+
+<!-- ==================== DEPARTMENTS ==================== -->
+<h2 style="font-size: 13px; color: var(--text-dim); margin: 24px 0 12px; text-transform: uppercase; letter-spacing: 0.05em;">
+  Departments
+  <span style="font-weight: 400; text-transform: none; color: var(--text-dim);">
+    (each has a dedicated dashboard)
+  </span>
+</h2>
+
+<div class="grid">
+  <div class="card">
+    <h2>Operations <span class="meta">coord</span> <a href="dept-operations.html" style="float:right;font-size:11px;color:var(--accent2)">dashboard →</a></h2>
+    <div class="row"><span class="label">Lead agent</span><span class="value">management-coordinator</span></div>
+    <div class="row"><span class="label">Cadence</span><span class="value">Mon+Thu 17:00 PYT</span></div>
+    <div class="row"><span class="label">Cron ID</span><span class="value"><code>46c5ae172d63</code></span></div>
+    <div class="row"><span class="label">Open stuck items</span><span class="value __STUCK_CLASS__">__STUCK__</span></div>
+    <div class="row"><span class="label">Stale repos (14d+)</span><span class="value">__STALE__</span></div>
+  </div>
+
+  <div class="card">
+    <h2>Finance &amp; Legal <span class="meta">finance</span> <a href="dept-finance.html" style="float:right;font-size:11px;color:var(--accent2)">dashboard →</a></h2>
+    <div class="row"><span class="label">Lead agent</span><span class="value">finance-controller</span></div>
+    <div class="row"><span class="label">Cadence</span><span class="value">Fri 18:00 PYT</span></div>
+    <div class="row"><span class="label">Cron ID</span><span class="value"><code>40a68cdf432b</code></span></div>
+    <div class="row"><span class="label">Open deals</span><span class="value">__DEALS__</span></div>
+    <div class="row"><span class="label">Compliance flags</span><span class="value __COMPL_CLASS__">__COMPL__</span></div>
+  </div>
+
+  <div class="card">
+    <h2>Sales &amp; Growth <span class="meta">sales</span> <a href="dept-sales.html" style="float:right;font-size:11px;color:var(--accent2)">dashboard →</a></h2>
+    <div class="row"><span class="label">Lead agent</span><span class="value">sales-pipeline</span></div>
+    <div class="row"><span class="label">Cadence</span><span class="value">Daily 09:00 + 12:00 PYT</span></div>
+    <div class="row"><span class="label">Cron ID</span><span class="value"><code>0e5db79fbca9</code></span></div>
+    <div class="row"><span class="label">Leads in flight</span><span class="value">__LEADS__</span></div>
+    <div class="row"><span class="label">Outreach queue today</span><span class="value">__OUTREACH__</span></div>
+  </div>
+
+  <div class="card">
+    <h2>Engineering &amp; Delivery <span class="meta">eng</span> <a href="dept-engineering.html" style="float:right;font-size:11px;color:var(--accent2)">dashboard →</a></h2>
+    <div class="row"><span class="label">Lead agent</span><span class="value">engineering-roster</span></div>
+    <div class="row"><span class="label">Cadence</span><span class="value">Tue+Fri 17:00 PYT</span></div>
+    <div class="row"><span class="label">Cron ID</span><span class="value"><code>3f0e7fd1898e</code></span></div>
+    <div class="row"><span class="label">Deploys (7d)</span><span class="value">__DEPLOYS__</span></div>
+    <div class="row"><span class="label">Incidents (72h)</span><span class="value __INC_CLASS__">__INC__</span></div>
+  </div>
+
+  <div class="card">
+    <h2>Research &amp; Education <span class="meta">research</span> <a href="dept-research.html" style="float:right;font-size:11px;color:var(--accent2)">dashboard →</a></h2>
+    <div class="row"><span class="label">Lead agent</span><span class="value">research-tracker</span></div>
+    <div class="row"><span class="label">Cadence</span><span class="value">Sun 18:00 PYT</span></div>
+    <div class="row"><span class="label">Cron ID</span><span class="value"><code>3b0045bd89e0</code></span></div>
+    <div class="row"><span class="label">Thesis chapter</span><span class="value">__THESIS__</span></div>
+    <div class="row"><span class="label">Publications pipeline</span><span class="value">__PUBS__</span></div>
+  </div>
+
+  <div class="card">
+    <h2>People &amp; Culture <span class="meta">people</span> <a href="dept-people.html" style="float:right;font-size:11px;color:var(--accent2)">dashboard →</a></h2>
+    <div class="row"><span class="label">Lead agent</span><span class="value">kiki-coach</span></div>
+    <div class="row"><span class="label">Cadence</span><span class="value">Fri 17:00 PYT</span></div>
+    <div class="row"><span class="label">Cron ID</span><span class="value"><code>eeca3ecd40ed</code></span></div>
+    <div class="row"><span class="label">Kiki lesson streak</span><span class="value">__KIKI_STREAK__</span></div>
+    <div class="row"><span class="label">Contractors active</span><span class="value">__CONTRACTORS__</span></div>
+  </div>
+</div>
+
+<!-- ==================== CRON JOBS ==================== -->
+<h2 style="font-size: 13px; color: var(--text-dim); margin: 24px 0 12px; text-transform: uppercase; letter-spacing: 0.05em;">Cron Jobs <span style="font-weight: 400; text-transform: none; color: var(--text-dim);">(__CRON_TOTAL__ total, __CRON_OK__ ok, __CRON_ERR__ error)</span></h2>
+
+<div class="card" style="display:flex;gap:16px;align-items:center;padding:12px 16px">
+  <span style="color:var(--text-dim);font-size:12px">Filter:</span>
+  <label style="color:var(--text);font-size:13px;cursor:pointer"><input type="checkbox" class="filter-checkbox" value="ok" checked> ok</label>
+  <label style="color:var(--text);font-size:13px;cursor:pointer"><input type="checkbox" class="filter-checkbox" value="err" checked> err</label>
+  <label style="color:var(--text);font-size:13px;cursor:pointer"><input type="checkbox" class="filter-checkbox" value="pending" checked> pending</label>
+  <label style="color:var(--text);font-size:13px;cursor:pointer"><input type="checkbox" class="filter-checkbox" value="script" checked> script</label>
+  <label style="color:var(--text);font-size:13px;cursor:pointer"><input type="checkbox" class="filter-checkbox" value="agent" checked> agent</label>
+  <span style="color:var(--text-dim);font-size:12px;margin-left:auto">click any column header to sort</span>
+</div>
+
+<div class="card">
+<table id="cron-table">
+  <thead><tr>
+    <th data-sort>Job</th>
+    <th data-sort>Schedule</th>
+    <th data-sort>Status</th>
+    <th data-sort>Last run</th>
+    <th data-sort>Mode</th>
+  </tr></thead>
+  <tbody>
+  __CRON_ROWS__
+  </tbody>
+</table>
+</div>
+
+<!-- ==================== MCP SERVERS ==================== -->
+<h2 style="font-size: 13px; color: var(--text-dim); margin: 24px 0 12px; text-transform: uppercase; letter-spacing: 0.05em;">MCP Servers <span style="font-weight: 400; text-transform: none; color: var(--text-dim);">(__MCP_TOTAL__ configured, __MCP_ENABLED__ enabled)</span></h2>
+
+<div class="card" style="display:flex;gap:16px;align-items:center;padding:12px 16px">
+  <span style="color:var(--text-dim);font-size:12px">Filter:</span>
+  <label style="color:var(--text);font-size:13px;cursor:pointer"><input type="checkbox" class="filter-mcp" value="stdio" checked> stdio</label>
+  <label style="color:var(--text);font-size:13px;cursor:pointer"><input type="checkbox" class="filter-mcp" value="http" checked> http</label>
+  <label style="color:var(--text);font-size:13px;cursor:pointer"><input type="checkbox" class="filter-mcp" value="ok" checked> ok</label>
+  <label style="color:var(--text);font-size:13px;cursor:pointer"><input type="checkbox" class="filter-mcp" value="err" checked> error</label>
+  <label style="color:var(--text);font-size:13px;cursor:pointer"><input type="checkbox" class="filter-mcp" value="auth" checked> needs auth</label>
+</div>
+
+<div class="card">
+<table id="mcp-table">
+  <thead><tr><th data-sort>Name</th><th data-sort>Transport</th><th data-sort>Tools</th><th data-sort>Status</th></tr></thead>
+  <tbody>
+  __MCP_ROWS__
+  </tbody>
+</table>
+</div>
+
+<!-- ==================== STATE FILES ==================== -->
+<h2 style="font-size: 13px; color: var(--text-dim); margin: 24px 0 12px; text-transform: uppercase; letter-spacing: 0.05em;">State Files <span style="font-weight: 400; text-transform: none; color: var(--text-dim);">(org memory)</span></h2>
+
+<div class="card" style="display:flex;gap:16px;align-items:center;padding:12px 16px">
+  <span style="color:var(--text-dim);font-size:12px">Filter:</span>
+  <label style="color:var(--text);font-size:13px;cursor:pointer"><input type="checkbox" class="filter-state" value="agent" checked> agent</label>
+  <label style="color:var(--text);font-size:13px;cursor:pointer"><input type="checkbox" class="filter-state" value="dept" checked> dept</label>
+  <label style="color:var(--text);font-size:13px;cursor:pointer"><input type="checkbox" class="filter-state" value="recent" checked> updated today</label>
+  <label style="color:var(--text);font-size:13px;cursor:pointer"><input type="checkbox" class="filter-state" value="stale" checked> stale (&gt;7d)</label>
+</div>
+
+<div class="card">
+<table id="state-table">
+  <thead><tr><th data-sort>File</th><th data-sort>Size</th><th data-sort>Last update</th><th data-sort>Decisions / open items</th></tr></thead>
+  <tbody>
+  __STATE_ROWS__
+  </tbody>
+</table>
+</div>
+
+<!-- ==================== HISTORY ==================== -->
+<h2 style="font-size: 13px; color: var(--text-dim); margin: 24px 0 12px; text-transform: uppercase; letter-spacing: 0.05em;">7-Day History <span style="font-weight: 400; text-transform: none; color: var(--text-dim);">(cron health trend)</span></h2>
+
+<div class="card">
+__HISTORY_HTML__
+</div>
+
+<h2 style="font-size: 13px; color: var(--text-dim); margin: 24px 0 12px; text-transform: uppercase; letter-spacing: 0.05em;">MCP Growth <span style="font-weight: 400; text-transform: none; color: var(--text-dim);">(server count over time)</span></h2>
+
+<div class="card">
+__MCP_GROWTH_HTML__
+</div>
+
+<!-- ==================== KANBAN QUEUE ==================== -->
+<h2 style="font-size: 13px; color: var(--text-dim); margin: 24px 0 12px; text-transform: uppercase; letter-spacing: 0.05em;">Active Tasks <span style="font-weight: 400; text-transform: none; color: var(--text-dim);">(kanban default board)</span></h2>
+
+<div class="card" style="display:flex;gap:16px;align-items:center;padding:12px 16px">
+  <span style="color:var(--text-dim);font-size:12px">Filter:</span>
+  <label style="color:var(--text);font-size:13px;cursor:pointer"><input type="checkbox" class="filter-kanban" value="ready" checked> ready</label>
+  <label style="color:var(--text);font-size:13px;cursor:pointer"><input type="checkbox" class="filter-kanban" value="claimed" checked> claimed</label>
+  <label style="color:var(--text);font-size:13px;cursor:pointer"><input type="checkbox" class="filter-kanban" value="blocked" checked> blocked</label>
+  <label style="color:var(--text);font-size:13px;cursor:pointer"><input type="checkbox" class="filter-kanban" value="done" checked> done</label>
+</div>
+
+<div class="card">
+<table id="kanban-table">
+  <thead><tr><th data-sort>Task</th><th data-sort>Project</th><th data-sort>Assignee</th><th data-sort>Body</th></tr></thead>
+  <tbody>
+  __KANBAN_ROWS__
+  </tbody>
+</table>
+</div>
+
+<footer>
+  AI Whisperers Paraguay EAS · Org dashboard · auto-generated by Erebus
+  · <a href="https://github.com/Ai-Whisperers/company">company</a> · <a href="/opt/data/agents/ORCHESTRATION.md">ORCHESTRATION.md</a>
+</footer>
+</body>
+</html>

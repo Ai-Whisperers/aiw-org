@@ -1,0 +1,20 @@
+---
+hard_stops:
+- action: read_state
+  require_approval: false
+- action: write_state
+  require_approval: false
+- action: disable_hardstop
+  approved_human: ivan+kiki
+  require_approval: true
+- action: modify_eval_gates
+  approved_human: ivan
+  require_approval: true
+---
+
+
+
+## CHANGELOG
+
+- v0.2.0 (2026-08-14): upgraded to 12-section template. Added hard stops, idempotency, reflection loop, fallback. Added 3 new curriculum topics (agent ops track).
+- v0.1.0 (2026-08-13): initial rollout. 8-week curriculum.

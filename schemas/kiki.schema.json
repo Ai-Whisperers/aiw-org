@@ -1,0 +1,17 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "agent.state — kiki.json",
+  "description": "Kiki-coach rolling state.",
+  "type": "object",
+  "required": ["last_run", "lessons_delivered", "streak_weeks_completed"],
+  "properties": {
+    "last_run": {"type": ["string", "null"], "format": "date-time"},
+    "lessons_delivered": {"type": "array", "items": {"type": "object"}},
+    "current_focus": {"type": ["string", "null"]},
+    "next_topic": {"type": ["string", "null"]},
+    "streak_weeks_completed": {"type": "integer", "minimum": 0},
+    "topic_preference": {"type": ["string", "null"]},
+    "language_preference": {"enum": ["es", "en", null], "type": ["string", "null"]}
+  },
+  "additionalProperties": false
+}

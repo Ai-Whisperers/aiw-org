@@ -1,0 +1,12 @@
+{
+  "last_run": null,
+  "kiki_lesson_streak_weeks": 0,
+  "kiki_total_lessons_completed": 0,
+  "contractors_active": [],
+  "contractor_onboarding_queue": [],
+  "founder_bandwidth_audit": {
+    "ivan": {"billable_hours_week": null, "internal_hours_week": null},
+    "kiki": {"billable_hours_week": null, "internal_hours_week": null}
+  },
+  "milestones_recent": []
+}

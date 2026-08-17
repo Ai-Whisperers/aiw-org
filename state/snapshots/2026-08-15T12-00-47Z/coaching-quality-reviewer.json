@@ -1,0 +1,20 @@
+{
+  "agent": "coaching-quality-reviewer",
+  "last_run": "2026-08-15T03:33:42.781936+00:00",
+  "sessions_reviewed": [
+    "coach-ivan",
+    "coach-kiki",
+    "coach-practitioner",
+    "coach-onboarding",
+    "coach-cohort-facilitator",
+    "coach-lead-agents",
+    "coach-lead-finder",
+    "coach-renewal-manager",
+    "coach-roi-tracker"
+  ],
+  "total_reviews": 9,
+  "issues_found": 2,
+  "escalations_triggered": 0,
+  "output_file": "/opt/data/agents/coaching-quality-reviewer/outbox/2026-08-15.md",
+  "next_review": "2026-08-16"
+}

@@ -1,0 +1,26 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "agent.state — coord.json",
+  "description": "Management-coordinator rolling state.",
+  "type": "object",
+  "required": ["last_run", "open_stuck", "stale_repos", "decisions_for_ivan"],
+  "properties": {
+    "last_run": {"type": ["string", "null"], "format": "date-time"},
+    "open_stuck": {"type": "array", "items": {"type": "object"}},
+    "stale_repos": {"type": "array", "items": {"type": "object"}},
+    "decisions_for_ivan": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["question", "context"],
+        "properties": {
+          "question": {"type": "string"},
+          "context": {"type": "string"},
+          "raised_at": {"type": "string", "format": "date-time"}
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

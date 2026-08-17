@@ -1,0 +1,48 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "agent.state — analyst.json",
+  "description": "Business-analyst rolling state. Updated daily after each brief.",
+  "type": "object",
+  "required": ["last_run", "decisions", "open_questions", "kpi_snapshot"],
+  "properties": {
+    "last_run": {
+      "type": ["string", "null"],
+      "format": "date-time",
+      "description": "ISO timestamp of last agent run; null if never"
+    },
+    "decisions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["date", "summary"],
+        "properties": {
+          "date": {"type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$"},
+          "summary": {"type": "string", "minLength": 1}
+        },
+        "additionalProperties": false
+      }
+    },
+    "open_questions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["question", "priority"],
+        "properties": {
+          "question": {"type": "string"},
+          "priority": {"enum": ["low", "medium", "high", "critical"]}
+        },
+        "additionalProperties": false
+      }
+    },
+    "kpi_snapshot": {
+      "type": "object",
+      "properties": {
+        "pipeline_usd": {"type": ["number", "null"], "minimum": 0},
+        "mrr_usd": {"type": ["number", "null"], "minimum": 0},
+        "leads_24h": {"type": "integer", "minimum": 0}
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

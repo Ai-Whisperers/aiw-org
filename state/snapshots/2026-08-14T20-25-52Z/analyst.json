@@ -1,0 +1,14 @@
+{
+  "decisions": [
+    {
+      "date": "2026-08-14T10:31:03.459902+00:00",
+      "content": ["Fix GitHub auth for org-pulse", "Investigate CI failures"]
+    }
+  ],
+  "questions": [
+    {
+      "date": "2026-08-14T10:31:03.459902+00:00",
+      "content": "Check GitHub auth status for org-pulse"
+    }
+  ]
+}

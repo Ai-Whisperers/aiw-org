@@ -1,0 +1,16 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "agent.state — kiki-prep.json",
+  "description": "Kiki-coach preparation snapshot (generated before each weekly lesson).",
+  "type": "object",
+  "required": ["as_of", "window_days", "kiki_repos"],
+  "properties": {
+    "as_of": {"type": "string", "format": "date-time"},
+    "window_days": {"type": "integer", "minimum": 1, "maximum": 90},
+    "kiki_repos": {"type": "array", "items": {"type": "string"}},
+    "recent_commits": {"type": "array", "items": {"type": "object"}},
+    "recent_files_touched": {"type": "array", "items": {"type": "string"}},
+    "error": {"type": ["string", "null"]}
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,19 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "agent.state — finance.json",
+  "description": "Finance-controller rolling state.",
+  "type": "object",
+  "required": ["last_run", "runway_months", "mrr_usd", "burn_usd_monthly"],
+  "properties": {
+    "last_run": {"type": ["string", "null"], "format": "date-time"},
+    "runway_months": {"type": ["number", "null"], "minimum": 0},
+    "mrr_usd": {"type": ["number", "null"], "minimum": 0},
+    "burn_usd_monthly": {"type": ["number", "null"], "minimum": 0},
+    "deals_open": {"type": "array", "items": {"type": "object"}},
+    "deals_signed_this_week": {"type": "array", "items": {"type": "object"}},
+    "compliance_flags": {"type": "array", "items": {"type": "object"}},
+    "renewals_due_30d": {"type": "array", "items": {"type": "object"}},
+    "open_questions": {"type": "array", "items": {"type": "object"}}
+  },
+  "additionalProperties": false
+}

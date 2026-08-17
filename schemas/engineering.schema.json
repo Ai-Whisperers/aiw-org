@@ -1,0 +1,18 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "agent.state — engineering.json",
+  "description": "Engineering-roster rolling state.",
+  "type": "object",
+  "required": ["last_run", "deploys_7d", "open_prs", "stale_repos_7d", "incidents_72h"],
+  "properties": {
+    "last_run": {"type": ["string", "null"], "format": "date-time"},
+    "deploys_7d": {"type": "array", "items": {"type": "object"}},
+    "open_prs": {"type": "array", "items": {"type": "object"}},
+    "stale_repos_7d": {"type": "array", "items": {"type": "object"}},
+    "incidents_72h": {"type": "array", "items": {"type": "object"}},
+    "kiki_commits_7d": {"type": "integer", "minimum": 0},
+    "infra_costs_monthly_usd": {"type": ["number", "null"], "minimum": 0},
+    "tools_pending_decision": {"type": "array", "items": {"type": "object"}}
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,26 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "agent.state — research.json",
+  "description": "Research-tracker rolling state.",
+  "type": "object",
+  "required": ["last_run", "thesis"],
+  "properties": {
+    "last_run": {"type": ["string", "null"], "format": "date-time"},
+    "thesis": {
+      "type": "object",
+      "properties": {
+        "chapter": {"type": ["integer", "null"], "minimum": 1},
+        "chapter_title": {"type": ["string", "null"]},
+        "last_commit": {"type": ["string", "null"], "format": "date-time"},
+        "target_date": {"type": ["string", "null"], "format": "date-time"},
+        "blocker": {"type": ["string", "null"]}
+      },
+      "additionalProperties": false
+    },
+    "publications_pipeline": {"type": "array", "items": {"type": "object"}},
+    "courses_ready": {"type": "array", "items": {"type": "object"}},
+    "courses_in_draft": {"type": "array", "items": {"type": "object"}},
+    "monetization_backlog": {"type": "array", "items": {"type": "object"}}
+  },
+  "additionalProperties": false
+}

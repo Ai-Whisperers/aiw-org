@@ -1,0 +1,26 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "agent.state — sales.json",
+  "description": "Sales-pipeline rolling state.",
+  "type": "object",
+  "required": ["last_run", "leads_in_flight", "funnel_30d"],
+  "properties": {
+    "last_run": {"type": ["string", "null"], "format": "date-time"},
+    "leads_in_flight": {"type": "array", "items": {"type": "object"}},
+    "funnel_30d": {
+      "type": "object",
+      "required": ["leads", "calls_booked", "proposals_sent", "contracts_signed"],
+      "properties": {
+        "leads": {"type": "integer", "minimum": 0},
+        "calls_booked": {"type": "integer", "minimum": 0},
+        "proposals_sent": {"type": "integer", "minimum": 0},
+        "contracts_signed": {"type": "integer", "minimum": 0}
+      },
+      "additionalProperties": false
+    },
+    "outreach_queue_today": {"type": "array", "items": {"type": "object"}},
+    "stalled_deals": {"type": "array", "items": {"type": "object"}},
+    "open_questions": {"type": "array", "items": {"type": "object"}}
+  },
+  "additionalProperties": false
+}

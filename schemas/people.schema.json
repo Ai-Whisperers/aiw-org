@@ -1,0 +1,17 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "agent.state — people.json",
+  "description": "People/HR rolling state.",
+  "type": "object",
+  "required": ["last_run", "kiki_lesson_streak_weeks", "kiki_total_lessons_completed"],
+  "properties": {
+    "last_run": {"type": ["string", "null"], "format": "date-time"},
+    "kiki_lesson_streak_weeks": {"type": "integer", "minimum": 0},
+    "kiki_total_lessons_completed": {"type": "integer", "minimum": 0},
+    "contractors_active": {"type": "array", "items": {"type": "object"}},
+    "contractor_onboarding_queue": {"type": "array", "items": {"type": "object"}},
+    "founder_bandwidth_audit": {"type": "object"},
+    "milestones_recent": {"type": "array", "items": {"type": "object"}}
+  },
+  "additionalProperties": false
+}

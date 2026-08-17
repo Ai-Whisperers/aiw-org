@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html><head>
+<meta charset="utf-8">
+<title>Sales & Growth · AI Whisperers</title>
+<style>
+:root {
+  --bg: #0f1115; --bg-card: #181c23; --text: #e6e6e6; --text-dim: #9ca3af;
+  --border: #2a2f3a; --ok: #10b981; --err: #ef4444; --warn: #f59e0b;
+  --accent: #f59e0b; --accent2: #a78bfa;
+}
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 24px; }
+header { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 24px; }
+h1 { margin: 0; font-size: 22px; }
+h1 small { color: var(--text-dim); font-weight: 400; font-size: 13px; }
+.dept-meta { color: var(--text-dim); font-size: 13px; margin-bottom: 24px; }
+.kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; margin-bottom: 24px; }
+.kpi-card { background: var(--bg-card); padding: 16px; border-radius: 6px; }
+.kpi-label { color: var(--text-dim); font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; }
+.kpi-value { font-size: 28px; font-weight: 600; color: var(--accent); margin: 6px 0; font-variant-numeric: tabular-nums; }
+.kpi-help { color: var(--text-dim); font-size: 11px; }
+.card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; padding: 16px; margin-bottom: 16px; }
+h2 { font-size: 13px; color: var(--text-dim); margin: 16px 0 12px; text-transform: uppercase; letter-spacing: 0.05em; }
+table { width: 100%; border-collapse: collapse; font-size: 12px; }
+th, td { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--border); }
+th { color: var(--text-dim); font-weight: 500; font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; }
+.pill { display: inline-block; padding: 2px 6px; border-radius: 3px; font-size: 11px; }
+.pill-ok { background: rgba(16, 185, 129, 0.2); color: var(--ok); }
+.pill-err { background: rgba(239, 68, 68, 0.2); color: var(--err); }
+.pill-dim { background: var(--border); color: var(--text-dim); }
+code { background: rgba(255,255,255,0.05); padding: 1px 4px; border-radius: 3px; font-family: "SF Mono", monospace; }
+.empty { color: var(--text-dim); font-style: italic; }
+footer { color: var(--text-dim); font-size: 11px; text-align: center; margin-top: 32px; }
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+@media (max-width: 800px) { .grid-2 { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<header>
+  <div>
+    <h1>Sales & Growth <small>Dept dashboard</small></h1>
+    <div class="dept-meta">
+      Head: <b>Ivan</b> · Lead agent: <code>sales-pipeline</code> · Cadence: <b>Daily 12:00 PYT</b>
+      · <a href="/">← main dashboard</a>
+    </div>
+  </div>
+  <div class="dept-meta">Generated 2026-08-13T18:34:44 UTC</div>
+</header>
+
+<div class="kpi-grid">
+
+<div class="kpi-card" style="border-left:3px solid #f59e0b">
+  <div class="kpi-label">Leads total</div>
+  <div class="kpi-value">0</div>
+  <div class="kpi-help">All-time</div>
+</div>
+<div class="kpi-card" style="border-left:3px solid #f59e0b">
+  <div class="kpi-label">In flight</div>
+  <div class="kpi-value">—</div>
+  <div class="kpi-help">Currently active</div>
+</div>
+<div class="kpi-card" style="border-left:3px solid #f59e0b">
+  <div class="kpi-label">Outreach queue</div>
+  <div class="kpi-value">—</div>
+  <div class="kpi-help">Today</div>
+</div>
+<div class="kpi-card" style="border-left:3px solid #f59e0b">
+  <div class="kpi-label">Stalled</div>
+  <div class="kpi-value">—</div>
+  <div class="kpi-help">No reply 7d+</div>
+</div>
+<div class="kpi-card" style="border-left:3px solid #f59e0b">
+  <div class="kpi-label">Conv. rate</div>
+  <div class="kpi-value">—</div>
+  <div class="kpi-help">Lead → closed</div>
+</div>
+<div class="kpi-card" style="border-left:3px solid #f59e0b">
+  <div class="kpi-label">Won (30d)</div>
+  <div class="kpi-value">—</div>
+  <div class="kpi-help">Closed deals</div>
+</div>
+</div>
+
+<div class="grid-2">
+<div class="card">
+<h2>Cron Jobs (1)</h2>
+<table>
+<thead><tr><th>Job</th><th>Schedule</th><th>Status</th></tr></thead>
+<tbody><tr><td><code>aiw-sales-pipeline-daily</code></td><td>0 13,16 * * *</td><td><span class="pill pill-dim">pending</span></td></tr></tbody>
+</table>
+</div>
+
+<div class="card">
+<h2>State File Summary</h2>
+<p style="color:var(--text-dim);font-size:11px;margin:0 0 8px"><code>sales.json</code> · last modified 2026-08-13T16:30:30</p>
+<ul style="font-size:13px;color:var(--text);line-height:1.6"><li><code>last_run</code>: None</li>
+<li><code>open_questions</code>: </li></ul>
+</div>
+</div>
+
+<div class="card">
+<h2>Recent Kanban Tasks</h2>
+<table>
+<thead><tr><th>Task</th><th>Status</th><th>Assignee</th><th>Age</th></tr></thead>
+<tbody><tr><td>Populate source-materials/ with real content</td><td>ready</td><td>ivan</td><td>0d</td></tr>
+<tr><td>Update THESIS_STATE.md</td><td>ready</td><td>ivan</td><td>0d</td></tr>
+<tr><td>Pick first 3 kiki-coach topics</td><td>ready</td><td>kiki</td><td>0d</td></tr>
+<tr><td>Send Richar Ruiz first contact</td><td>ready</td><td>ivan</td><td>0d</td></tr>
+<tr><td>Populate finance.json state with real numbers</td><td>ready</td><td>ivan</td><td>0d</td></tr>
+<tr><td>Add MCP server: cloudflare</td><td>ready</td><td>ivan</td><td>0d</td></tr>
+<tr><td>Add MCP server: github</td><td>ready</td><td>ivan</td><td>0d</td></tr>
+<tr><td>Fix thesis-daily-tick error state</td><td>ready</td><td>ivan</td><td>0d</td></tr>
+<tr><td>Commit /opt/data/agents/ to GitHub</td><td>ready</td><td>ivan</td><td>0d</td></tr>
+<tr><td>Wire CF Worker webhook for rubicon-eas-lead</td><td>ready</td><td>kiki</td><td>0d</td></tr>
+<tr><td>Fill 188 internal questions</td><td>ready</td><td>ivan</td><td>0d</td></tr>
+<tr><td>Sign Rubicón EAS contract</td><td>ready</td><td>ivan</td><td>0d</td></tr></tbody>
+</table>
+</div>
+
+<footer>
+AI Whisperers Paraguay EAS · Dept dashboard · auto-generated by Erebus
+</footer>
+</body></html>

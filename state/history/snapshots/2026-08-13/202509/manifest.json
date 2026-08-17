@@ -1,0 +1,85 @@
+{
+  "as_of": "2026-08-13T20:25:09.987695Z",
+  "file_count": 13,
+  "total_size": 236728,
+  "files": [
+    {
+      "src": "agents/state/analyst.json",
+      "sha256": "355f777096e208b00155a87436165e308cfc72a9ced4efaabde261543d52573e",
+      "mtime": 1786652413,
+      "size": 346
+    },
+    {
+      "src": "agents/state/coord.json",
+      "sha256": "9ae1415fb4bb4a8e859ab639bde5acf15e8a6fcd82abc87dbd720b141132a0ae",
+      "mtime": 1786638032,
+      "size": 91
+    },
+    {
+      "src": "agents/state/engineering.json",
+      "sha256": "ca40fb265303723936a85658a13b8ac6126ff07e24e22deecedc580df3785d68",
+      "mtime": 1786638630,
+      "size": 198
+    },
+    {
+      "src": "agents/state/finance.json",
+      "sha256": "70f09895c58f502d7a650f27d909a8baa4fe25b803a5b4c811fd323a64f15f24",
+      "mtime": 1786652655,
+      "size": 221
+    },
+    {
+      "src": "agents/state/kiki-prep.json",
+      "sha256": "6d825cd3ce14b093ecb353ac6b911e3e04ded14d33375e63c7108ddb0217d450",
+      "mtime": 1786638097,
+      "size": 238
+    },
+    {
+      "src": "agents/state/kiki.json",
+      "sha256": "30a8e32b41da03690c07f83d5b07522367cb709b566c9d2d75a771da560e5680",
+      "mtime": 1786638032,
+      "size": 223
+    },
+    {
+      "src": "agents/state/people.json",
+      "sha256": "aee73c982ffd35da08db6ab211350f49c3163c93eacdd6530bc516c80b44a99e",
+      "mtime": 1786638630,
+      "size": 363
+    },
+    {
+      "src": "agents/state/research.json",
+      "sha256": "169d130f42211b4ed50cd8097d921deda3a28766a5ea1ec3d988091a428ec69d",
+      "mtime": 1786638630,
+      "size": 269
+    },
+    {
+      "src": "agents/state/sales.json",
+      "sha256": "d85b02d3d15ddaad05450378dd072c5da87f5a49882a6c6823744dfdbe9950c3",
+      "mtime": 1786638630,
+      "size": 237
+    },
+    {
+      "src": "cron/canonical/jobs.json",
+      "sha256": "2f1dffb328024ffb3bd80f9828a4d644a750f9d19427ae2f5ebb29aa26555703",
+      "mtime": 1786652567,
+      "size": 46171
+    },
+    {
+      "src": "cron/gateway/jobs.json",
+      "sha256": "b83f9f972f4e4d2a1dfecbc4594173892b00b0aaba7a9b24eddc9abe9900a27d",
+      "mtime": 1786652694,
+      "size": 49054
+    },
+    {
+      "src": "config/runtime.yaml",
+      "sha256": "fdb1f362d11bd8c6bdfa4c97a4355bfc0f5f9975ef69d4df8468800bfb812ab7",
+      "mtime": 1786643296,
+      "size": 16437
+    },
+    {
+      "src": "kanban/kanban.db",
+      "sha256": "67cc8e46fe2038f6e92fc9fa3d363594cc93de36981e9ea8b942b2ca7da65a43",
+      "mtime": 1786642338,
+      "size": 122880
+    }
+  ]
+}

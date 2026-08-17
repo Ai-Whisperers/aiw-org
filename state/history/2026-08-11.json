@@ -1,0 +1,14 @@
+{
+  "date": "2026-08-11",
+  "timestamp": "2026-08-11T11:00:00+00:00",
+  "cron": {
+    "total": 17,
+    "ok": 6,
+    "error": 3,
+    "pending": 8
+  },
+  "mcp_count": 9,
+  "kanban": {
+    "total": 12
+  }
+}
