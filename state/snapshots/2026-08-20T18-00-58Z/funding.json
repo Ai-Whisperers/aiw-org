@@ -1,0 +1,26 @@
+{
+  "schema_version": "0.1.0",
+  "last_updated": "2026-08-14",
+  "last_updated_by": "funding-coordinator (draft)",
+  "applications_in_flight": [],
+  "credits_received_usd": 0,
+  "credits_in_flight_usd": 0,
+  "grants_approved_usd": 0,
+  "grants_in_flight_usd": 0,
+  "accelerator_acceptances": [],
+  "next_deadlines": [],
+  "key_metrics": {
+    "mrr_usd": 240,
+    "burn_usd_monthly": null,
+    "runway_months": null,
+    "customers_active": 1,
+    "customers_named": ["rubicon-eas"],
+    "leads_in_flight": ["richar-ruiz"],
+    "agents_deployed": 7,
+    "agents_target": 12
+  },
+  "founder_narrative_version": null,
+  "deck_version": null,
+  "metrics_sheet_version": null,
+  "funding_coordinator_agent_active": false
+}

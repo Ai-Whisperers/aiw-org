@@ -1,1 +1,0 @@
-\n✅ All clear — no fires today.\n\n
