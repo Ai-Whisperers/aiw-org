@@ -5,6 +5,17 @@ schedule: "0 14 1 */3 *"  # Quarterly (Jan/Apr/Jul/Oct, 1st, 14:00 UTC)
 owner: ivan
 parent_spec: /opt/data/agents/constitution/ORG-AGENTS.md
 fallback_model: litellm/reasoning
+hard_stops:
+  - action: read_state
+    require_approval: false
+  - action: write_state
+    require_approval: false
+  - action: disable_hardstop
+    require_approval: true
+    approved_human: ivan+kiki
+  - action: modify_eval_gates
+    require_approval: true
+    approved_human: ivan
 ---
 
 # Board of Directors Simulation Agent

@@ -1,0 +1,591 @@
+{
+  "version": "1.0.0",
+  "schema": "cost-tracker-v1",
+  "last_updated": "2026-08-21T04:12:40.261307+00:00",
+  "total_agents_tracked": 49,
+  "total_daily_usd": 9.79,
+  "total_monthly_usd": 293.41,
+  "model_pricing": {
+    "reasoning": {
+      "input": 3.0,
+      "output": 15.0
+    },
+    "fast": {
+      "input": 0.15,
+      "output": 0.6
+    },
+    "claude-opus-4.8": {
+      "input": 15.0,
+      "output": 75.0
+    },
+    "claude-sonnet-4.6": {
+      "input": 3.0,
+      "output": 15.0
+    },
+    "claude-haiku-4.5": {
+      "input": 0.8,
+      "output": 4.0
+    },
+    "gpt-4o": {
+      "input": 2.5,
+      "output": 10.0
+    },
+    "gpt-4o-mini": {
+      "input": 0.15,
+      "output": 0.6
+    },
+    "gemini-2.5-flash": {
+      "input": 0.075,
+      "output": 0.3
+    },
+    "deepseek-v3": {
+      "input": 0.27,
+      "output": 1.1
+    }
+  },
+  "agents": {
+    "business-analyst-daily": {
+      "runs_per_day": 1,
+      "input_tokens_per_run": 5000,
+      "output_tokens_per_run": 1500,
+      "cost_per_run_usd": 0.0375,
+      "daily_cost_usd": 0.0375,
+      "monthly_cost_usd": 1.12,
+      "model": "primary"
+    },
+    "management-coord-biwk": {
+      "runs_per_day": 1,
+      "input_tokens_per_run": 5000,
+      "output_tokens_per_run": 1500,
+      "cost_per_run_usd": 0.0375,
+      "daily_cost_usd": 0.0375,
+      "monthly_cost_usd": 1.12,
+      "model": "primary"
+    },
+    "kiki-coach-weekly": {
+      "runs_per_day": 1,
+      "input_tokens_per_run": 5000,
+      "output_tokens_per_run": 1500,
+      "cost_per_run_usd": 0.0375,
+      "daily_cost_usd": 0.0375,
+      "monthly_cost_usd": 1.12,
+      "model": "primary"
+    },
+    "sales-pipeline-daily": {
+      "runs_per_day": 0.14285714285714285,
+      "input_tokens_per_run": 5000,
+      "output_tokens_per_run": 1500,
+      "cost_per_run_usd": 0.0375,
+      "daily_cost_usd": 0.0054,
+      "monthly_cost_usd": 0.16,
+      "model": "primary"
+    },
+    "finance-controller-weekly": {
+      "runs_per_day": 1,
+      "input_tokens_per_run": 5000,
+      "output_tokens_per_run": 1500,
+      "cost_per_run_usd": 0.0375,
+      "daily_cost_usd": 0.0375,
+      "monthly_cost_usd": 1.12,
+      "model": "primary"
+    },
+    "engineering-roster-biwk": {
+      "runs_per_day": 1,
+      "input_tokens_per_run": 5000,
+      "output_tokens_per_run": 1500,
+      "cost_per_run_usd": 0.0375,
+      "daily_cost_usd": 0.0375,
+      "monthly_cost_usd": 1.12,
+      "model": "primary"
+    },
+    "research-tracker-weekly": {
+      "runs_per_day": 1,
+      "input_tokens_per_run": 5000,
+      "output_tokens_per_run": 1500,
+      "cost_per_run_usd": 0.0375,
+      "daily_cost_usd": 0.0375,
+      "monthly_cost_usd": 1.12,
+      "model": "primary"
+    },
+    "dashboard-refresh": {
+      "runs_per_day": 0.0,
+      "input_tokens_per_run": 5000,
+      "output_tokens_per_run": 1500,
+      "cost_per_run_usd": 0.0375,
+      "daily_cost_usd": 0.0,
+      "monthly_cost_usd": 0.0,
+      "model": "primary"
+    },
+    "state-snapshot-6h": {
+      "runs_per_day": 4.0,
+      "input_tokens_per_run": 5000,
+      "output_tokens_per_run": 1500,
+      "cost_per_run_usd": 0.0375,
+      "daily_cost_usd": 0.15,
+      "monthly_cost_usd": 4.5,
+      "model": "primary"
+    },
+    "state-validate-15m": {
+      "runs_per_day": 96.0,
+      "input_tokens_per_run": 5000,
+      "output_tokens_per_run": 1500,
+      "cost_per_run_usd": 0.0375,
+      "daily_cost_usd": 3.6,
+      "monthly_cost_usd": 108.0,
+      "model": "primary"
+    },
+    "cron-heartbeat-onhours": {
+      "runs_per_day": 48.0,
+      "input_tokens_per_run": 5000,
+      "output_tokens_per_run": 1500,
+      "cost_per_run_usd": 0.0375,
+      "daily_cost_usd": 1.8,
+      "monthly_cost_usd": 54.0,
+      "model": "primary"
+    },
+    "cron-heartbeat-offhours": {
+      "runs_per_day": 48.0,
+      "input_tokens_per_run": 5000,
+      "output_tokens_per_run": 1500,
+      "cost_per_run_usd": 0.0375,
+      "daily_cost_usd": 1.8,
+      "monthly_cost_usd": 54.0,
+      "model": "primary"
+    },
+    "db-snapshot-daily": {
+      "runs_per_day": 1,
+      "input_tokens_per_run": 5000,
+      "output_tokens_per_run": 1500,
+      "cost_per_run_usd": 0.0375,
+      "daily_cost_usd": 0.0375,
+      "monthly_cost_usd": 1.12,
+      "model": "primary"
+    },
+    "eval-gate-runner-on-agent-run": {
+      "runs_per_day": 1,
+      "input_tokens_per_run": 5000,
+      "output_tokens_per_run": 1500,
+      "cost_per_run_usd": 0.0375,
+      "daily_cost_usd": 0.0375,
+      "monthly_cost_usd": 1.12,
+      "model": "primary"
+    },
+    "skills-audit-weekly": {
+      "runs_per_day": 1,
+      "input_tokens_per_run": 5000,
+      "output_tokens_per_run": 1500,
+      "cost_per_run_usd": 0.0375,
+      "daily_cost_usd": 0.0375,
+      "monthly_cost_usd": 1.12,
+      "model": "primary"
+    },
+    "coach-ivan": {
+      "runs_per_day": 1,
+      "input_tokens_per_run": 118,
+      "output_tokens_per_run": 50,
+      "cost_per_run_usd": 0.0011,
+      "daily_cost_usd": 0.0011,
+      "monthly_cost_usd": 0.03,
+      "model": "primary"
+    },
+    "coach-kiki": {
+      "runs_per_day": 1,
+      "input_tokens_per_run": 103,
+      "output_tokens_per_run": 44,
+      "cost_per_run_usd": 0.001,
+      "daily_cost_usd": 0.001,
+      "monthly_cost_usd": 0.03,
+      "model": "primary"
+    },
+    "coach-org": {
+      "runs_per_day": 1,
+      "input_tokens_per_run": 102,
+      "output_tokens_per_run": 43,
+      "cost_per_run_usd": 0.001,
+      "daily_cost_usd": 0.001,
+      "monthly_cost_usd": 0.03,
+      "model": "primary"
+    },
+    "coach-lead-agents": {
+      "runs_per_day": 1,
+      "input_tokens_per_run": 108,
+      "output_tokens_per_run": 46,
+      "cost_per_run_usd": 0.001,
+      "daily_cost_usd": 0.001,
+      "monthly_cost_usd": 0.03,
+      "model": "primary"
+    },
+    "coaching-content-curator": {
+      "runs_per_day": 1,
+      "input_tokens_per_run": 95,
+      "output_tokens_per_run": 40,
+      "cost_per_run_usd": 0.0009,
+      "daily_cost_usd": 0.0009,
+      "monthly_cost_usd": 0.03,
+      "model": "primary"
+    },
+    "coaching-quality-reviewer": {
+      "runs_per_day": 48.0,
+      "input_tokens_per_run": 179,
+      "output_tokens_per_run": 76,
+      "cost_per_run_usd": 0.0017,
+      "daily_cost_usd": 0.0805,
+      "monthly_cost_usd": 2.41,
+      "model": "primary"
+    },
+    "coaching-research-intelligence": {
+      "runs_per_day": 1,
+      "input_tokens_per_run": 118,
+      "output_tokens_per_run": 50,
+      "cost_per_run_usd": 0.0011,
+      "daily_cost_usd": 0.0011,
+      "monthly_cost_usd": 0.03,
+      "model": "primary"
+    },
+    "coach-renewal-manager": {
+      "runs_per_day": 1,
+      "input_tokens_per_run": 109,
+      "output_tokens_per_run": 46,
+      "cost_per_run_usd": 0.001,
+      "daily_cost_usd": 0.001,
+      "monthly_cost_usd": 0.03,
+      "model": "primary"
+    },
+    "coach-roi-tracker": {
+      "runs_per_day": 1,
+      "input_tokens_per_run": 102,
+      "output_tokens_per_run": 44,
+      "cost_per_run_usd": 0.001,
+      "daily_cost_usd": 0.001,
+      "monthly_cost_usd": 0.03,
+      "model": "primary"
+    },
+    "coach-lead-finder": {
+      "runs_per_day": 1,
+      "input_tokens_per_run": 126,
+      "output_tokens_per_run": 54,
+      "cost_per_run_usd": 0.0012,
+      "daily_cost_usd": 0.0012,
+      "monthly_cost_usd": 0.04,
+      "model": "primary"
+    },
+    "proposal-drafter-on-demand": {
+      "runs_per_day": 1,
+      "input_tokens_per_run": 5000,
+      "output_tokens_per_run": 1500,
+      "cost_per_run_usd": 0.0375,
+      "daily_cost_usd": 0.0375,
+      "monthly_cost_usd": 1.12,
+      "model": "primary"
+    },
+    "lead-enrichment-daily": {
+      "runs_per_day": 1,
+      "input_tokens_per_run": 5000,
+      "output_tokens_per_run": 1500,
+      "cost_per_run_usd": 0.0375,
+      "daily_cost_usd": 0.0375,
+      "monthly_cost_usd": 1.12,
+      "model": "primary"
+    },
+    "marketing-content-mon-wed-fri": {
+      "runs_per_day": 1,
+      "input_tokens_per_run": 5000,
+      "output_tokens_per_run": 1500,
+      "cost_per_run_usd": 0.0375,
+      "daily_cost_usd": 0.0375,
+      "monthly_cost_usd": 1.12,
+      "model": "primary"
+    },
+    "multimedia-producer-on-demand": {
+      "runs_per_day": 1,
+      "input_tokens_per_run": 5000,
+      "output_tokens_per_run": 1500,
+      "cost_per_run_usd": 0.0375,
+      "daily_cost_usd": 0.0375,
+      "monthly_cost_usd": 1.12,
+      "model": "primary"
+    },
+    "accounting-automation-daily": {
+      "runs_per_day": 1,
+      "input_tokens_per_run": 5000,
+      "output_tokens_per_run": 1500,
+      "cost_per_run_usd": 0.0375,
+      "daily_cost_usd": 0.0375,
+      "monthly_cost_usd": 1.12,
+      "model": "primary"
+    },
+    "tax-receipt-tracker-weekly": {
+      "runs_per_day": 1,
+      "input_tokens_per_run": 5000,
+      "output_tokens_per_run": 1500,
+      "cost_per_run_usd": 0.0375,
+      "daily_cost_usd": 0.0375,
+      "monthly_cost_usd": 1.12,
+      "model": "primary"
+    },
+    "procurement-tracker-weekly": {
+      "runs_per_day": 1,
+      "input_tokens_per_run": 5000,
+      "output_tokens_per_run": 1500,
+      "cost_per_run_usd": 0.0375,
+      "daily_cost_usd": 0.0375,
+      "monthly_cost_usd": 1.12,
+      "model": "primary"
+    },
+    "devops-monitor-30min": {
+      "runs_per_day": 48.0,
+      "input_tokens_per_run": 1504,
+      "output_tokens_per_run": 644,
+      "cost_per_run_usd": 0.0142,
+      "daily_cost_usd": 0.6803,
+      "monthly_cost_usd": 20.41,
+      "model": "primary"
+    },
+    "qa-automation-on-pr": {
+      "runs_per_day": 1,
+      "input_tokens_per_run": 5000,
+      "output_tokens_per_run": 1500,
+      "cost_per_run_usd": 0.0375,
+      "daily_cost_usd": 0.0375,
+      "monthly_cost_usd": 1.12,
+      "model": "primary"
+    },
+    "security-watchdog-30min": {
+      "runs_per_day": 48.0,
+      "input_tokens_per_run": 1,
+      "output_tokens_per_run": 0,
+      "cost_per_run_usd": 0.0,
+      "daily_cost_usd": 0.0001,
+      "monthly_cost_usd": 0.0,
+      "model": "primary"
+    },
+    "ai-safety-engineer-30min": {
+      "runs_per_day": 48.0,
+      "input_tokens_per_run": 26,
+      "output_tokens_per_run": 11,
+      "cost_per_run_usd": 0.0002,
+      "daily_cost_usd": 0.0117,
+      "monthly_cost_usd": 0.35,
+      "model": "primary"
+    },
+    "citation-checker-on-demand": {
+      "runs_per_day": 1,
+      "input_tokens_per_run": 5000,
+      "output_tokens_per_run": 1500,
+      "cost_per_run_usd": 0.0375,
+      "daily_cost_usd": 0.0375,
+      "monthly_cost_usd": 1.12,
+      "model": "primary"
+    },
+    "thesis-tracker-daily": {
+      "runs_per_day": 1,
+      "input_tokens_per_run": 5000,
+      "output_tokens_per_run": 1500,
+      "cost_per_run_usd": 0.0375,
+      "daily_cost_usd": 0.0375,
+      "monthly_cost_usd": 1.12,
+      "model": "primary"
+    },
+    "course-producer-weekly": {
+      "runs_per_day": 1,
+      "input_tokens_per_run": 5000,
+      "output_tokens_per_run": 1500,
+      "cost_per_run_usd": 0.0375,
+      "daily_cost_usd": 0.0375,
+      "monthly_cost_usd": 1.12,
+      "model": "primary"
+    },
+    "founder-bandwidth-watchdog-weekly": {
+      "runs_per_day": 1,
+      "input_tokens_per_run": 5000,
+      "output_tokens_per_run": 1500,
+      "cost_per_run_usd": 0.0375,
+      "daily_cost_usd": 0.0375,
+      "monthly_cost_usd": 1.12,
+      "model": "primary"
+    },
+    "ai-ops-coordinator-daily": {
+      "runs_per_day": 1,
+      "input_tokens_per_run": 5000,
+      "output_tokens_per_run": 1500,
+      "cost_per_run_usd": 0.0375,
+      "daily_cost_usd": 0.0375,
+      "monthly_cost_usd": 1.12,
+      "model": "primary"
+    },
+    "bizops-tracker-weekly": {
+      "runs_per_day": 1,
+      "input_tokens_per_run": 5000,
+      "output_tokens_per_run": 1500,
+      "cost_per_run_usd": 0.0375,
+      "daily_cost_usd": 0.0375,
+      "monthly_cost_usd": 1.12,
+      "model": "primary"
+    },
+    "revops-pipeline-analyzer-daily": {
+      "runs_per_day": 1,
+      "input_tokens_per_run": 5000,
+      "output_tokens_per_run": 1500,
+      "cost_per_run_usd": 0.0375,
+      "daily_cost_usd": 0.0375,
+      "monthly_cost_usd": 1.12,
+      "model": "primary"
+    },
+    "compliance-monitor-weekly": {
+      "runs_per_day": 1,
+      "input_tokens_per_run": 5000,
+      "output_tokens_per_run": 1500,
+      "cost_per_run_usd": 0.0375,
+      "daily_cost_usd": 0.0375,
+      "monthly_cost_usd": 1.12,
+      "model": "primary"
+    },
+    "okr-tracker-weekly": {
+      "runs_per_day": 1,
+      "input_tokens_per_run": 5000,
+      "output_tokens_per_run": 1500,
+      "cost_per_run_usd": 0.0375,
+      "daily_cost_usd": 0.0375,
+      "monthly_cost_usd": 1.12,
+      "model": "primary"
+    },
+    "source-curator-weekly": {
+      "runs_per_day": 1,
+      "input_tokens_per_run": 5000,
+      "output_tokens_per_run": 1500,
+      "cost_per_run_usd": 0.0375,
+      "daily_cost_usd": 0.0375,
+      "monthly_cost_usd": 1.12,
+      "model": "primary"
+    },
+    "coach-onboarding-poller": {
+      "runs_per_day": 288.0,
+      "input_tokens_per_run": 5000,
+      "output_tokens_per_run": 1500,
+      "cost_per_run_usd": 0.0016,
+      "daily_cost_usd": 0.4752,
+      "monthly_cost_usd": 14.26,
+      "model": "fast"
+    },
+    "build-org-state": {
+      "runs_per_day": 1,
+      "input_tokens_per_run": 5000,
+      "output_tokens_per_run": 1500,
+      "cost_per_run_usd": 0.0016,
+      "daily_cost_usd": 0.0016,
+      "monthly_cost_usd": 0.05,
+      "model": "fast"
+    },
+    "compact-errors": {
+      "runs_per_day": 96.0,
+      "input_tokens_per_run": 5000,
+      "output_tokens_per_run": 1500,
+      "cost_per_run_usd": 0.0016,
+      "daily_cost_usd": 0.1584,
+      "monthly_cost_usd": 4.75,
+      "model": "fast"
+    }
+  },
+  "top_10_monthly": [
+    {
+      "agent": "state-validate-15m",
+      "runs_per_day": 96.0,
+      "input_tokens_per_run": 5000,
+      "output_tokens_per_run": 1500,
+      "cost_per_run_usd": 0.0375,
+      "daily_cost_usd": 3.6,
+      "monthly_cost_usd": 108.0,
+      "model": "primary"
+    },
+    {
+      "agent": "cron-heartbeat-onhours",
+      "runs_per_day": 48.0,
+      "input_tokens_per_run": 5000,
+      "output_tokens_per_run": 1500,
+      "cost_per_run_usd": 0.0375,
+      "daily_cost_usd": 1.8,
+      "monthly_cost_usd": 54.0,
+      "model": "primary"
+    },
+    {
+      "agent": "cron-heartbeat-offhours",
+      "runs_per_day": 48.0,
+      "input_tokens_per_run": 5000,
+      "output_tokens_per_run": 1500,
+      "cost_per_run_usd": 0.0375,
+      "daily_cost_usd": 1.8,
+      "monthly_cost_usd": 54.0,
+      "model": "primary"
+    },
+    {
+      "agent": "devops-monitor-30min",
+      "runs_per_day": 48.0,
+      "input_tokens_per_run": 1504,
+      "output_tokens_per_run": 644,
+      "cost_per_run_usd": 0.0142,
+      "daily_cost_usd": 0.6803,
+      "monthly_cost_usd": 20.41,
+      "model": "primary"
+    },
+    {
+      "agent": "coach-onboarding-poller",
+      "runs_per_day": 288.0,
+      "input_tokens_per_run": 5000,
+      "output_tokens_per_run": 1500,
+      "cost_per_run_usd": 0.0016,
+      "daily_cost_usd": 0.4752,
+      "monthly_cost_usd": 14.26,
+      "model": "fast"
+    },
+    {
+      "agent": "compact-errors",
+      "runs_per_day": 96.0,
+      "input_tokens_per_run": 5000,
+      "output_tokens_per_run": 1500,
+      "cost_per_run_usd": 0.0016,
+      "daily_cost_usd": 0.1584,
+      "monthly_cost_usd": 4.75,
+      "model": "fast"
+    },
+    {
+      "agent": "state-snapshot-6h",
+      "runs_per_day": 4.0,
+      "input_tokens_per_run": 5000,
+      "output_tokens_per_run": 1500,
+      "cost_per_run_usd": 0.0375,
+      "daily_cost_usd": 0.15,
+      "monthly_cost_usd": 4.5,
+      "model": "primary"
+    },
+    {
+      "agent": "coaching-quality-reviewer",
+      "runs_per_day": 48.0,
+      "input_tokens_per_run": 179,
+      "output_tokens_per_run": 76,
+      "cost_per_run_usd": 0.0017,
+      "daily_cost_usd": 0.0805,
+      "monthly_cost_usd": 2.41,
+      "model": "primary"
+    },
+    {
+      "agent": "business-analyst-daily",
+      "runs_per_day": 1,
+      "input_tokens_per_run": 5000,
+      "output_tokens_per_run": 1500,
+      "cost_per_run_usd": 0.0375,
+      "daily_cost_usd": 0.0375,
+      "monthly_cost_usd": 1.12,
+      "model": "primary"
+    },
+    {
+      "agent": "management-coord-biwk",
+      "runs_per_day": 1,
+      "input_tokens_per_run": 5000,
+      "output_tokens_per_run": 1500,
+      "cost_per_run_usd": 0.0375,
+      "daily_cost_usd": 0.0375,
+      "monthly_cost_usd": 1.12,
+      "model": "primary"
+    }
+  ]
+}

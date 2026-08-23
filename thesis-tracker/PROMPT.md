@@ -118,3 +118,27 @@ weekly brief, report across both repos:
 ### Open issues / blockers
 [anything that has been stuck >3 days]
 ```
+## CHANGELOG
+
+- v0.4.0 (2026-08-22): added FUNDING_PLAN reference. Thesis now fully-funded
+  pipeline (4 Tier S programs pre-drafted, $300K+ target). See
+  satellite-paraguay/docs/operations/FUNDING_PLAN.md.
+
+## Funding pipeline (added 2026-08-22)
+
+The thesis GPU compute is now funded via 4 Tier S programs (NVIDIA Inception,
+Modal Startups, Cloudflare for Startups, AWS Activate). Pre-drafted
+applications at `satellite-paraguay/docs/operations/applications/01-04*.md`.
+Ivan's time: 1.5 hours form-filling. Expected $300K+ in credits.
+
+When the agent briefs you on status, also report:
+- Funding pipeline status (which Tier S apps are in flight, approved, rejected)
+- GPU cost cap status (current spend vs $5/day, $50/month)
+- Drift detector alerts (any STATUS.md vs snapshot drift)
+- Security audit findings (from biweekly threat-model audits)
+
+Cross-reference docs (load on first run each session):
+1. `satellite-paraguay/docs/COMPLETE-PLAN.md` — master synthesis
+2. `satellite-paraguay/docs/operations/FUNDING_PLAN.md` — 4-path funding strategy
+3. `satellite-paraguay/docs/operations/funding-applications.log` — tracker
+4. `~/.hermes/memories/THESIS_ARCHITECTURE-satellite-paraguay.md` — cross-repo map

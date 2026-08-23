@@ -5,6 +5,17 @@ schedule: "0 22 * * 1"  # Weekly Monday 22:00 UTC
 owner: ivan
 parent_spec: /opt/data/agents/departments/06-people-culture.md
 fallback_model: litellm/reasoning
+hard_stops:
+  - action: read_state
+    require_approval: false
+  - action: write_state
+    require_approval: false
+  - action: disable_hardstop
+    require_approval: true
+    approved_human: ivan+kiki
+  - action: modify_eval_gates
+    require_approval: true
+    approved_human: ivan
 ---
 
 # People HR Agent — Human Resources Department
