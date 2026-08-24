@@ -151,7 +151,7 @@
   <div style="display:flex;gap:16px;align-items:center">
     <input type="text" id="filter-input" placeholder="Filter..." style="background:var(--bg-card);color:var(--text);border:1px solid var(--border);border-radius:4px;padding:6px 10px;font-size:13px;width:200px">
     <div class="stamp">
-      <code>2026-08-23T20:49:50 UTC</code>
+      <code>2026-08-24T04:28:05 UTC</code>
     </div>
   </div>
 </header>
@@ -245,7 +245,7 @@
 </div>
 
 <!-- ==================== CRON JOBS ==================== -->
-<h2 style="font-size: 13px; color: var(--text-dim); margin: 24px 0 12px; text-transform: uppercase; letter-spacing: 0.05em;">Cron Jobs <span style="font-weight: 400; text-transform: none; color: var(--text-dim);">(107 total, 36 ok, 26 error)</span></h2>
+<h2 style="font-size: 13px; color: var(--text-dim); margin: 24px 0 12px; text-transform: uppercase; letter-spacing: 0.05em;">Cron Jobs <span style="font-weight: 400; text-transform: none; color: var(--text-dim);">(107 total, 45 ok, 21 error)</span></h2>
 
 <div class="card" style="display:flex;gap:16px;align-items:center;padding:12px 16px">
   <span style="color:var(--text-dim);font-size:12px">Filter:</span>
@@ -274,7 +274,7 @@
 <tr data-filter="pending agent"><td><code>ometzdental-weekly-refresh</code></td><td>0 6 * * 1</td><td><span class="pill pill-dim">pending</span></td><td>—</td><td><span class="pill pill-dim">agent</span></td></tr>
 <tr data-filter="ok script"><td><code>thesis-daily-tick</code></td><td>0 6 * * *</td><td><span class="pill pill-ok">ok</span></td><td>—</td><td><span class="pill pill-dim">script</span></td></tr>
 <tr data-filter="error agent"><td><code>thesis-weekly-review</code></td><td>0 18 * * 0</td><td><span class="pill pill-err">error</span></td><td>—</td><td><span class="pill pill-dim">agent</span></td></tr>
-<tr data-filter="pending agent"><td><code>thesis-git-maintenance</code></td><td>0 23 * * 0</td><td><span class="pill pill-dim">pending</span></td><td>—</td><td><span class="pill pill-dim">agent</span></td></tr>
+<tr data-filter="error agent"><td><code>thesis-git-maintenance</code></td><td>0 23 * * 0</td><td><span class="pill pill-err">error</span></td><td>—</td><td><span class="pill pill-dim">agent</span></td></tr>
 <tr data-filter="ok agent"><td><code>thesis-watchdog</code></td><td>every 15m</td><td><span class="pill pill-ok">ok</span></td><td>—</td><td><span class="pill pill-dim">agent</span></td></tr>
 <tr data-filter="ok agent"><td><code>evo-poll-watchdog</code></td><td>every 5m</td><td><span class="pill pill-ok">ok</span></td><td>—</td><td><span class="pill pill-dim">agent</span></td></tr>
 <tr data-filter="ok agent"><td><code>aiw-business-analyst-daily</code></td><td>30 10 * * *</td><td><span class="pill pill-ok">ok</span></td><td>—</td><td><span class="pill pill-dim">agent</span></td></tr>
@@ -283,7 +283,7 @@
 <tr data-filter="ok agent"><td><code>aiw-sales-pipeline-daily</code></td><td>0 13,16 * * *</td><td><span class="pill pill-ok">ok</span></td><td>—</td><td><span class="pill pill-dim">agent</span></td></tr>
 <tr data-filter="error agent"><td><code>aiw-finance-controller-weekly</code></td><td>0 21 * * 5</td><td><span class="pill pill-err">error</span></td><td>—</td><td><span class="pill pill-dim">agent</span></td></tr>
 <tr data-filter="error agent"><td><code>aiw-engineering-roster-biwk</code></td><td>0 20 * * 2,5</td><td><span class="pill pill-err">error</span></td><td>—</td><td><span class="pill pill-dim">agent</span></td></tr>
-<tr data-filter="pending agent"><td><code>aiw-research-tracker-weekly</code></td><td>0 21 * * 0</td><td><span class="pill pill-dim">pending</span></td><td>—</td><td><span class="pill pill-dim">agent</span></td></tr>
+<tr data-filter="error agent"><td><code>aiw-research-tracker-weekly</code></td><td>0 21 * * 0</td><td><span class="pill pill-err">error</span></td><td>—</td><td><span class="pill pill-dim">agent</span></td></tr>
 <tr data-filter="ok script"><td><code>aiw-dashboard-refresh</code></td><td>every 15m</td><td><span class="pill pill-ok">ok</span></td><td>—</td><td><span class="pill pill-dim">script</span></td></tr>
 <tr data-filter="ok script"><td><code>cron-sync</code></td><td>every 5m</td><td><span class="pill pill-ok">ok</span></td><td>—</td><td><span class="pill pill-dim">script</span></td></tr>
 <tr data-filter="pending script"><td><code>aiw-state-snapshot-6h</code></td><td>0 */6 * * *</td><td><span class="pill pill-dim">pending</span></td><td>—</td><td><span class="pill pill-dim">script</span></td></tr>
@@ -318,7 +318,7 @@
 <tr data-filter="pending script"><td><code>aiw-funding-daily-check</code></td><td>0 9 * * *</td><td><span class="pill pill-dim">pending</span></td><td>—</td><td><span class="pill pill-dim">script</span></td></tr>
 <tr data-filter="ok script"><td><code>aiw-skills-audit-weekly</code></td><td>0 9 * * 1</td><td><span class="pill pill-ok">ok</span></td><td>—</td><td><span class="pill pill-dim">script</span></td></tr>
 <tr data-filter="ok script"><td><code>aiw-state-snapshot-6h</code></td><td>0 */6 * * *</td><td><span class="pill pill-ok">ok</span></td><td>—</td><td><span class="pill pill-dim">script</span></td></tr>
-<tr data-filter="pending agent"><td><code>aiw-coach-ivan</code></td><td>0 21 * * 0</td><td><span class="pill pill-dim">pending</span></td><td>—</td><td><span class="pill pill-dim">agent</span></td></tr>
+<tr data-filter="error agent"><td><code>aiw-coach-ivan</code></td><td>0 21 * * 0</td><td><span class="pill pill-err">error</span></td><td>—</td><td><span class="pill pill-dim">agent</span></td></tr>
 <tr data-filter="error agent"><td><code>aiw-coach-kiki</code></td><td>0 21 * * 5</td><td><span class="pill pill-err">error</span></td><td>—</td><td><span class="pill pill-dim">agent</span></td></tr>
 <tr data-filter="pending agent"><td><code>aiw-coach-org</code></td><td>0 0 1 1,4,7,10 *</td><td><span class="pill pill-dim">pending</span></td><td>—</td><td><span class="pill pill-dim">agent</span></td></tr>
 <tr data-filter="pending agent"><td><code>aiw-coach-lead-agents</code></td><td>0 22 1 * *</td><td><span class="pill pill-dim">pending</span></td><td>—</td><td><span class="pill pill-dim">agent</span></td></tr>
@@ -350,19 +350,19 @@
 <tr data-filter="error agent"><td><code>aiw-okr-tracker-weekly</code></td><td>0 8 * * 0</td><td><span class="pill pill-err">error</span></td><td>—</td><td><span class="pill pill-dim">agent</span></td></tr>
 <tr data-filter="error agent"><td><code>aiw-source-curator-weekly</code></td><td>0 13 * * 2</td><td><span class="pill pill-err">error</span></td><td>—</td><td><span class="pill pill-dim">agent</span></td></tr>
 <tr data-filter="ok script"><td><code>aiw-coach-onboarding-poller</code></td><td>*/5 * * * *</td><td><span class="pill pill-ok">ok</span></td><td>—</td><td><span class="pill pill-dim">script</span></td></tr>
-<tr data-filter="error script"><td><code>aiw-build-org-state</code></td><td>0 * * * *</td><td><span class="pill pill-err">error</span></td><td>—</td><td><span class="pill pill-dim">script</span></td></tr>
-<tr data-filter="error script"><td><code>aiw-compact-errors</code></td><td>*/15 * * * *</td><td><span class="pill pill-err">error</span></td><td>—</td><td><span class="pill pill-dim">script</span></td></tr>
-<tr data-filter="error script"><td><code>aiw-cost-monitor</code></td><td>0 */6 * * *</td><td><span class="pill pill-err">error</span></td><td>—</td><td><span class="pill pill-dim">script</span></td></tr>
-<tr data-filter="error script"><td><code>aiw-build-agent-context</code></td><td>0 * * * *</td><td><span class="pill pill-err">error</span></td><td>—</td><td><span class="pill pill-dim">script</span></td></tr>
-<tr data-filter="error script"><td><code>aiw-agent-tracer</code></td><td>*/30 * * * *</td><td><span class="pill pill-err">error</span></td><td>—</td><td><span class="pill pill-dim">script</span></td></tr>
-<tr data-filter="error script"><td><code>aiw-eval-trending</code></td><td>0 6 * * *</td><td><span class="pill pill-err">error</span></td><td>—</td><td><span class="pill pill-dim">script</span></td></tr>
-<tr data-filter="error script"><td><code>aiw-org-dashboard</code></td><td>0 8 * * *</td><td><span class="pill pill-err">error</span></td><td>—</td><td><span class="pill pill-dim">script</span></td></tr>
+<tr data-filter="ok script"><td><code>aiw-build-org-state</code></td><td>0 * * * *</td><td><span class="pill pill-ok">ok</span></td><td>—</td><td><span class="pill pill-dim">script</span></td></tr>
+<tr data-filter="ok script"><td><code>aiw-compact-errors</code></td><td>*/15 * * * *</td><td><span class="pill pill-ok">ok</span></td><td>—</td><td><span class="pill pill-dim">script</span></td></tr>
+<tr data-filter="ok script"><td><code>aiw-cost-monitor</code></td><td>0 */6 * * *</td><td><span class="pill pill-ok">ok</span></td><td>—</td><td><span class="pill pill-dim">script</span></td></tr>
+<tr data-filter="ok script"><td><code>aiw-build-agent-context</code></td><td>0 * * * *</td><td><span class="pill pill-ok">ok</span></td><td>—</td><td><span class="pill pill-dim">script</span></td></tr>
+<tr data-filter="ok script"><td><code>aiw-agent-tracer</code></td><td>*/30 * * * *</td><td><span class="pill pill-ok">ok</span></td><td>—</td><td><span class="pill pill-dim">script</span></td></tr>
+<tr data-filter="ok script"><td><code>aiw-eval-trending</code></td><td>0 6 * * *</td><td><span class="pill pill-ok">ok</span></td><td>—</td><td><span class="pill pill-dim">script</span></td></tr>
+<tr data-filter="ok script"><td><code>aiw-org-dashboard</code></td><td>0 8 * * *</td><td><span class="pill pill-ok">ok</span></td><td>—</td><td><span class="pill pill-dim">script</span></td></tr>
 <tr data-filter="ok script"><td><code>aiw-cost-alerts</code></td><td>0 */6 * * *</td><td><span class="pill pill-ok">ok</span></td><td>—</td><td><span class="pill pill-dim">script</span></td></tr>
 <tr data-filter="ok script"><td><code>aiw-eval-per-agent</code></td><td>0 * * * *</td><td><span class="pill pill-ok">ok</span></td><td>—</td><td><span class="pill pill-dim">script</span></td></tr>
 <tr data-filter="ok script"><td><code>aiw-eval-auto-trigger</code></td><td>*/5 * * * *</td><td><span class="pill pill-ok">ok</span></td><td>—</td><td><span class="pill pill-dim">script</span></td></tr>
 <tr data-filter="ok script"><td><code>aiw-state-auto-commit</code></td><td>5 * * * *</td><td><span class="pill pill-ok">ok</span></td><td>—</td><td><span class="pill pill-dim">script</span></td></tr>
-<tr data-filter="error script"><td><code>aiw-eval-report</code></td><td>0 7 * * *</td><td><span class="pill pill-err">error</span></td><td>—</td><td><span class="pill pill-dim">script</span></td></tr>
-<tr data-filter="pending script"><td><code>aiw-prompt-improvements</code></td><td>0 9 * * 1</td><td><span class="pill pill-dim">pending</span></td><td>—</td><td><span class="pill pill-dim">script</span></td></tr>
+<tr data-filter="ok script"><td><code>aiw-eval-report</code></td><td>0 7 * * *</td><td><span class="pill pill-ok">ok</span></td><td>—</td><td><span class="pill pill-dim">script</span></td></tr>
+<tr data-filter="ok script"><td><code>aiw-prompt-improvements</code></td><td>0 9 * * 1</td><td><span class="pill pill-ok">ok</span></td><td>—</td><td><span class="pill pill-dim">script</span></td></tr>
 <tr data-filter="pending script"><td><code>aiw-backup-drill</code></td><td>0 5 1 * *</td><td><span class="pill pill-dim">pending</span></td><td>—</td><td><span class="pill pill-dim">script</span></td></tr>
 <tr data-filter="error script"><td><code>aiw-script-tests</code></td><td>0 4 * * *</td><td><span class="pill pill-err">error</span></td><td>—</td><td><span class="pill pill-dim">script</span></td></tr>
 <tr data-filter="pending agent"><td><code>aiw-people-hr-weekly</code></td><td>0 22 * * 1</td><td><span class="pill pill-dim">pending</span></td><td>—</td><td><span class="pill pill-dim">agent</span></td></tr>

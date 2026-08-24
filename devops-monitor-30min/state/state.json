@@ -1,195 +1,132 @@
 {
   "agent": "devops-monitor-30min",
   "version": "0.1.0",
-  "tick": 72,
-  "last_run_at": "2026-08-23T20:31:00Z",
+  "tick": 87,
+  "last_run_at": "2026-08-24T04:33:39Z",
   "last_status": "ok",
   "verdict": "ALERT",
-  "alert_ticks": 43,
+  "alert_ticks": 53,
   "incidents": {
+    "wa_bridge_process_died_silently": {
+      "status": "open",
+      "first_seen": "2026-08-24T04:33:39Z",
+      "description": "tick 87: wa_bridge.py process DEAD silently at 04:29:41 UTC. pgrep empty, /proc scan empty, port 3000 connection refused (errno 7). Last log line 04:29:41 GET /messages 200. No error banner, no traceback, no supervisor running. Prior PID 3713061 was alive 1d 11h23m at death. Operator action: bash /opt/data/scripts/wa-bridge-stack.sh. Root cause: wa-bridge-stack.sh not running as service, no auto-restart on shim death. INBOUND WA WEBHOOK INTAKE FULLY OFFLINE."
+    },
+    "wa_inbound_silence": {
+      "status": "replaced",
+      "first_seen": "2026-08-23T07:00:00Z",
+      "description": "tick 87: REPLACED by wa_bridge_process_died_silently. Root cause of inbound silence is bridge process death, not absence of WA traffic."
+    },
     "rubiconeas_front_expired_request": {
       "status": "open",
       "first_seen": "2026-08-23T07:00:00Z",
-      "description": "All rubiconeas.paragu-ai.com routes return 200 with R2 ExpiredRequest XML body (118B). Presigned URLs in worker.js expired Aug 17/19 (TTL 7d, signed 2026-08-10/12). SSL cert valid (Let's Encrypt wildcard CN=YE2, Aug 17 -> Nov 15 2026). S3/R2 layer still serving stale presigned URLs."
+      "description": "tick 87: rubiconeas.paragu-ai.com returns 200/118B ExpiredRequest XML (R2 presigned URL). Day 7+. /api/lead/health 200 57B test mode. /api/lead POST form→415, UPPERCASE missing→400 [phone,area,summary] (3 fields), lowercase full JSON→200 + URGENT brief 285B. Lead Worker unchanged from tick 86."
     },
     "ometzdental_404_no_fallback": {
       "status": "open",
       "first_seen": "2026-08-23T07:30:00Z",
-      "description": "ometzdental.paragu-ai.com returns 404 (body '404 page not found'); no fallback worker route or static content deployed."
+      "description": "tick 87: ometzdental.paragu-ai.com 404/19B '404 page not found' (CF platform). ~22h+ stable. Carry."
     },
     "rubicon_eas_ssl_self_signed_flapping": {
       "status": "open",
       "first_seen": "2026-08-23T09:01:00Z",
-      "description": "tick 72: TLS handshake now PASSES (curl with -k not needed); HTTP 404 '404 page not found' (CF platform 404, NOT Worker 404). Cert still CN=TRAEFIK DEFAULT CERT (origin self-signed). tick 70: 404 platform (TLS pass). tick 71: HTTP 000 cert reject (CF rejecting). tick 72: 404 platform again (TLS pass). Flapping between cert reject and 404 \u2014 Worker route binding is the persistent blocker. Lead webhook pipeline still blocked. Two gaps: (1) bind rubicon-eas-lead worker route, (2) provision CF custom hostname edge cert (so cert flips from TRAEFIK DEFAULT to LE wildcard)."
+      "description": "tick 87: Lead Worker validates JSON properly; SSL flap carry shape remains the same. Front-end ExpiredRequest is the active load-bearing issue."
     },
     "docker_daemon_down": {
       "status": "open",
       "first_seen": "2026-08-22T05:00:00Z",
-      "description": "Docker daemon unreachable at unix:///var/run/docker.sock; static-content bypass broken. systemctl not present in container. Down ~38h+ at tick 70."
+      "description": "tick 87: Docker daemon unreachable. systemctl not present. Down ~47h+. Carry."
     },
     "cron_jobs_json_drift": {
       "status": "open",
       "first_seen": "2026-08-23T07:30:00Z",
-      "description": "tick 70: canonical /opt/data/cron/jobs.json FRESH (31s old, 107 jobs / 83 enabled). Gateway /opt/data/.hermes/cron/jobs.json STALE (141318s = 39h14m47s old, 103 jobs). Drift 39h14m47s (+29m36s from tick 69). cron-sync.log WARN sign-inverted (latest 19:29:25Z: 'gateway newer by 141227s' but reality is canonical newer by 141287s)."
+      "description": "tick 87 TRANSIENT: drift = 142.3s. Canonical mtime 04:31:27, gateway mtime 04:29:05 (gateway older). 4-line diff (2 completed counters 2715→2716 + 2868→2869 + 2 timestamps). Same counter-increment artifact pattern as tick 86. cron-sync.log last entry 04:29:05 with 303s drift auto-resolved; next sync ~04:34:05. Carry stays REOPENED but classified TRANSIENT (1-2 cycle drift = counter artifact, NOT real config split). Will resolve next cron-sync."
     },
     "missing_cron_scripts": {
       "status": "open",
       "first_seen": "2026-08-23T07:00:00Z",
-      "description": "tick 70: 9 truly missing (carry-down from 13 in tick 69; 4 path-guard confused correctly separated). Carry-9: build-org-state.py, compact-errors.py, cost-monitor.py, build-agent-context.py, agent-tracer.py, eval-trending.py, org-dashboard.py, eval-report.py, agents-v2/tests/run-all.sh (was aiw-script-tests)."
+      "description": "tick 87: 1 truly missing (carry). aiw-script-tests script field has 'bash ' prefix."
     },
     "path_guard_false_positive": {
       "status": "open",
       "first_seen": "2026-08-23T07:30:00Z",
-      "description": "tick 70: 2 jobs (carry-down from 3; -1 NEW aiw-cron-heartbeat-offhours no longer flagged). Scripts exist but runner rejects them as 'outside scripts directory'. aiw-state-validate.py + aiw-cron-heartbeat.sh (on-hours only \u2014 off-hours variant cleared this tick, may re-appear). Both fired again at 19:30:25Z."
+      "description": "tick 87: 2 jobs (carry). aiw-state-validate-15m + aiw-cron-heartbeat-onhours. Stable."
     },
     "litellm_402_payment_required": {
-      "status": "open",
+      "status": "near_resolution",
       "first_seen": "2026-08-23T08:00:00Z",
-      "description": "tick 70: 13 jobs with HTTP 402 (stable, no new today since 19:00:20Z). Cerebras 10 + Mistral 3. Latest fires: aiw-tax-receipt-tracker-weekly (19:00:20Z today), thesis-weekly-review (18:00:15Z today), aiw-okr-tracker-weekly (08:00:32Z today) \u2014 all Cerebras. 9 historical Cerebras + 3 Mistral failures carry."
+      "description": "tick 87: 16 jobs total (Cerebras 6 lifetime + Mistral 8 + aux 6 = 20 distinct lifetime, methodology-corrected). **0 fires in last 60min** (vs 0 at tick 86). Last 402 fire 02:10 Mistral — 81+ min ago, longest quiet window across ticks 80-87. Lifetime 20 vs tick86's 21 (tick86's +1 was Python regex double-pass artifact). Rate-pressure sub-component READY TO CLOSE next tick if sustained."
     },
     "department_03_devops_infrastructure_md_missing": {
       "status": "open",
       "first_seen": "2026-08-23T09:01:00Z",
-      "description": "PROMPT.md parent_spec /opt/data/agents/departments/03-devops-infrastructure.md does not exist. Stale reference in this agent's PROMPT.md frontmatter."
+      "description": "tick 87: PROMPT.md frontmatter references nonexistent parent spec /opt/data/agents/departments/03-devops-infrastructure.md. Carry."
     },
     "coaching_conversation_framework_skill_missing": {
       "status": "open",
       "first_seen": "2026-08-23T09:01:00Z",
-      "description": "Cron aiw-coaching-quality-reviewer skipping every run with 'Skill skill.core.coaching-conversation-framework.v1 not found'."
+      "description": "tick 87: cron aiw-coaching-quality-reviewer still skipping. Open carry."
     },
     "cron_sync_log_warn_message_inverted": {
-      "status": "open",
+      "status": "open_moot",
       "first_seen": "2026-08-23T10:31:00Z",
-      "description": "tick 70: 2,800+ WARNs confirmed. Latest 19:29:25Z says 'gateway newer than canonical by 141227s' \u2014 reality: canonical is 141287s newer than gateway. Sign-inverted comparison heuristic."
+      "description": "tick 87: log line is misleading copy; flag moot."
     },
     "lead_worker_area_case_sensitive": {
       "status": "open",
       "first_seen": "2026-08-23T11:01:00Z",
-      "description": "rubiconeas /api/lead validates 'area' as lowercase enum (penal/civil/ambiental). UPPERCASE/mixed-case -> 400. Public form should send lowercase or worker should normalize."
+      "description": "tick 87: rubiconeas lead Worker unchanged from tick 86 — UPPERCASE area + missing phone/summary returns 400 + 3-field error [phone, area, summary]. Lowercase full JSON works (200 + URGENT brief, 285B). 3 fields this tick vs 4 at tick86 (different uppercase body shape)."
     },
     "state_json_counters_stale": {
       "status": "open",
       "first_seen": "2026-08-23T12:02:00Z",
-      "description": "tick 70: errors.json still stale (writer dead, 2d14h+). Refresh logic dead. counters.wa_inbound_* last = 00:42:48Z Aug 23 (18h48m silent). cron.log absent on this host (verified)."
+      "description": "tick 87: errors.json last_updated 2026-08-21 04:45:35Z (~2d23h+ stale). wa_inbound.json absent. errors.log is being written fine."
     },
     "mcp_cold_start_storm_rebound": {
       "status": "open",
       "first_seen": "2026-08-23T13:01:00Z",
-      "description": "tick 70: errors.log 1.93 MB / 10,765 lines (+247 lines, +44KB vs tick 69). Last 500 lines space-format keyword counts: WARNING=365, failed=340, connection=333, MCP=331, server=314, parking=298. Recurring design-parked servers (unreal-engine, social-graph-mcp, mcp_jupyter, postgres, cloudflare, brave, spotify). mcp-stderr.log IS present at 59MB (hyphen-separated path) \u2014 previous brief's 'mcp_stderr.log ABSENT' was checking underscore filename."
+      "description": "tick 87 WSD REBOUND: OAuth distinct lifetime=42 (-4 vs tick86's 46, methodology-corrected), 60min=6 (flat), 30min=5. WSD distinct lifetime=158 (-6 vs tick86's 164), **60min=19 (was 2 at tick86), 30min=19 (was 0 at tick86)** — strong rebound, REOPENS carry. comfy-cloud OAuth 100% sole offender. 402 has 0 fires/60min for 81+ min (longest quiet window)."
     },
     "gateway_log_legacy_file_misleading": {
-      "status": "open",
+      "status": "resolved",
       "first_seen": "2026-08-23T13:01:00Z",
-      "description": "Methodology: /opt/data/logs/gateway.log is stale legacy file. Live gateway logs at /opt/data/logs/gateways/default/current (last entry: 19:02:18Z 'switch providers')."
+      "resolved_at": "2026-08-23T23:30:00Z",
+      "description": "tick 80: holding. Bridge log = /opt/data/logs/wa_bridge.log (verified via /proc/<pid>/fd/)."
     },
     "hermes_cli_venv_broken": {
       "status": "open",
       "first_seen": "2026-08-23T14:31:00Z",
-      "description": "tick 70: /opt/data/hermes-agent/venv/bin/hermes --version: 'exec: .../python3: not found'. Dead symlink chain. ~29h+ unresolved."
+      "description": "tick 87: /opt/data/hermes-agent/venv/bin/python3 broken. ~38h+. Carry."
     },
     "env_file_mode_644_leak": {
       "status": "open",
       "first_seen": "2026-08-23T20:31:00Z",
-      "description": "tick 72: security scan flagged /opt/data/work/research-repos/paragu-ai-builder/.env mode 644 with 47 findings (34 critical including tokens). Owner hermes:hermes. Git-tracked. Flag for safe-credential-scrub."
+      "description": "tick 87: paragu-ai-builder/.env mode 644 still pending scrub. Tick 72 finding. Carry."
+    },
+    "aiw_script_tests_malformed_script_field": {
+      "status": "open",
+      "first_seen": "2026-08-23T21:31:30Z",
+      "description": "tick 87: Script-not-found for `bash /opt/data/agents-v2/tests/run-all.sh`. Carry."
+    },
+    "gateway_rss_growth": {
+      "status": "near_resolution",
+      "first_seen": "2026-08-23T16:01:00Z",
+      "description": "tick 87 OSCILLATION-CONTINUED: tick86→87 RSS +3732 kB = +3.6 MiB (reverses tick86's -20.9 MiB drop). 9-tick net (78→87) +38896 kB = +38.0 MiB = +6.2% (~4.2 MiB/tick average). 5-tick net (83→87) +512 kB = +0.5 MiB (essentially flat). /proc VmRSS=653216 kB; heartbeat rss_kib=625964 (27 MiB below /proc, allocator renormalize). Carry stays near-resolution."
+    },
+    "lead_worker_test_mode_unchanged": {
+      "status": "open",
+      "first_seen": "2026-08-24T02:02:00Z",
+      "description": "tick 87: rubiconeas/api/lead/health still returns 'mode':'test' (no webhook to n8n). Production deploy pending. Carry."
+    },
+    "r2_presigned_url_expiry_static_assets": {
+      "status": "open",
+      "first_seen": "2026-08-23T07:00:00Z",
+      "description": "tick 87 (split from rubiconeas_front_expired_request): rubiconeas front-end static assets Worker serves R2 ExpiredRequest XML (Day 7). Distinct from lead Worker (live in test mode)."
+    },
+    "jobs_json_last_run_field_cleared": {
+      "status": "open",
+      "first_seen": "2026-08-24T02:31:00Z",
+      "description": "tick 87: jobs.json (canonical + gateway, byte-identical except 4 lines) has 66/107 jobs reporting last_status (45 ok + 21 error); remaining 41 null represent never-run jobs (likely disabled by config), NOT a wipe. Field write logic works. Retitled carry `jobs_json_never_run_status_null`."
     }
-  },
-  "closed_since_last_tick": [],
-  "counters": {
-    "bridge_lifetime_gets": 95383,
-    "bridge_lifetime_posts_send": 73,
-    "bridge_lifetime_posts_webhook": 133,
-    "bridge_log_lines": 98948,
-    "bridge_log_delta_30m": 1748,
-    "bridge_log_delta_rate_per_sec": 0.97,
-    "bridge_post_errors_lifetime": 0,
-    "bridge_wa_bridge_timeouts_30m": 0,
-    "bridge_polling_avg_seconds": 0.9655,
-    "bridge_polling_rate_per_sec": 1.036,
-    "bridge_pid": 3713061,
-    "bridge_rss_mb": 47.1,
-    "gateway_rss_mb": 599.8,
-    "gateway_pid": 3714173,
-    "gateway_alive_seconds": 95155,
-    "dashboard_rss_mb": 15.7,
-    "dashboard_pid": 2882377,
-    "errors_log_size_bytes": 1927512,
-    "errors_log_lines_this_hour": 247,
-    "errors_log_lines_total": 10765,
-    "errors_log_delta_bytes_30m": 44557,
-    "load_1min": 2.69,
-    "load_5min": 1.31,
-    "load_15min": 0.92,
-    "wa_inbound_60m": 0,
-    "wa_inbound_last_at": "2026-08-23T00:42:48Z",
-    "wa_inbound_silent_hours": 18.8,
-    "mcp_stderr_size_bytes": 59080108,
-    "mcp_stderr_size_mb": 59.1,
-    "mcp_parking_events_30m": 298,
-    "mcp_parking_rate_per_min": 9.93,
-    "mcp_cold_start_errors_30m": 0,
-    "mcp_parked_children_total": null,
-    "mcp_connection_closed_30m": 0,
-    "mcp_connect_error_30m": 0,
-    "mcp_oauth_errors_30m": 6,
-    "litellm_402_jobs_total": 13,
-    "litellm_402_cerebras": 10,
-    "litellm_402_mistral": 3,
-    "litellm_402_new_errors_30m": 0,
-    "cron_drift_seconds": 144909,
-    "cron_drift_human": "40h15m09s",
-    "cron_jobs_with_402_error": 13,
-    "cron_jobs_with_missing_script": 9,
-    "cron_jobs_with_path_guard_false": 2,
-    "cron_new_failures_30m": 4,
-    "rubiconeas_front_status": "200/118B ExpiredRequest XML",
-    "rubiconeas_api_lead_health": "200/57B test mode",
-    "ometzdental_status": "404",
-    "rubicon_eas_status": "404 page not found (CF platform, body disambiguated)",
-    "rubicon_eas_ssl_issuer": "CN=TRAEFIK DEFAULT CERT (origin self-signed, TLS handshake now succeeds)",
-    "docker_daemon_down_hours": 38.0,
-    "canonical_jobs_mtime": "2026-08-23T19:31:00Z",
-    "canonical_jobs_count": 107,
-    "gateway_jobs_mtime": "2026-08-22T04:15:38Z",
-    "gateway_jobs_count": 103,
-    "rubiconeas_api_lead_post": "200/306B URGENCIA PENAL brief healthy",
-    "wa_inbound_60min": 0,
-    "wa_inbound_silence_hours": 19.8,
-    "gateway_rss_mb_authoritative": 595,
-    "gateway_rss_pages_stalm": 318769,
-    "mcp_stderr_log_bytes": 59809574,
-    "mcp_stderr_log_delta_30m": 333599,
-    "errors_log_bytes": 2025165,
-    "errors_log_lines": 11319,
-    "errors_log_delta_30m_bytes": 52298,
-    "errors_log_delta_30m_lines": 318,
-    "jobs_402_total": 14,
-    "jobs_402_cerebras": 11,
-    "jobs_402_mistral": 3,
-    "jobs_missing_script_total_22": 22,
-    "jobs_real_missing_script_runner_errors": 9,
-    "jobs_path_guard_false_positive": 2,
-    "jobs_fresh_failures_30min": 7,
-    "jobs_in_error_state_total": 26
-  },
-  "next_actions": [
-    "Restore LiteLLM upstream credits (Cerebras 10 + Mistral 3 = 13 jobs blocked; no new today since 19:00:20Z tick 69)",
-    "Re-deploy rubiconeas worker.js with fresh R2 presigned URLs OR refactor to dynamic R2 binding",
-    "Bind rubicon-eas-lead Worker route to rubicon-eas.paragu-ai.com + provision CF custom hostname edge cert (TLS handshake now reaches origin Traefik default self-signed; need Worker route AND edge cert)",
-    "Investigate ometzdental 404 (deploy fallback route or static content)",
-    "Re-sync /opt/data/.hermes/cron/jobs.json from canonical (39h14m47s stale; canonical 31s old, source of truth)",
-    "Fix cron-sync WARN sign-inverted comparison heuristic (2,800+ WARNs; canonical is newer, not gateway)",
-    "Restore or remove 9 truly-missing cron scripts",
-    "Fix path-guard false positive for aiw-state-validate.py + aiw-cron-heartbeat.sh (2 jobs this tick; off-hours variant cleared)",
-    "Restore errors.json writer (2d14h+ stale)",
-    "Investigate MCP storm (parked 298/500, recurring design-parked servers; errors.log +44KB/30m)",
-    "Re-link /opt/data/hermes-agent/venv/bin/python3 -> /opt/hermes/.venv/bin/python3 (operator-side CLI broken ~29h)",
-    "Add /opt/data/agents/departments/03-devops-infrastructure.md stub",
-    "Verify or create skill.core.coaching-conversation-framework.v1",
-    "Set wrangler secret WEBHOOK_URL on rubicon-eas-lead worker",
-    "Schedule safe-credential-scrub review of /opt/data/scripts/deploy-ometzdental-worker.py (plaintext cfat_)",
-    "Normalize 'area' enum casing on rubiconeas lead form",
-    "Confirm /opt/data/state/cron/jobs.json absent is harmless (canonical path is /opt/data/cron/jobs.json)",
-    "Investigate aiw-state-snapshot-6h script path resolution (file exists at alt path, not in fresh-fails set today)"
-  ],
-  "latest_brief": "outbox/2026-08-23-1931-brief.md"
+  }
 }

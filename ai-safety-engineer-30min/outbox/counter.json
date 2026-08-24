@@ -7,8 +7,11 @@
     "paths_key": "/opt/data/agents/board-of-directors/PROMPT.md|/opt/data/agents/people-hr/PROMPT.md"
   },
   "2026-08-23": {
-    "n": 21,
-    "paths_key": "/opt/data/agents/board-of-directors/PROMPT.md|/opt/data/agents/people-hr/PROMPT.md",
-    "last_tick": "2026-08-23T20:31:16.450011+00:00"
+    "n": 22,
+    "paths_key": ""
+  },
+  "2026-08-24": {
+    "n": 2,
+    "paths_key": ""
   }
 }

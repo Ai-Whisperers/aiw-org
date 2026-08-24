@@ -1,0 +1,52 @@
+{
+  "decisions": [
+    {
+      "date": "2026-08-23T10:32:00.000000+00:00",
+      "content": [
+        "Skip revenue commentary: zero webhook events today, no new customers since 2026-08-21 test entry",
+        "Verify both nexaparaguay.com.py (307 → /es) and ometzdental.com (307 → /en) live before reporting all-clear — both confirmed via direct curl this run",
+        "Flag stale cron-heartbeat-alerts.log (2026-08-14, 9d old) — escalate as Today action #2 since last-tick state is unknown"
+      ]
+    },
+    {
+      "date": "2026-08-22T10:32:00.000000+00:00",
+      "content": [
+        "gh re-auth still blocked org-pulse (carried from 2026-08-14)",
+        "Skip revenue commentary: no customer/MRR signal in state since test entry 2026-08-21",
+        "Verify both nexaparaguay.com.py and ometzdental.com live before reporting all-clear"
+      ]
+    },
+    {
+      "date": "2026-08-14T10:31:03.459902+00:00",
+      "content": [
+        "Fix GitHub auth for org-pulse",
+        "Investigate CI failures"
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "date": "2026-08-23T10:32:00.000000+00:00",
+      "content": "Are the 8 cron jobs flagged in cron-heartbeat-alerts.log (2026-08-14) still erroring, or recovered silently? Need a re-check tick."
+    },
+    {
+      "date": "2026-08-22T10:32:00.000000+00:00",
+      "content": "Who owns gh auth rotation for org-pulse? Still unresolved 9 days."
+    },
+    {
+      "date": "2026-08-14T10:31:03.459902+00:00",
+      "content": "Check GitHub auth status for org-pulse"
+    }
+  ],
+  "last_run": "2026-08-23T10:32:00.000000+00:00",
+  "open_questions": [
+    "Who owns gh auth rotation for org-pulse?",
+    "Is webhook-log.json → customers.json pipeline intended to populate kpi_snapshot.leads_24h?",
+    "Are 8 cron jobs flagged 2026-08-14 still erroring or recovered silently?"
+  ],
+  "kpi_snapshot": {
+    "pipeline_usd": null,
+    "mrr_usd": null,
+    "leads_24h": 0
+  }
+}
