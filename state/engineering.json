@@ -1,10 +1,187 @@
 {
-  "last_run": null,
-  "deploys_7d": [],
-  "open_prs": [],
-  "stale_repos_7d": [],
-  "incidents_72h": [],
-  "kiki_commits_7d": 0,
+  "last_run": "2026-08-25T20:05:00Z",
+  "deploys_7d": [
+    {
+      "site": "rubiconeas.paragu-ai.com",
+      "deployed": "2026-08-25",
+      "by": "kiki",
+      "note": "linkedin-mcp/social-oauth-worker BWS->KV switch"
+    },
+    {
+      "site": "ometzdental.com",
+      "deployed": "2026-08-25",
+      "by": "kiki",
+      "note": "weekly refresh (failed Mon 24-Aug, retry 31-Aug)"
+    },
+    {
+      "site": "paragu-ai-platform",
+      "deployed": "2026-08-25",
+      "by": "kiki",
+      "note": "5 fix(nexa) commits + PR #27 wire deploy pipeline"
+    },
+    {
+      "site": "paragu-ai.com",
+      "deployed": "2026-08-24",
+      "by": "kiki",
+      "note": "agents-v2 monorepo sync"
+    }
+  ],
+  "open_prs": [
+    {
+      "n": 27,
+      "repo": "Ai-Whisperers/paragu-ai-platform",
+      "title": "fix(somosgay): wire deploy pipeline + unblock production build",
+      "author": "IvanWeissVanDerPol",
+      "opened": "2026-08-25",
+      "priority": "high"
+    },
+    {
+      "n": 1,
+      "repo": "Ai-Whisperers/mark-nl-vastgoed-coaching",
+      "title": "compliance: scrub trademark banlist from 27 files",
+      "author": "IvanWeissVanDerPol",
+      "opened": "2026-08-10",
+      "stale_days": 15
+    },
+    {
+      "n": 1,
+      "repo": "Ai-Whisperers/superspuma",
+      "title": "compliance: scrub trademark banlist from 62 files",
+      "author": "IvanWeissVanDerPol",
+      "opened": "2026-08-10",
+      "stale_days": 15
+    },
+    {
+      "n": 2,
+      "repo": "Ai-Whisperers/company",
+      "title": "compliance: scrub trademark banlist from 22 files",
+      "author": "IvanWeissVanDerPol",
+      "opened": "2026-08-10",
+      "stale_days": 15
+    },
+    {
+      "n": 1,
+      "repo": "Ai-Whisperers/somosgay-context",
+      "title": "compliance: scrub trademark banlist from 33 files",
+      "author": "IvanWeissVanDerPol",
+      "opened": "2026-08-10",
+      "stale_days": 15
+    }
+  ],
+  "stale_repos_7d": [
+    {
+      "name": "Company-Information",
+      "last_push": "2026-08-17"
+    },
+    {
+      "name": "paragu-ai-cv",
+      "last_push": "2026-08-14"
+    },
+    {
+      "name": "paragu-ai-clients",
+      "last_push": "2026-08-13"
+    },
+    {
+      "name": "saskia",
+      "last_push": "2026-08-13"
+    },
+    {
+      "name": "rubiconeas-website",
+      "last_push": "2026-08-12"
+    },
+    {
+      "name": "depiflash",
+      "last_push": "2026-08-10"
+    }
+  ],
+  "incidents_72h": [
+    {
+      "id": "lead_worker_8787_down",
+      "severity": "high",
+      "opened_tick": 151,
+      "ticks_open": 14,
+      "status": "open",
+      "root_cause": "no wrangler process; operator restart required"
+    },
+    {
+      "id": "validator_e164_regression",
+      "severity": "high",
+      "ticks_confirmed": 5,
+      "status": "open",
+      "root_cause": "^\\d{6,15}$ enforced instead of ^\\+[1-9]\\d{1,14}$"
+    },
+    {
+      "id": "validator_area_case_inversion",
+      "severity": "high",
+      "ticks_confirmed": 1,
+      "status": "open",
+      "root_cause": "validator now lowercase-only (penal/civil); inverse of prior finding"
+    },
+    {
+      "id": "mcp_parking_storm",
+      "severity": "medium",
+      "fresh30_count": 138,
+      "status": "open",
+      "root_cause": "mcp 2.x rename mcp.server.fastmcp -> mcp.server.mcpserver.MCPServer; pin mcp<2 to fix"
+    },
+    {
+      "id": "litellm_402_subs",
+      "severity": "medium",
+      "events_today": 7,
+      "providers": [
+        "cerebras",
+        "mistral"
+      ],
+      "status": "partial",
+      "root_cause": "Cerebras + Mistral subscriptions lapsed; 5+ cron jobs erroring"
+    },
+    {
+      "id": "wa_real_group_silence",
+      "severity": "low",
+      "gap_hours": 15.78,
+      "status": "band_held",
+      "root_cause": "upstream group quiet; bridge /send 200 OK (msg 3EB00737B240E75FAB8E21)"
+    }
+  ],
+  "kiki_commits_7d": 77,
   "infra_costs_monthly_usd": null,
-  "tools_pending_decision": []
+  "tools_pending_decision": [
+    {
+      "tool": "restart Lead Worker 8787 (Rubicón EAS lead form offline 14 ticks)",
+      "decision": "pending",
+      "raised_at": "2026-08-26"
+    },
+    {
+      "tool": "audit Rubicón EAS frontend area field case",
+      "decision": "pending",
+      "raised_at": "2026-08-26"
+    },
+    {
+      "tool": "triage 5 stale compliance PRs from 2026-08-10",
+      "decision": "pending",
+      "raised_at": "2026-08-26"
+    }
+  ],
+  "site_health_summary": {
+    "ok": [
+      "paragu-ai.com",
+      "www.paragu-ai.com",
+      "n8n.paragu-ai.com",
+      "llm.paragu-ai.com",
+      "grafana.paragu-ai.com",
+      "evolution.paragu-ai.com",
+      "rubiconeas.paragu-ai.com",
+      "ometzdental.com"
+    ],
+    "warn": [
+      "hermes.paragu-ai.com (port 80/443 closed by design; surface is 127.0.0.1:9119 tunnel)"
+    ],
+    "no_dns": [
+      "ometzdental.com.py",
+      "ometz.com.py",
+      "nexa-paraguay.com.py",
+      "somosgay.com.py",
+      "rubiconeas.com.py"
+    ]
+  }
 }

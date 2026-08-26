@@ -1,7 +1,10 @@
 {
   "last_run": "2026-08-17",
   "lessons_delivered": [
-    "Git rebase vs. merge in a 2-person team"
+    {
+      "lesson": "Git rebase vs. merge in a 2-person team",
+      "date": "2026-08-26"
+    }
   ],
   "current_focus": "Git rebase vs. merge in a 2-person team",
   "next_topic": "Reading a Next.js App Router stack trace",

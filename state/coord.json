@@ -1,13 +1,57 @@
 {
-  "open_stuck": 0,
-  "decisions_for_ivan": [
-    "- Investigate 2 failed cron jobs: /usr/bin/bash: line 3: hermes: command not found, /usr/bin/bash: line 3: jq: command not found"
+  "open_stuck": [
+    {
+      "title": "LiteLLM HTTP 402 credit exhaustion (Cerebras + Mistral) — 20+ weekly AIW cron jobs in error since ~2026-08-21 (aiw-kiki-coach-weekly, aiw-finance-controller-weekly, aiw-engineering-roster-biwk, aiw-coach-ivan, aiw-coach-kiki, aiw-coaching-research-intelligence, aiw-coach-roi-tracker, aiw-coach-lead-finder, aiw-tax-receipt-tracker-weekly, aiw-procurement-tracker-weekly, aiw-founder-bandwidth-watchdog-weekly, aiw-compliance-monitor-weekly, aiw-okr-tracker-weekly, aiw-source-curator-weekly, aiw-research-tracker-weekly, ometzdental-weekly-refresh, thesis-weekly-review, thesis-git-maintenance, aiw-management-coord-biwk)",
+      "status": "open",
+      "raised_at": "2026-08-26"
+    },
+    {
+      "title": "aiw-state-validate-15m + aiw-cron-heartbeat-onhours blocked by script path-guard (same root cause thesis-daily-tick hit today 2026-08-24; fix not propagated)",
+      "status": "open",
+      "raised_at": "2026-08-26"
+    },
+    {
+      "title": "aiw-script-tests: Script not found at /opt/data/scripts/bash /opt/data/agents-v2/tests/run-all.sh",
+      "status": "open",
+      "raised_at": "2026-08-26"
+    },
+    {
+      "title": "aiw-funding-weekly-sweep: 600s idle timeout exceeded",
+      "status": "open",
+      "raised_at": "2026-08-26"
+    },
+    {
+      "title": "mcp-health-check: 16/27 MCP servers healthy (11 unhealthy)",
+      "status": "open",
+      "raised_at": "2026-08-26"
+    },
+    {
+      "title": "thesis_watchdog.py false-positive urgent-resume (3 triggers today) — reads an older heartbeat field; project state is healthy (57/87 tasks done, defense materials produced)",
+      "status": "open",
+      "raised_at": "2026-08-26"
+    }
   ],
-  "last_run": "2026-08-13T21:01:00.843000",
-  "repos_analyzed": 0,
-  "stale_repos_count": 0,
-  "cron_errors": [
-    "/usr/bin/bash: line 3: hermes: command not found",
-    "/usr/bin/bash: line 3: jq: command not found"
-  ]
+  "decisions_for_ivan": [
+    {
+      "title": "Top up LiteLLM credits (Cerebras + Mistral) — single biggest org-wide blocker; ~20 weekly cron jobs stuck on HTTP 402",
+      "urgency": "MEDIUM",
+      "raised_at": "2026-08-26",
+      "question": "Top up LiteLLM credits (Cerebras + Mistral) — single biggest org-wide blocker; ~20 weekly cron jobs stuck on HTTP 402",
+      "context": "N/A"
+    },
+    {
+      "title": "Decide on 18 stale active repos (47% of active): bulk-archive OR write STATUS.md per repo (latter recommended — preserves history)",
+      "urgency": "MEDIUM",
+      "raised_at": "2026-08-26",
+      "question": "Decide on 18 stale active repos (47% of active): bulk-archive OR write STATUS.md per repo (latter recommended — preserves history)",
+      "context": "N/A"
+    }
+  ],
+  "last_run": "2026-08-24T21:00:00",
+  "repos_analyzed": 38,
+  "stale_repos_count": 18,
+  "cron_errors_count": 24,
+  "stale_cron_error_entry": "cleared — 2026-08-13 entry was a stale PATH issue not re-encountered this run (used curl + python3 instead of gh/jq/hermes)",
+  "notes": "PROMPT.md is truncated at 46 lines — role spec appears incomplete; ran from the in-prompt cron contract instead. GitHub API reachable via raw curl without auth for public org data.",
+  "stale_repos": []
 }
