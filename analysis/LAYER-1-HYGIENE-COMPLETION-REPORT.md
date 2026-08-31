@@ -153,4 +153,46 @@ Once all 4 are DONE, Ivan says "Layer 2 go" and AI writes `LAYER-2-FOUNDATION-SC
 
 **Awaiting Ivan's 4 Batch actions + decision (a/b/c for wrangler).**
 
-**AI is PAUSED for operator actions. Will resume when operator parts complete.**
+**AI revised Batch C after investigation. Awaiting Ivan operator actions (Batch A.1, A.2+A.3, A.5, sudo chmod) + wrangler webhook config (Batch C revised).**
+Will resume when operator parts complete.
+
+
+---
+
+## REVISION 1 — 2026-09-01 (post-initial-commit)
+
+After first commit, AI ran additional investigation that **revised Batch C** (wrangler decision) substantially:
+
+### What changed
+- **Batch C (Wrangler) — originally DECISION = ARCHIVE; REVISED to REVIVE WEBHOOK**
+- Direct HTTP probe of `/api/lead/health` → **200 OK** with `{"ok":true,"mode":"test"}`
+- Direct HTTP POST `/api/lead` with valid data → **200 OK** with formatted brief returned
+- Validator code IS working (proven by live POST)
+- Original incident description ("no wrangler process") was STALE (14 ticks old)
+- Real issue: `WEBHOOK_URL` secret not configured; leads go to test mode
+
+### What AI did post-initial-commit
+- Re-opened `lead_worker_8787_down` incident with revised description
+- Updated `state/coord.json` with revised Batch C note
+- Updated wishlist to reflect investigation finding
+- Net: the Worker is ALIVE, just in test mode pending webhook config
+
+### Final revised incident count
+- **Closed by AI**: 3 (validator_e164, validator_area_case, mcp_parking)
+- **Re-opened after revision**: 1 (lead_worker_8787_down — was wrongly closed)
+- **Net closed**: 2 (3 closed - 1 re-opened)
+- **Remaining open**: 3 (lead_worker_8787_down, litellm_402 SUBSCRIPTION, wa_real_group_silence)
+- **Severity of remaining**: 1 high (lead_worker_8787), 1 medium (litellm by design), 1 low (wa within tolerance)
+
+### Revised pending operator actions
+- **NEW**: wrangler secret put WEBHOOK_URL (Batch C revised) — configures the live Worker to forward real leads
+- Batch A.1: Supabase service-role rotate (web console)
+- Batch A.2+A.3: GH PAT revokes (needs full PAT values OR manual revoke)
+- Batch A.5: R2 presigned URL replacement (Kiki when available)
+- sudo chmod /opt/data/.hermes/.env (root user)
+
+### Lessons learned
+- **The "do the work" directive requires investigation before action**. The initial Batch C decision was based on stale state file data; the live HTTP probe revealed the Worker is functional. AI caught its own error.
+- **State files can be wrong**. `state/engineering.json:incidents_72h` had 14-tick-old descriptions that didn't match reality. Always verify before acting.
+- **AI investigation saved an irreversible decision**. Archiving a working Worker would have been wrong.
+- **Per Doctrine 1 + 5**: small decisions (close stale incidents) — AI acted; big decisions (revive/keep/archive Worker) — AI investigated and decided based on live evidence.
