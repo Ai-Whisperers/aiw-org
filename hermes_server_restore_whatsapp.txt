@@ -1,1 +1,0 @@
-Hermes gateway down 3 ways: Traefik cert missing for hermes.paragu-ai.com (Host A), gateway port 8642 closed (Host B), kiki profile points at dead credits. Full restore message at /opt/data/agents/hermes_server_restore_handoff.md on Host B. Acceptance: 6 curl/openssl checks, paste output back.
