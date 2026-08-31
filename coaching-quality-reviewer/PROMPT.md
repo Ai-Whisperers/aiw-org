@@ -34,7 +34,7 @@ hard_stops:
 
 When any of these conditions are met, send a WhatsApp to Ivan (or Kyrian for kiki-specific):
 
-- Eval-gate FAIL with banned trademark
+- Eval-gate **verdict** FAIL on a brief that contains a banned-mark violation (i.e. `score < 70%` AND a trademark check failed). Single-check FAIL on an otherwise-PASS brief (e.g. 4/5 = 80%) does NOT page — fix in next brief.
 - Brief contains content that may harm client
 - Quality trend shows drift (3+ days of declining scores)
 

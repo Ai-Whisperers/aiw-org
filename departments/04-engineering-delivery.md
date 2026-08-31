@@ -2,8 +2,8 @@
 
 **Head**: Kiki (CTO)
 **Lead agent**: `engineering-roster` (Tue/Fri 17:00 PYT)
-**Version**: 0.2.0
-**Last updated**: 2026-08-14
+| **Version**: 0.3.0 |
+| **Last updated**: 2026-08-28 |
 
 ---
 
@@ -83,7 +83,10 @@ Ship client sites, maintain infra uptime, keep the ParaguAI Builder running, dep
 | `devops-monitor` | Every 30 min | OPERATIONAL |
 | `qa-automation-runner` | On-PR | OPERATIONAL |
 | `security-watchdog` | Every 30 min | OPERATIONAL |
-| `ai-safety-engineer` (NEW) | Every 30 min | OPERATIONAL |
+| `ai-safety-engineer` (NEW v0.2.0) | Every 30 min | OPERATIONAL |
+| `scope-intake` (NEW v0.3.0) | On Metis proposal | OPERATIONAL |
+| `delivery-tracker` (NEW v0.3.0) | Mon 11:00 PYT | OPERATIONAL |
+| `feasibility-gate` (NEW v0.3.0) | On Metis send | GATING |
 
 ## Inputs the lead agent reads
 
@@ -106,6 +109,9 @@ Ship client sites, maintain infra uptime, keep the ParaguAI Builder running, dep
 | Every 15 min | state-validate, cron-heartbeat |
 | On-PR | qa-automation-runner |
 | Daily 02:00 | db-snapshot |
+| **NEW v0.3.0**: On Metis proposal | scope-intake |
+| **NEW v0.3.0**: Mon 11:00 PYT | delivery-tracker |
+| **NEW v0.3.0**: On Metis send | feasibility-gate |
 
 ## Stack reality (per `04-engineering-delivery.md` lines 86-95)
 
@@ -175,5 +181,6 @@ Ship client sites, maintain infra uptime, keep the ParaguAI Builder running, dep
 
 ## CHANGELOG
 
+- v0.3.0 (2026-08-28): added sales↔engineering handoff layer — `scope-intake` (Metis proposal → Kiki review), `delivery-tracker` (weekly sales status), `feasibility-gate` (blocks Metis sends without Kiki sign-off). Addresses the gap that Metis was drafting proposals with no technical input. Total sub-agents: 5 → 8.
 - v0.2.0 (2026-08-14): added 24 sub-roles (incl. AI Safety Engineer), 5 sub-agents (incl. ai-safety-engineer), AI Safety protocol, Storage architecture, Cross-references.
 - v0.1.0 (2026-08-13): initial ratification.

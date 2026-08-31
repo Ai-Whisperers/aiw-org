@@ -30,6 +30,18 @@ The org currently has **10 cron jobs** (4 thesis tickers, 3 watchdogs, 2 weekly 
 
 ---
 
+## Update (2026-08-28)
+
+The org has expanded significantly since this file was written (2026-08-13). For the current state, see:
+
+- **Constitution**: `/opt/data/agents/departments/ORG-AGENTS.md` (v0.3.0) — 6 departments, ~24 cron jobs, ~94 distinct agent names
+- **Engineering charter**: `/opt/data/agents/departments/04-engineering-delivery.md` (v0.3.0) — 8 sub-agents (added scope-intake, delivery-tracker, feasibility-gate since this file was written)
+- **Cron jobs**: `hermes cron list` (live count) or `/opt/data/cron/jobs.json` for the file source
+
+The output contract below still applies to all agents.
+
+---
+
 ## Architecture
 
 ```

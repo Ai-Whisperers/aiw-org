@@ -62,6 +62,9 @@ write rights and production-readiness, not job title.
 | 19 | **funding-coordinator** | finance | (on-demand, no cron) | — | — |
 | 20 | **citation-checker** | research | `aiw-citation-checker-on-demand` | `0 11 * * *` | — |
 | 21 | **people-hr** | people | `aiw-people-hr-weekly` | `0 22 * * 1` | `state/people.json` (people.schema.json) |
+| 22 | **scope-intake** | engineering | (on Metis proposal) | on-demand | `state/scope-intake/scope-intake.json` |
+| 23 | **delivery-tracker** | engineering | `aiw-delivery-tracker-weekly` | `0 14 * * 1` | `state/delivery-tracker/delivery-tracker.json` |
+| 24 | **feasibility-gate** | engineering | (on Metis send) | on-demand | `state/feasibility-gate/feasibility-gate.json` |
 
 ### 1.3 Tier 3 — Cross-cutting (8)
 
@@ -154,7 +157,7 @@ chair. The remaining agents sit under their lead by primary purpose.
 | **operations** | management-coordinator | procurement-tracker, okr-tracker | ai-ops-coordinator, compliance-monitor, founder-bandwidth-watchdog, eval-gate-runner, security-auditor | coach-lead-agents, coach-roi-tracker, board-of-directors | 13 | `coord.json`, `eval-per-agent.json` |
 | **finance** | business-analyst + finance-controller (co-leads) | accounting-automation, tax-receipt-tracker, funding-coordinator | bizops-tracker | — | 8 | `analyst.json`, `finance.json` |
 | **sales** | sales-pipeline | proposal-drafter, lead-enrichment, revops-pipeline-analyzer | — | coach-lead-finder, coach-conversion-agent, coach-renewal-manager | 6 | `sales.json` |
-| **engineering** | engineering-roster | qa-automation-runner | drift-detector, chaos-test-runner | — | 4 | `engineering.json` |
+| **engineering** | engineering-roster | qa-automation-runner, scope-intake, delivery-tracker, feasibility-gate | drift-detector, chaos-test-runner | — | 4 | `engineering.json` |
 | **research** | research-tracker | source-curator, citation-checker | — | coaching-research-intelligence | 4 | `research.json` |
 | **people** | kiki-coach | people-hr | — | coach-ivan, coach-kiki, coach-org, coach-onboarding, coach-practitioner, coach-cohort-facilitator, coaching-content-curator | 10 | `kiki.json`, `kiki-prep.json`, `people.json` |
 | **marketing** | (no lead; reports to sales-pipeline) | multimedia-producer, marketing-content | — | — | 2 | — |
@@ -582,3 +585,21 @@ Checklist (must pass before adding to production cron):
 - Modern operational rollback (per-state / per-cron / per-deploy): `/opt/data/agents/ROLLBACK-PLAYBOOK.md`
 - Companion skill: `aiw-ops-discipline` (cross-agent state-read pattern, cron-self-failure recovery, validation-before-completion)
 - Companion skill: `factor-9-compact-errors` (state/errors.json structure, eval-gate trend detection)
+
+---
+
+## Repository renamed (2026-08-31)
+
+This repository has been renamed for clarity:
+
+| Old URL | New URL | Why |
+|---|---|---|
+| `github.com/Ai-Whisperers/agents-v2` | [`github.com/Ai-Whisperers/growth-coaching`](https://github.com/Ai-Whisperers/growth-coaching) | This repo is the **product** (the customer-facing GROW coaching platform). The old name "agents-v2" was meaningless to outsiders; "growth-coaching" describes what the product actually does. |
+| `github.com/Ai-Whisperers/agents` | [`github.com/Ai-Whisperers/agent-infra`](https://github.com/Ai-Whisperers/agent-infra) | This repo is the **infrastructure** (agent specs, runtime state, governance docs, outbox history). The old name "agents" was too generic; "agent-infra" makes the purpose clear. |
+
+GitHub redirects the old URLs automatically, so any links from docs/issues/PRs still work — they just forward to the new location.
+
+### Quick reference
+
+- **Product** (coaching service, GROW methodology, customer tiers, marketing): [`Ai-Whisperers/growth-coaching`](https://github.com/Ai-Whisperers/growth-coaching) (this repo)
+- **Infrastructure** (agent PROMPTs, runtime state, governance, decisions): [`Ai-Whisperers/agent-infra`](https://github.com/Ai-Whisperers/agent-infra)

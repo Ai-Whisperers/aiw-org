@@ -1,12 +1,12 @@
-# AI Whisperers — Agent Organization v0.2.0
+# AI Whisperers — Agent Organization v0.3.0
 
 > The operating constitution. Defines how the company is structured as agents,
 > who owns what, who talks to whom, and how decisions escalate.
 
-**Version**: 0.2.0 — bumped 2026-08-14 (after Phase 8 of PLAN-v5)
+**Version**: 0.3.0 — bumped 2026-08-28 (after engineering v0.3.0 sales↔eng handoff layer shipped)
 **Authors**: Erebus (designed per Ivan's directive), ratified by Ivan
-**Status**: Active — v0.1.0 archived; v0.2.0 adds storage architecture, AI Ops cross-cutting, and per-dept role catalogs
-**Previous**: v0.2.0 (2026-08-14) at `archive/ORG-AGENTS-v0.1.0-2026-08-13.md`
+**Status**: Active — v0.2.0 superseded; v0.3.0 surfaces engineering v0.3.0 (scope-intake / delivery-tracker / feasibility-gate) at the constitution level and adds Appendix H current-state snapshot.
+**Previous**: v0.2.0 (2026-08-14) at `archive/ORG-AGENTS-v0.2.0-2026-08-14.md`
 
 ---
 
@@ -44,7 +44,7 @@ The company is **2 founders + ~45 agents across 30 functional areas**. Every mea
 | 1 | **Operations** | Ivan | management-coordinator | Mon+Thu 17:00 PYT | `01-operations.md` | business-analyst, kiki-coach, ai-ops-coordinator, bizops-tracker, compliance-monitor, source-curator, founder-bandwidth-watchdog | v0.2.0 |
 | 2 | **Finance & Legal** | Ivan | finance-controller | Fri 18:00 PYT | `02-finance-legal.md` | accounting-automation, tax-receipt-tracker, procurement-tracker, compliance-monitor | v0.2.0 |
 | 3 | **Sales & Growth** | Ivan | sales-pipeline | Daily 12:00 PYT | `03-sales-growth.md` | proposal-drafter, lead-enrichment, marketing-content-producer, multimedia-producer | v0.2.0 |
-| 4 | **Engineering & Delivery** | Kiki | engineering-roster | Tue+Fri 17:00 PYT | `04-engineering-delivery.md` | devops-monitor, qa-automation-runner, security-watchdog, ai-safety-engineer | v0.2.0 |
+| 4 | **Engineering & Delivery** | Kiki | engineering-roster | Tue+Fri 17:00 PYT | `04-engineering-delivery.md` | devops-monitor, qa-automation-runner, security-watchdog, ai-safety-engineer, **scope-intake (v0.3.0)**, **delivery-tracker (v0.3.0)**, **feasibility-gate (v0.3.0)** | v0.3.0 |
 | 5 | **Research & Education** | Ivan | research-tracker | Sun 18:00 PYT | `05-research-education.md` | citation-checker, thesis-tracker, course-producer, source-curator | v0.2.0 |
 | 6 | **People & Culture** | Kiki | kiki-coach | Fri 17:00 PYT | `06-people-culture.md` | founder-bandwidth-watchdog | v0.2.0 |
 
@@ -291,5 +291,27 @@ Per `06-people-culture.md` and preserved in v0.2.0:
 
 ## CHANGELOG
 
+- v0.3.0 (2026-08-28): engineering dept v0.3.0 (scope-intake / delivery-tracker / feasibility-gate) surfaced at the constitution level; added Appendix H current-state snapshot; dept directory row 4 updated. See `/opt/data/agents/departments/04-engineering-delivery.md` for the engineering-side changelog.
 - v0.2.0 (2026-08-14): bumped per Phase 8 of PLAN-v5. Added Appendices A-G (cross-cutting, deferred depts, storage, patterns, decisions, rituals, on-call). Each dept spec also bumped to v0.2.0 with full role catalogs.
 - v0.1.0 (2026-08-13): initial ratification. 6 depts, 12 ratified cron jobs.
+
+---
+
+## Appendix H — Current State vs Charter (snapshot 2026-08-28)
+
+Mechanical snapshot taken by Erebus from direct filesystem inspection. This appendix is the **gap detector** between what the constitution says and what is actually true. Re-take quarterly (or after any dept charter bump).
+
+| Surface | Charter says | Reality on disk | Delta |
+|---|---|---|---|
+| Engineering charter version | v0.2.0 (per cross-reference) | `/opt/data/agents/departments/04-engineering-delivery.md` is **v0.3.0** (2026-08-28) | Engineering charter at v0.3.0; this constitution now at v0.3.0 (was v0.2.0). |
+| Engineering sub-agents (per dept directory) | 4 listed: devops-monitor, qa-automation-runner, security-watchdog, ai-safety-engineer | 8 in v2 packages: + scope-intake, delivery-tracker, feasibility-gate, chaos-test-runner | v0.3.0 of this doc adds the 3 sales↔eng handoff agents. |
+| v2 packages directory | (not mentioned in constitution) | `/opt/data/agents-v2/packages/{coaching,engineering,finance,operations,research,sales}/agents/` exists with 37 PROMPT.md files | Out of scope of v0.3.0; tracked in `/opt/data/agents-v2/PACKAGE-INDEX.md`. |
+| v1 active agents (with outbox) | (not enumerated in constitution) | 34 of 61 v1 dirs have PROMPT.md + ≥1 outbox run | Tracked by `health.sh`; not in constitution scope. |
+| Duplicate agent dirs | (not surfaced) | `course-producer` and `thesis-tracker` exist as separate non-symlinked dirs in both `coaching/` and `research/` packages | **Decision pending**: research/ owns thesis/course pipeline; recommendation is to remove coaching/ copies. See `/opt/data/scratchpad/analysis/agent-org-improvement.md`. |
+| John (client) activation status | (not in agent layer) | VPS at 38.9.96.186 (Servarica V2 KVM Slim Slice 2, $7/mo), 506 MiniMax-M3 calls since 2026-08-13, 94% avg cache hit, 0 errors. Initial dead MiniMax key has been replaced and confirmed live | `/opt/data/agents-v2/state/john.json` captured this snapshot. |
+| Layer 1 git repos | Per `STORAGE-ARCHITECTURE.md`: per-agent git repos at `/opt/data/git-repos/aiw-agents-*/` should be populated | 30+ dirs exist as **empty placeholders** (size 0) | Layer 1 migration stalled in Phase 5.5; tracked as org improvement work. |
+| Layer 2 SQLite | Per `STORAGE-ARCHITECTURE.md`: per-agent SQLite DBs at `/opt/data/db/<agent>.db` | Partial — `/opt/data/db/*.db` shows ~10 active (coord, kiki, kiki-prep, etc.) | Migration in progress; not blocking. |
+| GAP-AUDIT-2026-08-13 (12 gaps) | Status not tracked | P0 (1.1 cron errors, 1.2 no agent runs, 1.3 split cron storage): all closed per direct audit. P1 (2.1 schema validation, 2.5 alerting): still open | See "Resolution Status — 2026-08-28" appended to `/opt/data/agents/GAP-AUDIT-2026-08-13.md`. |
+| Trademark-scrub pre-commit hook | Spec'd but not wired (gap 3.3) | `/opt/data/agents-v2/patterns/trademark-scrub.sh` exists as a runnable script; pre-commit hook has not been wired. Banlist has **30 distinct terms** (verified 2026-08-28: mensaje, mensajebusiness, mensaje-web, wpp, facebook, instagram, insta, messenger, oculus, paypal, stripe, google, gmail, youtube, tiktok, twitter, x-com, discord, slack, microsoft, office365, apple, icloud, amazon, aws-, openai, chatgpt, anthropic, claude, meta). Source of truth is the script itself, not the constitution text. | Org improvement brief covers this. |
+| Org repo count (per GitHub API audit 2026-08-28) | (not previously enumerated) | **146 repos total** in `Ai-Whisperers` org: 92 active, 53 archived, 1 fork, 0 disabled. **34 active repos are stale (>90 days no push)**. Inventory at `/opt/data/scratchpad/analysis/org/ALL-146-REPOS.json`. | Engineering-roster should consume this inventory. |
+| **Active secret leaks** | (not previously enumerated) | **3 leaked credentials** discovered 2026-08-28: (1) Supabase JWT in `paragu-ai-builder/.env`, (2) GitHub PAT `ghp_U0Cs76_FAKE...REDACTED_TAIL (see /opt/data/scratchpad/analysis/org-secrets-FULL.json for full value)` in 13 repos' `.git/config`, (3) GitHub PAT `ghp_Rfi9_FAKE...6irj` in `paragu-ai-platform` git history. State at `/opt/data/agents-v2/state/org-secrets.json`. **Time-to-safe: ~17 min.** | P0 advisory at `/opt/data/scratchpad/analysis/P0-SECURITY-ADVISORY.md`. |
