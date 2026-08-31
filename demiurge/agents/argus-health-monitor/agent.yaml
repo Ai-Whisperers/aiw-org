@@ -1,0 +1,10 @@
+id: argus-health-monitor
+name: Argus
+display_name: Argus — Department Health Monitor
+archetype: Watchdog
+status: active
+git_repo: https://github.com/Ai-Whisperers/aiw-agent-argus-health-monitor
+departments: [marketing, sales, product-discovery]
+cadence:
+  schedule: "0 */6 * * *"
+  type: scheduled

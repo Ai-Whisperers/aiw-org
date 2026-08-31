@@ -1,0 +1,11 @@
+id: orpheus-recordings-agent
+name: Orpheus
+display_name: Orpheus — Recordings Agent
+archetype: Builder
+status: active
+git_repo: https://github.com/Ai-Whisperers/aiw-agent-orpheus-recordings-agent
+departments: [knowledge-mgmt]
+roles: [recordings]
+cadence:
+  type: on_signal
+  routing_tags: [recording-upload]

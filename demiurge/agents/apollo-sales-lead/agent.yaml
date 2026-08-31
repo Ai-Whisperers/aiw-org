@@ -1,0 +1,11 @@
+id: apollo-sales-lead
+name: Apollo
+display_name: Apollo — Head of Sales
+archetype: Connector
+status: active
+git_repo: https://github.com/Ai-Whisperers/aiw-agent-apollo-sales-lead
+departments: [sales]
+roles: [sales-lead]
+cadence:
+  schedule: "0 12 * * *"
+  type: scheduled

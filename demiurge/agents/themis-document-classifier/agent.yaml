@@ -1,0 +1,11 @@
+id: themis-document-classifier
+name: Themis
+display_name: Themis — Document Classifier
+archetype: Analyst
+status: active
+git_repo: https://github.com/Ai-Whisperers/aiw-agent-themis-document-classifier
+departments: [knowledge-mgmt]
+roles: [document-classifier]
+cadence:
+  type: on_signal
+  routing_tags: [document-ingest, transcript-ready]

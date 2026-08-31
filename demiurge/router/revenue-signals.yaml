@@ -1,0 +1,37 @@
+# Revenue + Operations signal registry
+
+> DEMIURGE-032, DEMIURGE-040, DEMIURGE-046, DEMIURGE-076
+> Full Operations KPI definitions: `departments/operations/signals.yaml`
+
+departments:
+  - marketing
+  - sales
+  - product-discovery
+  - operations
+
+three_way_loops:
+  - name: content-pipeline-insight
+    flow:
+      - clio collects customer signals
+      - athena synthesizes product-discovery-insight
+      - hera adapts marketing-campaign-brief
+      - apollo uses content in sales-inbound-lead follow-up
+      - apollo emits sales-pipeline-feedback
+    feedback_loop_id: loop-pipeline-to-content
+
+signals:
+  - marketing-content-ready
+  - marketing-campaign-brief
+  - sales-pipeline-feedback
+  - sales-inbound-lead
+  - sales-discovery-complete
+  - product-discovery-insight
+  - customer-signal-raw
+  # Operations inbound (cross_dept) — routed to kronos-operations-lead
+  - dept-activation-ready
+  - dept-health-breach
+  - ops-agent-health-anomaly
+  - ops-compliance-flag-count
+  # Operations outbound (cross_dept)
+  - dept-kpi-signals
+  - org-new-dept-request

@@ -1,0 +1,67 @@
+# AI Whisperers standard .gitignore for client repos
+# Last updated: 2026-08-28
+# Source: /opt/data/agents-v2/templates/gitignore.template
+# Install: copy to repo root as `.gitignore`
+
+# === Secrets (CRITICAL — see /opt/data/scratchpad/analysis/P0-SECURITY-ADVISORY.md) ===
+.env
+.env.*
+.env.local
+.env.development
+.env.production
+.env.production.example  # OK to keep — examples are non-secret
+
+# === Build outputs ===
+node_modules/
+.next/
+out/
+dist/
+build/
+.turbo/
+*.tsbuildinfo
+
+# === Hermes / desktop app artifacts ===
+.hermes/
+.hermes/desktop-attachments/
+hermes-backup/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.python-version
+
+# === Editor / OS noise ===
+.DS_Store
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# === Test / coverage ===
+coverage/
+.nyc_output/
+*.lcov
+playwright-report/
+test-results/
+__tests__/snapshots/
+
+# === Agent / framework scratch ===
+.agents/
+.claude/
+.cursor/
+.sisyphus/
+.firecrawl/
+.backup/
+.worktrees/
+
+# === Logs ===
+*.log
+logs/*.jsonl
+!logs/.gitkeep
+
+# === Misc ===
+*.tsbuildinfo
+.pnp.*
+.yarn/cache
+.yarn/install-state.gz

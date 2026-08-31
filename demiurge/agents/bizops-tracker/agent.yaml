@@ -1,0 +1,12 @@
+id: bizops-tracker
+name: Erebus
+display_name: Erebus — BizOps Tracker
+archetype: Analyst
+status: active
+git_repo: https://github.com/Ai-Whisperers/aiw-agent-bizops-tracker
+departments: [operations]
+roles: [ops-bizops-tracker]
+cadence:
+  schedule: "0 17 * * 0"
+  timezone: America/Asuncion
+  type: scheduled

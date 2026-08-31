@@ -1,0 +1,14 @@
+repo: aiw-agent-themis-document-classifier
+remote: https://github.com/Ai-Whisperers/aiw-agent-themis-document-classifier
+visibility: private
+initial_paths:
+  - PROMPT.md
+  - agent.yaml
+  - envelopes/.gitkeep
+  - outbox/.gitkeep
+  - decisions/.gitkeep
+  - lessons/.gitkeep
+gitignore:
+  - state/
+  - "*.db"
+  - logs/

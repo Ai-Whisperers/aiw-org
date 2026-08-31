@@ -1,0 +1,10 @@
+# Compliance signal definitions
+# DEMIURGE-079 — outbound cross_dept signals to operations
+
+signal_types:
+  - id: ops-compliance-flag-count
+    direction: out
+    type: cross_dept
+    recipients: [operations]
+    routing_tags: [compliance, trademark]
+    sla_reaction: PT24H

@@ -1,0 +1,84 @@
+# Operations Source Catalog
+
+> DEMIURGE-074
+
+```yaml
+catalog_id: catalog-operations
+department_id: operations
+version: 1.0.0
+maintained_by: thoth-literature-scanner
+```
+
+## Sources
+
+| id | title | type | rating | url |
+|----|-------|------|--------|-----|
+| ops-measure-what-matters | Measure What Matters (Doerr) | book | 5 | — |
+| ops-high-output-mgmt | High Output Management (Grove) | book | 5 | — |
+| ops-dora-report | DORA State of DevOps Report | paper | 5 | https://dora.dev |
+| ops-the-goal | The Goal (Goldratt) | book | 4 | — |
+| ops-itil | ITIL 4 Service Management | standard | 4 | https://www.axelos.com/certifications/itil-service-management |
+| ops-first-round | First Round Review — Ops playbooks | blog | 4 | https://review.firstround.com/search?query=operations |
+| ops-a16z-guides | a16z Startup Ops Guides | blog | 4 | — |
+| ops-atlassian-playbook | Atlassian Team Playbook | framework | 4 | https://www.atlassian.com/team-playbook |
+| ops-lennys-ops | Lenny's Newsletter (ops / org design) | blog | 3 | https://www.lennysnewsletter.com |
+| ops-revops-coop | RevOps Co-op | community | 4 | https://www.revopscoop.com |
+| ops-operations-nation | Operations Nation | community | 4 | https://operationsnation.com/community |
+
+RevOps Co-op is Tier 2 (`revops`) but listed here intentionally — at <50 headcount, ops and revops signal overlap; operations dept consumes cross-functional practitioner signal until RevOps activates on trigger.
+
+## Science-backed frameworks (≥3)
+
+| framework | source | domain |
+|-----------|--------|--------|
+| OKRs | Measure What Matters (Doerr) | goal-setting, quarterly alignment |
+| Managerial leverage / output | High Output Management (Grove) | signal-driven daily ops, decision latency |
+| DORA metrics (MTTR, change failure rate, deployment frequency) | DORA State of DevOps | incident response, engineering ops |
+| Theory of Constraints | The Goal (Goldratt) | process bottlenecks, cycle time |
+| ITIL incident + change management | ITIL 4 | runbook culture, service ops |
+
+## Key insights
+
+1. **Signal over meetings** — Grove: managerial output = output of org; measure leading indicators daily, not status meetings
+2. **OKRs with kill criteria** — Doerr: objectives qualitative, key results measurable; weekly check-ins, quarterly reset
+3. **Incident culture** — ITIL + DORA: blameless postmortems, MTTR as primary health signal, runbooks before heroics
+4. **Vendor stack hygiene** — First Round / a16z: SaaS renewal calendar, cost-per-seat tracking, tool sprawl audits quarterly
+5. **Cross-dept coordination without middle management** — async briefs + explicit decision queues (Ivan ≤3 decisions/week)
+6. **Unit economics** — burn rate, cost per transaction, infra cost per agent run; weekly snapshot not monthly surprise
+7. **Process as code** — documented procedures in repo, not tribal knowledge; Atlassian playbooks for retros, health monitors
+
+## Signal types (feeds DEMIURGE-075)
+
+### Daily
+
+| signal_id | description | source_agent |
+|-----------|-------------|--------------|
+| `ops-incident-open-count` | Open incidents / P1-P3 | ai-ops-coordinator |
+| `ops-agent-health-anomaly` | Eval gate failures, hard-stop bypasses | ai-ops-coordinator |
+| `ops-stale-repo-count` | Repos with no push in 14+ days | management-coordinator |
+| `ops-cron-error-count` | Cron jobs in error state | business-analyst |
+| `ops-decision-queue-depth` | Pending decisions for Ivan | management-coordinator |
+
+### Weekly
+
+| signal_id | description | source_agent |
+|-----------|-------------|--------------|
+| `ops-okr-completion-pct` | OKR % complete per objective | bizops-tracker |
+| `ops-cycle-time-days` | Avg time issue open → closed | management-coordinator |
+| `ops-vendor-renewal-30d` | SaaS renewals due within 30 days | bizops-tracker |
+| `ops-cross-dept-blocker-count` | Cross-functional blockers surfaced | bizops-tracker |
+| `ops-compliance-flag-count` | Open compliance / trademark flags | compliance-monitor |
+| `ops-decision-latency-days` | Avg days from decision queued to resolved | bizops-tracker |
+
+### Monthly / Quarterly
+
+| signal_id | description | cadence |
+|-----------|-------------|---------|
+| `ops-burn-rate` | Monthly burn vs budget | monthly |
+| `ops-cost-per-transaction` | Unit economics per revenue event | monthly |
+| `ops-tool-sprawl-count` | Active SaaS tools vs last quarter | quarterly |
+| `ops-okr-reset` | Quarterly OKR review + reset | quarterly |
+
+## Community signals
+
+See [community-signals.md](community-signals.md).

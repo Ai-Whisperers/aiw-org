@@ -1,0 +1,40 @@
+# Revenue Stack KPIs
+
+> DEMIURGE-048
+
+```yaml
+version: 1.0.0
+departments: [marketing, sales, product-discovery]
+```
+
+## Marketing (owner: hera-marketing-lead)
+
+| id | name | formula | target | unit | feedback_loop |
+|----|------|---------|--------|------|---------------|
+| kpi-mkt-content-output | Content pieces/week | count published drafts | 3 | count | loop-monitor-to-source |
+| kpi-mkt-engagement | Engagement rate | clicks+replies / impressions | 0.15 | ratio | loop-pipeline-to-content |
+| kpi-mkt-signal-sla | Campaign brief SLA | briefs on time / total | 0.9 | ratio | loop-monitor-to-soul |
+
+## Sales (owner: apollo-sales-lead)
+
+| id | name | formula | target | unit | feedback_loop |
+|----|------|---------|--------|------|---------------|
+| kpi-sales-reply-sla | Inbound reply SLA | leads ack within 2h / total | 0.95 | ratio | loop-monitor-to-soul |
+| kpi-sales-pipeline-value | Pipeline value | sum qualified opportunities | 5000 | USD | loop-pipeline-to-content |
+| kpi-sales-win-rate | Win rate | wins / (wins+losses) | 0.25 | ratio | loop-pipeline-to-content |
+
+## Product Discovery (owner: athena-product-discovery-lead)
+
+| id | name | formula | target | unit | feedback_loop |
+|----|------|---------|--------|------|---------------|
+| kpi-pd-interviews | Customer touches/week | count | 3 | count | loop-monitor-to-source |
+| kpi-pd-insights | Insights shipped/month | count validated insights | 4 | count | loop-pd-to-mkt |
+| kpi-pd-experiments | Experiments/quarter | count with kill criteria | 2 | count | loop-monitor-to-soul |
+
+## Org health (owner: argus-health-monitor)
+
+| id | name | formula | target |
+|----|------|---------|--------|
+| kpi-org-health-score | Revenue stack health | weighted avg dept scores | 0.85 |
+
+feedback_trigger below 0.7 → loop-monitor-to-soul

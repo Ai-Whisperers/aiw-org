@@ -1,0 +1,34 @@
+# {{REPO_NAME}} — Agent Entry-Point
+
+> Auto-generated from `/opt/data/agents-v2/templates/AGENTS.md.template` on {{DATE}}.
+> Replace `{{...}}` placeholders. Keep under 60 lines.
+
+## What this repo is
+{{ONE_LINE_DESCRIPTION}}
+
+## Conventions
+- **Stack**: {{STACK}}
+- **Branch**: `main` (production), `dev` (integration). PRs target `main`.
+- **Commits**: conventional commits (`feat:`, `fix:`, `chore:`, `docs:`).
+- **Tests required for**: any change to `src/lib/**`, `web/app/api/**`, `db/migrations/**`.
+
+## What agents read first
+- `README.md` — human entry point
+- `CLAUDE.md` (if present) — agent context, ops notes, gotchas
+- `{{STATE_OR_CONFIG_FILE}}` — current state, open work, recent decisions
+
+## What agents must NOT do
+- Push to `main` without review (`merge_pr` is a hard-stop, requires Kiki/Ivan approval)
+- Deploy to production without approval (`deploy_prod` is a hard-stop)
+- Modify canonical narrative / pricing docs (requires Ivan only)
+- Commit secrets — see `.gitignore` (mandatory) and `secret-leak-check.sh` pre-commit hook (recommended)
+
+## Handoffs
+- Engineering state: `/opt/data/agents/state/engineering.json`
+- If this repo's work blocks another repo's delivery, log to `/opt/data/agents/state/coord.json` under `open_stuck`
+
+## References
+- Org constitution: `/opt/data/agents/departments/ORG-AGENTS.md` (v0.3.0)
+- Engineering charter: `/opt/data/agents/departments/04-engineering-delivery.md` (v0.3.0)
+- Hard-stops vocabulary: `/opt/data/agents-v2/patterns/hard-stops-schema.md`
+- Trademark banlist: `/opt/data/agents-v2/patterns/trademark-scrub.sh`

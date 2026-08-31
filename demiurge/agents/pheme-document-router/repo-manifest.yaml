@@ -1,0 +1,14 @@
+repo: aiw-agent-pheme-document-router
+remote: https://github.com/Ai-Whisperers/aiw-agent-pheme-document-router
+visibility: private
+initial_paths:
+  - PROMPT.md
+  - agent.yaml
+  - queue/.gitkeep
+  - dead-letter/.gitkeep
+  - outbox/.gitkeep
+  - routing-audit/.gitkeep
+gitignore:
+  - state/
+  - "*.db"
+  - logs/

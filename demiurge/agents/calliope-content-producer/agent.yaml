@@ -1,0 +1,11 @@
+id: calliope-content-producer
+name: Calliope
+display_name: Calliope — Content Producer
+archetype: Builder
+status: active
+git_repo: https://github.com/Ai-Whisperers/aiw-agent-calliope-content-producer
+departments: [marketing]
+roles: [marketing-content-producer]
+cadence:
+  schedule: "0 10 * * 1,3,5"
+  type: scheduled

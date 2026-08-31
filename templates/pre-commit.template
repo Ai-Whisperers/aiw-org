@@ -1,0 +1,55 @@
+#!/usr/bin/env bash
+# AI Whisperers standard pre-commit hook
+# Generated from /opt/data/agents-v2/templates/pre-commit.template on {{DATE}}
+#
+# Combines:
+#   1. secret-leak-check.sh — blocks GH PAT, OpenAI/Anthropic/Stripe/AWS keys
+#   2. trademark-scrub.sh   — blocks Hostinger-banned terms (30 terms)
+#
+# Install: see install-hooks.sh in the same dir, or manually:
+#   cp /opt/data/agents-v2/templates/pre-commit.template .git/hooks/pre-commit
+#   chmod +x .git/hooks/pre-commit
+
+set -e
+
+REPO_ROOT="$(git rev-parse --show-toplevel)"
+
+# Get staged files (empty array if not in a git repo, but we ARE in a git hook)
+STAGED=$(git diff --cached --name-only --diff-filter=ACM 2>/dev/null || true)
+
+if [[ -z "$STAGED" ]]; then
+    # Nothing staged, nothing to check
+    exit 0
+fi
+
+PATTERNS_DIR="/opt/data/agents-v2/patterns"
+
+# Check 1: secret leaks (fast regex scan)
+if [[ -x "$PATTERNS_DIR/secret-leak-check.sh" ]]; then
+    echo "[pre-commit] Running secret-leak-check.sh on staged files..."
+    # Pass each staged file to the script
+    if ! "$PATTERNS_DIR/secret-leak-check.sh" $STAGED 2>/dev/null; then
+        echo ""
+        echo "❌ COMMIT BLOCKED: secret pattern detected."
+        echo "   Remove the secret, rotate it at the source, then re-commit."
+        echo "   To override (e.g. for known-safe test fixtures): git commit --no-verify"
+        exit 1
+    fi
+fi
+
+# Check 2: trademark scrub (the Hostinger banlist)
+if [[ -x "$PATTERNS_DIR/trademark-scrub.sh" ]]; then
+    echo "[pre-commit] Running trademark-scrub.sh on staged files..."
+    if ! "$PATTERNS_DIR/trademark-scrub.sh" $STAGED 2>/dev/null; then
+        echo ""
+        echo "❌ COMMIT BLOCKED: trademark-banned term detected."
+        echo "   See /opt/data/agents-v2/patterns/trademark-scrub.sh for the 30 banned terms."
+        echo "   To override for a specific line: append '# trademark-allow: <reason>'"
+        echo "   To override for a path: add it to .trademark-allowlist"
+        echo "   Last resort: git commit --no-verify (must file an issue)"
+        exit 1
+    fi
+fi
+
+echo "[pre-commit] OK"
+exit 0

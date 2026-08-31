@@ -1,0 +1,13 @@
+# Soul improvement workflow
+
+> DEMIURGE-051
+
+When `loop-monitor-to-soul` fires:
+
+1. Argus collects: KPI breach context, recent outbox samples, routing failures
+2. Writes suggestion to `demiurge/agents/<id>/soul-revision-proposals/YYYY-MM-DD.md`
+3. Does **not** modify PROMPT.md without `human:ivan` approval
+4. On approval: bump `Soul.version` patch in agent.yaml
+5. Log decision in episodic `decisions/`
+
+Integrates with existing `scripts/observability/prompt-improvement-suggester.py` at runtime.

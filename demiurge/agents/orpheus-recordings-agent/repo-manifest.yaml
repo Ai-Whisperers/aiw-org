@@ -1,0 +1,17 @@
+repo: aiw-agent-orpheus-recordings-agent
+remote: https://github.com/Ai-Whisperers/aiw-agent-orpheus-recordings-agent
+visibility: private
+initial_paths:
+  - PROMPT.md
+  - agent.yaml
+  - recordings/.gitkeep
+  - transcripts/.gitkeep
+  - outbox/.gitkeep
+gitignore:
+  - state/
+  - "*.db"
+  - logs/
+  - "*.wav"
+  - "*.mp3"
+  - "*.mp4"
+  - "*.m4a"

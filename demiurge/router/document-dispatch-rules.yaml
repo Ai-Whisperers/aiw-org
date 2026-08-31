@@ -1,0 +1,141 @@
+# Document Intelligence dispatch rules
+# Applied by pheme-document-router on quality-assessed signals (not document-classified)
+#
+# Match convention: derived.audience values must appear in routing_tags (see document.md)
+
+dispatch_rules:
+  - id: route-document-p0-marketing
+    match:
+      signal_type: quality-assessed
+      derived_urgency: P0
+      routing_tags: [marketing]
+    deliver_to:
+      - type: agent
+        id: hera-marketing-lead
+    priority: critical
+    ack_required: true
+    fan_out: all
+
+  - id: route-document-p0-sales
+    match:
+      signal_type: quality-assessed
+      derived_urgency: P0
+      routing_tags: [sales]
+    deliver_to:
+      - type: agent
+        id: apollo-sales-lead
+    priority: critical
+    ack_required: true
+    fan_out: all
+
+  - id: route-document-p1-marketing
+    match:
+      signal_type: quality-assessed
+      derived_urgency: P1
+      routing_tags: [marketing]
+    deliver_to:
+      - type: agent
+        id: hera-marketing-lead
+    priority: urgent
+    ack_required: true
+    fan_out: first_available
+
+  - id: route-document-p1-sales
+    match:
+      signal_type: quality-assessed
+      derived_urgency: P1
+      routing_tags: [sales]
+    deliver_to:
+      - type: agent
+        id: apollo-sales-lead
+    priority: urgent
+    ack_required: true
+    fan_out: first_available
+
+  - id: route-document-audience-marketing
+    match:
+      signal_type: quality-assessed
+      routing_tags: [marketing]
+    deliver_to:
+      - type: agent
+        id: hera-marketing-lead
+    fan_out: first_available
+
+  - id: route-document-audience-sales
+    match:
+      signal_type: quality-assessed
+      routing_tags: [sales, pipeline]
+    deliver_to:
+      - type: agent
+        id: apollo-sales-lead
+    fan_out: first_available
+
+  - id: route-document-audience-product-discovery
+    match:
+      signal_type: quality-assessed
+      routing_tags: [product-discovery, insight, validation]
+    deliver_to:
+      - type: agent
+        id: athena-product-discovery-lead
+    fan_out: first_available
+
+  - id: route-document-human-only
+    match:
+      signal_type: quality-assessed
+      requires_human: true
+    deliver_to:
+      - type: human
+        id: ivan
+    channel: whatsapp
+    fan_out: first_available
+
+  - id: route-action-item-sales
+    match:
+      signal_type: action-item-extracted
+      routing_tags: [sales, pipeline]
+    deliver_to:
+      - type: agent
+        id: apollo-sales-lead
+    fan_out: first_available
+    note: >
+      Pheme also emits a cross_dept signal with routing_tags [lead, inbound] for
+      hermes-router-revenue to pick up via dispatch-rules.yaml — do not duplicate
+      Hermes dispatch logic here.
+
+  - id: route-nugget-thoth
+    match:
+      signal_type: nugget-surfaced
+      routing_tags: [literature, research]
+    deliver_to:
+      - type: agent
+        id: thoth-literature-scanner
+    fan_out: first_available
+
+  - id: route-document-audience-operations
+    match:
+      signal_type: quality-assessed
+      routing_tags: [operations]
+    deliver_to:
+      - type: agent
+        id: kronos-operations-lead
+    fan_out: first_available
+
+  - id: route-unresolved-audience
+    match:
+      signal_type: quality-assessed
+      audience_resolved: false
+    deliver_to:
+      - type: queue
+        id: dead-letter
+    escalate_to: human:ivan
+    fan_out: first_available
+
+  - id: route-quality-gate-blocked
+    match:
+      signal_type: quality-assessed
+      gate_triggered: true
+    deliver_to:
+      - type: queue
+        id: quality-gate-hold
+    escalate_to: human:ivan
+    fan_out: first_available

@@ -1,0 +1,13 @@
+repo: aiw-agent-thoth-literature-scanner
+remote: https://github.com/Ai-Whisperers/aiw-agent-thoth-literature-scanner
+visibility: private
+initial_paths:
+  - PROMPT.md
+  - agent.yaml
+  - outbox/.gitkeep
+  - decisions/.gitkeep
+  - lessons/.gitkeep
+gitignore:
+  - state/
+  - "*.db"
+  - logs/

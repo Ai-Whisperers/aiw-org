@@ -1,0 +1,11 @@
+id: iris-community-monitor
+name: Iris
+display_name: Iris — Community Monitor
+archetype: Connector
+status: active
+git_repo: https://github.com/Ai-Whisperers/aiw-agent-iris-community-monitor
+departments: [marketing]
+roles: [marketing-community-monitor]
+cadence:
+  schedule: "0 11 * * 2,4"
+  type: scheduled

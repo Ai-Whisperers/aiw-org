@@ -1,0 +1,11 @@
+id: mnemosyne-document-archivist
+name: Mnemosyne
+display_name: Mnemosyne — Document Archivist
+archetype: Curator
+status: active
+git_repo: https://github.com/Ai-Whisperers/aiw-agent-mnemosyne-document-archivist
+departments: [knowledge-mgmt]
+roles: [document-archivist]
+cadence:
+  type: on_signal
+  routing_tags: [document-classified]

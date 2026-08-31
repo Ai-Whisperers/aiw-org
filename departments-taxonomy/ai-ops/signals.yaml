@@ -1,0 +1,19 @@
+# AI Ops signal definitions
+# DEMIURGE-079 — outbound cross_dept signals to operations
+
+signal_types:
+  - id: ops-agent-health-anomaly
+    direction: out
+    type: cross_dept
+    sender: ai-ops
+    recipients: [operations]
+    routing_tags: [eval-gate, drift, hard-stop]
+    sla_reaction: PT1H
+
+  - id: ops-incident-open-count
+    direction: out
+    type: kpi
+    recipients: [operations]
+    sender: ai-ops-coordinator
+    measurement_cadence: P1D
+    routing_tags: [incident, daily]

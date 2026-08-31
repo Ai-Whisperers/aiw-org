@@ -1,0 +1,79 @@
+dispatch_rules:
+  - id: route-inbound-lead
+    match:
+      signal_type: cross_dept
+      routing_tags: [lead, inbound]
+    deliver_to:
+      - type: agent
+        id: apollo-sales-lead
+      - type: agent
+        id: cadmus-lead-enrichment
+    fan_out: all
+
+  - id: route-content-ready
+    match:
+      routing_tags: [content, pipeline]
+    deliver_to:
+      - type: agent
+        id: apollo-sales-lead
+    fan_out: first_available
+
+  - id: route-pd-insight
+    match:
+      routing_tags: [insight, validation]
+    deliver_to:
+      - type: agent
+        id: hera-marketing-lead
+      - type: agent
+        id: apollo-sales-lead
+    fan_out: all
+
+  - id: route-pipeline-feedback
+    match:
+      routing_tags: [pipeline, win-loss]
+    deliver_to:
+      - type: agent
+        id: hera-marketing-lead
+      - type: agent
+        id: athena-product-discovery-lead
+    fan_out: all
+
+  - id: route-customer-signal
+    match:
+      routing_tags: [customer-voice]
+    deliver_to:
+      - type: agent
+        id: clio-customer-signal-collector
+    fan_out: first_available
+
+  - id: route-dept-activation
+    match:
+      routing_tags: [dept-activation]
+    deliver_to:
+      - type: agent
+        id: kronos-operations-lead
+    fan_out: first_available
+
+  - id: route-dept-health-breach
+    match:
+      routing_tags: [dept-health, kpi-breach]
+    deliver_to:
+      - type: agent
+        id: kronos-operations-lead
+    fan_out: first_available
+
+  - id: route-ops-agent-anomaly
+    match:
+      routing_tags: [eval-gate, drift, hard-stop]
+    deliver_to:
+      - type: agent
+        id: kronos-operations-lead
+    fan_out: first_available
+
+  - id: route-compliance-flag
+    match:
+      routing_tags: [compliance, trademark]
+    deliver_to:
+      - type: agent
+        id: kronos-operations-lead
+    fan_out: first_available

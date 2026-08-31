@@ -1,0 +1,11 @@
+id: hephaestus-document-miner
+name: Hephaestus
+display_name: Hephaestus — Document Miner
+archetype: Builder
+status: active
+git_repo: https://github.com/Ai-Whisperers/aiw-agent-hephaestus-document-miner
+departments: [knowledge-mgmt]
+roles: [document-miner]
+cadence:
+  type: on_signal
+  routing_tags: [document-classified]

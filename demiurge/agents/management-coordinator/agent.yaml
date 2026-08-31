@@ -1,0 +1,12 @@
+id: management-coordinator
+name: Erebus
+display_name: Erebus — Management Coordinator
+archetype: Coordinator
+status: active
+git_repo: https://github.com/Ai-Whisperers/aiw-agent-management-coordinator
+departments: [operations]
+roles: [ops-management-coordinator]
+cadence:
+  schedule: "0 17 * * 1,4"
+  timezone: America/Asuncion
+  type: scheduled

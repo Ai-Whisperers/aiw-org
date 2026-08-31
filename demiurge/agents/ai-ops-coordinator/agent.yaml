@@ -1,0 +1,12 @@
+id: ai-ops-coordinator
+name: Erebus
+display_name: Erebus — AI Ops Coordinator
+archetype: Watchdog
+status: active
+git_repo: https://github.com/Ai-Whisperers/aiw-agent-ai-ops-coordinator
+departments: [ai-ops]
+roles: [ai-ops-coordinator]
+cadence:
+  schedule: "0 9 * * *"
+  timezone: America/Asuncion
+  type: scheduled

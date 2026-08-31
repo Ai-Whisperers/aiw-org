@@ -1,0 +1,12 @@
+repo: aiw-agent-peitho-language-quality
+remote: https://github.com/Ai-Whisperers/aiw-agent-peitho-language-quality
+visibility: private
+initial_paths:
+  - PROMPT.md
+  - agent.yaml
+  - quality-reports/.gitkeep
+  - outbox/.gitkeep
+gitignore:
+  - state/
+  - "*.db"
+  - logs/

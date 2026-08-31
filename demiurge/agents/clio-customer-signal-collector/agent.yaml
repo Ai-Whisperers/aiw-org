@@ -1,0 +1,10 @@
+id: clio-customer-signal-collector
+name: Clio
+display_name: Clio — Customer Signal Collector
+archetype: Curator
+status: active
+git_repo: https://github.com/Ai-Whisperers/aiw-agent-clio-customer-signal-collector
+departments: [product-discovery]
+cadence:
+  schedule: "0 7 * * 1-5"
+  type: scheduled

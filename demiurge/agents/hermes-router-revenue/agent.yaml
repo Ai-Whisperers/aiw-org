@@ -1,0 +1,10 @@
+id: hermes-router-revenue
+name: Hermes
+display_name: Hermes — Signal Router
+archetype: Connector
+status: active
+git_repo: https://github.com/Ai-Whisperers/aiw-agent-hermes-router-revenue
+departments: [marketing, sales, product-discovery, operations]
+cadence:
+  schedule: "*/15 6-22 * * *"
+  type: continuous

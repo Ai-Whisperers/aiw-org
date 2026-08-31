@@ -1,0 +1,58 @@
+# Document Intelligence timing / SLA rules (ITIL P0–P3 aligned)
+
+timing_rules:
+  - id: sla-document-p0
+    match:
+      derived_urgency: P0
+    sla_reaction: PT15M
+    escalate_to: human:ivan
+    escalate_after: PT30M
+    ack_required: true
+
+  - id: sla-document-p1
+    match:
+      derived_urgency: P1
+    sla_reaction: PT4H
+    escalate_to: human:ivan
+    escalate_after: PT8H
+    ack_required: true
+
+  - id: sla-document-p2
+    match:
+      derived_urgency: P2
+    sla_reaction: P7D
+    queue: scheduled
+    ack_required: false
+
+  - id: sla-document-p3
+    match:
+      derived_urgency: P3
+    sla_reaction: P30D
+    queue: scheduled
+    ack_required: false
+
+  - id: sla-recording-upload
+    match:
+      signal_type: recording-upload
+    sla_reaction: PT4H
+    escalate_to: orpheus-recordings-agent
+    escalate_after: PT8H
+
+  - id: sla-quality-assessed
+    match:
+      signal_type: quality-assessed
+    sla_reaction: PT1H
+    escalate_to: pheme-document-router
+    escalate_after: PT2H
+
+  - id: sla-quality-report
+    match:
+      signal_type: quality-report
+    sla_reaction: PT72H
+    deliver_to: author
+
+  - id: sla-terminology-candidate
+    match:
+      signal_type: terminology-update
+    sla_reaction: PT24H
+    escalate_to: human:ivan

@@ -1,0 +1,12 @@
+id: hera-marketing-lead
+name: Hera
+display_name: Hera — Head of Marketing
+archetype: Strategist
+status: active
+git_repo: https://github.com/Ai-Whisperers/aiw-agent-hera-marketing-lead
+departments: [marketing]
+roles: [marketing-lead]
+cadence:
+  schedule: "0 9 * * 1,3,5"
+  timezone: America/Asuncion
+  type: scheduled

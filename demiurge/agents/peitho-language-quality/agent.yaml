@@ -1,0 +1,11 @@
+id: peitho-language-quality
+name: Peitho
+display_name: Peitho — Language Quality
+archetype: Analyst
+status: active
+git_repo: https://github.com/Ai-Whisperers/aiw-agent-peitho-language-quality
+departments: [knowledge-mgmt]
+roles: [language-quality]
+cadence:
+  type: on_signal
+  routing_tags: [document-classified]

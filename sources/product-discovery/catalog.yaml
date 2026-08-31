@@ -1,0 +1,37 @@
+# Product Discovery Source Catalog
+
+> DEMIURGE-018, DEMIURGE-021
+
+```yaml
+catalog_id: catalog-product-discovery
+department_id: product-discovery
+version: 1.0.0
+maintained_by: thoth-literature-scanner
+```
+
+## Top 10 sources
+
+| id | title | type | rating | url |
+|----|-------|------|--------|-----|
+| pd-lean-startup | The Lean Startup (Ries) | book | 5 | — |
+| pd-running-lean | Running Lean (Maurya) | book | 5 | — |
+| pd-inspired | Inspired (Cagan) | book | 5 | — |
+| pd-continuous-discovery | Continuous Discovery Habits (Torres) | book | 5 | — |
+| pd-jtbd | Jobs to Be Done | framework | 5 | — |
+| pd-mom-test | The Mom Test (Fitzpatrick) | book | 5 | — |
+| pd-lenny-pm | Lenny's Newsletter (PM) | blog | 5 | https://www.lennysnewsletter.com |
+| pd-product-talk | Product Talk (Torres) | blog | 4 | https://www.producttalk.org |
+| pd-strategyzer | Business Model Canvas | framework | 4 | https://www.strategyzer.com |
+| pd-indie-validators | Indie Hackers validation threads | community | 4 | https://www.indiehackers.com |
+
+## Key insights
+
+1. **Weekly customer touchpoints** — Torres continuous discovery
+2. **Problem interviews before solutions** — Mom Test
+3. **Opportunity solution trees** — link insights to experiments
+4. **Kill criteria** — define what disproves a bet
+5. **Feed Sales + Marketing** — validated messaging only
+
+## Community signals
+
+See [community-signals.md](community-signals.md).

@@ -1,0 +1,12 @@
+id: business-analyst
+name: Erebus
+display_name: Erebus — Business Analyst
+archetype: Analyst
+status: active
+git_repo: https://github.com/Ai-Whisperers/aiw-agent-business-analyst
+departments: [operations]
+roles: [ops-business-analyst]
+cadence:
+  schedule: "30 6 * * *"
+  timezone: America/Asuncion
+  type: scheduled

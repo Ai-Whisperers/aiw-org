@@ -1,0 +1,41 @@
+# Marketing Source Catalog
+
+> DEMIURGE-016, DEMIURGE-019
+
+```yaml
+catalog_id: catalog-marketing
+department_id: marketing
+version: 1.0.0
+maintained_by: thoth-literature-scanner
+```
+
+## Top 10 sources
+
+| id | title | type | rating | url |
+|----|-------|------|--------|-----|
+| mkt-lennys-newsletter | Lenny's Newsletter | blog | 5 | https://www.lennysnewsletter.com |
+| mkt-reforge | Reforge Growth Series | framework | 5 | https://www.reforge.com |
+| mkt-hubspot-inbound | HubSpot Inbound Methodology | framework | 4 | https://www.hubspot.com/inbound-marketing |
+| mkt-crossing-chasm | Crossing the Chasm (Moore) | book | 5 | — |
+| mkt-traction | Traction (Weinberg & Mares) | book | 4 | — |
+| mkt-jtbd | Jobs to Be Done (Christensen) | framework | 5 | — |
+| mkt-sahil-bloom | Sahil Bloom / Curiosity Chronicle | blog | 3 | https://www.sahilbloom.com |
+| mkt-indie-hackers | Indie Hackers community | community | 4 | https://www.indiehackers.com |
+| mkt-hbr-marketing | HBR Marketing articles | paper | 4 | https://hbr.org/topic/marketing |
+| mkt-plausible-analytics | Plausible / privacy-first analytics | standard | 4 | https://plausible.io/docs |
+
+## Key insights (extracted)
+
+1. **Channel-market fit before scale** — Traction bullseye: one channel until it works
+2. **JTBD framing** — market problems, not product features
+3. **Inbound + consent** — align with AI Whisperers coaching ethics
+4. **Founder-led content** — high trust for SMB ICP
+5. **Measure leading indicators** — engagement before revenue attribution
+
+## Community signals (Echo scanner)
+
+- r/marketing, r/startups, r/SaaS
+- HN "Show HN" / "Ask HN" marketing threads
+- Lenny's Slack (if access)
+
+See [community-signals.md](community-signals.md).

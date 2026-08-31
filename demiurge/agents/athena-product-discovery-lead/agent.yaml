@@ -1,0 +1,10 @@
+id: athena-product-discovery-lead
+name: Athena
+display_name: Athena — Head of Product Discovery
+archetype: Strategist
+status: active
+git_repo: https://github.com/Ai-Whisperers/aiw-agent-athena-product-discovery-lead
+departments: [product-discovery]
+cadence:
+  schedule: "0 8 * * 1"
+  type: scheduled

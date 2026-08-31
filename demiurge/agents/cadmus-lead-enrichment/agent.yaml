@@ -1,0 +1,10 @@
+id: cadmus-lead-enrichment
+name: Cadmus
+display_name: Cadmus — Lead Enrichment
+archetype: Analyst
+status: active
+git_repo: https://github.com/Ai-Whisperers/aiw-agent-cadmus-lead-enrichment
+departments: [sales]
+cadence:
+  type: on_signal
+  routing_tags: [lead, inbound]

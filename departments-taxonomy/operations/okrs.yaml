@@ -1,0 +1,71 @@
+# Operations OKR definitions
+# DEMIURGE-079 — quarterly objectives + key results for bizops-tracker
+
+# Update quarter on each quarterly reset (bizops-tracker `ops-okr-reset` signal)
+quarter: 2026-Q3
+owner: ivan
+review_cadence: weekly
+reset_cadence: quarterly
+
+objectives:
+  - id: ops-okr-01
+    title: Keep the agent platform healthy and observable
+    key_results:
+      - id: ops-kr-01-1
+        description: Cron error count ≤ 1 sustained over 7 days
+        metric_signal: ops-cron-error-count
+        target: 1
+        kill_criteria: "> 3 errors for 3 consecutive days"
+      - id: ops-kr-01-2
+        description: Zero open P1 incidents > 24h
+        metric_signal: ops-incident-open-count
+        target: 0
+        kill_criteria: "any P1 open > 48h"
+      - id: ops-kr-01-3
+        description: Stale repo count ≤ 3
+        metric_signal: ops-stale-repo-count
+        target: 3
+        kill_criteria: "> 8 stale repos"
+
+  - id: ops-okr-02
+    title: Reduce decision latency and coordination overhead
+    key_results:
+      - id: ops-kr-02-1
+        description: Decision queue depth ≤ 3 items for Ivan
+        metric_signal: ops-decision-queue-depth
+        target: 3
+        kill_criteria: "> 5 items for 2 consecutive weeks"
+      - id: ops-kr-02-2
+        description: Avg decision latency ≤ 5 days
+        metric_signal: ops-decision-latency-days
+        target: 5
+        kill_criteria: "> 10 days avg for 4 weeks"
+      - id: ops-kr-02-3
+        description: Cross-dept blockers resolved within 7 days
+        metric_signal: ops-cross-dept-blocker-count
+        target: 0
+        kill_criteria: "same blocker open > 21 days"
+
+  - id: ops-okr-03
+    title: Maintain unit economics and vendor hygiene
+    key_results:
+      - id: ops-kr-03-1
+        description: Monthly burn within 10% of budget
+        metric_signal: ops-burn-rate
+        target: 0.10
+        kill_criteria: "> 25% over budget for 2 months"
+      - id: ops-kr-03-2
+        description: All SaaS renewals flagged 30d before due
+        metric_signal: ops-vendor-renewal-30d
+        target: 0
+        kill_criteria: "missed renewal without 14d notice"
+      - id: ops-kr-03-3
+        description: Tool sprawl count stable or decreasing QoQ
+        metric_signal: ops-tool-sprawl-count
+        target: 0
+        kill_criteria: "> 3 net new tools in quarter without review"
+
+scoring:
+  method: doerr_0_to_1
+  weekly_check_in: bizops-tracker
+  quarterly_reset_signal: ops-okr-reset

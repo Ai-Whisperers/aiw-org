@@ -1,0 +1,37 @@
+# Sales Source Catalog
+
+> DEMIURGE-017, DEMIURGE-020
+
+```yaml
+catalog_id: catalog-sales
+department_id: sales
+version: 1.0.0
+maintained_by: thoth-literature-scanner
+```
+
+## Top 10 sources
+
+| id | title | type | rating | url |
+|----|-------|------|--------|-----|
+| sales-spin | SPIN Selling (Rackham) | book | 5 | — |
+| sales-challenger | The Challenger Sale | book | 5 | — |
+| sales-predictable-rev | Predictable Revenue (Ross) | book | 4 | — |
+| sales-meddic | MEDDIC qualification | framework | 4 | — |
+| sales-gtm-strategy | Go-To-Market Strategy (Khan) | book | 4 | — |
+| sales-revops-council | RevOps Co-op / Pavilion | community | 4 | https://www.revopscoop.com |
+| sales-hubspot-crm | HubSpot Sales methodology | framework | 4 | https://www.hubspot.com/sales |
+| sales-first90 | The First 90 Days (Watkins) | book | 3 | — |
+| sales-gong-labs | Gong Labs research | blog | 4 | https://www.gong.io/labs |
+| sales-paraguay-smb | PY SMB landscape + ICP + culture | research | 4 | sources/py/smb-landscape.md |
+
+## Key insights
+
+1. **Inbound-first** (D2 decision) — qualify before outbound
+2. **Discovery before demo** — SPIN / MEDDIC for coaching ICP
+3. **Pipeline hygiene** — stage definitions, exit criteria
+4. **RevOps feedback loop** — win/loss → marketing
+5. **Human-in-loop** for proposals and discounts (hard stops)
+
+## Community signals
+
+See [community-signals.md](community-signals.md).

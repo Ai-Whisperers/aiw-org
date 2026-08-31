@@ -1,0 +1,38 @@
+# Knowledge Management Source Catalog
+
+> DEMIURGE-078
+
+```yaml
+catalog_id: catalog-knowledge-mgmt
+department_id: knowledge-mgmt
+version: 1.0.0
+maintained_by: thoth-literature-scanner
+```
+
+## Scope
+
+Sources for document classification, terminology compliance, and archival standards. Expanded by Thoth and Mnemosyne as the catalog grows.
+
+## Seed sources
+
+| id | title | type | rating | url |
+|----|-------|------|--------|-----|
+| km-dublin-core | Dublin Core Metadata Initiative | standard | 5 | https://www.dublincore.org |
+| km-prov-o | W3C PROV-O Provenance | standard | 5 | https://www.w3.org/TR/prov-o/ |
+| km-skos | SKOS Simple Knowledge Organization System | standard | 5 | https://www.w3.org/2004/02/skos/ |
+| km-itil-urgency | ITIL urgency tiers (P0–P3) | framework | 4 | — |
+| km-terms-md | AI Whisperers TERMS.md | internal | 5 | docs/terminology/TERMS.md |
+
+## Key insights (extracted)
+
+1. **Given vs derived attributes** — creator intent vs classifier inference; always carry confidence on derived fields
+2. **routing_tags mirror audience** — dept/agent ids in `derived.audience` must appear in `routing_tags` for dispatch rules to match
+3. **Quality before route** — Peitho emits `quality-assessed`; Pheme routes only after assessment completes
+
+## Community signals (Echo scanner)
+
+- r/KnowledgeManagement, r/semanticweb, r/MachineLearning (document AI threads)
+- HN document intelligence, ontology, provenance threads
+- W3C dublin-core, prov-wg mailing lists
+
+See [community-signals.md](community-signals.md).

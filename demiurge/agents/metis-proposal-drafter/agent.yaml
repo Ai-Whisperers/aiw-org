@@ -1,0 +1,10 @@
+id: metis-proposal-drafter
+name: Metis
+display_name: Metis — Proposal Drafter
+archetype: Analyst
+status: active
+git_repo: https://github.com/Ai-Whisperers/aiw-agent-metis-proposal-drafter
+departments: [sales]
+cadence:
+  type: on_signal
+  routing_tags: [proposal, discovery]

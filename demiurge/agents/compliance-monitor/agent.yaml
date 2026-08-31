@@ -1,0 +1,12 @@
+id: compliance-monitor
+name: Erebus
+display_name: Erebus — Compliance Monitor
+archetype: Watchdog
+status: active
+git_repo: https://github.com/Ai-Whisperers/aiw-agent-compliance-monitor
+departments: [compliance]
+roles: [compliance-monitor]
+cadence:
+  schedule: "0 8 * * 1"
+  timezone: America/Asuncion
+  type: scheduled

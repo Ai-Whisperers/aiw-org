@@ -1,0 +1,15 @@
+repo: aiw-agent-hephaestus-document-miner
+remote: https://github.com/Ai-Whisperers/aiw-agent-hephaestus-document-miner
+visibility: private
+initial_paths:
+  - PROMPT.md
+  - agent.yaml
+  - mined/action-items/.gitkeep
+  - mined/decisions/.gitkeep
+  - mined/nuggets/.gitkeep
+  - mined/terminology-candidates/.gitkeep
+  - outbox/.gitkeep
+gitignore:
+  - state/
+  - "*.db"
+  - logs/

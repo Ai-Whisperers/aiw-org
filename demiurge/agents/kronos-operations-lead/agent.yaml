@@ -1,0 +1,12 @@
+id: kronos-operations-lead
+name: Kronos
+display_name: Kronos — Head of Operations
+archetype: Strategist
+status: active
+git_repo: https://github.com/Ai-Whisperers/aiw-agent-kronos-operations-lead
+departments: [operations]
+roles: [ops-lead]
+cadence:
+  schedule: "0 7 * * 1-5"
+  timezone: America/Asuncion
+  type: scheduled

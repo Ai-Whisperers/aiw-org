@@ -1,0 +1,16 @@
+repo: aiw-agent-mnemosyne-document-archivist
+remote: https://github.com/Ai-Whisperers/aiw-agent-mnemosyne-document-archivist
+visibility: private
+initial_paths:
+  - PROMPT.md
+  - agent.yaml
+  - catalog/.gitkeep
+  - catalog/relationships/.gitkeep
+  - outbox/.gitkeep
+  - decisions/.gitkeep
+  - lessons/.gitkeep
+gitignore:
+  - state/
+  - "*.db"
+  - logs/
+  - index/
