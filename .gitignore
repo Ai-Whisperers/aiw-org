@@ -136,3 +136,7 @@ state/*.jsonl.gz
 # Runtime sub-dirs (mirrors to state-versioned repo)
 state/runtime-tracker/
 state/delivery-tracker/
+
+# Generic monitor-notes pre-tick backups (added 2026-09-01)
+**/monitor-notes/.*pre-*.*.bak
+**/monitor-notes/.*pre-*.bak
