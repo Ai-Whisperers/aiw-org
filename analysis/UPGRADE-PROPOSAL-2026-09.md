@@ -1,6 +1,6 @@
 # AIW Org Upgrade Proposal — 2026-09
 
-> **Status**: DRAFT v1.2.0, awaiting Ivan's approval per phase.
+> **Status**: DRAFT v1.3.0, awaiting Ivan's approval for Layer 1 greenlight.
 > **Date**: 2026-09-01
 > **Scope**: `aiw-org` repo. **Excludes** `coach/` (moved to `growth-coaching` repo) and all sister repos.
 > **Method**: Local diagnostic + literature grounded in
@@ -8,6 +8,13 @@
 > catalog + **comprehensive web research** across 27 sources in 3 streams
 > (classic canon + SMB frameworks + AI researchers). See
 > `analysis/RESEARCH-CITATIONS-2026-09.md` for primary sources.
+>
+> **v1.3.0 changes**: Reframed from "production-grade" to "production prep."
+> Phases 1-4 now organized as 4 sequential layers (operational hygiene →
+> structural foundation → quality infrastructure → conditional adaptive layer).
+> Phase 5 (feedback-loop runtime) is now **out of scope** until customer
+> traction emerges + Ivan's staged soul-improvement gate (§12) is satisfied.
+> Authoritative execution doc: `EXECUTION-SCOPE-2026-09.md`.
 
 ---
 
@@ -822,8 +829,71 @@ Everything else waits for per-phase greenlight.
 
 ---
 
-**Document version**: 1.2.0 — 2026-09-01 (comprehensive research v2 + 5 new DELTAs)
+## 12 — Staged soul-improvement gate (added in v1.3.0)
+
+**Phase 5 (feedback-loop runtime + auto soul revisions) is explicitly OUT OF SCOPE
+for this upgrade.** The Layer 4 (Adaptive) work in `EXECUTION-SCOPE-2026-09.md`
+covers feedback loops for *monitoring and alerting* only — never for *soul
+modification*. Soul-improvement is a separate, gated capability that requires
+its own decision tree, which is formalized here.
+
+### Why this gate exists
+
+Soul-improvement lets agents modify their own `PROMPT.md`. This is the
+highest-blast-radius capability in any agent system. Per the Phase5 risks in
+§4 and Pattern 4 in §6.3 (Schaul's embedded agency, Christiano's amplification
+needs oversight), auto-modification without human-in-the-loop is a category of
+risk that justifies a dedicated gate.
+
+### Per-Ivan directive (2026-09-01)
+
+Ivan's explicit rule: *"we can improve the soul but only once we know we should
+do it and it will be fine and a test edit of a soul works and is stable and
+efficient not all souls at once and not the main soul we use first."*
+
+Translated into a 4-stage gate:
+
+| Stage | Gate | Duration | What we test | Exit criteria |
+|-------|------|----------|--------------|---------------|
+| **1. Test edit on a non-main soul** | `soul-improvement-test-harness.py` runs against a sandbox agent (NOT in `demiurge/agents/`, NOT in `departments/`). Edit a copy, observe behavior change, verify rollback works. | 1 week | Soul-edit mechanics work; rollback is clean; no PROMPT.md corruption outside sandbox | Test harness passes 100% of cases; rollback verified by hash diff |
+| **2. Apply to ONE non-main soul, observe** | Pick the lowest-stakes demiurge agent (e.g. `orpheus-recordings-agent` — audio transcription, no customer-facing output). Enable soul-improvement in shadow mode (writes proposals, never modifies). After 7 days, review proposal quality. | 1 week | Real-world soul-improvement suggestions are sensible | 0 corrupt proposals; ≥80% of proposals make semantic sense to a human reviewer |
+| **3. Graduated rollout to MORE non-main souls** | Enable soul-improvement in active mode for `orpheus` + 2-3 other low-stakes agents. Each gets 7-day observation. | 2-3 weeks | Active soul revisions improve agent behavior without breaking it | KPI movement ≥+5% on each agent; 0 regressions; ≤1 Ivan review/week per agent |
+| **4. Main souls only after proof** | Only enable soul-improvement for primary dept agents (`management-coordinator`, `engineering-roster`, etc) AFTER ≥3 stages-3 agents are running smoothly AND ≥1 paying customer uses aiw-org features in production. | 2-4 weeks | Main agents don't break; customer experience unaffected | Customer-facing KPIs stable; 0 critical incidents attributable to soul-improvement |
+
+**Critical rule**: at no stage is soul-improvement enabled for the "main soul
+we use first" — meaning the agents that handle customer-facing work, the
+constitution, or the feedback loops themselves.
+
+### Per-stage rollback
+
+| Stage | Rollback command | Time-to-rollback |
+|-------|------------------|-------------------|
+| 1 | `git revert <commit>` | <5 min |
+| 2 | Disable soul-improvement in Argus PROMPT | <30 min |
+| 3 | Per-agent disable via new `soul_improvement_enabled: false` flag | <5 min per agent |
+| 4 | Org-wide kill-switch: `hermes cron disable aiw-soul-improver` (new cron job, defined in Layer 4) | <1 min |
+
+### What this gate does NOT cover
+
+- Phase 1-4 of the upgrade (cleanup, atomic-layer completion, business-layer integration, tests) — these proceed unconditionally
+- Layer 4 (Adaptive) from the execution scope — feedback loops for MONITORING, not for soul editing
+- The "AI self-fixes" doctrine from the EXECUTION-SCOPE — soul-improvement is NOT self-fixing; it requires the staged gate above
+
+### What triggers re-evaluation of the gate
+
+If any of these happen, the gate re-opens from Stage 1:
+- A new AI model release that makes soul-improvement qualitatively safer (e.g. built-in constitutional AI with formal verification)
+- A formal verification framework for soul changes becomes available
+- An external security audit concludes soul-improvement is safe under certain conditions
+- Ivan explicitly requests re-evaluation
+
+---
+
+**Document version**: 1.3.0 — 2026-09-01 (4-layer framing, Phase5 deferred, §12 staged soul gate)
 **Author**: Hermes (Ivan's session)
-**Status**: AWAITING REVIEW (Phase 1 greenlight pending)
-**Next review**: After Ivan's feedback on §3, §4, §7, and §11
-**Companion**: `analysis/RESEARCH-CITATIONS-2026-09.md` (27 sources, 3 streams)
+**Status**: AWAITING REVIEW (Layer 1 greenlight pending)
+**Next review**: After Ivan's feedback on §3, §4, §7, §11, §12
+**Companions**:
+- `analysis/RESEARCH-CITATIONS-2026-09.md` (27 sources, 3 streams)
+- `analysis/GAP-RESEARCH-FINDINGS-2026-09.md` (52-gap audit)
+- `analysis/EXECUTION-SCOPE-2026-09.md` (authoritative execution doc — Layer 1-4 scope)
