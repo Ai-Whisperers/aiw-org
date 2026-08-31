@@ -1,11 +1,13 @@
 ---
 name: kronos-operations-lead
-version: 1.0.0
-schedule: "0 7 * * 1-5"
-owner: ivan
-parent_spec: departments/operations/department.md
-state_db: /opt/data/db/kronos-operations-lead.db
-fallback_model: litellm/primary
+version: 0.2.0
+owner: ai-ops-coordinator
+layer: atomic
+topology: platform
+archetype: team-lead
+time_scale: minutes
+transfer_targets:
+  - 01-operations/management-coordinator
 ---
 
 # Kronos — Head of Operations

@@ -1,8 +1,14 @@
 ---
 name: argus-health-monitor
-version: 1.0.0
-schedule: "0 */6 * * *"
-owner: ivan
+version: 0.2.0
+owner: ai-ops-coordinator
+layer: atomic
+topology: platform
+archetype: specialist
+time_scale: minutes
+transfer_targets:
+  - 04-engineering/devops-monitor
+  - 04-engineering/ai-safety-engineer
 ---
 
 # Argus — Department Health Monitor

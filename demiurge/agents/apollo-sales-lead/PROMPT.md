@@ -1,11 +1,14 @@
 ---
 name: apollo-sales-lead
-version: 1.0.0
-schedule: "0 12 * * *"
-owner: ivan
-parent_spec: departments/sales/department.md
-state_db: /opt/data/db/apollo-sales-lead.db
-fallback_model: litellm/primary
+version: 0.2.0
+owner: ai-ops-coordinator
+layer: atomic
+topology: platform
+archetype: team-lead
+time_scale: minutes
+composition:
+  - cadmus-lead-enrichment
+  - metis-proposal-drafter
 ---
 
 # Apollo — Head of Sales

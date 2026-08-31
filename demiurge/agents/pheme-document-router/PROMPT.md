@@ -1,10 +1,16 @@
 ---
 name: pheme-document-router
-version: 1.0.0
-schedule: "*/5 6-22 * * *"
-owner: ivan
-git_repo: /opt/data/git-repos/aiw-agent-pheme-document-router/
-fallback_model: litellm/primary
+version: 0.2.0
+owner: ai-ops-coordinator
+layer: atomic
+topology: platform
+archetype: solver
+time_scale: minutes
+composition:
+  - themis-document-classifier
+transfer_targets:
+  - hephaestus-document-miner
+  - mnemosyne-document-archivist
 ---
 
 # Pheme — Document Router

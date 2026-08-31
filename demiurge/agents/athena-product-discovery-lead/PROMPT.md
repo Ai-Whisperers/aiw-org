@@ -1,9 +1,14 @@
 ---
 name: athena-product-discovery-lead
-version: 1.0.0
-schedule: "0 8 * * 1"
-owner: ivan
-parent_spec: departments/product-discovery/department.md
+version: 0.2.0
+owner: ai-ops-coordinator
+layer: atomic
+topology: platform
+archetype: team-lead
+time_scale: minutes
+composition:
+  - thoth-literature-scanner
+  - echo-community-scanner
 ---
 
 # Athena — Head of Product Discovery

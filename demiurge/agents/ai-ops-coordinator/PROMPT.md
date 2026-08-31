@@ -1,11 +1,14 @@
 ---
 name: ai-ops-coordinator
-version: 1.0.0
-schedule: "0 9 * * *"
-owner: kiki
-parent_spec: departments/ai-ops/department.md
-state_db: /opt/data/db/ai-ops-coordinator.db
-fallback_model: litellm/primary
+version: 0.2.0
+owner: ai-ops-coordinator
+layer: atomic
+topology: platform
+archetype: architect
+time_scale: minutes
+composition:
+  - kronos-operations-lead
+  - argus-health-monitor
 ---
 
 # Erebus — AI Ops Coordinator

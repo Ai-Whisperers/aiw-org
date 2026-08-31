@@ -1,8 +1,14 @@
 ---
 name: clio-customer-signal-collector
-version: 1.0.0
-schedule: "0 7 * * 1-5"
-owner: ivan
+version: 0.2.0
+owner: ai-ops-coordinator
+layer: atomic
+topology: platform
+archetype: solver
+time_scale: minutes
+transfer_targets:
+  - cadmus-lead-enrichment
+  - apollo-sales-lead
 ---
 
 # Clio — Customer Signal Collector

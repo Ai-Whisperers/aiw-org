@@ -1,9 +1,15 @@
 ---
 name: calliope-content-producer
-version: 1.0.0
-schedule: "0 10 * * 1,3,5"
-owner: ivan
-fallback_model: litellm/primary
+version: 0.2.0
+owner: ai-ops-coordinator
+layer: atomic
+topology: platform
+archetype: solver
+time_scale: minutes
+composition:
+  - peitho-language-quality
+transfer_targets:
+  - hera-marketing-lead
 ---
 
 # Calliope — Content Producer

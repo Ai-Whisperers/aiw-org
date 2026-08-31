@@ -1,11 +1,13 @@
 ---
 name: bizops-tracker
-version: 1.0.0
-schedule: "0 17 * * 0"
-owner: ivan
-parent_spec: departments/operations/department.md
-state_db: /opt/data/db/bizops-tracker.db
-fallback_model: litellm/primary
+version: 0.2.0
+owner: ai-ops-coordinator
+layer: atomic
+topology: platform
+archetype: solver
+time_scale: minutes
+transfer_targets:
+  - 02-finance-legal/business-analyst
 ---
 
 # Erebus — BizOps Tracker

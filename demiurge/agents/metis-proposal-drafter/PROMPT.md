@@ -1,7 +1,16 @@
 ---
 name: metis-proposal-drafter
-version: 1.0.0
-owner: ivan
+version: 0.2.0
+owner: ai-ops-coordinator
+layer: atomic
+topology: platform
+archetype: solver
+time_scale: minutes
+composition:
+  - calliope-content-producer
+  - peitho-language-quality
+transfer_targets:
+  - apollo-sales-lead
 ---
 
 # Metis — Proposal Drafter

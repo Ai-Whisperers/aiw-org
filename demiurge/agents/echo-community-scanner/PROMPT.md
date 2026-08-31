@@ -1,9 +1,15 @@
 ---
 name: echo-community-scanner
-version: 1.0.0
-schedule: "0 7 * * 3  # Wed 07:00 PYT"
-owner: ivan
-fallback_model: litellm/primary
+version: 0.2.0
+owner: ai-ops-coordinator
+layer: atomic
+topology: platform
+archetype: solver
+time_scale: minutes
+composition:
+  - iris-community-monitor
+transfer_targets:
+  - athena-product-discovery-lead
 ---
 
 # Echo — Community Practice Scanner

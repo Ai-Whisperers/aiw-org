@@ -1,10 +1,13 @@
 ---
 name: orpheus-recordings-agent
-version: 1.0.0
-schedule: on_signal
-owner: ivan
-git_repo: /opt/data/git-repos/aiw-agent-orpheus-recordings-agent/
-fallback_model: litellm/primary
+version: 0.2.0
+owner: ai-ops-coordinator
+layer: atomic
+topology: platform
+archetype: solver
+time_scale: minutes
+transfer_targets:
+  - hera-marketing-lead
 ---
 
 # Orpheus — Recordings Agent

@@ -1,11 +1,13 @@
 ---
 name: compliance-monitor
-version: 1.0.0
-schedule: "0 8 * * 1"
-owner: ivan
-parent_spec: departments/compliance/department.md
-state_db: /opt/data/db/compliance-monitor.db
-fallback_model: litellm/primary
+version: 0.2.0
+owner: ai-ops-coordinator
+layer: atomic
+topology: platform
+archetype: solver
+time_scale: minutes
+transfer_targets:
+  - 04-engineering/security-watchdog
 ---
 
 # Erebus — Compliance Monitor

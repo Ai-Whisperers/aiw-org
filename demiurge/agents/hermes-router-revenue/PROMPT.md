@@ -1,8 +1,14 @@
 ---
 name: hermes-router-revenue
-version: 1.0.0
-schedule: "*/15 6-22 * * *"
-owner: ivan
+version: 0.2.0
+owner: ai-ops-coordinator
+layer: atomic
+topology: platform
+archetype: architect
+time_scale: minutes
+transfer_targets:
+  - 03-sales-growth/sales-pipeline
+  - 02-finance-legal/finance-controller
 ---
 
 # Hermes — Signal Router

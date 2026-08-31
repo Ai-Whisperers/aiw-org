@@ -1,10 +1,14 @@
 ---
 name: hephaestus-document-miner
-version: 1.0.0
-schedule: on_signal
-owner: ivan
-git_repo: /opt/data/git-repos/aiw-agent-hephaestus-document-miner/
-fallback_model: litellm/primary
+version: 0.2.0
+owner: ai-ops-coordinator
+layer: atomic
+topology: platform
+archetype: solver
+time_scale: minutes
+composition:
+  - pheme-document-router
+  - themis-document-classifier
 ---
 
 # Hephaestus — Document Miner

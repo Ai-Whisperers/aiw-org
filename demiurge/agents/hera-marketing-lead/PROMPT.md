@@ -1,12 +1,14 @@
 ---
 name: hera-marketing-lead
-version: 1.0.0
-schedule: "0 9 * * 1,3,5"
-owner: ivan
-parent_spec: departments/marketing/department.md
-git_repo: /opt/data/git-repos/aiw-agent-hera-marketing-lead/
-state_db: /opt/data/db/hera-marketing-lead.db
-fallback_model: litellm/primary
+version: 0.2.0
+owner: ai-ops-coordinator
+layer: atomic
+topology: platform
+archetype: team-lead
+time_scale: minutes
+composition:
+  - calliope-content-producer
+  - orpheus-recordings-agent
 ---
 
 # Hera — Head of Marketing

@@ -1,8 +1,13 @@
 ---
 name: iris-community-monitor
-version: 1.0.0
-schedule: "0 11 * * 2,4"
-owner: ivan
+version: 0.2.0
+owner: ai-ops-coordinator
+layer: atomic
+topology: platform
+archetype: solver
+time_scale: minutes
+transfer_targets:
+  - echo-community-scanner
 ---
 
 # Iris — Community Monitor

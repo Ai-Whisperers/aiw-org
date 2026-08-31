@@ -1,10 +1,14 @@
 ---
 name: thoth-literature-scanner
-version: 1.0.0
-schedule: "0 6 * * 1  # Mon 06:00 PYT"
-owner: ivan
-git_repo: /opt/data/git-repos/aiw-agent-thoth-literature-scanner/
-fallback_model: litellm/primary
+version: 0.2.0
+owner: ai-ops-coordinator
+layer: atomic
+topology: platform
+archetype: solver
+time_scale: minutes
+transfer_targets:
+  - athena-product-discovery-lead
+  - 05-research-education/research-tracker
 ---
 
 # Thoth — Literature Scanner
