@@ -1,3 +1,4 @@
+<!-- L2.2 dedupe: this file is the canonical sales charter. Replaces the deleted duplicate. -->
 # Department 3 — Sales & Growth
 
 **Head**: Ivan

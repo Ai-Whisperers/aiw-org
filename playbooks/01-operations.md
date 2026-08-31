@@ -1,3 +1,4 @@
+<!-- L2.2 dedupe: this file is the canonical operations charter. Replaces the deleted duplicate. -->
 # 01 — Operations Playbook (Reference)
 
 > Reference playbook for the Operations department. This is the "1 version good" — every other playbook derives from this template.

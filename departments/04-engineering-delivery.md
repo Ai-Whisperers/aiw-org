@@ -1,3 +1,4 @@
+<!-- L2.2 dedupe: this file is the canonical engineering charter. Replaces the deleted duplicate. -->
 # Department 4 — Engineering & Delivery
 
 **Head**: Kiki (CTO)

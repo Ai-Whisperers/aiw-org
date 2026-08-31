@@ -1,3 +1,4 @@
+<!-- L2.2 dedupe: this file is the canonical people charter. Replaces the deleted duplicate. -->
 # Department 6 — People & Culture
 
 **Head**: Ivan + Kiki (co-owned)

@@ -79,3 +79,60 @@ dist/
 # OS-specific
 .DS_Store
 Thumbs.db
+
+# Runtime tickers (added 2026-09-01)
+*.last_run
+**/*.last_run
+.coverage
+.pytest_cache/
+
+# Generated dashboards (rebuild on demand)
+dashboards/*.html
+**/dashboards/*.html
+**/outbox/*.bak-pre-*
+**/monitor-notes/*.bak-pre-*
+
+# State files with .bak-* suffix (backup sequences added 2026-09-01)
+state/*bak*
+
+
+
+# === Runtime tickers, generated artifacts, and backups ===
+# (Added 2026-09-01 — addresses audit leaks)
+
+# Coverage + pytest cache
+.coverage
+.coverage.*
+.pytest_cache/
+
+# Chaos / last-run tickers at any depth
+**/chaos*.last_run
+**/*.chaos.last_run
+**/*.last_run
+
+# Generated dashboards (rebuild on demand)
+dashboards/*.html
+**/dashboards/*.html
+
+# Pre-tick backups at any depth
+**/*.bak-pre-*
+**/state/*.bak-*
+**/monitor-notes/*.bak-pre-*
+state/*bak*
+
+# Whole monitor-notes & outbox snapshot dirs (already covered above; concrete)
+**/outbox/.chaos_test_last_run
+**/outbox/.scan_snapshot.json
+**/outbox/.tick-*
+
+
+
+
+# Runtime state (auto-snapshotted to state-versioned repo)
+state/*.json
+state/*.jsonl
+state/*.jsonl.gz
+
+# Runtime sub-dirs (mirrors to state-versioned repo)
+state/runtime-tracker/
+state/delivery-tracker/

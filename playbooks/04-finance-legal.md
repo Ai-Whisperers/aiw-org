@@ -1,3 +1,4 @@
+<!-- L2.2 dedupe: this file is the canonical finance charter. Replaces the deleted duplicate. -->
 # 04 — Finance & Legal Playbook
 
 > Department charter + roles + agents + tooling + SOPs for Finance & Legal.

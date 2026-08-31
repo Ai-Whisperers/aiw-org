@@ -1,3 +1,4 @@
+<!-- L2.2 dedupe: this file is the canonical research charter. Replaces the deleted duplicate. -->
 # 05 — Research & Education Playbook
 
 > Department charter + roles + agents + tooling + SOPs for Research & Education.
