@@ -19,6 +19,10 @@
 */monitor-notes/.funding-mirror-pre-*.bak
 */monitor-notes/*.pre-tick-*.bak
 
+# Per-agent runtime state inside agent dirs
+*/state/state.json
+*/state/state.jsonl
+
 # Live state backups
 *.pre-sqlite.bak
 *.pre-fire*
