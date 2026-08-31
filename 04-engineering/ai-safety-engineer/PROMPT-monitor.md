@@ -4,14 +4,14 @@
 
 ## Purpose
 
-Watch `/opt/data/agents/state/eval-per-agent.json` (per-agent eval pass rates), `/opt/data/agents/state/validation-report.json` (schema validation), and `/opt/data/agents/state/engineering.json:incidents_72h` (P0/P1 patterns). Lead agent is `ai-safety-engineer`.
+Watch `/opt/data/state/eval-per-agent.json` (per-agent eval pass rates), `/opt/data/state/validation-report.json` (schema validation), and `/opt/data/agents/state/engineering.json:incidents_72h` (P0/P1 patterns). Lead agent is `ai-safety-engineer`.
 
 ## Files watched
 
 | File | Schema |
 |------|--------|
-| `/opt/data/agents/state/eval-per-agent.json` | (real file, no schema — read raw) |
-| `/opt/data/agents/state/validation-report.json` | (real file, no schema — read raw) |
+| `/opt/data/state/eval-per-agent.json` | (real file, no schema — read raw) |
+| `/opt/data/state/validation-report.json` | (real file, no schema — read raw) |
 | `/opt/data/agents/state/engineering.json` | `engineering.schema.json` |
 
 ## Metrics watched

@@ -4,7 +4,7 @@
 
 ## Purpose
 
-Watch `/opt/data/agents/state/engineering.json` (security incidents, audit findings, secret-rotation status) and `/opt/data/agents/state/compliance.json` if present. Lead agent is `security-watchdog`.
+Watch `/opt/data/agents/state/engineering.json` (security incidents, audit findings, secret-rotation status) and `(real file, no schema — read raw from /opt/data/agents/state/coord.json:compliance_breaches[])` if present. Lead agent is `security-watchdog`.
 
 ## Files watched
 

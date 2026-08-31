@@ -4,14 +4,14 @@
 
 ## Purpose
 
-Watch QA-related state across `/opt/data/agents/state/eval-per-agent.json`, `/opt/data/agents/state/validation-report.json`, and `/opt/data/agents/state/engineering.json:incidents_72h` (engineering incidents that may indicate QA gaps). Lead agent is `qa-automation-runner`.
+Watch QA-related state across `/opt/data/state/eval-per-agent.json`, `/opt/data/state/validation-report.json`, and `/opt/data/agents/state/engineering.json:incidents_72h` (engineering incidents that may indicate QA gaps). Lead agent is `qa-automation-runner`.
 
 ## Files watched
 
 | File | Schema |
 |------|--------|
-| `/opt/data/agents/state/eval-per-agent.json` | (real file, no formal schema — read raw) |
-| `/opt/data/agents/state/validation-report.json` | (real file, no formal schema — read raw) |
+| `/opt/data/state/eval-per-agent.json` | (real file, no formal schema — read raw) |
+| `/opt/data/state/validation-report.json` | (real file, no formal schema — read raw) |
 | `/opt/data/agents/state/engineering.json` | `engineering.schema.json` (incidents field) |
 
 ## Metrics watched

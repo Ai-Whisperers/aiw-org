@@ -4,14 +4,14 @@
 
 ## Purpose
 
-Watch `/opt/data/agents/state/engineering.json` (deploys, incidents, infra costs) and `/opt/data/agents/state/cost-tracker.json` if present. Lead agent is `devops-monitor`.
+Watch `/opt/data/agents/state/engineering.json` (deploys, incidents, infra costs) and `/opt/data/state/cost-tracker.json` if present. Lead agent is `devops-monitor`.
 
 ## Files watched
 
 | File | Schema |
 |------|--------|
 | `/opt/data/agents/state/engineering.json` | `engineering.schema.json` |
-| `/opt/data/agents/state/cost-tracker.json` | (real file, no schema) |
+| `/opt/data/state/cost-tracker.json` | (real file, no schema) |
 
 ## Metrics watched
 

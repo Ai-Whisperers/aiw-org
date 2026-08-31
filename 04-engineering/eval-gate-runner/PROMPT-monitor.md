@@ -4,13 +4,13 @@
 
 ## Purpose
 
-Watch `/opt/data/agents/state/eval-per-agent.json` (per-agent pass rates and consecutive failures), and `/opt/data/agents/state/eval-gate-config.json` if present (gate enable/disable state). Lead agent is `eval-gate-runner`.
+Watch `/opt/data/state/eval-per-agent.json` (per-agent pass rates and consecutive failures), and `(no schema — eval config embedded in /opt/data/state/eval-per-agent.json)` if present (gate enable/disable state). Lead agent is `eval-gate-runner`.
 
 ## Files watched
 
 | File | Schema |
 |------|--------|
-| `/opt/data/agents/state/eval-per-agent.json` | (real file, no schema — read raw) |
+| `/opt/data/state/eval-per-agent.json` | (real file, no schema — read raw) |
 
 ## Metrics watched
 
@@ -41,7 +41,7 @@ Watch `/opt/data/agents/state/eval-per-agent.json` (per-agent pass rates and con
 
 ## Run procedure
 
-1. Read eval-per-agent.json via `cat /opt/data/agents/state/eval-per-agent.json | python3 -m json.tool`.
+1. Read eval-per-agent.json via `cat /opt/data/state/eval-per-agent.json | python3 -m json.tool`.
 2. Compute aggregate pass_rate as `sum(pass_rate * eval_count) / sum(eval_count)`.
 3. Evaluate every metric → fire per routing table.
 
