@@ -1,0 +1,47 @@
+# ============================================================
+# AIW-ORG .GITIGNORE
+# ============================================================
+# Runtime artifacts that change every cron tick:
+# We don't track these in git. The canonical state lives in:
+#   - /opt/data/state/         (live runtime)
+#   - state-versioned repo     (auto-snapshot every hour)
+#   - agent's PROMPT.md body   (the agent definition)
+
+# Per-agent runtime output
+*/outbox/*.md
+*/outbox/.tick-*
+*/outbox/.scan_snapshot.json
+*/outbox/.chaos_test_last_run
+*/outbox/.last-tick.json*
+*/outbox/_last-tick.json*
+*/monitor-notes/*.md
+*/monitor-notes/.coord-mirror-pre-*.bak
+*/monitor-notes/.funding-mirror-pre-*.bak
+*/monitor-notes/*.pre-tick-*.bak
+
+# Live state backups
+*.pre-sqlite.bak
+*.pre-fire*
+
+# Runtime tick state
+*.chaos.last_run
+.state-mirror-pre-*
+
+# State history (auto-snapshotted to state-versioned repo)
+state/history/
+state/org-state.json.bak
+state/*.mirror-pre-*.bak
+state/*.pre-*.bak
+state/coaching-customers/.pre-*.bak
+
+# OS / Editor
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+.vscode/
+.idea/
+
+# Python
+__pycache__/
+*.pyc
