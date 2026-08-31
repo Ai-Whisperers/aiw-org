@@ -50,47 +50,39 @@ Old URLs auto-redirect to the new name.
 aiw-org/
 ├── README.md                              ← you are here
 ├── analysis/                              ← catalog docs (DEPT-AGENTS-ROLES-COMPLETE, ORGANIGRAM, naming)
-│   ├── DEPT-AGENTS-ROLES-COMPLETE.md
-│   ├── ORGANIGRAM.md
-│   ├── AGENT-NAMES-V2.md
-│   ├── NAMING-CONVENTION-ANALYSIS.md
-│   ├── AGENT-HUMAN-NAMES.md
-│   ├── DEPT-AGENTS-PUN-NAMES.md
-│   ├── REMAINING-TASKS-AND-WISHLIST.md
-│   └── README.md
-├── departments/                           ← 6 Tier-1 dept charters
-│   ├── 01-operations.md
-│   ├── 02-finance-legal.md
-│   ├── 03-sales-growth.md
-│   ├── 04-engineering-delivery.md
-│   ├── 05-research-education.md
-│   └── 06-people-culture.md
-├── coach/                                 ← internal coaching product (14 agents)
-│   ├── README.md
-│   ├── kiki-coach/                        ← charter + curriculum + lessons (Ivan's actual coaching)
-│   ├── coach-ivan/                        ← self-coaching cron agent
-│   ├── coach-kiki/                        ← self-coaching cron agent for Kiki
-│   ├── coach-lead-agents/                 ← coaches lead agents on GROW
-│   ├── coach-lead-finder/                 ← lead-finding coaching
-│   ├── coach-onboarding/                  ← customer/FTE onboarding
-│   ├── coach-cohort-facilitator/          ← (planned)
-│   ├── coach-conversion-agent/            ← (planned)
-│   ├── coach-practitioner/                ← (planned)
-│   ├── coach-renewal-manager/             ← renewal coaching
-│   ├── coach-roi-tracker/                 ← ROI coaching
-│   ├── coach-org/                         ← quarterly org coaching
-│   ├── coaching-content-curator/          ← coaching content calendar
-│   ├── coaching-quality-reviewer/         ← every-30-min quality review
-│   └── coaching-research-intelligence/    ← coaching research signals
-├── <agent-name>/                          ← the other 33 production agents at root
-│   ├── PROMPT.md
-│   ├── outbox/                            ← historical briefs
-│   └── PROMPT-monitor.md                  ← (some agents)
+├── 01-operations/                         ← Operations dept (mgmt-coord, bizops, ai-ops,
+│                                              compliance, founder-bandwidth, source-curator,
+│                                              okr, procurement + ai-ops-daily)
+├── 02-finance-legal/                      ← Finance & Legal dept (finance-ctrl, business-analyst,
+│                                              accounting, tax-receipts, funding + acct-daily)
+├── 03-sales-growth/                       ← Sales & Growth dept (sales-pipeline, lead-enrichment,
+│                                              proposal-drafter, revops, marketing-content,
+│                                              multimedia + 3 daily variants)
+├── 04-engineering/                        ← Engineering & Delivery dept (eng-roster, ai-safety,
+│                                              devops-monitor, security-watchdog, qa, delivery,
+│                                              chaos, drift, eval-gate, security-audit + 4 monitors)
+├── 05-research-education/                 ← Research & Education dept (research-tracker,
+│                                              thesis-tracker, citation-checker, course-producer)
+├── 06-people-culture/                     ← People & Culture dept (people-hr)
+│                                              (kiki-coach lives in sister repo coach-agents)
+├── board-of-directors/                    ← Executive governance (not a charter dept)
+├── coach/                                 ← (moved to sister repo Ai-Whisperers/coach-agents)
+├── demiurge/                              ← DEMIURGE agent framework (24 souls)
+├── departments/                           ← 6 Tier-1 dept charters (00N-name.md)
+├── departments-taxonomy/                  ← 16-dept taxonomy (ai-ops, compliance, etc.)
 ├── dept-monitors/                         ← 16 PROMPT-monitor.md patterns + INDEX.md
-├── scripts/                               ← infra scripts (state-validate, cron-heartbeat, etc.)
+├── agents-prompts/                       ← 31 legacy PROMPT.md (constitution v0.2.0)
 ├── schemas/                               ← 9 agent-state schemas
 ├── state/                                 ← LIVE runtime state (coord.json, finance.json, ...)
-└── research/                              ← research materials used by org agents
+├── research/                              ← research materials used by org agents
+├── sources/                               ← source catalog (knowledge-mgmt, latam, etc.)
+├── patterns/                              ← hard-stop-wrapper, idempotency, trademark-scrub
+├── playbooks/                             ← 00-INDEX + 8 dept playbooks + ROADMAP
+├── prompts/                               ← PROMPT-TEMPLATE (master template)
+├── templates/                             ← AGENTS.md.template, email templates
+├── tests/                                 ← 25 test files
+├── scripts/                               ← 25 production scripts (cron-sync, eval-gate, etc.)
+└── tickets/                               ← 81 DEMIURGE ticket artifacts
 ```
 
 ---
