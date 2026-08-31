@@ -1,0 +1,295 @@
+{
+  "_meta": {
+    "framework": "[Domain Root] + [Personal Suffix]",
+    "generated": "2026-08-31",
+    "total_agents": 54,
+    "replaces": "AGENT-HUMAN-NAMES.md (kept as informal alternative)",
+    "suffixes_used": {
+      "-ina": 16,
+      "-ia": 8,
+      "-in": 5,
+      "-is": 8,
+      "-us": 2,
+      "-a": 35,
+      "-30": 3
+    }
+  },
+  "agents": {
+    "management-coordinator": {
+      "old": "Hern\u00e1n Coordinador",
+      "new": "Coordina",
+      "dept": "Operations"
+    },
+    "business-analyst": {
+      "old": "Beatriz Analista",
+      "new": "Analisa",
+      "dept": "Operations"
+    },
+    "ai-ops-coordinator": {
+      "old": "Hern\u00e1n Coordinador II",
+      "new": "Opsina",
+      "dept": "Operations (T2)"
+    },
+    "bizops-tracker": {
+      "old": "Bianca Rastreadora",
+      "new": "Bizina",
+      "dept": "Operations (T2)"
+    },
+    "source-curator": {
+      "old": "Soledad Curadora",
+      "new": "Curatora",
+      "dept": "Ops + Research (T2)"
+    },
+    "compliance-monitor": {
+      "old": "Camila Vigilante",
+      "new": "Compla",
+      "dept": "Finance/Ops (T2)"
+    },
+    "founder-bandwidth-watchdog": {
+      "old": "Fidel Vig\u00eda",
+      "new": "Vigilis",
+      "dept": "Ops/People (T2)"
+    },
+    "finance-controller": {
+      "old": "Federico Contador",
+      "new": "Finus",
+      "dept": "Finance & Legal"
+    },
+    "accounting-automation": {
+      "old": "Aurora Contable",
+      "new": "Bokina",
+      "dept": "Finance & Legal"
+    },
+    "tax-receipt-tracker": {
+      "old": "Trinidad Impuestina",
+      "new": "Taxina",
+      "dept": "Finance & Legal"
+    },
+    "procurement-tracker": {
+      "old": "Pilar Compradora",
+      "new": "Procin",
+      "dept": "Finance (T2)"
+    },
+    "sales-pipeline": {
+      "old": "Sof\u00eda Vendedora",
+      "new": "Saleina",
+      "dept": "Sales & Growth"
+    },
+    "lead-enrichment": {
+      "old": "Luc\u00eda Buscadora",
+      "new": "Prospia",
+      "dept": "Sales & Growth"
+    },
+    "proposal-drafter": {
+      "old": "Pablo Redactor",
+      "new": "Proporina",
+      "dept": "Sales & Growth"
+    },
+    "marketing-content-producer": {
+      "old": "Mariana Creadora",
+      "new": "Markina",
+      "dept": "Sales & Growth"
+    },
+    "multimedia-producer": {
+      "old": "Mateo Multimedia",
+      "new": "Media",
+      "dept": "Sales & Growth"
+    },
+    "revops-pipeline-analyzer": {
+      "old": "Rodrigo Analista",
+      "new": "Revina",
+      "dept": "Sales (T2)"
+    },
+    "customer-health-scorer": {
+      "old": "Constanza Cuidadora",
+      "new": "Churna",
+      "dept": "Sales (T2)"
+    },
+    "engineering-roster": {
+      "old": "Eduardo Rosterina",
+      "new": "Devin",
+      "dept": "Engineering & Delivery"
+    },
+    "devops-monitor": {
+      "old": "Diego Vigilante",
+      "new": "Devor",
+      "dept": "Engineering & Delivery"
+    },
+    "qa-automation-runner": {
+      "old": "Quint\u00edn Asegurador",
+      "new": "Qualis",
+      "dept": "Engineering & Delivery"
+    },
+    "security-watchdog": {
+      "old": "Sergio Guardi\u00e1n",
+      "new": "Securia",
+      "dept": "Engineering & Delivery"
+    },
+    "ai-safety-engineer": {
+      "old": "Bruno Vigilante",
+      "new": "Safina",
+      "dept": "Engineering (T2)"
+    },
+    "scope-intake": {
+      "old": "Sara Receptora",
+      "new": "Scopia",
+      "dept": "Engineering & Delivery"
+    },
+    "delivery-tracker": {
+      "old": "Tom\u00e1s Entregador",
+      "new": "Deliva",
+      "dept": "Engineering & Delivery"
+    },
+    "feasibility-gate": {
+      "old": "Francisca Portera",
+      "new": "Gatina",
+      "dept": "Engineering & Delivery"
+    },
+    "chaos-test-runner": {
+      "old": "Camilo Cat\u00e1strofe",
+      "new": "Chaosia",
+      "dept": "Engineering & Delivery"
+    },
+    "research-tracker": {
+      "old": "Renata Rastreadora",
+      "new": "Researcha",
+      "dept": "Research & Education"
+    },
+    "citation-checker": {
+      "old": "Clara Citadora",
+      "new": "Citia",
+      "dept": "Research & Education"
+    },
+    "thesis-tracker": {
+      "old": "Teresa T\u00e9sista",
+      "new": "Thesis",
+      "dept": "Research & Education"
+    },
+    "course-producer": {
+      "old": "Camila Curadora de Cursos",
+      "new": "Coursia",
+      "dept": "Research & Education"
+    },
+    "okr-tracker": {
+      "old": "Octavio Medidor",
+      "new": "Metrika",
+      "dept": "Research & Education"
+    },
+    "funding-coordinator": {
+      "old": "Florencia Fondista",
+      "new": "Fundina",
+      "dept": "Research & Education"
+    },
+    "kiki-coach": {
+      "old": "Maestra Kiki",
+      "new": "Magistra",
+      "dept": "People & Culture"
+    },
+    "people-hr": {
+      "old": "Patricia Humana",
+      "new": "Herina",
+      "dept": "People & Culture"
+    },
+    "coaching-customers": {
+      "old": "Carmen Coordinadora",
+      "new": "Coachina",
+      "dept": "People (coaching)"
+    },
+    "conversion-funnel": {
+      "old": "Carlos Ca\u00f1er\u00eda",
+      "new": "Converin",
+      "dept": "People (coaching)"
+    },
+    "coach-conversion-agent": {
+      "old": "Camila Cerradora",
+      "new": "Coachin",
+      "dept": "People (coaching)"
+    },
+    "coach-lead-finder": {
+      "old": "Lorenzo Buscador",
+      "new": "Leadius",
+      "dept": "People (coaching)"
+    },
+    "coach-onboarding": {
+      "old": "Olga Onboardera",
+      "new": "Onboardia",
+      "dept": "People (coaching)"
+    },
+    "coach-renewal-manager": {
+      "old": "Renato Renovador",
+      "new": "Renovin",
+      "dept": "People (coaching)"
+    },
+    "coach-roi-tracker": {
+      "old": "Ricardo Medidor",
+      "new": "Roina",
+      "dept": "People (coaching)"
+    },
+    "coach-lead-agents": {
+      "old": "Lorena L\u00edder",
+      "new": "Lidera",
+      "dept": "People (coaching)"
+    },
+    "coach-practitioner": {
+      "old": "Pedro Pr\u00e1ctico",
+      "new": "Practis",
+      "dept": "People (coaching)"
+    },
+    "coach-ivan": {
+      "old": "Iv\u00e1n Iv\u00e1n",
+      "new": "Coachis",
+      "dept": "People (coaching)"
+    },
+    "coach-kiki": {
+      "old": "Kiki Kiki",
+      "new": "Coachita",
+      "dept": "People (coaching)"
+    },
+    "coach-org": {
+      "old": "Olivia Org\u00e1nica",
+      "new": "Organis",
+      "dept": "People (coaching)"
+    },
+    "coaching-content-curator": {
+      "old": "Cristina Curadora",
+      "new": "Contentis",
+      "dept": "People (coaching)"
+    },
+    "coaching-quality-reviewer": {
+      "old": "Renata Revisora",
+      "new": "Qualireva",
+      "dept": "People (coaching)"
+    },
+    "coaching-research-intelligence": {
+      "old": "Roxana Investigadora",
+      "new": "Cochis",
+      "dept": "People (coaching)"
+    },
+    "board-of-directors": {
+      "old": "Bernardo Presidente + Esperanza Consejera + Eduardo Consejero",
+      "new": "Boardina",
+      "dept": "Ops (T2)"
+    },
+    "ai-safety-engineer-30min": {
+      "old": "Bruno Vigilante (cron variant)",
+      "new": "Safina-30",
+      "dept": "Engineering (v1 cron)"
+    },
+    "devops-monitor-30min": {
+      "old": "Diego Vigilante (cron variant)",
+      "new": "Devor-30",
+      "dept": "Engineering (v1 cron)"
+    },
+    "security-watchdog-30min": {
+      "old": "Sergio Guardi\u00e1n (cron variant)",
+      "new": "Securia-30",
+      "dept": "Engineering (v1 cron)"
+    }
+  },
+  "user_examples_present": {
+    "Saleina": "sales-pipeline",
+    "Devin": "engineering-roster",
+    "Finus": "finance-controller",
+    "Herina": "people-hr"
+  }
+}
