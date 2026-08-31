@@ -1,7 +1,9 @@
 # ON-CALL.md
 
 > On-call rotation. Documented per Session 1 cheatsheet + Gap-audit P2 #11.
-> **Last updated**: 2026-08-14
+> **Last updated**: 2026-09-01 (Phase 8 — refreshed after funnel revival + health dashboard work)
+>
+> **Pair with**: [OPERATIONS.md](OPERATIONS.md) (how the org works), [ON-CALL-QUICK-REF](#quick-ref-when-x-breaks) below
 
 ---
 
@@ -66,6 +68,42 @@ For Critical/High:
 
 ## Cross-references
 
-- `/opt/data/agents/departments/01-operations.md` (Operations dept spec)
-- `/opt/data/agents/REVIEW-2026-Q4.md` (90-day review includes on-call metrics)
-- `/opt/data/agents-v2/FAILURE-MODES.md` (failure modes that trigger on-call)
+- `/opt/data/agents/OPERATIONS.md` — how the org works (read first)
+- `/opt/data/agents/department-index.md` — per-dept agent/monitor/research map
+- `/opt/data/agents/departments/01-operations.md` — Operations dept spec
+- `/opt/data/agents/REVIEW-2026-Q4.md` — 90-day review includes on-call metrics
+- `/opt/data/agents/board/risk-register-2026.md` — 12 risks ranked
+- `/opt/data/agents/operations/health-dashboard.md` — per-dept health scores
+- `/opt/data/agents/operations/cron-error-patterns-30d.md` — current cron-error snapshot
+- `/opt/data/agents/analysis/GAP-RESEARCH-FINDINGS-2026-09.md` — Phase 1 L1 audit findings
+
+---
+
+## Quick-ref: when X breaks
+
+| Symptom | Likely cause | First action |
+|---|---|---|
+| Sales funnel empty | Worker 404 / form backend down | `sales/funnel-revival-2026.md` — recommend Formspree |
+| Cron errors > 5 | Sunday-evening token-plan | Spread crons; check `cron-error-watchdog.json` |
+| Hard-stops blocked | LLM tried destructive action | Check `patterns/hard-stop-wrapper.py`; review action log |
+| Eval aggregate < 0.5 | Eval system not populating `by_agent` | `python3 scripts/eval-aggregate-pass-rate.py`; investigate |
+| Drift alerts flood | Threshold too sensitive | `operations/monitor-threshold-calibration-2026.md` |
+| Health score < 60 | Per-dept issue | `operations/health-dashboard.md` |
+| Ivan bandwidth red | Founder overload | `01-operations/founder-bandwidth-watchdog/` triggers |
+| Hard-stops never invoked | Wrapper exists but 0/49 agents call it | `operations/hard-stops-enforcement-audit.md` — needs Kiki |
+| Trademark incident | Hostinger-like | `compliance-monitor` + trademark-scan-cron |
+| SECURITY: credential leak | Bitwarden vault compromised | Rotate via BWS immediately; check `state/webhook-log.json` |
+| SECURITY: prompt injection | Adversarial input | ai-safety-engineer + state-write-disciple catches (if invoked) |
+| Lua: `minimax-plan` unknown | Config drift | Edit cron definition to use current provider |
+| Lint fails | New PROMPT.md missing frontmatter | `scripts/lint-prompts.py --fix` |
+| Smoke gate fails | Layer regression | `scripts/smoke-test.sh all` — read which layer broke |
+
+---
+
+## Phase 8 alerts (priorities for the next 7 days)
+
+1. **🔴 URGENT — Sales pipeline revival decision** — Ivan picks Formspree (1-2h) vs Worker revival (8-16h). See `sales/funnel-revival-2026.md`.
+2. **🔴 HIGH — Hard-stops enforcement decision** — Kiki reviews `operations/hard-stops-enforcement-audit.md`. 16h to implement.
+3. **🟡 MEDIUM — Sunday-evening cron spread** — 2h work, ai-ops-coordinator.
+4. **🟡 MEDIUM — Provider name fix** — `aiw-people-hr-weekly` cron has `minimax-plan` (wrong). Trivial fix.
+5. **🟢 LOW — Eval aggregate cron wiring** — `scripts/eval-aggregate-pass-rate.py` should run nightly. 4h work.

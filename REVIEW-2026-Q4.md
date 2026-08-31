@@ -1,7 +1,7 @@
 # REVIEW-2026-Q4.md
 
 > 30/60/90-day review checklist for AI Whisperers org buildout.
-> **Last updated**: 2026-08-14
+> **Last updated**: 2026-09-01 (Phase 8 — appended "Phase 26 candidates" + status refresh)
 
 ---
 
@@ -141,3 +141,75 @@ All 30/60/90-day reviews conducted by **Erebus** (management-coordinator) and re
 - `/opt/data/agents-v2/FAILURE-MODES.md` (chaos tests)
 - `/opt/data/agents/DECISIONS-2026-Q3.md` (OP-4: self-running milestone)
 - `/opt/data/agents-v2/BURNOUT-SIGNAL-SPEC.md`
+- [`OPERATIONS.md`](./OPERATIONS.md) — how the org works (read first)
+- [`department-index.md`](./department-index.md) — per-dept map
+
+---
+
+## Phase 8 status snapshot (2026-09-01)
+
+**Current org scorecard** (per `operations/self-running-scorecard-2026.md` and `operations/health-dashboard.md`):
+
+| Metric | Target | Current | Status |
+|---|---|---|---|
+| Cron health | 100% | 125/131 = 95.4% | 🟡 6 in error |
+| Sub-agent monitors wired | 100% | 28/28 (100%) | ✅ |
+| PROMPT.md lint pass | 100% | 63/63 (100%) | ✅ |
+| Smoke gate | 100% | 100% pass, 9s | ✅ |
+| Self-running criteria | 7/7 | 4.5/7 (64%) | 🟡 |
+| Aggregate eval pass_rate | ≥95% | 0% (no data) | 🔴 |
+| Ivan bandwidth audit | 2wk | not started | 🟡 |
+| Sales funnel | ≥5 leads | 0 | 🔴 |
+| Health dashboard | ≥60 | Ops 90 / Fin 48 / Sales 48 / Eng 96 / Res 58 / People 34 / Board 34 | mixed |
+
+**Risk register** (per `board/risk-register-2026.md`): 3 CRITICAL (R1 hard-stops, R2 sales funnel, R11 Ivan bandwidth).
+
+---
+
+## Phase 26 candidates (ordered by impact)
+
+| # | Action | Source | Impact | Effort |
+|---|---|---|---|---|
+| 1 | **Sales funnel revival** (Formspree) | Phase 8 #19 | 🔴 Unblocks revenue | 1-2h |
+| 2 | **Hard-stops wrapper invocation** | Phase 8 #2 | 🔴 Closes AI safety hole | 16h (Kiki) |
+| 3 | **Eval aggregate cron wiring** (nightly) | Phase 8 #10 | 🟠 First real eval signal | 4h |
+| 4 | **Drift detection calibration** (30d) | Phase 8 #8 | 🟡 Tune thresholds | 0h (passive) |
+| 5 | **Chaos-test scenario #1** (state corruption) | Phase 8 #9 | 🟡 Verify monitor path | 4h |
+| 6 | **Spread Sunday-evening weekly crons** | Phase 8 #3 | 🟡 Fix 5 of 6 cron errors | 2h |
+| 7 | **Fix `minimax-plan` provider** | Phase 8 OQ | 🟡 People dept score 34→50 | 1h |
+| 8 | **Eval gate enforcement** | Phase 8 G2 | 🟠 Block low-pass agents | 8h |
+| 9 | **Heartbeat self-validation** | Phase 26 #6 | 🟢 Detect silent failure | 4h |
+| 10 | **Cost reporting per cron** | Phase 26 #7 | 🟢 Visibility | 4h |
+
+**Total effort to ship all 10**: ~50h. At 2-person org, ~5 weeks of part-time work.
+
+---
+
+## What needs Ivan (decisions only Ivan can make)
+
+| Decision | Recommendation | Source |
+|---|---|---|
+| Sales funnel: Formspree (1-2h) vs Worker revival (8-16h) | **Formspree** | `sales/funnel-revival-2026.md` |
+| Decline richar-ruiz deal (22d stalled, anonymized) | **YES** | `state/sales.json` open_questions |
+| Resurrect Rubicon EAS Worker later? | **LATER** (after $5K MRR) | `sales/funnel-revival-2026.md` |
+| Apply to SIC (Start-Up Chile)? | **YES** (Q4) | `finance/funding-landscape-2026-Q4.md` |
+| Open-source the agent framework? | **YES** (unlocks funding) | `finance/funding-landscape-2026-Q4.md` |
+
+## What needs Kiki (technical decisions)
+
+| Decision | Recommendation | Source |
+|---|---|---|
+| Invoke hard-stops wrapper globally? | **YES** (8-16h) | `operations/hard-stops-enforcement-audit.md` |
+| Add eval gate enforcement (block low-pass)? | **YES** (8h) | `engineering/ai-safety-posture-2026.md` |
+| Adopt M4 (time-bounded consensus) for board? | **YES** | `board/co-chair-decision-rights.md` |
+
+## What agents can do autonomously
+
+- Run chaos-test-runner scenario #1
+- Wire eval-aggregate-pass-rate.py to nightly cron
+- Spread Sunday-evening weekly crons
+- Fix `minimax-plan` provider name
+- Apply for SIC + Open Source Collective
+- Run citation-coverage audit on full corpus
+
+**Total autonomous work**: ~20h.
