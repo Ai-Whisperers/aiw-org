@@ -197,7 +197,12 @@ def main():
         "skills": route_skills,
         "conversion": route_conversion,
     }
-    
+    # Help
+    if len(sys.argv) >= 2 and sys.argv[1] in ("--help", "-h", "help"):
+        print("Usage: org-dashboard.py <route>")
+        print("Routes: " + ", ".join(routes.keys()))
+        sys.exit(0)
+
     if len(sys.argv) < 2:
         print("Usage: org-dashboard.py <route>")
         print("Routes: " + ", ".join(routes.keys()))
