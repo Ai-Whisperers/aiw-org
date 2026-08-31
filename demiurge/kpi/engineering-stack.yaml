@@ -1,0 +1,30 @@
+# Engineering Stack KPIs
+
+> DEMIURGE-051 — Companion to revenue-stack.yaml
+> Owner: devops-monitor (department)
+> Atomic agents: argus-health-monitor, hermes-router-revenue
+
+```yaml
+version: 1.0.0
+departments: [engineering]
+```
+
+## Engineering (owner: devops-monitor)
+
+| id | name | formula | target | unit | feedback_loop |
+|----|------|---------|--------|------|---------------|
+| kpi-eng-deploy-freq | Deploy frequency | count/week | 5 | count | loop-monitor-to-source |
+| kpi-eng-mttr | MTTR | avg(resolved - opened) | 60 | minutes | loop-monitor-to-source |
+| kpi-eng-change-fail-rate | Change fail rate | failed deploys / total | 0.10 | ratio | loop-monitor-to-soul |
+| kpi-eng-test-coverage | Test coverage | covered lines / total | 0.80 | ratio | loop-eval-to-source |
+| kpi-eng-p0-leak-age | P0 leak age | max(leak_age_hours) | 24 | hours | loop-monitor-to-soul |
+| kpi-eng-eval-gate-pass | Eval gate pass rate | passes / total | 0.95 | ratio | loop-eval-to-soul |
+| kpi-eng-agent-runs | Agent runs/week | count | 50 | count | loop-monitor-to-source |
+
+## Health signal (owner: argus-health-monitor)
+
+| id | name | formula | target |
+|----|------|---------|--------|
+| kpi-org-health-eng | Engineering health | weighted avg eng KPIs | 0.85 |
+
+feedback_trigger below 0.7 → loop-monitor-to-soul

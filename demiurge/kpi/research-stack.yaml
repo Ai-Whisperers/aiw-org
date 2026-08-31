@@ -1,0 +1,28 @@
+# Research Stack KPIs
+
+> DEMIURGE-052 — Companion to revenue-stack.yaml
+> Owner: research-tracker (department)
+> Atomic agents: thoth-literature-scanner, peitho-language-quality
+
+```yaml
+version: 1.0.0
+departments: [research-education]
+```
+
+## Research (owner: research-tracker)
+
+| id | name | formula | target | unit | feedback_loop |
+|----|------|---------|--------|------|---------------|
+| kpi-res-papers-week | Papers reviewed/week | count | 5 | count | loop-monitor-to-source |
+| kpi-res-citation-coverage | Citation coverage | cited refs / total | 0.95 | ratio | loop-eval-to-source |
+| kpi-res-course-output | Course pieces/week | count | 1 | count | loop-monitor-to-source |
+| kpi-res-quality-pass | Quality gate pass rate | passes / total | 0.90 | ratio | loop-eval-to-soul |
+| kpi-res-knowledge-base | KB entries | count | 200 | count | loop-monitor-to-source |
+
+## Health signal (owner: argus-health-monitor)
+
+| id | name | formula | target |
+|----|------|---------|--------|
+| kpi-org-health-res | Research health | weighted avg research KPIs | 0.85 |
+
+feedback_trigger below 0.7 → loop-monitor-to-soul

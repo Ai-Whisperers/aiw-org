@@ -1,0 +1,29 @@
+# Operations Stack KPIs
+
+> DEMIURGE-049 — Companion to revenue-stack.yaml
+> Owner: kronos-operations-lead (atomic)
+> Coordinator: ai-ops-coordinator
+
+```yaml
+version: 1.0.0
+departments: [operations]
+```
+
+## Operations (owner: kronos-operations-lead)
+
+| id | name | formula | target | unit | feedback_loop |
+|----|------|---------|--------|------|---------------|
+| kpi-ops-incident-mttr | Mean time to recover | avg(resolved - opened) | 240 | minutes | loop-monitor-to-source |
+| kpi-ops-incident-mttr-high | High-sev MTTR | avg for sev=high | 120 | minutes | loop-monitor-to-source |
+| kpi-ops-uptime | Org uptime | uptime / total_hours | 0.999 | ratio | loop-monitor-to-soul |
+| kpi-ops-hardstop-breaches | Hard-stop breaches | count blocked actions | 0 | count | loop-monitor-to-soul |
+| kpi-ops-process-completion | Cron completion rate | completed / scheduled | 0.98 | ratio | loop-monitor-to-source |
+| kpi-ops-board-review-cadence | Board review adherence | on-time reviews / scheduled | 0.95 | ratio | loop-monitor-to-soul |
+
+## Health signal (owner: argus-health-monitor)
+
+| id | name | formula | target |
+|----|------|---------|--------|
+| kpi-org-health-ops | Operations health | weighted avg ops KPIs | 0.85 |
+
+feedback_trigger below 0.7 → loop-monitor-to-soul

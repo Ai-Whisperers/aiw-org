@@ -1,0 +1,28 @@
+# People Stack KPIs
+
+> DEMIURGE-053 — Companion to revenue-stack.yaml
+> Owner: people-hr (department)
+> Atomic agents: echo-community-scanner, iris-community-monitor
+
+```yaml
+version: 1.0.0
+departments: [people-culture]
+```
+
+## People (owner: people-hr)
+
+| id | name | formula | target | unit | feedback_loop |
+|----|------|---------|--------|------|---------------|
+| kpi-people-hiring-pipeline | Hiring pipeline | count active candidates | 3 | count | loop-monitor-to-source |
+| kpi-people-onboarding-days | Avg onboarding days | avg(days_to_full_prod) | 30 | days | loop-monitor-to-source |
+| kpi-people-review-cadence | Review adherence | on-time / scheduled | 0.95 | ratio | loop-monitor-to-soul |
+| kpi-people-bandwidth | Founder bandwidth utilization | booked / available | 0.80 | ratio | loop-monitor-to-source |
+| kpi-people-retention | Retention | retained / total | 0.95 | ratio | loop-monitor-to-soul |
+
+## Health signal (owner: argus-health-monitor)
+
+| id | name | formula | target |
+|----|------|---------|--------|
+| kpi-org-health-people | People health | weighted avg people KPIs | 0.85 |
+
+feedback_trigger below 0.7 → loop-monitor-to-soul

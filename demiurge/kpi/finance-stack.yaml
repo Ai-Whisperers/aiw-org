@@ -1,0 +1,30 @@
+# Finance Stack KPIs
+
+> DEMIURGE-050 — Companion to revenue-stack.yaml
+> Owner: finance-controller (department)
+> Atomic agents: business-analyst
+
+```yaml
+version: 1.0.0
+departments: [finance-legal]
+```
+
+## Finance (owner: finance-controller)
+
+| id | name | formula | target | unit | feedback_loop |
+|----|------|---------|--------|------|---------------|
+| kpi-fin-cash-balance | Cash balance | bank + crypto + runway | 50000 | USD | loop-monitor-to-soul |
+| kpi-fin-burn-rate | Monthly burn | total expenses / month | 8000 | USD/mo | loop-monitor-to-soul |
+| kpi-fin-runway | Runway | balance / burn | 6 | months | loop-monitor-to-soul |
+| kpi-fin-mrr | MRR | monthly recurring revenue | 1000 | USD | loop-pipeline-to-finance |
+| kpi-fin-ar-90 | Receivables >90d | sum | 0 | USD | loop-monitor-to-source |
+| kpi-fin-compliance-fines | Compliance fines | count | 0 | count | loop-monitor-to-soul |
+| kpi-fin-funding-pipeline | Funding leads | count active | 5 | count | loop-pipeline-to-finance |
+
+## Health signal (owner: argus-health-monitor)
+
+| id | name | formula | target |
+|----|------|---------|--------|
+| kpi-org-health-fin | Finance health | weighted avg finance KPIs | 0.85 |
+
+feedback_trigger below 0.7 → loop-monitor-to-soul

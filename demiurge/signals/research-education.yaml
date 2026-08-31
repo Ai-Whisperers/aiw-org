@@ -1,0 +1,21 @@
+# Research-Education Signals
+
+> Source routing for 01-operations/* PROMPT.md agents.
+> Schema version 1.0.0
+
+```yaml
+version: 1.0.0
+department: research-education
+routing:
+  ai-ops-coordinator: { consumes: [hermes-router-revenue, kronos-operations-lead], emits: [] }
+  bizops-tracker: { consumes: [kronos-operations-lead], emits: [bizops-tracker] }
+  compliance-monitor: { consumes: [], emits: [compliance-monitor] }
+  founder-bandwidth-watchdog: { consumes: [clio-customer-signal-collector], emits: [] }
+  management-coordinator: { consumes: [hermes-router-revenue], emits: [] }
+  okr-tracker: { consumes: [themis-document-classifier], emits: [okr-tracker] }
+  procurement-tracker: { consumes: [themis-document-classifier], emits: [procurement-tracker] }
+  source-curator: { consumes: [thoth-literature-scanner, peitho-language-quality], emits: [source-curator] }
+```
+
+> AIW: signals.yaml files are companion to kpis.yaml.
+> Each agent's signals = the atomic-agent events it consumes + emits.
