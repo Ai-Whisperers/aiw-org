@@ -4,7 +4,7 @@
 > every agent that works the role, plus the artifacts each role owns.
 >
 > **Structure**: Department → Roles → Sub-roles / Agents → Artifacts
-> **Scope**: 36 functional areas, ~137 roles, 47 agents, 24 DEMIURGE + 23 heritage
+> **Scope**: 36 functional areas, ~137 roles, **49 production agents** (34 in [aiw-org](https://github.com/Ai-Whisperers/aiw-org) + 15 in [coach-agents](https://github.com/Ai-Whisperers/coach-agents)), 24 DEMIURGE souls + 23 heritage
 > **Source files** (read 2026-08-31):
 > - `[ROLES-INVENTORY.md](https://github.com/Ai-Whisperers/growth-coaching/blob/master/ROLES-INVENTORY.md) (in growth-coaching repo)` (137 roles)
 > - `[ORG-AGENTS.md](../ORG-AGENTS.md) (handoff matrix)` (47-agent handoff matrix)
@@ -12,7 +12,17 @@
 > - `[packages/<dept>/agents/<agent>/PROMPT.md](https://github.com/Ai-Whisperers/growth-coaching/tree/master/packages) (37 shipped packages)` (37 shipped)
 > - `[DEPT-AGENTS-ROLES-COMPLETE.md](DEPT-AGENTS-ROLES-COMPLETE.md) (sibling catalog)` (consolidated catalog)
 >
-> **Last updated**: 2026-08-31
+> **Last updated**: 2026-08-31 (post 3-repo split)
+
+---
+
+## AIW repos (post 2026-08-31 split)
+
+| Repo | URL | Purpose | Agents |
+|---|---|---|---|
+| **`aiw-org`** | [github.com/Ai-Whisperers/aiw-org](https://github.com/Ai-Whisperers/aiw-org) | Internal AIW org layer | 34 production agents in 6 dept dirs + governance |
+| **`coach-agents`** | [github.com/Ai-Whisperers/coach-agents](https://github.com/Ai-Whisperers/coach-agents) | Internal coaching product | 15 agents (kiki-coach + 14 coach-*) |
+| **`growth-coaching`** | [github.com/Ai-Whisperers/growth-coaching](https://github.com/Ai-Whisperers/growth-coaching) | Customer-facing GROW product | 6 distributable packages |
 
 ---
 

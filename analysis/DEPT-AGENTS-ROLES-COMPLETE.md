@@ -22,17 +22,17 @@
 
 | Metric | Count | Notes |
 |---|---|---|
+| **AIW repos (split 2026-08-31)** | 3 | [aiw-org](https://github.com/Ai-Whisperers/aiw-org) (internal org), [coach-agents](https://github.com/Ai-Whisperers/coach-agents) (internal coaching), [growth-coaching](https://github.com/Ai-Whisperers/growth-coaching) (customer product) |
 | **Tier-1 departments (chartered)** | 6 | Operations, Finance & Legal, Sales & Growth, Engineering & Development, Research & Education, People & Culture |
 | **Tier-2 cross-cutting concerns** | 8 | AI Ops, Compliance, KM, RevOps, BizOps, CS, AI Safety, Procurement |
 | **Tier-3 deferred departments** | 17 | Activate on triggers (5+ clients, $100K cash, EU client, etc.) |
 | **Tier-4 enterprise depts** | 5 | Only at 50+ people / $1M+ revenue scale |
 | **Total functional areas** | **36** | 6 + 8 + 17 + 5 |
-| **Total roles (target catalog)** | **~137** | Per ROLES-INVENTORY.md |
-| **Total agents (shipped)** | **47** | 7 Tier-1 leads + 14 T2 sub + 8 T3 cross-cut + 4 monitoring + 14 coaching |
-| **DEMIURGE agents (canonical names)** | **24** | Greek-mythology names, full PROMPT+yaml+manifest |
+| **Total roles (target catalog)** | **~137** | Per [ROLES-INVENTORY.md](https://github.com/Ai-Whisperers/growth-coaching/blob/master/ROLES-INVENTORY.md) |
+| **Production agents (running)** | **49** | 34 in [aiw-org](https://github.com/Ai-Whisperers/aiw-org) (6 dept dirs + `board-of-directors/`) + 15 in [coach-agents](https://github.com/Ai-Whisperers/coach-agents) (14 coach-* + kiki-coach) |
+| **DEMIURGE agent souls** | **24** | In `aiw-org/demiurge/agents/`. Greek-mythology names. Specs (not all running). |
 | **Heritage agents (portmanteau names)** | **23** | Awaiting DEMIURGE migration |
-| **Agent packages built** | **37** | `[packages/<dept>/agents/<agent>/PROMPT.md](https://github.com/Ai-Whisperers/growth-coaching/tree/master/packages) (37 shipped)` |
-| **Active cron jobs** | **92** | After dedup from 116 in Phase 25 |
+| **Active cron jobs** | **113** | After dedup from 116 in Phase 25 + recent additions |
 | **Coaching skills shipped** | **16** | Tier 1 + Tier 2 |
 | **Eval-gate pass rate** | **86.6%** | Per Phase 22 |
 | **LLM cost (monthly)** | **$293.41** | Well under $12K risk threshold |
@@ -46,26 +46,54 @@
                               ┌─────────────────────────────┐
                               │   CEO + Founder: Ivan       │
                               │   CTO + Coach: Kiki (Kyrian)│
-                              └──────────┬──────────────────┘
-                                         │
-        ┌────────────────────┬───────────┼───────────┬────────────────────┐
-        │                    │           │           │                    │
-   ┌────▼─────┐       ┌──────▼────┐ ┌────▼────┐ ┌────▼─────┐       ┌──────▼────┐
-   │  01 OPS  │       │ 02 FIN&LG │ │ 03 SLS  │ │ 04 ENG   │       │ 05 RES   │ 06 PPL│
-   │ (Ivan)   │       │  (Ivan)   │ │ (Ivan)  │ │ (Kiki)   │       │ (Ivan)   │(Ivan+Kiki)
-   └────┬─────┘       └─────┬─────┘ └────┬────┘ └────┬─────┘       └────┬─────┘  └────┬─────┘
-        │                  │             │           │                  │            │
-   management-coord  finance-controller  sales-pipeline  engineering-roster  research-tracker  kiki-coach
-        + 6 sub          + 4 sub          + 6 sub       + 8 sub            + 6 sub          + 8 sub
-                                                                  │
-                                              ┌───────────────────┼───────────────────┐
-                                              │                   │                   │
-                                         Tier-3 cross-cutting (8):               Tier-4 monitoring (4):
-                                         ai-ops-coord, bizops-tracker,           devops-monitor-30min,
-                                         compliance-monitor, founder-bandwidth,  ai-safety-engineer-30min,
-                                         drift-detector, chaos-test-runner,      security-watchdog-30min,
-                                         eval-gate-runner, security-auditor      coaching-quality-reviewer
-                                                                       │
+                              └────────────┬────────────────┘
+                                           │
+   ┌────────────────────────────────────────┼─────────────────────────────────────────┐
+   │       Aiw-Org (internal org)             │   Coach-Agents (internal coaching)     │
+   │   github.com/Ai-Whisperers/aiw-org       │   github.com/Ai-Whisperers/coach-agents │
+   ├────────────────────────────────────────┼─────────────────────────────────────────┤
+   │   6 Tier-1 dept dirs + governance:        │   People dept lead (kiki-coach) lives  │
+   │   01-operations/      (9 agents)         │   here. Plus 14 coach-* cron agents.   │
+   │   02-finance-legal/   (6 agents)         │                                         │
+   │   03-sales-growth/    (9 agents)         │   kiki-coach/      (lead + charter)    │
+   │   04-engineering/     (14 agents)        │   coach-ivan/      (self-coaching)     │
+   │   05-research-edu/    (4 agents)         │   coach-kiki/      (self-coaching)     │
+   │   06-people-culture/  (1 agent)          │   coach-lead-agents/ (leads coaching)  │
+   │   board-of-directors/                    │   coach-lead-finder/ (lead finder)    │
+   │                                         │   coach-onboarding/ (WhatsApp poller)  │
+   │   Leads:                                │   coach-renewal-manager/                │
+   │   management-coordinator (Ivan)          │   coach-roi-tracker/                     │
+   │   finance-controller (Ivan)              │   coach-org/        (quarterly org)    │
+   │   sales-pipeline (Ivan)                  │   coach-practitioner/ (planned)        │
+   │   engineering-roster (Kiki)              │   coach-cohort-facilitator/ (planned)  │
+   │   research-tracker (Ivan)                │   coach-conversion-agent/ (planned)    │
+   │   people-hr (Ivan+Kiki)                  │   coaching-content-curator/             │
+   │                                         │   coaching-quality-reviewer/ (every 30m)│
+   │   Cross-cutting:                        │   coaching-research-intelligence/       │
+   │   + ai-ops-coordinator, bizops-tracker, │                                         │
+   │     compliance-monitor,                  │   13 cron jobs:                         │
+   │     founder-bandwidth-watchdog,         │   aiw-coach-ivan, aiw-coach-kiki,        │
+   │     source-curator, okr-tracker,        │   aiw-coach-org, aiw-coach-lead-agents,  │
+   │     procurement-tracker                  │   aiw-coach-lead-finder,                │
+   │   + ai-safety-engineer, devops-monitor,  │   aiw-coach-renewal-manager,            │
+   │     security-watchdog, qa-automation,    │   aiw-coach-roi-tracker,                │
+   │     chaos-test-runner, drift-detector,  │   aiw-coaching-content-curator,          │
+   │     eval-gate-runner, security-auditor   │   aiw-coaching-quality-reviewer,         │
+   │                                         │   aiw-coaching-research-intelligence,    │
+   │   Special:                              │   aiw-kiki-coach-weekly,                │
+   │   + funding-coordinator (FADA thesis)   │   aiw-coach-onboarding-poller,           │
+   │     lives in 02-finance-legal/          │   aiw-coaching-monitor-30min             │
+   │                                         │                                         │
+   │   90+ cron jobs                          │                                         │
+   └────────────────────────────────────────┴─────────────────────────────────────────┘
+                                                       │
+                                                       ▼
+                                          ┌──────────────────────────────────┐
+                                          │ Growth-Coaching (customer product)│
+                                          │ github.com/Ai-Whisperers/growth-coaching │
+                                          │ 6 distributable packages            │
+                                          └──────────────────────────────────┘
+```
                                                           Tier-5 Coaching (14):
                                                           coach-ivan, coach-kiki, coach-org,
                                                           coach-lead-agents, coach-lead-finder,
@@ -88,7 +116,7 @@
 - **Cadence**: Biweekly
 - **State file**: `state/coord.json` (schema: `coord.schema.json`)
 - **Mission**: Run day-to-day of the org; set cadence; clear blockers; surface escalations.
-- **Agents (8)**: management-coordinator (lead) + bizops-tracker + ai-ops-coordinator + compliance-monitor + founder-bandwidth-watchdog + source-curator + okr-tracker + procurement-tracker
+- **Agents (9 in `01-operations/`)**: `management-coordinator/` (lead) + `bizops-tracker/` + `ai-ops-coordinator/` + `ai-ops-coordinator-daily/` + `compliance-monitor/` + `founder-bandwidth-watchdog/` + `source-curator/` + `okr-tracker/` + `procurement-tracker/`
 - **Roles (8)**: Operations Lead, Repo Steward, Asset Tracker, Vendor Coordinator, Compliance Watchdog, Watchdog Engineer, BizOps Specialist, COO (T3)
 
 ### 3.2 Department 02 — Finance & Legal
@@ -98,7 +126,8 @@
 - **Cadence**: Weekly close + daily analyst
 - **State files**: `state/finance.json`, `state/analyst.json`
 - **Mission**: Own all financial decisions, sign contracts above threshold, monthly close, runway.
-- **Agents (6)**: finance-controller + business-analyst + accounting-automation + tax-receipt-tracker + funding-coordinator + bizops-tracker (shared)
+- **Agents (6 in `02-finance-legal/`)**: `finance-controller/` + `business-analyst/` + `accounting-automation/` + `accounting-automation-daily/` + `tax-receipt-tracker/` + `funding-coordinator/`
+- **Shared with Operations**: `bizops-tracker/` lives in `01-operations/` (cross-cutting analytics)
 - **Roles (14)**: CFO/Controller, Accountant, Bookkeeper, AP/AR Specialists, Procurement Officer, Legal Counsel, Compliance Officer, Tax Specialist, Contract Drafter, Payroll Specialist, Treasurer, FP&A Analyst, Pricing Analyst
 
 ### 3.3 Department 03 — Sales & Growth
@@ -106,8 +135,9 @@
 - **Lead agent**: `sales-pipeline` (daily 12:00 PYT, twice 13:00 + 16:00 UTC)
 - **Cadence**: Daily
 - **State file**: `state/sales.json`
-- **Mission**: Own revenue. Triage inbound, run discovery (SPIN/MEDDIC), close deals, expand accounts.
-- **Agents (8)**: sales-pipeline + lead-enrichment + proposal-drafter + revops-pipeline-analyzer + marketing-content-producer + multimedia-producer + coach-lead-finder (T5) + coach-renewal-manager (T5)
+- **Mission**: Own revenue. Triage inbound, run discovery (SPIN/MED), close deals, expand accounts.
+- **Agents (9 in `03-sales-growth/`)**: `sales-pipeline/` + `lead-enrichment/` + `lead-enrichment-daily/` + `proposal-drafter/` + `proposal-drafter-on-demand/` + `revops-pipeline-analyzer/` + `revops-pipeline-analyzer-daily/` + `marketing-content-producer/` + `multimedia-producer/`
+- **Moved to coach-agents**: `coach-lead-finder/` + `coach-renewal-manager/` (coaching agents, not dept agents)
 - **Roles (18)**: CRO, SDR, BDR, AE, Sales Engineer, CSM, Proposal Writer, Marketing Manager, Content Marketing, Performance Marketing, SEO, Email Marketing, Social Media Manager, Community Manager, Brand Manager, PMM, Growth Marketer, Channel Sales Manager
 
 ### 3.4 Department 04 — Engineering & Development
@@ -116,7 +146,8 @@
 - **Cadence**: Biweekly
 - **State file**: `state/engineering.json`
 - **Mission**: Own all technical decisions. Schema/infra PR signoff. Production health + Kiki's bandwidth visibility.
-- **Agents (10)**: engineering-roster + ai-safety-engineer + devops-monitor + security-watchdog + qa-automation-runner + scope-intake + delivery-tracker + feasibility-gate + chaos-test-runner + drift-detector
+- **Agents (14 in `04-engineering/`)**: `engineering-roster/` + `ai-safety-engineer/` + `ai-safety-engineer-30min/` + `devops-monitor/` + `devops-monitor-30min/` + `security-watchdog/` + `security-watchdog-30min/` + `qa-automation-runner/` + `qa-automation-on-pr/` + `chaos-test-runner/` + `delivery-tracker/` + `drift-detector/` + `eval-gate-runner/` + `security-auditor/`
+- **Planned (not yet built)**: `scope-intake/` + `feasibility-gate/`
 - **Roles (24)**: CTO, Eng Manager, Frontend/Backend/Full-stack/Mobile, DevOps/SRE, QA, Security, ML, Data, Solutions Architect, Tech Writer, Eng PM, Platform, Release Manager, DBA, Network, UI/UX Designer, Product Designer, Build/Release Eng, Embedded Systems, AI Safety Engineer
 
 ### 3.5 Department 05 — Research & Education
@@ -125,16 +156,20 @@
 - **Cadence**: Weekly
 - **State file**: `state/research.json`
 - **Mission**: Knowledge backbone. Thesis + publications pipeline. Course production. Source-material curation.
-- **Agents (7)**: research-tracker + thesis-tracker + citation-checker + course-producer + funding-coordinator + okr-tracker + source-curator
+- **Agents (4 in `05-research-education/`)**: `research-tracker/` + `thesis-tracker/` + `citation-checker/` + `course-producer/`
+- **Shared cross-cutting (in Operations)**: `source-curator/` (in `01-operations/`), `okr-tracker/` (in `01-operations/`)
+- **Note**: `funding-coordinator/` lives in `02-finance-legal/` (FADA thesis funding apps), not research
 - **Roles (12)**: Research Lead, Researcher, Writer/Editor, Academic Liaison, Citation Specialist, Course Designer, Course Producer, Instructional Designer, SME, Research Engineer, IP/Patent Specialist, Publication Coordinator
 
 ### 3.6 Department 06 — People & Culture
 - **Head**: Ivan + Kiki (co-owned)
-- **Lead agent**: `kiki-coach` (Fri 17:00 PYT)
+- **Lead agent**: `kiki-coach` (Fri 17:00 PYT) — *lives in sister repo [coach-agents](https://github.com/Ai-Whisperers/coach-agents)*
 - **Cadence**: Weekly
 - **State files**: `state/kiki.json`, `state/kiki-prep.json`, `state/people.json`
 - **Mission**: Coaching product (Kiki is Ivan's client AND the coach agent). People ops when first FTE hires.
-- **Agents (10)**: kiki-coach + people-hr + coach-ivan + coach-kiki + coach-org + coach-lead-agents + coach-onboarding + coach-practitioner (planned) + coach-cohort-facilitator (planned) + coaching-content-curator + coaching-research-intelligence + board-of-directors
+- **Agents (1 in aiw-org + 14 in coach-agents)**: 
+  - In aiw-org: `06-people-culture/people-hr/` + `board-of-directors/`
+  - In [coach-agents](https://github.com/Ai-Whisperers/coach-agents): `kiki-coach/` (lead) + `coach-ivan/`, `coach-kiki/`, `coach-org/`, `coach-lead-agents/`, `coach-lead-finder/`, `coach-onboarding/`, `coach-renewal-manager/`, `coach-roi-tracker/`, `coach-practitioner/` (planned), `coach-cohort-facilitator/` (planned), `coach-conversion-agent/` (planned), `coaching-content-curator/`, `coaching-quality-reviewer/`, `coaching-research-intelligence/`
 - **Roles (8)**: Head of People, Recruiter, Onboarding Specialist, Performance Coach, Recognition Lead, Compensation Specialist, People Ops Specialist, L&D Manager
 
 ---
@@ -250,26 +285,40 @@ These write `state/org-state.json` every 30 minutes. The only agents whose lates
 | 35 | security-watchdog-30min | `*/30 * * * *` | `outbox/<date>.md` |
 | 36 | coaching-quality-reviewer | `*/30 * * * *` | `outbox/<date>.<HHMM>.md` |
 
-### 7.5 Tier 5 — Coaching (14)
+### 7.5 Tier 5 — Coaching (14, lives in sister repo)
+
+> **All Tier-5 coaching agents moved to [`Ai-Whisperers/coach-agents`](https://github.com/Ai-Whisperers/coach-agents)**
+> (split 2026-08-31). Local worktree: `/opt/data/coach-agents/`.
 
 | # | Agent | Dept | Cron |
 |---|---|---|---|
 | 37 | coach-ivan | people | `aiw-coach-ivan` 0 21 * * 0 |
 | 38 | coach-kiki | people | `aiw-coach-kiki` 0 21 * * 5 |
 | 39 | coach-org | people | `aiw-coach-org` 0 0 1 1,4,7,10 * (quarterly) |
-| 40 | coach-lead-agents | operations | `aiw-coach-lead-agents` 0 22 1 * * |
+| 40 | coach-lead-agents | people | `aiw-coach-lead-agents` 0 22 1 * * |
 | 41 | coach-lead-finder | sales | `aiw-coach-lead-finder` 0 13 * * 3 |
 | 42 | coach-onboarding | people | live poller `aiw-coach-onboarding-poller` */5m |
 | 43 | coach-practitioner | people | planned, no cron |
 | 44 | coach-cohort-facilitator | people | planned, no cron |
 | 45 | coach-conversion-agent | sales | planned, no cron |
 | 46 | coach-renewal-manager | sales | `aiw-coach-renewal-manager` 0 9 1 * * |
-| 47 | coach-roi-tracker | operations | `aiw-coach-roi-tracker` 0 16 * * 5 |
+| 47 | coach-roi-tracker | people | `aiw-coach-roi-tracker` 0 16 * * 5 |
 | 48 | coaching-content-curator | people | `aiw-coaching-content-curator` 0 14 * * 1 |
-| 49 | coaching-research-intelligence | research | `aiw-coaching-research-intelligence` 0 13 * * 3 |
-| 50 | board-of-directors | operations | `aiw-board-of-directors-quarterly` 0 14 1 */3 * |
+| 49 | coaching-research-intelligence | people | `aiw-coaching-research-intelligence` 0 13 * * 3 |
+| 50 | board-of-directors | governance | `aiw-board-of-directors-quarterly` 0 14 1 */3 * |
 
-> **Note**: Tier-5 has 14 named; roster rounds to 47 because 3 are "planned, no cron."
+> **Note**: roster rounds to 47 because 3 are "planned, no cron." `board-of-directors` is
+> governance (not a Tier-5 coaching agent) — kept at aiw-org root.
+
+---
+
+### 7.6 Governance (not a charter dept)
+
+| # | Agent | Path | Cron |
+|---|---|---|---|
+| 51 | board-of-directors | `/opt/data/agents/board-of-directors/` | `aiw-board-of-directors-quarterly` 0 14 1 */3 * |
+
+> Reports to Ivan. Quarterly executive brief. Lives at aiw-org root (not under any Tier-1 dept).
 
 ---
 
@@ -797,7 +846,7 @@ sales/         lead-enrichment, marketing-content-producer,
 
 ---
 
-## 16. Active Cron Jobs (92 after dedup)
+## 16. Active Cron Jobs (113 active after dedup)
 
 ### Tier-1 lead agents (7 cron jobs)
 | Agent | Cron job | Schedule |
@@ -845,7 +894,8 @@ sales/         lead-enrichment, marketing-content-producer,
 - aiw-security-watchdog-30min
 - aiw-coaching-quality-reviewer
 
-### Tier-5 coaching (8 cron jobs)
+### Tier-5 coaching (13 cron jobs, lives in [coach-agents](https://github.com/Ai-Whisperers/coach-agents))
+
 | Agent | Cron job | Schedule |
 |---|---|---|
 | coach-ivan | aiw-coach-ivan | 0 21 * * 0 |
@@ -855,9 +905,14 @@ sales/         lead-enrichment, marketing-content-producer,
 | coach-lead-finder | aiw-coach-lead-finder | 0 13 * * 3 |
 | coach-renewal-manager | aiw-coach-renewal-manager | 0 9 1 * * |
 | coach-roi-tracker | aiw-coach-roi-tracker | 0 16 * * 5 |
+| coach-onboarding-poller | aiw-coach-onboarding-poller | */5 * * * * |
 | coaching-content-curator | aiw-coaching-content-curator | 0 14 * * 1 |
+| coaching-quality-reviewer | aiw-coaching-quality-reviewer | */30 * * * * |
 | coaching-research-intelligence | aiw-coaching-research-intelligence | 0 13 * * 3 |
-| board-of-directors | aiw-board-of-directors-quarterly | 0 14 1 */3 * |
+| kiki-coach-weekly | aiw-kiki-coach-weekly | 0 21 * * 5 |
+| coaching-monitor-30min | aiw-coaching-monitor-30min | every 30m |
+
+> Note: `board-of-directors` is governance (not a Tier-5 coaching agent) — see section 7.6.
 
 ### Infra & monitoring (16 cron jobs)
 | Cron job | Schedule | Purpose |
@@ -931,28 +986,34 @@ sales/         lead-enrichment, marketing-content-producer,
 
 ## 19. Cross-References
 
-### Local files
-- `[ORG-AGENTS.md](../ORG-AGENTS.md) (handoff matrix)` — full handoff matrix (47 agents, 9 schemas)
-- `[ROLLBACK-PLAYBOOK.md](../ROLLBACK-PLAYBOOK.md)` — 16.2 KB
-- `[DEFERRED-AGENTS.md](../DEFERRED-AGENTS.md)` — deferred agent triggers
-- `[DEFERRED-ROLES.md](../DEFERRED-ROLES.md)` — deferred role triggers
-- `[AGENT-NAMES-V2.md](AGENT-NAMES-V2.md) (legacy portmanteau framework)` — portmanteau legacy layer
-- `[NAMING-CONVENTION-ANALYSIS.md](NAMING-CONVENTION-ANALYSIS.md)` — naming rationale
-- `[ROLES-INVENTORY.md](https://github.com/Ai-Whisperers/growth-coaching/blob/master/ROLES-INVENTORY.md) (137-role catalog)` — 137 roles catalog
-- `[ROADMAP-DEPT-EXPANSION.md](https://github.com/Ai-Whisperers/growth-coaching/blob/master/ROADMAP-DEPT-EXPANSION.md)` — Phase 0-4 build order
-- `[PHASE-17..25-*.md](https://github.com/Ai-Whisperers/growth-coaching/tree/master/) (session logs)` — session upgrade logs
-- `[MASTER-UPGRADE-CHANGELOG.md](https://github.com/Ai-Whisperers/growth-coaching/blob/master/MASTER-UPGRADE-CHANGELOG.md)` — full changelog
-- `[STATE-AUDIT-2026-08-14.md](https://github.com/Ai-Whisperers/growth-coaching/blob/master/STATE-AUDIT-2026-08-14.md)` — state-file audit
-- `[12-FACTOR-AUDIT.md](https://github.com/Ai-Whisperers/growth-coaching/blob/master/12-FACTOR-AUDIT.md)` — Factor compliance
-- `[departments/01..06-*.md](../departments/)` — 6 dept charters
-- `[packages/<dept>/agents/<agent>/PROMPT.md](https://github.com/Ai-Whisperers/growth-coaching/tree/master/packages) (37 shipped)` — 37 shipped agents
-- `runtime `cron/jobs.json` (92 jobs after dedup; lives in `cron/` on the deployment)` — 92 cron jobs
-- `runtime state files in `state/` on the deployment` — 9 live state files
+### AIW repos (post 2026-08-31 split)
+- **`aiw-org`** ([github.com/Ai-Whisperers/aiw-org](https://github.com/Ai-Whisperers/aiw-org)) — internal AIW org layer: 6 Tier-1 dept dirs + governance, 34 production agents, DEMIURGE framework, 81 tickets, 25 scripts/tests
+- **`coach-agents`** ([github.com/Ai-Whisperers/coach-agents](https://github.com/Ai-Whisperers/coach-agents)) — internal coaching product: 15 agents (kiki-coach + 14 coach-* cron agents)
+- **`growth-coaching`** ([github.com/Ai-Whisperers/growth-coaching](https://github.com/Ai-Whisperers/growth-coaching)) — customer-facing GROW coaching product: 6 distributable packages
+- ~146 repos total across the org
 
-### Repos
-- **agent-infra**: `github.com/Ai-Whisperers/agent-infra` (this doc + analysis + handoff)
-- **growth-coaching**: `github.com/Ai-Whisperers/growth-coaching` (DEMIURGE branch = canonical agent source)
-- 146 repos in total across both
+### Sister docs (cross-repo)
+- [`ROLES-INVENTORY.md`](https://github.com/Ai-Whisperers/growth-coaching/blob/master/ROLES-INVENTORY.md) — 137-role catalog (in growth-coaching)
+- [`ROADMAP-DEPT-EXPANSION.md`](https://github.com/Ai-Whisperers/growth-coaching/blob/master/ROADMAP-DEPT-EXPANSION.md) — Phase 0-4 build order
+- [`PHASE-17..25-*.md`](https://github.com/Ai-Whisperers/growth-coaching/tree/master/) — session upgrade logs
+- [`MASTER-UPGRADE-CHANGELOG.md`](https://github.com/Ai-Whisperers/growth-coaching/blob/master/MASTER-UPGRADE-CHANGELOG.md) — full changelog
+- [`STATE-AUDIT-2026-08-14.md`](https://github.com/Ai-Whisperers/growth-coaching/blob/master/STATE-AUDIT-2026-08-14.md) — state-file audit
+- [`12-FACTOR-AUDIT.md`](https://github.com/Ai-Whisperers/growth-coaching/blob/master/12-FACTOR-AUDIT.md) — Factor compliance
+
+### Local files (in this repo)
+- [ORG-AGENTS.md](../ORG-AGENTS.md) — full handoff matrix
+- [ROLLBACK-PLAYBOOK.md](../playbooks/ROLLBACK-PLAYBOOK.md)
+- [DEFERRED-AGENTS.md](../DEFERRED-AGENTS.md) — deferred agent triggers
+- [DEFERRED-ROLES.md](../DEFERRED-ROLES.md) — deferred role triggers
+- [AGENT-NAMES-V2.md](AGENT-NAMES-V2.md) — portmanteau legacy layer
+- [NAMING-CONVENTION-ANALYSIS.md](NAMING-CONVENTION-ANALYSIS.md) — naming rationale
+- [departments/01..06-*.md](../departments/) — 6 dept charters
+- `packages/` (in growth-coaching) — 37 shipped distributable agents
+- `runtime cron/jobs.json` (113 jobs; canonical on the deployment)
+- `runtime state/` (9 live state files + mirrors)
+
+### Related repos
+- [ORGANIGRAM.md](ORGANIGRAM.md) — companion organigram with full dept→role→agent tree
 
 ---
 
