@@ -1,42 +1,63 @@
 # ============================================================
-# AIW-ORG .GITIGNORE
+# AIW-ORG .GITIGNORE (L2.3 — fixed 2026-09-01)
 # ============================================================
 # Runtime artifacts that change every cron tick:
 # We don't track these in git. The canonical state lives in:
 #   - /opt/data/state/         (live runtime)
 #   - state-versioned repo     (auto-snapshot every hour)
 #   - agent's PROMPT.md body   (the agent definition)
+#
+# L2.3 fix: replaced `*/X` with `**/X` for nested-dir matching
+# Old:  */outbox/*.md      → only matched files directly in X/outbox/*.md
+# New:  **/outbox/*.md     → matches files in any nested X/outbox/*.md
+# git's `*/` only matches a SINGLE directory level; `**/` matches any depth
 
-# Per-agent runtime output
-*/outbox/*.md
-*/outbox/.tick-*
-*/outbox/.scan_snapshot.json
-*/outbox/.chaos_test_last_run
-*/outbox/.last-tick.json*
-*/outbox/_last-tick.json*
-*/monitor-notes/*.md
-*/monitor-notes/.coord-mirror-pre-*.bak
-*/monitor-notes/.funding-mirror-pre-*.bak
-*/monitor-notes/*.pre-tick-*.bak
+# Per-agent runtime output (outbox at any depth)
+**/outbox/*.md
+**/outbox/*.bak
+**/outbox/.tick-*
+**/outbox/.scan_snapshot.json
+**/outbox/.chaos_test_last_run
+**/outbox/.last-tick.json*
+**/outbox/_last-tick.json*
+**/outbox/.daily.bak
+
+# Per-agent monitor notes (at any depth)
+**/monitor-notes/*.md
+**/monitor-notes/.coord-mirror-pre-*.bak
+**/monitor-notes/.funding-mirror-pre-*.bak
+**/monitor-notes/*.pre-tick-*.bak
 
 # Per-agent runtime state inside agent dirs
-*/state/state.json
-*/state/state.jsonl
+**/state/state.json
+**/state/state.jsonl
+**/state/*.bak
 
-# Live state backups
+# Live state backups (root-level .pre-sqlite.bak etc)
 *.pre-sqlite.bak
 *.pre-fire*
 
-# Runtime tick state
+# Runtime tick state (anywhere)
 *.chaos.last_run
+
+# State mirrors
 .state-mirror-pre-*
 
 # State history (auto-snapshotted to state-versioned repo)
 state/history/
+state/snapshots/
 state/org-state.json.bak
+state/coaching-customers/
 state/*.mirror-pre-*.bak
 state/*.pre-*.bak
-state/coaching-customers/.pre-*.bak
+state/*.bak
+
+# Env files (anywhere — but not aiw-org's own .env.example files)
+.env
+.env.*
+!**/.env.example
+!**/.env.sample
+!**/.envrc
 
 # OS / Editor
 .DS_Store
@@ -49,3 +70,12 @@ Thumbs.db
 # Python
 __pycache__/
 *.pyc
+
+# Node
+node_modules/
+.next/
+dist/
+
+# OS-specific
+.DS_Store
+Thumbs.db
