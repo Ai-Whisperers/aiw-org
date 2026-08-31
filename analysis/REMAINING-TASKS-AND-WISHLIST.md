@@ -402,3 +402,19 @@ These auto-trigger as the org hits size:
 - `github.com/Ai-Whisperers/growth-coaching/tree/epic/DEMIURGE` — DEMIURGE branch (now merged into main)
 - `github.com/Ai-Whisperers/growth-coaching/blob/main/ROADMAP-DEPT-EXPANSION.md` — DEMIURGE roadmap
 - `github.com/Ai-Whisperers/growth-coaching/blob/main/tickets/` — 81 ticket dirs
+
+
+## Updates 2026-09-01 (Layer 1 AI precheck)
+
+The following actions were completed by AI autonomous precheck:
+
+- ✅ **validator_e164_regression incident closed** (code already had fix; `^\\+[1-9]\\d{1,14}$`)
+- ✅ **validator_area_case_inversion incident closed** (code already uses `.toLowerCase().trim()`)
+- ✅ **mcp_parking_storm incident closed** (hermes-agent pins `mcp==1.28.1` already, effectively `<2`)
+- 🔄 **Layer 1 Task 1.6 (wrangler restart) — AWAITING IVAN DECISION** (resurrect/archive/defer)
+- ⏸ **Layer 1 Task 1.5 (LiteLLM topup) — AWAITING OPERATOR** (web console action)
+- 🔒 **P0 secret leaks (5 items, ~75 min operator work) — IN BATCH A runbook**
+- ✅ **5 .env files chmod'd to 600** (4 done by AI; 1 needs sudo as root)
+- ✅ **Baseline metrics captured**: see `analysis/BASELINE-METRICS-2026-09-01.json`
+
+State updated: `state/engineering.json` (3 incidents closed), `state/coord.json` (wrangler note appended).

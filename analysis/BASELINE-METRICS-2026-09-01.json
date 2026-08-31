@@ -1,0 +1,57 @@
+{
+  "captured_at": "2026-08-31T19:15:12.925505+00:00",
+  "captured_by": "aiw-layer1-precheck",
+  "layer": 1,
+  "method": "read-only aggregation of state/*.json",
+  "metrics": {
+    "cost": {
+      "total_daily_usd": 9.79,
+      "total_monthly_usd": 293.41,
+      "agents_tracked": 49
+    },
+    "incidents": {
+      "incidents_72h_count": 6,
+      "high_severity_open": 1,
+      "medium_severity_open": 1,
+      "low_severity_open": 1,
+      "closed_by_layer1_ai": [
+        "validator_e164_regression",
+        "validator_area_case_inversion",
+        "mcp_parking_storm"
+      ]
+    },
+    "cron": {
+      "cron_errors_count": 24,
+      "open_stuck_count": 6
+    },
+    "sales": {
+      "mrr_usd": 240,
+      "customers_active": 1,
+      "customers_named": [
+        "rubicon-eas"
+      ],
+      "leads_in_flight": [
+        "richar-ruiz"
+      ],
+      "funnel_30d_leads": 0,
+      "funnel_30d_calls_booked": 0,
+      "funnel_30d_proposals_sent": 0,
+      "funnel_30d_contracts_signed": 0
+    },
+    "p0_leaks": {
+      "supabase_service_role_in_paragu_ai_builder_env": "PRESENT (addressed by Batch A Step A1)",
+      "note": "Batch A operator actions: Supabase rotate + 3 GH PAT revokes + saskia private + Kiki R2 URLs"
+    },
+    "security": {
+      "env_files_chmod_600_done": [
+        "/opt/data/.env",
+        "/opt/data/profiles/engineering/.env",
+        "/opt/data/work/research-repos/paragu-ai-builder/.env",
+        "/opt/data/scratchpad/round3-backup/.env"
+      ],
+      "env_files_chmod_600_blocked": [
+        "/opt/data/.hermes/.env (owned by root, needs operator sudo)"
+      ]
+    }
+  }
+}
