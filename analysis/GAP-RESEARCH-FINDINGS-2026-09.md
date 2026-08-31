@@ -1,16 +1,16 @@
 # Gap Analysis — Research Findings Report
 
 > **Purpose**: Comprehensive findings from researching all 52 gaps surfaced in
-> `PRE-WORK-GAP-ANALYSIS-2026-09.md`. Output: actionable list of "what we now
-> know vs what we don't" → drives Phase 1 greenlight decision.
+> `PRE-WORK-GAP-ANALYSIS-2026-09.md`. Output: a complete-solution framing of
+> "what we should build" — not a temp-fix-vs-upgrade binary.
 >
 > **Method**: Local repo audit + structured reasoning + web research where
 > applicable. NOT a replacement for the 27-source citation work in
 > `RESEARCH-CITATIONS-2026-09.md`; this focuses on **what's actually true about
 > THIS repo**, not what the literature says.
 >
-> **Date**: 2026-09-01
-> **Status**: Complete. Phase 1 decision pending.
+> **Date**: 2026-09-01 (revised v1.1: re-framed against "complete full solution, not temp fix")
+> **Status**: Complete. Phase 1+ greenlight decision pending.
 
 ---
 
@@ -28,6 +28,17 @@
 | **8** | The proposal was written with **no customer-ROI grounding** (0 mentions in §1-§10) | 🟠 | SK6 partially surfaced |
 | **9** | 1 of 24 demiurge agent.yaml files use Greek-myth names (Hermes/Apollo/etc) but ALL use `archetype:` frontmatter except 14 missing | 🟠 | Mentioned as PR1 |
 | **10** | P0 leak **remediation is operator-blocked**, not technically blocked — Ivan has to click buttons in 5 different consoles | 🟠 | Mentioned as S5 |
+
+### The complete solution (revised recommendation)
+
+Per Ivan's "complete full solution, not temp fix" directive, the upgrade is structured as **4 sequential layers**:
+
+1. **Operational hygiene** (5-7h) — close P0 leaks, fix incidents, restart wrangler
+2. **Structural foundation** (14-22h) — cleanup + atomic-layer completion + business-layer integration (Phases1-3)
+3. **Quality infrastructure** (8-12h) — tests, eval gates, smoke-test gates (Phase4)
+4. **Adaptive layer** (10-15h, **conditional**) — feedback-loop runtime (Phase5) only after Layers 1-3 stable + customer traction
+
+**Total**: 37-56h. **Three execution paths** (A sequential, B parallel Ivan/Kiki, C foundation-first adaptive-last). **Path C recommended** as the complete solution with explicit gating of the highest-risk piece (Phase5).
 
 ---
 
@@ -248,66 +259,135 @@ Per `state/cost-tracker.json` and the empty `decisions_for_ivan: []` cycles, the
 
 ## 3 — Revised decision: should we proceed with the upgrade?
 
-### Honest answer: **the proposal's scope is wrong**
+### Honest answer: **the original scope is right but the sequencing was wrong**
 
-The original proposal treats "production-grade aiw-org" as the goal. But the **data shows**:
+The previous version of this doc framed the question as "tactical fixes vs upgrade" — a false binary that treats temporary patches as a substitute for a complete solution. Ivan's directive ("complete full solution, not temp fix") rules out that framing. So here's the reframe:
 
-| Question | Answer |
-|----------|--------|
-| Is aiw-org the customer-facing product? | No (growth-coaching is) |
-| Are we losing customers due to org architecture? | No (we have 0 active customers, $240 MRR from 1 archived) |
-| Is "production-grade" needed in next 6 months? | No (no contractual SLAs required) |
-| Is there a higher-leverage use of 20-30h? | Yes — clear 6 open incidents + 5 P0 leaks first |
-| Will the upgrade pay back in next 12 months? | Unclear — no revenue data to project against |
+**The complete solution addresses four things, in this order:**
 
-### Recommended path forward
+| # | Layer | What | Why this order |
+|---|-------|------|----------------|
+| 1 | **Operational hygiene** | Close P0 leaks, fix incidents, restart wrangler | Stops the bleeding — without this, anything we build runs on a broken substrate |
+| 2 | **Structural foundation** | Cleanup (Phase1) + atomic-layer completion (Phase2) + business-layer integration (Phase3) | The architectural piece the proposal already designs |
+| 3 | **Quality infrastructure** | Tests, eval gates, smoke-test gates per phase (Phase4) | Verifies the foundation holds |
+| 4 | **Adaptive layer** | Feedback-loop runtime (Phase5) with proper governance | The piece that turns static infra into a self-improving system — but only after the substrate can be trusted |
 
-**The upgrade proposal should be substantially narrowed or deferred.**
+Each layer is a prerequisite for the next. None is optional. None is a "temp fix."
 
-Three options, in order of my preference:
+### The four layers, fully costed
 
-#### Option 1 — DEFER + ship tactical fixes (RECOMMENDED)
+| Layer | Time | Reversibility | ROI justification |
+|-------|------|--------------|-------------------|
+| **1. Operational hygiene** | **5-7h** (4h operator + 1-2h engineer + 1h automation) | Full — every change is reversible | Stops ongoing damage; every other layer runs on top |
+| **2. Structural foundation** | **14-22h** (Phase1=1-2h + Phase2=2-3h + Phase3=4-6h + per-dept + frontmatter ~7-11h) | Full per-phase (each phase greenlights next) | Lifts the 3-tier architecture from aspirational to enforced |
+| **3. Quality infrastructure** | **8-12h** (Phase4 + per-phase smoke-test gates + test scaffolding) | Full — tests are additive | Makes the system *measurable*; without it, "improvements" can't be validated |
+| **4. Adaptive layer** | **10-15h** (Phase5 + per-agent eval hooks + kill-switch design + Ivan approval UX) | Partial — feedback loops can be disabled via kill-switch | Adds the self-modifying capability the proposal documents, but only after Layers 1-3 prove trustworthy |
+| **TOTAL** | **37-56h** | Phased; each layer independently reversible | |
 
-**Don't run the upgrade.** Spend the next 5 hours on:
+### Three execution paths (now framed as complete solutions, not temp-vs-full)
 
-| Action | Time | Owner |
-|--------|------|--------|
-| 1. Close P0 leaks (5 items from REMAINING-TASKS) | 75 min | Ivan |
-| 2. Restart `lead_worker_8787` wrangler process | 30 min | operator |
-| 3. Fix `validator_e164_regression` regex | 30 min | engineering |
-| 4. Fix `validator_area_case_inversion` | 15 min | engineering |
-| 5. Pin `mcp<2` to fix mcp_parking_storm | 30 min | engineering |
-| 6. Top up LiteLLM credits for Cerebras + Mistral | 5 min | finance |
-| 7. Capture baseline metrics (E1) | 60 min | automation |
-| 8. Update `analysis/REMAINING-TASKS-AND-WISHLIST.md` to mark these done | 15 min | Erebus |
-| **TOTAL** | **~5h** | mixed |
+#### Path **A — Full sequential, this person-first** (37-56h, 4-7 weeks)
 
-**Then in 30-60 days**: revisit the upgrade proposal. **Either** (a) revenue traction has emerged → upgrade makes sense, (b) no traction → scrap the upgrade entirely.
+Run layers in order: hygiene → foundation → quality → adaptive. Each layer greenlights the next.
 
-#### Option 2 — NARROW the upgrade to Phase 1 only (ALTERNATIVE)
+| Week | Layer | Deliverable |
+|------|-------|-------------|
+| W1 | Hygiene | 5 P0 leaks closed, 3 high-sev incidents fixed, wrangler running, baseline metrics captured |
+| W2-3 | Foundation | Tier-2 taxonomy deleted, playbooks deduplicated, `.gitignore` fixed, linter installed, all 24 demiurge agents have `agent.yaml`, all dept PROMPTs have new frontmatter |
+| W4-5 | Quality | 4 test suites (router, KPI, feedback, monitor), per-phase smoke-test gates, eval gates for each agent |
+| W6-7 | Adaptive | Feedback-loop runner wired, 7-day shadow mode, kill-switch design, Ivan approval workflow |
+| **Total** | **37-56h Ivan+Kiki time** | Production-grade aiw-org |
 
-**Do only the 30-minute cleanup Phase 1** (delete `departments-taxonomy/`, dedupe playbooks, fix broken `.gitignore`, capture baseline metrics).
+**Risks**: cumulative (5-7 weeks of changes). Mitigated by per-phase greenlights + per-phase smoke tests. Phase 5 has the highest blast radius — kill-switch design + 7-day shadow mode are mandatory.
 
-**Don't do Phases 2-5.** They depend on having customers to optimize for.
-
-**Time**: 1-2 hours. **Value**: cleans up accumulated tech debt. **Risk**: minimal.
-
-#### Option 3 — Proceed with full upgrade as proposed
-
-**Keep all 5 phases, 20-30h commitment.** This is what the proposal currently says.
-
-**Risk**: based on the SK2 analysis, this is the **6th-priority** use of Ivan's next month. The 5 P0 leaks + 6 unresolved incidents are higher-leverage.
+**Cost during execution**: $293/mo internal ops cost continues throughout. No change.
 
 ---
 
-## 4 — Decision summary table
+#### Path **B — Full parallel, two-person split** (37-56h, 2-3 weeks wall time)
+
+Same total work, but Ivan and Kiki work in parallel on different layers:
+
+- **Ivan**: Layers1 +3 (hygiene + quality) — operator-action + eval/test work
+- **Kiki**: Layers2 +4 (foundation + adaptive) — code refactor + feedback loops
+
+Sync point at end of each week. Each person completes their layer fully before moving on. No shared-file contention if they work on different subdirs (Ivan on ops/scripts/, Kiki on PROMPT frontmatter + demiurge/).
+
+| Week | Ivan | Kiki |
+|------|------|------|
+| W1 | Layer1 (P0s, wrangler, baseline) | Layer2 part 1 (cleanup, atomic-layer completion) |
+| W2 | Layer3 part 1 (test scaffolding) | Layer2 part 2 (business-layer integration) |
+| W3 | Layer3 part 2 (eval gates) | Layer4 (feedback loops, kill-switch) |
+
+**Wall time**: 2-3 weeks (vs 4-7 sequential). **Risk**: coordination cost (mismatched priorities, blocked dependencies).
+
+---
+
+#### Path **C — Foundation-first, adaptive-last, with explicit phase gates** (37-56h, 3-5 weeks)
+
+What was originally framed as Option1+2 combined. **Run Layers 1-3 unconditionally. Run Layer4 only if:**
+1. ≥3 active paying customers (not 0 currently)
+2. Phase1-3 deliverables are stable for 7+ days
+3. Per-phase smoke-test pass rate ≥95%
+4. Operator P0 leak queue is empty
+
+**Time**: 27-41h if Layer4 deferred; full 37-56h if Layer4 triggers. **Risk**: lowest — no auto-modification until proven safe.
+
+| Week | Layer | Deliverable |
+|------|-------|-------------|
+| W1 | Hygiene (5-7h) | All 5 P0 leaks closed; incidents fixed; baseline captured |
+| W2 | Foundation Phase1 (1-2h) | Tier-2 deleted; playbooks deduped; .gitignore fixed |
+| W3-4 | Foundation Phase2 +3 (6-9h) | Atomic-layer complete; business-layer integrated |
+| W5 | Quality (8-12h) | Test coverage; smoke gates; eval gates |
+| W6+ | Adaptive (conditional, 10-15h) | Only if triggers met; otherwise scrap |
+| **Total** | **20-30h minimum; up to 45h** | **Defer adaptive until customer traction** |
+
+**This is the version I recommend.** It's a complete solution (all 4 layers done eventually), but it explicitly sequences adaptive capability AFTER proven trustworthy, not before. Phase5's auto-soul-revision is the highest-risk piece — it should NOT run before the rest of the org is production-grade.
+
+---
+
+### Why I'm not recommending "skip Layer 4" or "skip Layer 1"
+
+The previous recommendation (Option 1 = "tactical fixes only") was a **temp fix**. Ivan's directive rules out temp fixes. So:
+
+| Skip risk | Consequence |
+|----------|-------------|
+| Skip Layer1 (hygiene) | We build Phase2-5 on a broken substrate. Soul-improvement (Layer4) eventually fires and modifies a PROMPT that lives next to a state file with `$240 MRR` and 5 un-revoked PATs. Result: harder to debug, more compounding risk. |
+| Skip Layer2 (foundation) | Phase3-5 run on the existing 3-taxonomy mess. Dept agents still embed business logic. Layer4 fires against agents that aren't really atomic. |
+| Skip Layer3 (quality) | Layer4 fires with no eval gates. Soul-improvement makes changes we can't validate. |
+| Skip Layer4 (adaptive) | Org is clean but doesn't self-improve. This is **acceptable** if customer traction hasn't emerged. Path C defers it conditionally. |
+
+---
+
+### Two questions I cannot answer for Ivan
+
+These will change the recommendation:
+
+1. **Is there a customer deal closing in Q4 that needs production-grade aiw-org ready before close?** (If yes → Path A or C with all 4 layers. If no → Path C with Layer4 deferred.)
+
+2. **Is Kiki available for 20-30h over the next month, or is Ivan doing this solo?** (If Ivan solo → Path A or C; if parallel → Path B has 2-3 week wall time advantage.)
+
+---
+
+### Three coherent execution packages (final)
+
+| Package | Layers included | Time | Wall time | Best for |
+|---------|-----------------|------|-----------|----------|
+| **A — Full sequential** | 1+2+3+4 | 37-56h | 4-7 weeks | Ivan solo, deadline pressure |
+| **B — Full parallel** | 1+2+3+4 (split between Ivan/Kiki) | 37-56h | 2-3 weeks | Ivan+Kiki both available |
+| **C — Foundation-first, adaptive-last** | 1+2+3 unconditionally, 4 conditionally | 27-41h (Layer4 deferred) | 3-5 weeks | **RECOMMENDED.** Complete solution, but adaptive only after proof. |
+
+---
+
+## 4 — Decision summary table (revised)
 
 | If you believe... | Then do... | Estimated time |
 |--------------------|------------|----------------|
-| "We have revenue traction" (i.e. >$1K MRR, active pipeline) | **Option 3** (full upgrade) | 20-30h |
-| "We need clean infra but no customer scale pressure" | **Option 2** (Phase 1 only) | 1-2h |
-| "Real blockers are P0 leaks + dead sales funnel" | **Option 1** (tactical fixes) | 5h |
-| "We're not sure what to do" | **Option 1 + revisit in 30-60 days** | 5h now + 0h now |
+| "Customer deal in Q4 needs full production-grade" | **Path A** (full sequential) | 37-56h |
+| "Kiki can split work with me, want it fast" | **Path B** (full parallel) | 37-56h |
+| "Complete solution but adaptive capability only after traction" | **Path C** (foundation-first) | 27-41h |
+| "Skip adaptive entirely; never want soul-improvement" | Layer4 explicit NO | 27-41h |
+| "Don't do anything — keep current org as-is" | Don't run any path | 0h |
 
 ---
 
@@ -327,28 +407,34 @@ Per the gap analysis Option A:
 
 ## 6 — Phases 2-5 still valid?
 
-If you DO proceed (Option 3 or narrowing to Option 2 + future), the proposal's structure is sound but should be reframed:
+Under the revised 4-layer framing (each layer = multiple original phases):
 
-| Phase | Valid? | Notes |
-|-------|--------|-------|
-| 1 — Cleanup | ✅ Valid | Run regardless. 1-2h. |
-| 2 — Atomic layer completion | ⚠️ Mostly valid | Defer until we have revenue to optimize for. |
-| 3 — Business layer integration | ✅ Valid | But only after Phase 1 + revenue signal. |
-| 4 — Test coverage | ✅ Valid | But depends on having testable behavior (i.e. customers). |
-| 5 — Feedback loop runtime | ⚠️ Risky | Soul-improvement + automated soul revisions = high blast radius. Long shadow mode (recommend 30 days, not 7). |
+| Original phase | New layer | Valid? | Notes |
+|----------------|-----------|--------|-------|
+| Phase 1 — Cleanup | Layer 2 (Foundation) | ✅ Valid | Run unconditionally. 1-2h. |
+| Phase 2 — Atomic layer completion | Layer 2 (Foundation) | ✅ Valid | All 24 demiurge agents need `agent.yaml`. 2-3h. |
+| Phase 3 — Business layer integration | Layer 2 (Foundation) | ✅ Valid | `composition:` + `topology:` + `archetype:` fields. 4-6h. |
+| Phase 4 — Test coverage | Layer 3 (Quality) | ✅ Valid | Test scaffolding, eval gates, smoke-test gates. 8-12h. |
+| Phase 5 — Feedback loop runtime | Layer 4 (Adaptive) | ⚠️ Conditional | Only after Layer1-3 stable + customer traction. 10-15h. |
+
+The 8 design DELTAs (layer, topology, archetype, time_scale, composition, negative_examples, transfer_targets, intent_mismatch) all remain valid — they're additive frontmatter fields, not breaking changes.
 
 ---
 
 ## 7 — Honest acknowledgments
 
-1. **The original proposal was written without revenue grounding.** That's a methodological gap. This report fixes that.
+1. **The original proposal was written without revenue grounding.** That's a methodological gap. This report (v1.1) reframes it as a complete-solution problem with 4 layers.
 
-2. **The proposal assumes "production-grade" as a goal. The data shows it isn't.** Phase 1 makes sense regardless. Phases 2-5 may not be worth the 20-30h commitment.
+2. **The complete solution is 37-56h, not 20-30h.** Adding Layer1 (operational hygiene, 5-7h) and Layer3 (quality infrastructure, 8-12h) that the original proposal omitted is the price of "complete, not temp fix."
 
-3. **This audit itself used ~3K tokens of API work (mostly local repo reads).** Adding to the 6K spent on docs, the upgrade proposal + gap analysis + this findings report = ~9K tokens. **Phase 1 itself (cleanup) is ~1-2h and may be the right next move.**
+3. **Layer4 (Phase5 / adaptive) is conditional, not abandoned.** Per Ivan's directive of complete-solution, all 4 layers get done — but Layer4 has 4 explicit gating conditions (3+ customers, 7+ days stable, ≥95% smoke pass, P0 queue empty). These conditions are not punitive; they're safety belts for the highest-risk piece.
 
-4. **I may be wrong about priorities.** The proposal author (Erebus?) may have context I don't — about future client pipeline, funding trajectory, founder goals. **If Ivan sees a deal coming in Q4 that needs production-grade, the calculus changes.** This audit is a snapshot, not a verdict.
+4. **This audit itself used ~3K tokens of API work (mostly local repo reads).** The proposal + gap analysis + findings report = ~9K tokens total for the planning phase. The execution phase (Path C recommended) is ~27-41h of human work.
+
+5. **Path B (parallel Ivan/Kiki) requires Kiki availability** for 20-30h over 2-3 weeks. If Kiki isn't available, Path A (sequential Ivan) or Path C (Layer4 deferred) is the realistic option.
+
+6. **I may be wrong about priorities.** If Ivan sees a deal closing in Q4 that needs production-grade aiw-org, the calculus shifts to Path A. This audit is a snapshot, not a verdict.
 
 ---
 
-**Awaiting Ivan's call: Option 1 (defer), Option 2 (Phase 1 only), or Option 3 (full upgrade).**
+**Awaiting Ivan's call: Path A (full sequential), Path B (full parallel), or Path C (foundation-first, adaptive conditional).**
