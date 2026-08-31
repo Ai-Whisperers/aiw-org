@@ -1,0 +1,30 @@
+# Board-of-Directors Stack KPIs
+
+> DEMIURGE-055 — Governance layer (wraps all Tier-1 dept stacks)
+> Owner: board-of-directors (governance)
+> Co-chairs: Ivan + Kiki (tiebreaker rotates monthly)
+> Atomic agents: ai-ops-coordinator, apollo-sales-lead, argus-health-monitor
+
+```yaml
+version: 1.0.0
+departments: [board-of-directors]
+```
+
+## Board (owner: board-of-directors)
+
+| id | name | formula | target | unit | feedback_loop |
+|----|------|---------|--------|------|---------------|
+| kpi-board-review-cadence | Board review adherence | on-time reviews / scheduled | 0.95 | ratio | loop-monitor-to-soul |
+| kpi-board-decision-cycle-time | Avg decision cycle | avg(decision - escalation) | 72 | hours | loop-monitor-to-source |
+| kpi-board-org-health-avg | Org health (avg across all dept KPIs) | avg(kpi-org-health-*) | 0.85 | ratio | loop-monitor-to-soul |
+| kpi-board-escalation-rate | Escalations per cycle | count / quarter | 5 | count | loop-monitor-to-source |
+| kpi-board-co-chair-parity | Co-chair decision parity | min(ivan, kiki_decisions) / total | 0.40 | ratio | loop-monitor-to-source |
+| kpi-board-overdue-decisions | Decisions pending >7d | count | 0 | count | loop-monitor-to-soul |
+
+## Health signal (owner: argus-health-monitor)
+
+| id | name | formula | target |
+|----|------|---------|--------|
+| kpi-org-health-board | Board governance health | weighted avg board KPIs | 0.85 |
+
+feedback_trigger below 0.7 → loop-monitor-to-soul

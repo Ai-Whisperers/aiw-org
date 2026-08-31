@@ -1,0 +1,31 @@
+# Sales Stack KPIs
+
+> DEMIURGE-054 — Companion to revenue-stack.yaml
+> Owner: sales-pipeline (department)
+> Atomic agents: apollo-sales-lead, cadmus-lead-enrichment, metis-proposal-drafter, hermes-router-revenue
+
+```yaml
+version: 1.0.0
+departments: [sales-growth]
+```
+
+## Sales (owner: sales-pipeline)
+
+| id | name | formula | target | unit | feedback_loop |
+|----|------|---------|--------|------|---------------|
+| kpi-sales-mrr | Monthly Recurring Revenue | sum(active_subscriptions * price) | 1000 | USD | loop-pipeline-to-finance |
+| kpi-sales-weighted-pipeline | Pipeline value | sum(deal_value * stage_probability) | 10000 | USD | loop-monitor-to-source |
+| kpi-sales-leads-week | New leads/week | count | 20 | count | loop-pipeline-to-finance |
+| kpi-sales-conversion-rate | Lead to customer | closed / qualified_leads | 0.10 | ratio | loop-eval-to-source |
+| kpi-sales-time-to-close | Days to close | avg(closed - first_contact) | 30 | days | loop-monitor-to-source |
+| kpi-sales-proposal-approval | Proposal approval rate | approved / drafted | 0.50 | ratio | loop-eval-to-source |
+| kpi-sales-csat | Customer satisfaction | avg(score) | 0.85 | ratio | loop-monitor-to-soul |
+| kpi-sales-mrr-growth | MoM MRR growth | (this_month - last_month) / last_month | 0.10 | ratio | loop-pipeline-to-finance |
+
+## Health signal (owner: argus-health-monitor)
+
+| id | name | formula | target |
+|----|------|---------|--------|
+| kpi-org-health-sales | Sales health | weighted avg sales KPIs | 0.85 |
+
+feedback_trigger below 0.7 → loop-monitor-to-soul

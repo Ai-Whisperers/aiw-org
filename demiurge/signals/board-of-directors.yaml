@@ -1,0 +1,17 @@
+# Board-of-Directors Signals
+
+> Governance routing — wraps all Tier-1 dept signals.
+> Schema version 1.0.0
+> Co-chairs: Ivan + Kiki (per Ivan's 2026-09-01 clarification)
+
+```yaml
+version: 1.0.0
+department: board-of-directors
+routing:
+  board-of-directors: { consumes: [argus-health-monitor, ai-ops-coordinator, apollo-sales-lead, all-dept-monitors], emits: [] }
+```
+
+> AIW: signals.yaml files are companion to kpis.yaml.
+> Board consumes signals from ALL dept-monitor agents.
+> Board emits decisions_for_ivan[] / decisions_for_kiki[] to coord.json (HIGH/CRITICAL only).
+> LOW/MEDIUM go to board-of-directors/monitor-notes/.

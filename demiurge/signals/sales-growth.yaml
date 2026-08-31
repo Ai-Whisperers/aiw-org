@@ -1,0 +1,19 @@
+# Sales-Growth Signals
+
+> Source routing for 03-sales-growth/* PROMPT.md agents.
+> Schema version 1.0.0
+
+```yaml
+version: 1.0.0
+department: sales-growth
+routing:
+  sales-pipeline: { consumes: [hermes-router-revenue, apollo-sales-lead, cadmus-lead-enrichment], emits: [] }
+  lead-enrichment: { consumes: [cadmus-lead-enrichment, clio-customer-signal-collector], emits: [lead-enrichment] }
+  proposal-drafter: { consumes: [apollo-sales-lead, peitho-language-quality], emits: [proposal-drafter] }
+  revops-pipeline-analyzer: { consumes: [hermes-router-revenue, bizops-tracker], emits: [revops-pipeline-analyzer] }
+  marketing-content-producer: { consumes: [hera-marketing-lead, calliope-content-producer], emits: [marketing-content-producer] }
+  multimedia-producer: { consumes: [orpheus-recordings-agent], emits: [multimedia-producer] }
+```
+
+> AIW: signals.yaml files are companion to kpis.yaml.
+> Each agent's signals = the atomic-agent events it consumes + emits.
