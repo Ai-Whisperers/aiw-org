@@ -1,487 +1,259 @@
-# AIW Departments — Complete Reference (4 tiers, 31 depts, 137+ roles, 88+ agents)
+# AIW Agent Roster — DEMIURGE is Source of Truth
 
-> **Generated**: 2026-08-31 from canonical source files
-> **Sources**:
-> - `/opt/data/agents-v2/constitution/01-06-*.md` (6 Tier-1 charters, v0.2.0/v0.3.0)
-> - `/opt/data/agents-v2/playbooks/07-cross-cutting-concerns.md` (8 Tier-2 concerns)
-> - `/opt/data/agents-v2/playbooks/08-deferred-tier3.md` (17 Tier-3 + 5 Tier-4 depts)
-> - `/opt/data/agents-v2/packages/*/agents/*/PROMPT.md` (35 v2 agent specs)
-> - `/opt/data/agents/*/PROMPT.md` (51 v1-legacy agents, 30 active with outbox)
-> - `/opt/data/scratchpad/analysis/AGENT-NAMES-V2.json` (portmanteau naming)
+> **Last updated**: 2026-08-31 (after DEMIURGE branch audit)
+> **Source of truth**: `github.com/Ai-Whisperers/growth-coaching` branch `epic/DEMIURGE`
+> **Canonical reference**: `demiurge/agents/README.md` (24 DEMIURGE agents) + constitution charters (heritage agents)
+
+## Naming convention
+
+Every DEMIURGE agent has a **single Greek-mythology name** (Apollo, Hera, Thoth, etc.).
+These names ARE the agent identity — there is no second portmanteau name, no Spanish-surname variant, no human-name alias.
+Heritage agents (from the v0.2.0/v0.3.0 constitution) keep their formal names until they migrate to DEMIURGE.
+
+**Rule**: One name per agent. No duplicates. No aliases. If you find two names for one agent, that's a bug to fix.
 
 ---
 
-## Top-level summary
+# DEMIURGE Agents — Active (24)
 
-| Tier | Count | Description |
+These agents have full PROMPT.md, agent.yaml, and repo-manifest.yaml in the DEMIURGE branch.
+Each runs as a standalone repo under `Ai-Whisperers/aiw-agent-<id>`.
+
+## Marketing
+
+| Name | ID | Schedule | Owner | Mission |
+|---|---|---|---|---|
+| **Calliope** | `calliope-content-producer` | 0 10 * * 1,3,5 | ivan | You are **Calliope**, muse of content. You produce blog posts, social drafts, and email copy from Hera's briefs. |
+| **Hera** | `hera-marketing-lead` | 0 9 * * 1,3,5 | ivan | You are **Hera**, strategist of demand. You own marketing direction, campaign briefs, and the bridge from Product Discovery insights to Sale |
+| **Iris** | `iris-community-monitor` | 0 11 * * 2,4 | ivan | You are **Iris**, rainbow bridge to the audience. You monitor community channels and surface engagement opportunities to Hera. |
+
+## Sales
+
+| Name | ID | Schedule | Owner | Mission |
+|---|---|---|---|---|
+| **Apollo** | `apollo-sales-lead` | 0 12 * * * | ivan | You are **Apollo**, bringer of clarity in the pipeline. You triage inbound leads, run discovery (SPIN/MEDDIC), and coordinate Cadmus and Met |
+| **Cadmus** | `cadmus-lead-enrichment` | manual | ivan | You enrich inbound leads with ICP scoring and intent signals. Route summary to Apollo within same signal batch. |
+| **Metis** | `metis-proposal-drafter` | manual | ivan | You draft proposals after discovery. Human approval required before send. |
+
+## Product Discovery
+
+| Name | ID | Schedule | Owner | Mission |
+|---|---|---|---|---|
+| **Athena** | `athena-product-discovery-lead` | 0 8 * * 1 | ivan | You synthesize customer evidence into validated insights. Continuous discovery per Torres/Mom Test. |
+| **Clio** | `clio-customer-signal-collector` | 0 7 * * 1-5 | ivan | Collect raw customer signals from sessions, support, win/loss notes. Emit `customer-signal-raw` to Athena. |
+
+## Operations
+
+| Name | ID | Schedule | Owner | Mission |
+|---|---|---|---|---|
+| **BizOps Tracker** | `bizops-tracker` | 0 17 * * 0 | ivan | You are **Erebus**, AI Whisperers' BizOps tracker. You track cross-functional metrics, OKRs, and executive decision support. |
+| **Business Analyst** | `business-analyst` | 30 6 * * * | ivan | You are **Erebus**, AI Whisperers' business analyst. You produce a single one-page brief per day so Ivan can answer in 30 seconds: **"Are we |
+| **Kronos** | `kronos-operations-lead` | 0 7 * * 1-5 | ivan | You are **Kronos**, keeper of operational order. You own OKR tracking, incident triage, cross-dept coordination, vendor hygiene, and cost co |
+| **Mgmt Coordinator** | `management-coordinator` | 0 17 * * 1,4 | ivan | You are **Erebus**, AI Whisperers' ops coordinator. Twice a week you surface what's open, what's blocked, and what Ivan or Kyrian should pic |
+
+## AI Ops
+
+| Name | ID | Schedule | Owner | Mission |
+|---|---|---|---|---|
+| **AI Ops Coordinator** | `ai-ops-coordinator` | 0 9 * * * | kiki | You are **Erebus**, AI Whisperers' AI Ops coordinator. You monitor the agent layer itself — eval gates, hard stops, drift detection, golden  |
+
+## Compliance
+
+| Name | ID | Schedule | Owner | Mission |
+|---|---|---|---|---|
+| **Compliance Monitor** | `compliance-monitor` | 0 8 * * 1 | ivan | You are **Erebus**, AI Whisperers' compliance monitor. You watch for regulatory changes (EU AI Act, GDPR, LGPD), trademark issues, and PII h |
+
+## Router
+
+| Name | ID | Schedule | Owner | Mission |
+|---|---|---|---|---|
+| **Hermes** | `hermes-router-revenue` | */15 6-22 * * * | ivan | You route signals across Marketing, Sales, Product Discovery, and Operations. Enforce dispatch rules, timing SLAs, and quorum. |
+
+## Monitor
+
+| Name | ID | Schedule | Owner | Mission |
+|---|---|---|---|---|
+| **Argus** | `argus-health-monitor` | 0 */6 * * * | ivan | You watch KPIs and agent cadences for the revenue stack. Fire feedback loops when thresholds breach. |
+
+## Knowledge Management
+
+| Name | ID | Schedule | Owner | Mission |
+|---|---|---|---|---|
+| **Hephaestus** | `hephaestus-document-miner` | on_signal | ivan | You are **Hephaestus**, forger of structured value from raw material. You extract action items, decisions, nuggets, references, and terminol |
+| **Mnemosyne** | `mnemosyne-document-archivist` | on_signal | ivan | You are **Mnemosyne**, mother of memory. You maintain the org's document catalog — not passive storage, but active indexing, tagging, and re |
+| **Orpheus** | `orpheus-recordings-agent` | on_signal | ivan | You are **Orpheus**, master of voice and song. You ingest audio/video recordings, transcribe them, and hand structured transcripts into the  |
+| **Peitho** | `peitho-language-quality` | on_signal | ivan | You are **Peitho**, goddess of persuasion and eloquence. You assess document quality — spelling, grammar, tone, terminology compliance, clar |
+| **Pheme** | `pheme-document-router` | */5 6-22 * * * | ivan | You are **Pheme**, voice of rumour and fame. You deliver classified documents and mined assets to the right agents and departments — replaci |
+| **Themis** | `themis-document-classifier` | on_signal | ivan | You are **Themis**, goddess of divine order. You read every ingested document and assign structured attributes so downstream agents route, c |
+
+## Cross-cutting (knowledge discovery)
+
+| Name | ID | Schedule | Owner | Mission |
+|---|---|---|---|---|
+| **Echo** | `echo-community-scanner` | 0 7 * * 3  # Wed 07:00 PYT | ivan | You are **Echo**, listener of the swarm. You scan practitioner communities for emerging tactics, anti-patterns, and language shifts. |
+| **Thoth** | `thoth-literature-scanner` | 0 6 * * 1  # Mon 06:00 PYT | ivan | You are **Thoth**, curator of knowledge. You scan authoritative literature and update department source catalogs with quality-rated entries  |
+
+---
+
+# Heritage Agents — Awaiting DEMIURGE Migration (~23)
+
+These agents exist in the constitution (`agents-v2/constitution/01-06-*.md`) and the legacy `agents/` repo.
+They use the portmanteau naming framework (Saleina, Devin, Finus, etc.) for now.
+**Migration path**: when a dept gets built to DEMIURGE standard, these get renamed to Greek-mythology names.
+
+| Department | Formal name | Portmanteau | Mission |
+|---|---|---|---|
+
+### Engineering & Delivery
+
+| engineering-roster | **Devin** | Twice-weekly visibility into production health + Kiki's bandwidth |
+| devops-monitor | **Devor** | Detect infrastructure anomalies. Surface to engineering-roster. |
+| qa-automation-runner | **Qualis** | Run all tests on every PR. Comment results. Block merge if coverage drops. |
+| security-watchdog | **Securia** | Detect security threats before they become incidents. |
+| ai-safety-engineer | **Safina** | Prevent Kiro-class incidents |
+| scope-intake | **Scopia** | Scope before contract signed |
+| delivery-tracker | **Deliva** | Make Kiki's bandwidth visible to sales before commitments |
+| feasibility-gate | **Gatina** | Stop the org from overpromising |
+| chaos-test-runner | **Chaosia** | Weekly chaos testing |
+
+### Finance & Legal
+
+| finance-controller | **Finus** | Weekly end-of-week close |
+| accounting-automation | **Bokina** | Daily expense categorization |
+| tax-receipt-tracker | **Taxina** | Weekly receipt capture |
+| procurement-tracker | **Procin** | Weekly vendor renewal alerts |
+
+### Research & Education
+
+| research-tracker | **Researcha** | Weekly thesis + publications visibility |
+| thesis-tracker | **Thesis** | Advance thesis by 1 task/day |
+| citation-checker | **Citia** | Zero hallucinated citations |
+| course-producer | **Coursia** | 1 module/week |
+| okr-tracker | **Metrika** | Weekly OKR progress |
+| funding-coordinator | **Fundina** | 15+ funding apps by Nov 12 |
+| source-curator | **Curatora** | Source-material freshness sweep |
+
+### People & Culture
+
+| kiki-coach | **Magistra** | Deliver one concrete skill per week |
+| founder-bandwidth-watchdog | **Vigilis** | Burnout detection |
+
+---
+
+# Tier 2 Cross-cutting Concerns (8)
+
+These touch every department as sub-functions of existing Tier-1 depts. Promote to standalone when triggers fire.
+
+| Concern | Portmanteau | Owner dept | Status | Promotion trigger |
+|---|---|---|---|---|
+| AI Ops | **Opsina** | Engineering (Kiki) | T1 active | Always |
+| Compliance | **Compla** | Finance (Ivan wearing hat) | T1 vacant | First EU client OR $50K MRR |
+| Knowledge Management | **Curatora** | Research | T2 next | >100 source-material files OR 2nd knowledge-heavy vertical |
+| RevOps | **Revina** | Sales | T2 next | 5+ closed deals/quarter |
+| BizOps | **Bizina** | Operations | T2 next | When OKRs formalized |
+| Customer Success | **Churna** | Sales | T3 deferred | 5+ clients |
+| AI Safety | **Safina** | Engineering | T1 active | Already promoted (heritage) |
+| Procurement | **Procin** | Finance | T2 next | Vendor count > 10 |
+
+---
+
+# Tier 3 — Deferred Departments (17)
+
+| Department | Portmanteau | Promotion trigger |
 |---|---|---|
-| **1** | **6** | Core departments (charters v0.2.0/v0.3.0) |
-| **2** | **8** | Cross-cutting sub-functions |
-| **3** | **17** | Deferred departments (with promotion triggers) |
-| **4** | **5** | Enterprise scale departments |
-| **TOTAL** | **36** | |
+| Customer Success | **Churna** | 5+ recurring clients |
+| Marketing (independent) | **Markina-II** | >$2K/mo marketing budget OR 10+ clients |
+| Procurement (independent) | **Procin** | Active vendors > 10 OR SaaS spend > $1K/mo |
+| Compliance (standalone) | **Compla** | First EU client OR $50K MRR (HARD-STOP) |
+| Investor Relations | **Investia** | First external investor |
+| Chief of Staff | **COS** | Ivan coord hours > 50/week |
+| Treasury | **Treasuria** | $100K+ cash OR debt instruments |
+| Internal Audit | **Auditia** | $1M+ revenue |
+| Trust & Safety | **Trustina** | Ship consumer AI product |
+| DevRel | **Devrelia** | ParaguAI Builder has public API |
+| Workplace Operations | **Workopia** | Open physical office |
+| Fraud / Risk | **Frauda** | $500K+ payment volume |
+| Compensation & Benefits | **Compina** | 10+ employees |
+| People Operations (HR) | **Herina-II** | First FTE hire |
+| DEI / Belonging | **Diversina** | 10+ employees |
+| Public Relations | **Publicina** | Launch flagship brand |
+| Government Relations | **Goverina** | Regulated vertical |
 
----
+# Tier 4 — Enterprise Scale (5)
 
-# TIER 1 — ACTIVE CORE DEPARTMENTS (6)
-
-## Operations (v0.2.0)
-
-> **Mission**: Keep the agent platform itself alive, healthy, observable. Operations is the **objetivo-department** — it doesn't ship products, it makes sure every other department can ship.
-
-### Roles
-
-| # | Role | Tier |
+| Department | Portmanteau | Promotion trigger |
 |---|---|---|
-| 1.1 | Operations Lead | 🟢 T1 |
-| 1.2 | Repo Steward | 🟢 T1 |
-| 1.3 | Asset Tracker | 🟢 T1 |
-| 1.4 | Vendor Coordinator | 🟢 T1 |
-| 1.5 | Compliance Watchdog | 🟢 T1 |
-| 1.6 | Watchdog Engineer | 🟢 T1 |
-| 1.7 | BizOps Specialist | 🟡 T2 |
-| 1.8 | COO | 🟠 T3 |
+| Internal Communications | **Comina** | 50+ people |
+| M&A / Corp Dev | **Mandina** | Acquisitions planned |
+| Chief Data Officer (CDO) | **Dataia** | Data-driven product |
+| Chief AI Officer (CAIO) | **AIia** | Enterprise AI |
+| Diversity & Inclusion Lead | **Diversia** | 25+ employees |
 
-### Sub-agents (charter)
+---
 
-| Formal name | Portmanteau | Cadence |
+# Final Stats
+
+- **DEMIURGE active**: 24 agents (canonical, Greek-mythology names)
+- **Heritage agents**: 23 agents (constitution v0.2.0/v0.3.0, portmanteau names)
+- **Total shipped**: 47 agents
+- **Tier 2 cross-cutting**: 8 concerns
+- **Tier 3 deferred**: 17 depts
+- **Tier 4 enterprise**: 5 depts
+- **Total functional areas**: 31 + 8 Tier 2 = **39**
+- **Total roles**: 84 (Tier 1) + 36 (Tier 2) + 17 (Tier 3) + 5 (Tier 4) = **142**
+
+## Demotions and replacements (cleanup)
+
+**DEMIURGE replaces**: the portmanteau framework (`/opt/data/scratchpad/analysis/AGENT-NAMES-V2.md`) for the 24 agents that have DEMIURGE equivalents. The portmanteau framework stays as the **legacy naming layer** for heritage agents awaiting migration.
+
+**Examples of replacements** (DEMIURGE → portmanteau legacy):
+
+| DEMIURGE (canonical) | Portmanteau (legacy) | Function |
 |---|---|---|
-| `management-coordinator` | **Coordina** | Mon+Thu 17:00 PYT |
-| `business-analyst` | **Analisa** | Daily 06:30 PYT |
-| `kiki-coach` | **Magistra** | Fri 17:00 PYT |
+| **Apollo** | Saleina | sales-pipeline (lead) |
+| **Cadmus** | Prospia | lead-enrichment |
+| **Metis** | Proporina | proposal-drafter |
+| **Hera** | Markina | marketing lead |
+| **Calliope** | Contentis | content producer |
+| **Iris** | (none) | community monitor |
+| **Athena** | (none) | product discovery lead |
+| **Clio** | (none) | customer signal collector |
+| **Kronos** | (none) | operations lead |
+| **Thoth** | (none) | literature scanner |
+| **Echo** | (none) | community scanner |
+| **Hermes** | (none) | revenue router |
+| **Argus** | (none) | health monitor |
+| **Themis** | (none) | document classifier |
+| **Mnemosyne** | (none) | document archivist |
+| **Hephaestus** | (none) | document miner |
+| **Pheme** | (none) | document router |
+| **Peitho** | (none) | language quality |
+| **Orpheus** | (none) | recordings |
+| **Kronos** (replacement) | Coordina | operations coordinator |
 
----
+Heritage agents that don't have DEMIURGE replacements yet:
 
-## Finance & Legal (v0.2.0)
-
-> **Mission**: Track every dollar in and out, every contract sent/signed/expired, every compliance flag. The Finance & Legal department's job is to make sure Ivan knows the company's financial and legal position wit
-
-### Roles
-
-| # | Role | Tier |
+| Portmanteau | Formal | Function |
 |---|---|---|
-| 2.1 | CFO/Controller | 🟢 T1 |
-| 2.2 | Accountant | 🟡 T2 |
-| 2.3 | Bookkeeper | 🟢 T1 |
-| 2.4 | AP Specialist | 🟡 T2 |
-| 2.5 | AR Specialist | 🟡 T2 |
-| 2.6 | Procurement Officer | 🟢 T1 |
-| 2.7 | Legal Counsel | 🟢 T1 *external* |
-| 2.8 | Compliance Officer (named role) | 🟢 T1 |
-| 2.9 | Tax Specialist | 🟢 T1 *external* |
-| 2.10 | Contract Drafter | 🟢 T1 |
-| 2.11 | Payroll Specialist | 🔴 T4 |
-| 2.12 | Treasurer | 🟠 T3 |
-| 2.13 | FP&A Analyst | 🟡 T2 |
-| 2.14 | Pricing Analyst | 🟢 T1 |
-
-### Sub-agents (charter)
-
-| Formal name | Portmanteau | Cadence |
-|---|---|---|
-| `finance-controller` | **Finus** | Fri 18:00 PYT |
-| `accounting-automation`` | **—** | Daily |
-| `tax-receipt-tracker`` | **—** | Weekly |
-| `procurement-tracker`` | **—** | Weekly |
-| `compliance-monitor`` | **—** | Weekly |
-
----
-
-## Sales & Growth (v0.2.0)
-
-> **Mission**: Generate qualified leads, run outreach, close deals. Sales is the only department that directly produces revenue.
-
-### Roles
-
-| # | Role | Tier |
-|---|---|---|
-| 3.1 | Head of Sales / CRO | 🟢 T1 |
-| 3.2 | SDR | 🟢 T1 |
-| 3.3 | BDR | 🟡 T2 |
-| 3.4 | Account Executive | 🟢 T1 |
-| 3.5 | Sales Engineer | 🟡 T2 |
-| 3.6 | Customer Success Manager | 🟡 T2 |
-| 3.7 | Proposal Writer | 🟢 T1 |
-| 3.8 | Marketing Manager | 🟢 T1 |
-| 3.9 | Content Marketing Manager | 🟡 T2 |
-| 3.10 | Performance Marketing Manager | 🟠 T3 *TM-restricted* |
-| 3.11 | SEO Specialist | 🟡 T2 |
-| 3.12 | Email Marketing Specialist | 🟡 T2 |
-| 3.13 | Social Media Manager | 🟠 T3 |
-| 3.14 | Community Manager | 🟠 T3 |
-| 3.15 | Brand Manager | 🟠 T3 |
-| 3.16 | Product Marketing Manager | 🟡 T2 |
-| 3.17 | Growth Marketer | 🟡 T2 |
-| 3.18 | Channel Sales Manager | 🟠 T3 |
-
-### Sub-agents (charter)
-
-| Formal name | Portmanteau | Cadence |
-|---|---|---|
-| `sales-pipeline` | **Saleina** | Daily 12:00 PYT |
-| `proposal-drafter` | **Proporina** | On-demand |
-| `lead-enrichment` | **Prospia** | Daily |
-| `marketing-content-producer` | **Markina** | Mon/Wed/Fri |
-| `multimedia-producer` | **Media** | On-demand |
-| `customer-health-scorer`` | **—** | Weekly |
-
----
-
-## Engineering & Delivery (v0.3.0)
-
-> **Mission**: Ship client sites, maintain infra uptime, keep the ParaguAI Builder running, deploy changes safely. Engineering is where Kiki owns end-to-end.
-
-### Roles
-
-| # | Role | Tier |
-|---|---|---|
-| 4.1 | CTO/Eng Lead | 🟢 T1 |
-| 4.2 | Engineering Manager | 🟠 T3 |
-| 4.3 | Frontend Engineer | 🟢 T1 |
-| 4.4 | Backend Engineer | 🟢 T1 |
-| 4.5 | Full-stack Engineer | 🟢 T1 |
-| 4.6 | Mobile Engineer | 🟠 T3 |
-| 4.7 | DevOps / SRE | 🟢 T1 |
-| 4.8 | QA Engineer | 🟢 T1 |
-| 4.9 | Security Engineer | 🟢 T1 |
-| 4.10 | ML Engineer | 🟠 T3 |
-| 4.11 | Data Engineer | 🟠 T3 |
-| 4.12 | Solutions Architect | 🟠 T3 |
-| 4.13 | Tech Writer | 🟡 T2 |
-| 4.14 | Engineering PM | 🟠 T3 |
-| 4.15 | Platform Engineer | 🟠 T3 |
-| 4.16 | Release Manager | 🟠 T3 |
-| 4.17 | SRE | 🟠 T3 |
-| 4.18 | DBA | 🟡 T2 |
-| 4.19 | Network Engineer | 🟠 T3 |
-| 4.20 | UI/UX Designer | 🟡 T2 |
-| 4.21 | Product Designer | 🟠 T3 |
-| 4.22 | EngOps Specialist | 🟠 T3 |
-| 4.23 | Build/Release Engineer | 🟠 T3 |
-| 4.24 | AI Safety Engineer | 🟢 T1 *NEW v0.2.0* |
-
-### Sub-agents (charter)
-
-| Formal name | Portmanteau | Cadence |
-|---|---|---|
-| `engineering-roster` | **Devin** | Tue+Fri 17:00 PYT |
-| `devops-monitor` | **Devor** | Every 30 min |
-| `qa-automation-runner` | **Qualis** | On-PR |
-| `security-watchdog` | **Securia** | Every 30 min |
-| `ai-safety-engineer`` | **—** | Every 30 min |
-| `scope-intake`` | **—** | On Metis proposal |
-| `delivery-tracker`` | **—** | Mon 11:00 PYT |
-| `feasibility-gate`` | **—** | On Metis send |
-
----
-
-## Research & Education (v0.2.0)
-
-> **Mission**: Drive the master's thesis (P1 GeoData v2 — Paraguayan cartography) to completion, package research into publications, and turn it into paid products (courses, papers, consulting). Research is a flagsh
-
-### Roles
-
-| # | Role | Tier |
-|---|---|---|
-| 5.1 | Research Lead | 🟢 T1 |
-| 5.2 | Researcher | 🟢 T1 |
-| 5.3 | Writer / Editor | 🟢 T1 |
-| 5.4 | Academic Liaison | 🟡 T2 |
-| 5.5 | Citation / Bibliography Specialist | 🟢 T1 |
-| 5.6 | Course Designer | 🟢 T1 |
-| 5.7 | Course Producer | 🟡 T2 |
-| 5.8 | Instructional Designer | 🟠 T3 |
-| 5.9 | Subject Matter Expert (SME) | 🟡 T2 *external* |
-| 5.10 | Research Engineer | 🟡 T2 |
-| 5.11 | IP / Patent Specialist | 🟠 T3 |
-| 5.12 | Publication Coordinator | 🟡 T2 |
-
-### Sub-agents (charter)
-
-| Formal name | Portmanteau | Cadence |
-|---|---|---|
-| `research-tracker` | **Researcha** | Sun 18:00 PYT |
-| `citation-checker`` | **—** | On-demand |
-| `thesis-tracker`` | **—** | Daily 06:00 UTC |
-| `course-producer`` | **—** | Weekly |
-| `source-curator`` | **—** | Weekly |
-
----
-
-## People & Culture (v0.2.0)
-
-> **Mission**: Make sure both founders (Ivan + Kiki) and any future hires stay sharp, healthy, and growing. People & Culture is small in headcount but huge in leverage — Ivan's bandwidth and Kiki's growth are the co
-
-### Roles
-
-| # | Role | Tier |
-|---|---|---|
-| 6.1 | Head of People / VP HR | 🟢 T1 |
-| 6.2 | Recruiter | 🔴 T4 *deferred* |
-| 6.3 | Onboarding Specialist | 🔴 T4 *deferred* |
-| 6.4 | Performance Coach | 🟢 T1 |
-| 6.5 | Recognition Lead | 🟢 T1 |
-| 6.6 | Compensation Specialist | 🔴 T4 *deferred* |
-| 6.7 | People Operations Specialist | 🟠 T3 *deferred* |
-| 6.8 | Learning & Development Manager | 🟠 T3 *deferred* |
-
-### Sub-agents (charter)
-
-| Formal name | Portmanteau | Cadence |
-|---|---|---|
-| `kiki-coach` | **Magistra** | Fri 17:00 PYT |
-| `founder-bandwidth-watchdog`` | **—** | Weekly |
-
----
-
-# TIER 2 — CROSS-CUTTING SUB-FUNCTIONS (8)
-
-## AI Ops → **Opsina**
-
-- **Owner dept**: ?
-- **Status**: ?
-- **Promotion trigger**: ?
-
----
-
-## Compliance → **Compla**
-
-- **Owner dept**: ?
-- **Status**: ?
-- **Promotion trigger**: ?
-
----
-
-## Knowledge Management → **Curatora**
-
-- **Owner dept**: ?
-- **Status**: ?
-- **Promotion trigger**: ?
-
----
-
-## RevOps → **Revina**
-
-- **Owner dept**: ?
-- **Status**: ?
-- **Promotion trigger**: ?
-
----
-
-## BizOps → **Bizina**
-
-- **Owner dept**: ?
-- **Status**: ?
-- **Promotion trigger**: ?
-
----
-
-## Customer Success → **Churna**
-
-- **Owner dept**: ?
-- **Status**: ?
-- **Promotion trigger**: ?
-
----
-
-## AI Safety → **Safina**
-
-- **Owner dept**: ?
-- **Status**: ?
-- **Promotion trigger**: ?
-
----
-
-## Procurement → **Procin**
-
-- **Owner dept**: ?
-- **Status**: ?
-- **Promotion trigger**: ?
-
----
-
-# TIER 3 — DEFERRED DEPARTMENTS (17)
-
-## Customer Success (absorbed in Sales) → **Churna**
-
-- **Promotion trigger**: 5+ recurring clients
-- **Roles**: CSM Lead, Onboarding Specialist, Account Manager, Renewals Manager, Customer Education, Support Engineer
-- **Agent candidates**: `customer-health-scorer` (already in plan as Tier 2)
-
-## Marketing (independent) (absorbed in Sales) → **—**
-
-- **Promotion trigger**: >$2K/mo marketing budget OR 10+ clients
-- **Roles**: Brand Manager, SEO Specialist, Email Marketing Specialist, Paid Ads Specialist (TRADEMARK-BANNED), Social Media Manager (TRADEMARK-RESTRICTED), Community Manager, Event Coordinator, Partnerships Manager
-- **Agent candidates**: `marketing-content-producer`, `multimedia-producer` (already Tier 2)
-
-## Procurement (independent) (absorbed in Finance) → **—**
-
-- **Promotion trigger**: Active vendors > 10 OR SaaS spend > $1K/mo
-- **Roles**: Procurement Manager, Vendor Manager, Contract Negotiator, Renewal Specialist
-- **Agent candidates**: `procurement-tracker` (already Tier 2)
-
-## Compliance (standalone) (currently Ivan wearing hat) → **—**
-
-- **Promotion trigger**: First EU client OR $50K MRR
-- **Roles**: Compliance Officer (currently Ivan), Privacy Counsel/DPO, Regulatory Affairs Specialist
-- **Agent candidates**: `compliance-monitor` (currently Tier 2, promotes to Tier 3 lead)
-
-## Investor Relations → **Investia**
-
-- **Promotion trigger**: First external investor
-- **Roles**: IR Manager, Fundraising Lead, Board Liaison
-- **Agent candidates**: `ir-monitor` (tracks cap table, runway, deck status)
-
-## Chief of Staff → **COS**
-
-- **Promotion trigger**: Ivan coord hours > 50/week
-- **Roles**: Chief of Staff, Executive Assistant, Board Prep Specialist
-- **Agent candidates**: `executive-brief-generator` (auto-generates board updates)
-
-## Treasury → **Treasuria**
-
-- **Promotion trigger**: $100K+ cash OR debt instruments
-- **Roles**: Treasurer, Banking Specialist, FX Manager, Investment Manager
-- **Agent candidates**: `treasury-monitor` (tracks cash, FX exposure, runway scenarios)
-
-## Internal Audit → **Auditia**
-
-- **Promotion trigger**: $1M+ revenue
-- **Roles**: Internal Audit Lead, Compliance Auditor, Risk Analyst
-- **Agent candidates**: `audit-runner` (scheduled compliance + control checks)
-
-## Trust & Safety → **Trustina**
-
-- **Promotion trigger**: Ship consumer AI product
-- **Roles**: T&S Lead, Content Moderator, Misuse Specialist, Policy Writer
-- **Agent candidates**: `t-s-monitor` (scans for misuse patterns)
-
-## DevRel → **Devrelia**
-
-- **Promotion trigger**: ParaguAI Builder has public API
-- **Roles**: DevRel Manager, Developer Advocate, Community Manager, Tech Writer
-- **Agent candidates**: `devrel-content-producer`, `api-docs-monitor`
-
-## Workplace Operations → **Workopia**
-
-- **Promotion trigger**: Open physical office
-- **Roles**: Workplace Manager, Office Coordinator, IT Support
-- **Agent candidates**: `workplace-monitor` (sensor + access management)
-
-## Fraud / Risk → **Frauda**
-
-- **Promotion trigger**: $500K+ payment volume
-- **Roles**: Fraud Analyst, Risk Manager, Chargeback Specialist
-- **Agent candidates**: `fraud-detector` (analyzes transaction patterns)
-
-## Compensation & Benefits → **Compina**
-
-- **Promotion trigger**: First FTE hire
-- **Roles**: Comp & Benefits Manager, Equity Specialist, Payroll Admin
-- **Agent candidates**: `comp-monitor` (salary band tracking)
-
-## People Operations (HR) → **Herina-II**
-
-- **Promotion trigger**: 5+ FTEs
-- **Roles**: People Ops Partner, HR Generalist, Benefits Admin
-- **Agent candidates**: `people-ops` (onboarding workflow, benefits tracking)
-
-## DEI / Belonging → **Diversina**
-
-- **Promotion trigger**: 10+ employees (and values-aligned)
-- **Roles**: DEI Specialist, ER Lead
-- **Agent candidates**: (none — sensitive human work)
-
-## Public Relations → **Publicina**
-
-- **Promotion trigger**: Launch flagship brand OR media interest
-- **Roles**: PR Manager, Media Liaison, Spokesperson
-- **Agent candidates**: `press-monitor` (tracks media mentions)
-
-## Government Relations → **Goverina**
-
-- **Promotion trigger**: Regulated vertical
-- **Roles**: GovRel Manager, Lobbyist, Compliance Liaison
-- **Agent candidates**: `regulatory-monitor` (gov announcement watch)
-
----
-
-# TIER 4 — ENTERPRISE SCALE DEPARTMENTS (5)
-
-## Internal Communications → **Comina**
-
-- **Promotion trigger**: 50+ people
-- **Roles**: Internal Comms Manager, Newsletter Editor
-
-## M&A / Corp Dev → **Mandina**
-
-- **Promotion trigger**: Acquisitions planned
-- **Roles**: Corp Dev Lead, M&A Analyst
-
-## Chief Data Officer (CDO) → **Dataia**
-
-- **Promotion trigger**: Data-driven product
-- **Roles**: CDO, Data Strategy Lead
-
-## Chief AI Officer (CAIO) → **AIia**
-
-- **Promotion trigger**: Enterprise AI (per Futureproofing.dev 2026)
-- **Roles**: CAIO, AI Strategy Lead
-
-## Diversity & Inclusion Lead → **Diversia**
-
-- **Promotion trigger**: 25+ employees (and values-aligned)
-
----
-
-# V1-LEGACY ACTIVE AGENTS (30 with outbox content)
-
-These v1 agents have active cron jobs (outbox/). They're also listed under Tier 1 depts above; this is a consolidated view.
-
-| Formal name | Portmanteau | Dept | Owner | Schedule | Outbox |
-|---|---|---|---|---|---|
-| `board-of-directors` | **Boardina** | 01 Operations | ivan | 0 14 1 */3 * | 2 |
-| `business-analyst` | **Analisa** | 01 Operations | — | ? | 4 |
-| `management-coordinator` | **Coordina** | 01 Operations | — | ? | 2 |
-| `finance-controller` | **Finus** | 02 Finance & Legal | — | ? | 4 |
-| `lead-enrichment` | **Prospia** | 03 Sales & Growth | — | ? | 1 |
-| `multimedia-producer` | **Media** | 03 Sales & Growth | — | ? | 2 |
-| `sales-pipeline` | **Saleina** | 03 Sales & Growth | — | ? | 7 |
-| `ai-safety-engineer-30min` | **Safina-30** | 04 Engineering & Delivery | — | ? | 108 |
-| `devops-monitor-30min` | **Devor-30** | 04 Engineering & Delivery | erebus | */30 * * * * | 104 |
-| `engineering-roster` | **Devin** | 04 Engineering & Delivery | — | ? | 3 |
-| `qa-automation-runner` | **Qualis** | 04 Engineering & Delivery | — | ? | 1 |
-| `security-watchdog-30min` | **Securia-30** | 04 Engineering & Delivery | — | ? | 8 |
-| `citation-checker` | **Citia** | 05 Research & Education | — | ? | 2 |
-| `research-tracker` | **Researcha** | 05 Research & Education | — | ? | 3 |
-| `thesis-tracker` | **Thesis** | 05 Research & Education | — | ? | 2 |
-| `coach-cohort-facilitator` | **—** | 06 People & Culture | erebus | weekly (per cohort) | 1 |
-| `coach-conversion-agent` | **Coachin** | 06 People & Culture | erebus | on-demand (after each free quick-win session) | 3 |
-| `coach-ivan` | **Coachis** | 06 People & Culture | ivan | 0 21 * * 0 | 1 |
-| `coach-kiki` | **Coachita** | 06 People & Culture | erebus | 0 21 * * 5 | 1 |
-| `coach-lead-agents` | **Lidera** | 06 People & Culture | erebus | 0 22 1 * * | 1 |
-| `coach-lead-finder` | **Leadius** | 06 People & Culture | erebus | weekly (Wednesday) | 1 |
-| `coach-onboarding` | **Onboardia** | 06 People & Culture | erebus | triggered on new customer signup (via webhook from CF Worker) | 2 |
-| `coach-org` | **Organis** | 06 People & Culture | erebus | 0 0 1 1,4,7,10 * | 1 |
-| `coach-practitioner` | **Practis** | 06 People & Culture | erebus | on-demand (triggered per session) | 1 |
-| `coach-renewal-manager` | **Renovin** | 06 People & Culture | erebus | monthly (1st of month, 09:00 UTC) | 1 |
-| `coach-roi-tracker` | **Roina** | 06 People & Culture | erebus | weekly (Friday) | 1 |
-| `coaching-content-curator` | **Contentis** | 06 People & Culture | erebus | 0 14 * * 1 | 1 |
-| `coaching-quality-reviewer` | **Qualireva** | 06 People & Culture | erebus | */30 * * * * | 99 |
-| `coaching-research-intelligence` | **Cochis** | 06 People & Culture | erebus | 0 13 * * 3 | 1 |
-| `people-hr` | **Herina** | 06 People & Culture | ivan | 0 22 * * 1 | 1 |
-
----
-
-# FINAL STATS
-
-- **Tier 1**: 6 depts, 84 roles, 29 sub-agents
-- **Tier 2**: 8 concerns, 0 roles, 0 sub-agents
-- **Tier 3**: 17 depts (deferred)
-- **Tier 4**: 5 depts (deferred)
-- **v1-legacy active**: 30 agents (with outbox content)
-
-**Grand total**: 36 functional areas (6 + 8 + 17 + 5 = 36 — slightly more than 31 because the playbook counts some items twice)
-
-**Agent names**: every agent has a portmanteau name from `/opt/data/scratchpad/analysis/AGENT-NAMES-V2.json` (54 names, all unique)
-**Reference**: `/opt/data/scratchpad/analysis/AGENT-NAMES-V2.md` (full reference)
+| Devin | engineering-roster | Engineering lead |
+| Devor | devops-monitor | DevOps |
+| Qualis | qa-automation-runner | QA |
+| Securia | security-watchdog | Security |
+| Safina | ai-safety-engineer | AI Safety |
+| Scopia | scope-intake | Scope intake |
+| Deliva | delivery-tracker | Delivery tracking |
+| Gatina | feasibility-gate | Feasibility gate |
+| Chaosia | chaos-test-runner | Chaos testing |
+| Finus | finance-controller | Finance lead |
+| Bokina | accounting-automation | Accounting |
+| Taxina | tax-receipt-tracker | Tax |
+| Procin | procurement-tracker | Procurement |
+| Magistra | kiki-coach | Coaching |
+| Vigilis | founder-bandwidth-watchdog | Burnout detection |
+| Researcha | research-tracker | Research lead |
+| Thesis | thesis-tracker | Thesis |
+| Citia | citation-checker | Citations |
+| Coursia | course-producer | Courses |
+| Metrika | okr-tracker | OKRs |
+| Fundina | funding-coordinator | Funding |
+| Curatora | source-curator | Sources |

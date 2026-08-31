@@ -12,7 +12,10 @@
       "-us": 2,
       "-a": 35,
       "-30": 3
-    }
+    },
+    "canonical_source": "github.com/Ai-Whisperers/growth-coaching/tree/epic/DEMIURGE",
+    "demiurge_branch": "epic/DEMIURGE",
+    "migration_note": "DEMIURGE is the canonical source. Portmanteau names are the LEGACY naming layer for heritage agents awaiting migration to DEMIURGE."
   },
   "agents": {
     "management-coordinator": {
@@ -291,5 +294,37 @@
     "Devin": "engineering-roster",
     "Finus": "finance-controller",
     "Herina": "people-hr"
+  },
+  "demiurge_migration": {
+    "canonical_branch": "epic/DEMIURGE",
+    "canonical_agents_count": 24,
+    "mapping_to_portmanteau_legacy": {
+      "apollo-sales-lead": "Saleina",
+      "cadmus-lead-enrichment": "Prospia",
+      "metis-proposal-drafter": "Proporina",
+      "hera-marketing-lead": "Markina",
+      "calliope-content-producer": "Contentis",
+      "iris-community-monitor": "Iris (no portmanteau)",
+      "athena-product-discovery-lead": "Athena (no portmanteau)",
+      "clio-customer-signal-collector": "Clio (no portmanteau)",
+      "kronos-operations-lead": "Coordina (legacy portmanteau)",
+      "management-coordinator": "Coordina",
+      "business-analyst": "Analisa",
+      "bizops-tracker": "Bizina",
+      "ai-ops-coordinator": "Opsina",
+      "compliance-monitor": "Compla",
+      "hermes-router-revenue": "Hermes (no portmanteau)",
+      "argus-health-monitor": "Argus (no portmanteau)",
+      "thoth-literature-scanner": "Thoth (no portmanteau)",
+      "echo-community-scanner": "Echo (no portmanteau)",
+      "themis-document-classifier": "Themis (no portmanteau)",
+      "mnemosyne-document-archivist": "Mnemosyne (no portmanteau)",
+      "hephaestus-document-miner": "Hephaestus (no portmanteau)",
+      "pheme-document-router": "Pheme (no portmanteau)",
+      "peitho-language-quality": "Peitho (no portmanteau)",
+      "orpheus-recordings-agent": "Orpheus (no portmanteau)"
+    },
+    "heritage_agents_count": 23,
+    "heritage_agents_keep_portmanteau_until_migration": true
   }
 }

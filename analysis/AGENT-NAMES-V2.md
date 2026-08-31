@@ -1,31 +1,22 @@
-# AIW Agent Naming Framework v2 — Portmanteau Names
+# AIW Agent Naming — DEMIURGE is Source of Truth (Portmanteau = Legacy)
 
-> **Purpose**: single canonical reference mapping every AIW agent to its **portmanteau name** following the [Domain Root + Personal Suffix] framework.
-> **Generated**: 2026-08-31 (replaces AGENT-HUMAN-NAMES.md)
-> **Replaces**: the previous Spanish-surname names (Hernán Coordinador, Sofía Vendedora, etc.). Those are still valid but **these portmanteau names are now the canonical conversation names**.
+> **Last updated**: 2026-08-31
+> **CANONICAL**: The DEMIURGE branch (`github.com/Ai-Whisperers/growth-coaching/tree/epic/DEMIURGE`) is the source of truth for the 24 active agents. Each has a **single Greek-mythology name** (Apollo, Hera, Thoth, etc.).
+>
+> **LEGACY**: The portmanteau framework (this document) is the **legacy naming layer** for the 23 heritage agents (constitution v0.2.0/v0.3.0) that have not yet been migrated to DEMIURGE standard.
+>
+> **Migration**: When a heritage agent gets the DEMIURGE treatment (full PROMPT.md + agent.yaml + repo-manifest.yaml in `demiurge/agents/<id>/`), it gets renamed to its Greek-mythology name. The portmanteau name is then deprecated.
+
+## How to read this document
+
+- **DEMIURGE agents** (24): see `/opt/data/scratchpad/analysis/DEPT-AGENTS-ROLES-COMPLETE.md` for the canonical list.
+- **Heritage agents** (23): listed below. They keep their portmanteau name until they get the DEMIURGE treatment.
 
 ---
 
-## Framework
+# LEGACY: Portmanteau framework (pre-DEMIURGE)
 
-```
-[ Domain Root Suffix ]  +  [ Personal Suffix ]  =  [ Functional Identity ]
-       (Sale-)                   (-ina)                    (Saleina)
-```
-
-**Suffix conventions:**
-- `-ina`, `-ia` (feminine/neuter) — broad operational domains
-- `-in`, `-us`, `-is` (masculine/neuter classical) — technical/analytical
-- `-a`, `-o` (Spanish neuter) — agents with Latin/Romance etymology
-
-**Why this works:**
-1. **Context bleed prevention** — generic names like `agent_01` or `sales_agent_v2` obscure routing errors in multi-agent traces. Distinct proper nouns keep tool execution logs and LLM-to-LLM conversation contexts distinct.
-2. **Ergonomic ChatOps** — `@Saleina` in chat vs `/run_workflow sales_pipeline`
-3. **Single-word** — fits in logs, dashboards, cron job names
-4. **Cross-language readable** — Spanish/English speakers both parse the suffix easily
-5. **Function-referential** — the name hints at the domain (Sale→sales, Dev→development, Fin→finance)
-
-**Total**: 54 agents renamed, all unique.
+The 23 heritage agents still use the portmanteau naming framework. Kept here as a transition layer.
 
 ---
 
