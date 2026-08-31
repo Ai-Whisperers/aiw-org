@@ -1,7 +1,7 @@
 # Threat Model
 
 > Who could attack, what they'd target, what defends.
-> **Last updated**: 2026-08-14
+> **Last updated**: 2026-09-01 (L2.8 update)
 
 ---
 
@@ -239,6 +239,140 @@ This threat model does NOT cover:
 
 ---
 
-**Document path**: `/opt/data/agents-v2/THREAT-MODEL.md`
-**Version**: 0.1.0
+**Document path**: `/opt/data/agents/docs/THREAT-MODEL.md`
+**Version**: 0.2.0
 **Last updated**: 2026-08-14
+
+
+---
+
+## ADDENDUM A — Multi-Agent Attack Surface (L2.8, 2026-09-01)
+
+The threat model above predates DEMIURGE integration. The atomic-agent layer introduces new attack vectors not covered in TH-1 through TH-7.
+
+### MAA-1: Atomic agent compromise via composition chain
+
+**Scenario**: An attacker compromises one atomic agent (e.g., `themis-document-classifier`). All 12+ dept agents that list it in `composition:` inherit the compromise vector.
+
+**Defense** (per `composition:` field added in L2.5/L2.6):
+- Per-agent composition lists are bounded (4 agents max in current state)
+- Trust boundaries explicit: each `composition:` agent must be independently vetted
+- Cross-compromise detection: argus-health-monitor watches for correlated failures
+
+**Residual risk**: Medium (no automated composition-graph analysis yet).
+
+**Action item**: L3.2 will add `test_agent_composition.py` to enforce bounded composition depth.
+
+### MAA-2: Hard-stops wrapper enforcement gap
+
+**Scenario**: Per `scripts/lint-prompts.py` audit: 34/34 dept PROMPTs declare hard_stops, BUT 0 agents currently invoke `hard-stops-wrapper.py`. The hard_stops are advisory, not enforced.
+
+**Defense** (planned):
+- Layer 3 will wire up `hard-stops-wrapper.py` as a per-agent pre-action hook
+- Currently relies on LLM compliance with PROMPT.md hard_stops text
+
+**Residual risk**: HIGH (declared but not enforced).
+
+**Action item**: L3 priority item — wire hard-stops-wrapper as pre-action gate.
+
+### MAA-3: Frontmatter-as-attack-vector
+
+**Scenario**: An attacker modifies a PROMPT.md frontmatter (e.g., changes `archetype` to `architect`, granting broader perms) to escalate privileges.
+
+**Defense** (L2.4 + L2.5 + L2.6):
+- All PROMPTs now have structured frontmatter; mods are visible in git diff
+- `scripts/lint-prompts.py` validates schema (catches type confusion)
+- `validate-state.py` does NOT yet enforce frontmatter integrity (gap)
+
+**Residual risk**: Medium (no runtime check on frontmatter changes).
+
+**Action item**: Add frontmatter-hash to state-validation.
+
+### MAA-4: Cron job prompt injection
+
+**Scenario**: A cron job prompt contains attacker-controlled text (e.g., from a doc an agent reads). The prompt runs as cron with cron-context auth.
+
+**Defense**:
+- Pre-commit cron-guard hook blocks commits if `jobs.json` drifts
+- Per L1 precheck: cron-sync via sha256 ensures `/opt/data/cron` and `/opt/data/.hermes/cron` stay in sync
+- Prompts are reviewed before being added to jobs.json
+
+**Residual risk**: Low.
+
+### MAA-5: Cross-repo leak vectors
+
+**Scenario**: Per security-watchdog P5/P7/P8 buckets, secrets can leak across:
+- `/opt/data/work/research-repos/*/.env` (P5: git-tracked PATs)
+- `/opt/data/scratchpad/*/.env` (P7: live-dup)
+- `/opt/data/.git/config` (P8: PATs in remote URLs)
+
+**Defense** (L2.3 + L1):
+- `.gitignore` patterns fixed (L2.3 — 0% → ~96% match rate)
+- security-watchdog-30min runs every 30 min
+- Per L1 audit: 4/5 `.env` files now chmod 600 (5th blocked by root ownership)
+
+**Residual risk**: Medium-High (privilege-bound actions remain; P5/P7/P8 still active).
+
+**Action items (operator)**: revoke 3 GitHub PATs, rotate Supabase service-role, replace 16 R2 presigned URLs.
+
+### MAA-6: AI agent prompt-injection at scale
+
+**Scenario**: An attacker floods org with emails/docs containing injection text targeting all 58 agents (now LLM-readable per Layer 2.5 schema).
+
+**Defense**:
+- All PROMPTs declare `hard_stops` (L2.5/L2.6)
+- L1 security-watchdog flags new exposure classes (P5/P7/P8)
+- Argus-health-monitor + hephaestus-document-miner route external content through classifier
+- peitho-language-quality agent enforces output sanitization
+
+**Residual risk**: Medium (no automated prompt-injection testing yet).
+
+---
+
+## ADDENDUM B — Soul-Improvement Threat Model (L4, gated)
+
+Per `UPGRADE-PROPOSAL-2026-09.md §12`, soul-improvement agents can modify their own PROMPT.md based on signals. This is a high-trust capability.
+
+### SAA-1: Soul agent runaway
+
+**Scenario**: Soul-improvement agent decides to rewrite its own PROMPT to remove hard_stops.
+
+**Defense** (gated):
+- Soul agents run in test environment first (L4.1: not main)
+- Per Proposal §12 staged rollout: test → 1 non-main soul → multiple non-main → never main
+- All soul-agent PROMPT changes logged to state/versioned repo
+- Ivan co-approves (currently requires ivan+kiki per hard_stops schema)
+
+**Residual risk**: Medium (soul agents are inherently self-modifying).
+
+### SAA-2: Soul agent compromise
+
+**Scenario**: Attacker compromises the soul-improvement cron, gets write access to all 58 PROMPT.md files.
+
+**Defense**:
+- Cron job is itself gated by hard_stops (only ivan+kiki can modify soul-improve schedule)
+- All PROMPT changes are git-versioned (full audit trail)
+- Pre-commit hook checks for invalid frontmatter changes
+
+**Residual risk**: Low (with current pre-commit gates).
+
+---
+
+## ADDENDUM C — Updated Action Items (L2.8)
+
+| # | Action | Layer | Status |
+|---|--------|-------|--------|
+| 1 | Wire `hard-stops-wrapper.py` as pre-action gate (MAA-2) | L3 | Pending |
+| 2 | Add `test_agent_composition.py` (bounded composition depth) (MAA-1) | L3 | Pending |
+| 3 | Add frontmatter-hash to state-validation (MAA-3) | L3 | Pending |
+| 4 | Revoke 3 leaked GitHub PATs (MAA-5) | L1 operator | PENDING |
+| 5 | Replace 16 R2 presigned URLs (MAA-5) | L1 operator | PENDING (Kiki) |
+| 6 | chmod /opt/data/.hermes/.env to 600 (MAA-5) | L1 operator | PENDING (root) |
+| 7 | Quarterly threat model review | Ongoing | 2026-11-30 next |
+| 8 | Pre-commit secret-leak-check | L2 followup | Pending |
+
+---
+
+**Updated by**: AI autonomous precheck (L2.8), 2026-09-01
+**Inputs**: L1 audit (PRE-LAYER-1-PREFLIGHT-AUDIT-2026-09.md), L2 findings (LAYER-2-FOUNDATION-SCOPE.md §L2.4-L2.7), security-watchdog 2026-08-31 outbox, Proposal §12
+**References**: `RESEARCH-CITATIONS-2026-09.md §C2 (composition), §C6 (hard-stops), §C7 (cron-guard)`
