@@ -1,12 +1,12 @@
 # AIW Org Upgrade Proposal — 2026-09
 
-> **Status**: DRAFT v1.1.0, awaiting Ivan's approval per phase.
+> **Status**: DRAFT v1.2.0, awaiting Ivan's approval per phase.
 > **Date**: 2026-09-01
 > **Scope**: `aiw-org` repo. **Excludes** `coach/` (moved to `growth-coaching` repo) and all sister repos.
 > **Method**: Local diagnostic + literature grounded in
 > `research/org-design-literature.md` + DEMIURGE architecture docs + `analysis/`
-> catalog + web research on top-10 AI researchers (Karpathy/Sutton/Yao/Schaul/
-> Andreas/LeCun/Bengio/Silver/Brown/Christiano). See
+> catalog + **comprehensive web research** across 27 sources in 3 streams
+> (classic canon + SMB frameworks + AI researchers). See
 > `analysis/RESEARCH-CITATIONS-2026-09.md` for primary sources.
 
 ---
@@ -450,17 +450,20 @@ Top 10 focused on multi-agent / orchestration / eval relevance per Ivan's "(b)" 
 The full original list of 20 + 10 additional researchers deferred (see §10 Appendix:
 acknowledged gaps).
 
-### 6.3.1 Five cross-cutting patterns synthesized
+### 6.3.1 Eight cross-cutting patterns synthesized
 
-After reviewing all 10, **5 patterns** emerge that map to specific phases of this upgrade:
+After reviewing all 27 sources across 3 streams (classic canon + SMB frameworks + AI researchers), **8 patterns** emerge that map to specific phases of this upgrade:
 
 | # | Pattern | Sources | Maps to phase |
 |---|---------|---------|---------------|
-| 1 | **Atomic composition**: small primitives compose into larger capabilities | Andreas (DNMN, NMN), Yao (ReAct, CoALA), Christiano (IDA) | **Phase 3** — `composition:` block |
-| 2 | **Search + learning**: agents both explore options AND improve from outcomes | Sutton (Bitter Lesson), Silver (AlphaZero, MuZero), Karpathy (Software 2.0/3.0) | **Phase 5** — feedback loop runtime |
-| 3 | **Hierarchical abstraction**: agents at different levels manipulate different kinds of representations | Bengio (System 2), LeCun (H-JEPA) | **Phase 3** — `layer:` frontmatter |
-| 4 | **Embedded oversight**: agents operating on themselves / each other need explicit human gates | Schaul (Agent Foundations), Christiano (Alignment via Amplification), Brown (Strategic Interactions) | **Phase 5** — preserves Ivan approval in soul-improvement |
-| 5 | **Reflection & revision**: agents should record what went wrong and adapt | Yao (Reflexion, CoALA), Karpathy (LLM Wiki), Sutton (learn-by-search) | **Phase 5** — outbox + state + soul-improvement |
+| 1 | **Atomic composition**: small primitives compose into larger capabilities | Andreas (NMN), Yao (ReAct/CoALA), Christiano (IDA), **Team Topologies (Platform/Stream-aligned)**, **Mintzberg (adhocracy)** | **Phase 3** — `composition:` + `topology:` block |
+| 2 | **Search + learning**: agents both explore options AND improve from outcomes | Sutton (Bitter Lesson), Silver (AlphaZero/MuZero), Karpathy (Software 2.0/3.0), **Grove (Manager Output Equation)**, **EOS (Traction)** | **Phase 5** — feedback loop runtime |
+| 3 | **Hierarchical abstraction**: agents at different levels manipulate different kinds of representations | Bengio (System 2), LeCun (H-JEPA), **Precup (Options / Time scales)**, **Larson (3 systems)**, **Mintzberg (Fly)** | **Phase 3** — `layer:` frontmatter |
+| 4 | **Embedded oversight**: agents operating on themselves / each other need explicit human gates | Schaul (Agent Foundations), Christiano (Alignment via Amplification), Brown (Strategic Interactions), **Leike (Scalable Oversight)**, **Hadfield-Menell (CIRL)** | **Phase 5** — preserves Ivan approval in soul-improvement |
+| 5 | **Reflection & revision**: agents should record what went wrong and adapt | Yao (Reflexion, CoALA), Karpathy (LLM Wiki), Sutton (learn-by-search), **Hinton (Forward-Forward negative pass)**, **Olah (Mechanistic Interpretability)** | **Phase 5** — outbox + state + soul-improvement |
+| 6 | **Professional + Adhocratic hybrid**: org is professional at dept layer (experts with autonomy), adhocratic at atomic layer (innovation engine) | **Mintzberg (Professional/Adhocracy)**, **Team Topologies**, **Christensen (Autonomous org)** | **Phase 1** — preserve; document explicitly |
+| 7 | **Multi-time-scale operation**: every org runs at multiple time scales simultaneously | **Precup (Options)**, **Grove (cadence)**, **Shape Up (6-week cycles)**, **AIW cron grid**, **Larson (eng/ops/infra)** | **Phase 3** — document in cadence-map |
+| 8 | **Right People in Right Seats**: agents have explicit competence boundaries; escalate outside them | **Wickman (EOS People)**, **Collins (First Who)**, **Grove (TRM)**, **Hadfield-Menell (CIRL)** | **Phase 3** — `composition:` block + `archetype:` field |
 
 ### 6.3.2 Pattern-by-pattern application
 
@@ -545,9 +548,87 @@ require human oversight — Brown + Schaul + Christiano all point to this.
 extends PROMPT template with a "lessons learned" section. Combined: every AIW
 agent has a structured place to reflect + a memory layer that persists across runs.
 
+#### Pattern 6 — Professional + Adhocratic hybrid (Phase 1, document only)
+
+> Mintzberg (1979): 5 organizational configurations — Entrepreneurial, Machine
+> Bureaucracy, Professional, Divisional, Adhocracy. AI-native companies will trend
+> toward Adhocracy.
+>
+> Team Topologies (2019): stream-aligned teams (business-flow-aligned) vs platform
+> teams (infrastructure-as-a-product). The split is exactly our dept/atomic split.
+>
+> Christensen (1997): disruptive orgs must be autonomous to avoid being judged by
+> incumbent metrics.
+
+**Applied as**: Phase 1 explicitly documents in `ORG-AGENTS.md` that AIW is a
+**Professional configuration at the dept layer** (experts with autonomy, standardized
+inputs/outputs) and an **Adhocratic / Platform configuration at the atomic layer**
+(project-based, multidisciplinary). This validates the architecture as the
+literature-consistent answer, not a workaround. **Phase 1 also adds a
+`topology:` field to agent.yaml** per Team Topologies:
+`stream-aligned | platform | enabling | complicated-subsystem`.
+
+**Per-dept mapping to Mintzberg configurations**:
+
+| Dept | Mintzberg config | Team Topologies equivalent |
+|------|------------------|----------------------------|
+| 01-operations | Professional + Machine (mixed) | Stream-aligned + Platform |
+| 02-finance-legal | Machine Bureaucracy (compliance rules) | Complicated Subsystem |
+| 03-sales-growth | Professional + Adhocratic | Stream-aligned (revenue stream) |
+| 04-engineering | Adhocratic | Stream-aligned + Platform |
+| 05-research-education | Adhocratic | Enabling + Complicated Subsystem |
+| 06-people-culture | Professional | Stream-aligned |
+
+#### Pattern 7 — Multi-time-scale operation (Phase 3, document)
+
+> Precup/Sutton/Singh (1999) — Options framework: temporally extended actions
+> over multiple time scales.
+>
+> Grove (1983) — Manager output = sum across activities at different cadences.
+>
+> Shape Up (2019) — 6-week cycles + daily standups + quarterly planning.
+>
+> AIW's cron grid already has 5min/15min/30min/daily/weekly/monthly/quarterly.
+
+**Applied as**: Phase 3 adds an explicit time-scale hierarchy section to
+`ORG-AGENTS.md`. This makes the implicit options framework visible and lets us
+audit it. **Adds `time_scale:` field to PROMPT frontmatter** per agent:
+`seconds | minutes | hours | days | weeks | months | quarters`. Documents the
+cron-vs-options correspondence:
+
+| Cron | Time scale | Option equivalent |
+|------|-----------|------------------|
+| `health.sh` every 5min | seconds | "system heartbeat option" |
+| `heartbeat-alerts-15min` | minutes | "near-real-time monitoring" |
+| `daily-brief` 06:00 | days | "morning intelligence option" |
+| `engineering-roster` Tue/Fri | days | "weekly velocity review" |
+| `finance-controller` Fri | weeks | "weekly cash position" |
+| `board-of-directors` quarterly | quarters | "strategic review option" |
+
+#### Pattern 8 — Right People in Right Seats (Phase 3)
+
+> Wickman (EOS) — "Right People in the Right Seats" — every position needs someone
+> who understands the vision and has the ability.
+>
+> Collins — "First Who Then What" — get the right people on the bus *before* deciding
+> where to drive it.
+>
+> Grove — Task-Relevant Maturity (TRM) — same person has high TRM for familiar work,
+> low TRM for new responsibilities.
+>
+> Hadfield-Menell (CIRL) — agents don't fully know Ivan's true reward function; they
+> must learn it via feedback.
+
+**Applied as**: Phase 3's `composition:` block (Pattern 1) is the "right seat"
+declaration. **Phase 3 also adds `archetype:` field to PROMPT frontmatter** per
+Larson (Pattern 6 + 8): `team-lead | architect | solver | right-hand | specialist`.
+Combined with `topology:` (Pattern 6) and `composition:` (Pattern 1), every agent
+declares its archetype, its position in the org topology, and which atomic agents
+it calls. This is the operational realization of "right people in right seats."
+
 ### 6.3.3 What the research DELTA'd in the original proposal
 
-Two design decisions **changed** after the research pass:
+Two design decisions **changed** after the v1 research pass:
 
 1. **Phase 3 PROMPT frontmatter** now includes `layer:` (atomic/business/governance)
    field — added per LeCun + Bengio's hierarchical-abstraction pattern. Was not in
@@ -567,6 +648,68 @@ One design decision **rejected**:
    vault items on its own initiative is exactly the kind of agent-modifying-itself
    pattern that needs a human gate. **The loader workflow is out of scope for this
    upgrade; if it gets built, it gets its own design + review.**
+
+Five design decisions **added** after the v2 comprehensive research pass:
+
+4. **`topology:` field** (Phase 3 PROMPT frontmatter) — `stream-aligned | platform
+   | enabling | complicated-subsystem`. Per Team Topologies' 4-team-type model.
+   Maps AIW's dept layer to stream-aligned + the DEMIURGE atomic layer to platform.
+   Per Pattern 6.
+
+5. **`archetype:` field** (Phase 3 PROMPT frontmatter) — `team-lead | architect |
+   solver | right-hand | specialist`. Per Will Larson's staff-eng archetypes.
+   Identifies what KIND of agent each is, not just what it does. Per Pattern 8.
+
+6. **`intent_mismatch:` field** in feedback loop runs (Phase 5). Per Hadfield-Menell's
+   CIRL — distinguishes formal KPI breach from informal Ivan-dislikes-this. Per
+   Pattern 4.
+
+7. **Spec-gaming tests in Phase 4** — at least one test per agent asserting "you
+   cannot game your KPI by [known gaming pattern]." Per Anca Dragan's reward
+   hacking research. Dragan's audit table is in the citations file (§C5).
+
+8. **Time-scale hierarchy documented** in `ORG-AGENTS.md` §cadence-map (Phase 3).
+   Adds `time_scale:` field to PROMPT frontmatter (`seconds | minutes | hours |
+   days | weeks | months | quarters`). Maps cron schedules to Precup's Options
+   framework. Per Pattern 7.
+
+**Updated PROMPT frontmatter schema** (Phase 3, additive only):
+
+```yaml
+---
+name: <agent-id>
+version: <semver>
+schedule: <cron>
+owner: <human>
+parent_spec: <path/to/charter>
+state_db: <path>
+fallback_model: <model>
+
+# NEW v1 (research)
+layer: atomic | business | governance      # Pattern 3 — LeCun/Bengio
+
+# NEW v2 (comprehensive)
+topology: stream-aligned | platform | enabling | complicated-subsystem   # Pattern 6 — Team Topologies
+archetype: team-lead | architect | solver | right-hand | specialist     # Pattern 8 — Larson
+time_scale: seconds | minutes | hours | days | weeks | months | quarters   # Pattern 7 — Precup
+
+# NEW v2 (per agent type)
+composition: [<atomic-agent-id>, ...]       # Pattern 1 — Andreas/Christiano
+negative_examples: ["do NOT ..."]           # Pattern 5 — Hinton
+transfer_targets: [<agent-id>, ...]         # Pattern 4 — Singh
+
+hard_stops:
+  - action: <verb>
+    require_approval: bool
+    approved_human: <who>
+---
+```
+
+**Total DELTAs**: **8 design additions** (2 from v1 + 5 from v2 + 1 negative
+from §6.3.3 secret-loader) + **2 design changes** (shadow mode 48h→7d;
+heritage agent migration now explicitly DEMIURGE-082). None of these are
+breaking changes to existing PROMPT files — they are all additive fields
+with sensible defaults.
 
 ### 6.3.4 Citations file
 
@@ -679,8 +822,8 @@ Everything else waits for per-phase greenlight.
 
 ---
 
-**Document version**: 1.1.0 — 2026-09-01 (research pass + DELTA updates incorporated)
+**Document version**: 1.2.0 — 2026-09-01 (comprehensive research v2 + 5 new DELTAs)
 **Author**: Hermes (Ivan's session)
 **Status**: AWAITING REVIEW (Phase 1 greenlight pending)
 **Next review**: After Ivan's feedback on §3, §4, §7, and §11
-**Companion**: `analysis/RESEARCH-CITATIONS-2026-09.md` (web research + citations)
+**Companion**: `analysis/RESEARCH-CITATIONS-2026-09.md` (27 sources, 3 streams)
