@@ -2,15 +2,22 @@
 """hard-stop-wrapper.py — Runtime enforcement of agent hard stops.
 
 Usage:
-    python3 hard-stop-wrapper.py --check <action> <role>
+    python3 hard-stop-wrapper.py --check <action> <role> [--agent AGENT] [--log]
     python3 hard-stop-wrapper.py --validate <agent-name>
 
 The --check mode returns 0 (allowed) or 1 (blocked).
 The --validate mode checks a YAML hard_stops section for syntactic validity.
+
+Importable as a module:
+    from patterns.hard_stop_wrapper import check_action, load_hard_stops
+
+This module is what agents should `import` and call, not the CLI.
 """
+import json
 import sys
 import yaml
 import re
+from datetime import datetime, timezone
 from pathlib import Path
 
 STANDARD_ACTIONS = {
@@ -43,16 +50,43 @@ STANDARD_ACTIONS = {
 
 
 def load_hard_stops(prompt_path: Path) -> list:
-    """Extract hard_stops YAML from PROMPT.md."""
+    """Extract hard_stops YAML from PROMPT.md.
+
+    Supports multiple formats (in order of preference):
+    1. YAML frontmatter (between --- markers at top of file)
+    2. A second --- block (legacy format used by some PROMPTs)
+    3. A bare `hard_stops:` YAML block anywhere in the file
+    4. Markdown section: `## Hard stops` + ```yaml code fence
+    """
     text = prompt_path.read_text()
-    match = re.search(r"## Hard stops\s*```yaml\s*\n(.+?)\n```", text, re.DOTALL)
-    if not match:
-        return []
-    loaded = yaml.safe_load(match.group(1))
-    if isinstance(loaded, dict) and "hard_stops" in loaded:
-        return loaded["hard_stops"]
-    if isinstance(loaded, list):
-        return loaded
+
+    # Format 1+2: YAML frontmatter (try both --- blocks)
+    for fm_match in re.finditer(r"^---\s*\n(.+?)\n---", text, re.DOTALL | re.MULTILINE):
+        loaded = yaml.safe_load(fm_match.group(1))
+        if isinstance(loaded, dict) and "hard_stops" in loaded:
+            stops = loaded["hard_stops"]
+            return stops if isinstance(stops, list) else []
+
+    # Format 3: bare hard_stops block anywhere
+    bare_match = re.search(r"^hard_stops:\s*\n((?:  [^#\n].*\n?)+)", text, re.MULTILINE)
+    if bare_match:
+        try:
+            loaded = yaml.safe_load(bare_match.group(0))
+            if isinstance(loaded, dict) and "hard_stops" in loaded:
+                stops = loaded["hard_stops"]
+                return stops if isinstance(stops, list) else []
+        except yaml.YAMLError:
+            pass
+
+    # Format 4: markdown section with code fence
+    section_match = re.search(r"## Hard stops\s*```yaml\s*\n(.+?)\n```", text, re.DOTALL)
+    if section_match:
+        loaded = yaml.safe_load(section_match.group(1))
+        if isinstance(loaded, dict) and "hard_stops" in loaded:
+            return loaded["hard_stops"]
+        if isinstance(loaded, list):
+            return loaded
+
     return []
 
 
@@ -64,8 +98,12 @@ def check_action(action: str, role: str, hard_stops: list) -> bool:
 
     if rules.get("require_approval", False):
         approved = rules.get("approved_human", "")
+        # Support: "ivan", "ivan+kiki" (any-of), or [list]
         if isinstance(approved, list):
             return role in approved
+        if "+" in approved:
+            # Any-of: role must match any of the joined names
+            return role in approved.split("+")
         return role == approved
 
     return True
@@ -102,6 +140,38 @@ def validate_prompt(agent_name: str) -> tuple:
     return len(errors) == 0, errors
 
 
+LOG_PATH = Path("/opt/data/state/hard-stop-audit.json")
+
+
+def _log_check(agent_name: str, action: str, role: str, allowed: bool) -> None:
+    """Append a check event to the audit log.
+
+    Format: array of {ts, agent, action, role, allowed}
+    """
+    LOG_PATH.parent.mkdir(parents=True, exist_ok=True)
+    entry = {
+        "ts": datetime.now(timezone.utc).isoformat(),
+        "agent": agent_name,
+        "action": action,
+        "role": role,
+        "allowed": allowed,
+    }
+    if LOG_PATH.exists():
+        try:
+            with LOG_PATH.open() as f:
+                log = json.load(f)
+        except (json.JSONDecodeError, OSError):
+            log = []
+    else:
+        log = []
+    log.append(entry)
+    # Cap at 1000 entries
+    if len(log) > 1000:
+        log = log[-1000:]
+    with LOG_PATH.open("w") as f:
+        json.dump(log, f, indent=2)
+
+
 def main():
     if len(sys.argv) < 2:
         print(__doc__)
@@ -109,18 +179,45 @@ def main():
 
     if sys.argv[1] == "--check":
         if len(sys.argv) < 4:
-            print("Usage: --check <action> <role>")
+            print("Usage: --check <action> <role> [--agent AGENT] [--log]")
             sys.exit(2)
         action = sys.argv[2]
         role = sys.argv[3]
-        # In production, load from active agent's PROMPT.md
-        # For now, allow all actions by default
-        allowed = True
+
+        # Parse optional flags
+        agent_name = None
+        do_log = False
+        i = 4
+        while i < len(sys.argv):
+            if sys.argv[i] == "--agent" and i + 1 < len(sys.argv):
+                agent_name = sys.argv[i + 1]
+                i += 2
+            elif sys.argv[i] == "--log":
+                do_log = True
+                i += 1
+            else:
+                i += 1
+
+        # Load hard_stops from agent's PROMPT.md (or default if --agent not given)
+        hard_stops = []
+        if agent_name:
+            prompt_path = Path(f"/opt/data/agents/{agent_name}/PROMPT.md")
+            if prompt_path.exists():
+                hard_stops = load_hard_stops(prompt_path)
+            else:
+                print(f"WARN: PROMPT.md not found for {agent_name}; treating as no hard_stops", file=sys.stderr)
+
+        allowed = check_action(action, role, hard_stops)
+
+        # Optional audit log
+        if do_log:
+            _log_check(agent_name or "<anonymous>", action, role, allowed)
+
         if not allowed:
-            print(f"BLOCKED: action '{action}' not allowed for role '{role}'")
+            print(f"BLOCKED: action '{action}' not allowed for role '{role}' (agent: {agent_name or '<anonymous>'})")
             sys.exit(1)
         else:
-            print(f"ALLOWED: action '{action}' for role '{role}'")
+            print(f"ALLOWED: action '{action}' for role '{role}' (agent: {agent_name or '<anonymous>'})")
             sys.exit(0)
 
     elif sys.argv[1] == "--validate":
