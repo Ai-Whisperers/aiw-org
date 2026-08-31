@@ -1,0 +1,24 @@
+{
+  "2026-08-22": {
+    "first_seen": "2026-08-22T12:30:21.537416+00:00",
+    "last_updated": "2026-08-22T23:00:59Z",
+    "n": 22,
+    "note": "counter.json lacked paths_key in tick31; N recovered from in-text mirror of archived tick31.",
+    "paths_key": "/opt/data/agents/board-of-directors/PROMPT.md|/opt/data/agents/people-hr/PROMPT.md"
+  },
+  "2026-08-23": {
+    "n": 22,
+    "paths_key": ""
+  },
+  "2026-08-24": {
+    "n": 2,
+    "paths_key": ""
+  },
+  "2026-08-31": {
+    "first_seen": "2026-08-31T14:17:04.454172+00:00",
+    "last_updated": "2026-08-31T19:03:37Z",
+    "n": 7,
+    "paths_key": "/opt/data/agents/04-engineering/security-watchdog-30min/PROMPT.md",
+    "note": "tick11: STATE-HELD SILENT (4-tick streak, canonical_paths_sha256_16 198b941838e2ca7a); Pattern 22 size-rollover executed: 2026-08-31.md (78598 B / 98.2% of 80KB) -> 2026-08-31-pt2.md archive; fresh 2026-08-31.md initialized with tick 11 body; watchdog mtime unchanged 2026-08-26T21:02:15Z; held_state_n 3 -> 4 per Lesson 40; post-state-change grace period N=11 of 8..17 applies; origin-chat SILENT"
+  }
+}

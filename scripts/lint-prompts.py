@@ -1,19 +1,17 @@
 #!/usr/bin/env python3
-"""lint-prompts.py — Layer 2.4 enforcer.
+"""lint-prompts.py — Layer 2.4 enforcer (with pyyaml).
 
 Lints all PROMPT.md files in aiw-org for:
-- Required fields: name, version, owner (schedule optional)
+- Required fields: name, version, owner
 - Layer 3 recommended fields: layer, topology, archetype
 - hard_stops schema: each stop has 'action' (str), 'require_approval' (bool)
 - Optional fields: composition (list), negative_examples (list), transfer_targets (list), time_scale (str)
 
-Exits 0 if all pass; 1 if any fail. Per-agent output: name + issues list.
-
-No external deps — uses manual frontmatter parser.
+Exits 0 if all pass; 1 if any fail.
 """
 import os
-import re
 import sys
+import yaml
 from pathlib import Path
 
 ROOT = Path("/opt/data/agents")
@@ -25,55 +23,29 @@ VALID_ARCHETYPES = {"team-lead", "architect", "solver", "right-hand", "specialis
 
 
 def parse_frontmatter(content: str):
-    """Parse simple YAML-like frontmatter into dict. Returns (dict, error_list)."""
+    """Parse YAML frontmatter. Returns (dict, error_list)."""
     issues = []
     if not content.startswith("---"):
         issues.append("missing-frontmatter")
         return None, issues
-    # Find closing ---
-    m = re.search(r"\n---\n", content[3:])
+    m = __import__("re").search(r"\n---\n", content[3:])
     if not m:
         issues.append("malformed-frontmatter")
         return None, issues
     fm_text = content[3:3 + m.start()]
-    fm = {}
-    current_key = None
-    current_list = None
-    list_indent_re = re.compile(r"^\s+-\s+(.*)$")
-    for raw_line in fm_text.split("\n"):
-        if not raw_line.strip():
-            continue
-        # Comment
-        if raw_line.strip().startswith("#"):
-            continue
-        # List item under current_key
-        lm = list_indent_re.match(raw_line)
-        if lm and current_list is not None:
-            current_list.append(lm.group(1).strip().strip('\"\'').rstrip(','))
-            continue
-        # key: value
-        if ":" in raw_line and not raw_line.startswith(" "):
-            k, v = raw_line.split(":", 1)
-            k = k.strip()
-            v = v.strip().strip('\"\'').rstrip(',')
-            if not v:
-                # Start of a list
-                current_key = k
-                current_list = []
-                fm[k] = current_list
-            elif v.lower() in ("true", "false"):
-                fm[k] = (v.lower() == "true")
-            elif re.match(r"^-?\d+$", v):
-                fm[k] = int(v)
-            else:
-                fm[k] = v
-                current_key = None
-                current_list = None
+    try:
+        fm = yaml.safe_load(fm_text)
+    except yaml.YAMLError as e:
+        issues.append(f"yaml-error: {e}")
+        return None, issues
+    if not isinstance(fm, dict):
+        issues.append("frontmatter-not-dict")
+        return None, issues
     return fm, issues
 
 
 def lint_one(prompt_path: Path):
-    """Return list of issues for one PROMPT.md. Empty list = pass."""
+    """Return list of issues for one PROMPT.md."""
     issues = []
     try:
         content = prompt_path.read_text()
@@ -85,34 +57,28 @@ def lint_one(prompt_path: Path):
     if fm is None:
         return issues
 
-    # Required fields
     for field in REQUIRED_FIELDS:
         if field not in fm:
             issues.append(f"missing-required:{field}")
         elif not fm[field]:
             issues.append(f"empty-required:{field}")
 
-    # Layer 3 recommended fields
     for field in RECOMMENDED_LAYER3:
         if field not in fm:
             issues.append(f"missing-recommended:{field}")
 
-    # Validate layer values
     if "layer" in fm and fm["layer"] not in VALID_LAYERS:
         issues.append(f"invalid-layer:{fm['layer']}")
-
-    # Validate topology values
     if "topology" in fm and fm["topology"] not in VALID_TOPOLOGIES:
         issues.append(f"invalid-topology:{fm['topology']}")
-
-    # Validate archetype values
     if "archetype" in fm and fm["archetype"] not in VALID_ARCHETYPES:
         issues.append(f"invalid-archetype:{fm['archetype']}")
 
-    # Validate hard_stops schema
     if "hard_stops" in fm:
         hs = fm["hard_stops"]
-        if isinstance(hs, list):
+        if not isinstance(hs, list):
+            issues.append("hard-stops-not-list")
+        else:
             for i, stop in enumerate(hs):
                 if not isinstance(stop, dict):
                     issues.append(f"hard-stops[{i}]:not-dict")
@@ -126,7 +92,6 @@ def lint_one(prompt_path: Path):
                 elif not isinstance(stop["require_approval"], bool):
                     issues.append(f"hard-stops[{i}]:require_approval-not-bool")
 
-    # Validate composition (list of strings)
     if "composition" in fm and not isinstance(fm["composition"], list):
         issues.append("composition-not-list")
 
@@ -134,10 +99,10 @@ def lint_one(prompt_path: Path):
 
 
 def find_all_prompts():
-    """Find all PROMPT.md files in the repo, excluding archive + venv."""
+    """Find all PROMPT.md files, excluding sister repos + archive."""
     prompts = []
     for root, dirs, files in os.walk(ROOT):
-        if "agents-v2" in root or "/archive" in root or "/.venv" in root or "/.git" in root:
+        if any(x in root for x in ["/agents-v2", "/archive", "/.venv", "/.git", "node_modules"]):
             continue
         for f in files:
             if f == "PROMPT.md":

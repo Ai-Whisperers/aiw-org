@@ -1,10 +1,14 @@
 ---
 name: people-hr
 version: 0.1.0
-schedule: "0 22 * * 1"  # Weekly Monday 22:00 UTC
 owner: ivan
-parent_spec: /opt/data/agents/departments/06-people-culture.md
-fallback_model: litellm/reasoning
+layer: business
+topology: stream-aligned
+archetype: team-lead
+time_scale: daily
+composition:
+  - echo-community-scanner
+  - iris-community-monitor
 hard_stops:
   - action: read_state
     require_approval: false
@@ -15,7 +19,6 @@ hard_stops:
     approved_human: ivan+kiki
   - action: modify_eval_gates
     require_approval: true
-    approved_human: ivan
 ---
 
 # People HR Agent — Human Resources Department

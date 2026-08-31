@@ -1,0 +1,90 @@
+{
+  "agent": "multimedia-monitor-30min",
+  "tick_ts_utc": "2026-08-31T19:14:19Z",
+  "tick_ts_pyt": "2026-08-31T15:14:19-0400",
+  "last_tick_pyt": "2026-08-31T15:14:19-0400",
+  "last_tick_ts_utc": "2026-08-31T19:14:19Z",
+  "canonical_fire_number": 6,
+  "regime": "chronic-suppress (Pattern 71 \u2014 both SHAs stable since fire #1)",
+  "shas_match_prior": true,
+  "analyst_sha_break": false,
+  "research_sha_break": false,
+  "verdict": "OK",
+  "reason": "all 8 thresholds NOT FIRED; chronic-suppress regime binding",
+  "last_verdict": "OK",
+  "highest_severity": "LOW",
+  "routing": "silent",
+  "thresholds_evaluated": [
+    {
+      "metric": "outbox_age_30d",
+      "fired": false,
+      "observed_value": 0,
+      "threshold": 30
+    },
+    {
+      "metric": "outbox_age_14d",
+      "fired": false,
+      "observed_value": 0,
+      "threshold": 14
+    },
+    {
+      "metric": "outbox_age_7d",
+      "fired": false,
+      "observed_value": 0,
+      "threshold": 7
+    },
+    {
+      "metric": "failed_markers",
+      "fired": false,
+      "observed_value": 0,
+      "threshold": 1
+    },
+    {
+      "metric": "queue_not_draining",
+      "fired": false,
+      "observed_value": "ready=0",
+      "threshold": "ready>0 AND outbox>14d"
+    },
+    {
+      "metric": "courses_in_draft>25",
+      "fired": false,
+      "observed_value": 0,
+      "threshold": 25
+    },
+    {
+      "metric": "courses_in_draft>15",
+      "fired": false,
+      "observed_value": 0,
+      "threshold": 15
+    },
+    {
+      "metric": "pipeline_usd==0",
+      "fired": false,
+      "observed_value": null,
+      "threshold": 0
+    }
+  ],
+  "metrics": {
+    "outbox_newest_filename_date": "2026-08-31",
+    "outbox_calendar_age_days": 0,
+    "outbox_mtime_bulk_touched": true,
+    "outbox_failed_markers": 0,
+    "research_courses_ready": 0,
+    "research_courses_in_draft": 0,
+    "analyst_pipeline_usd": null,
+    "queue_len": 38,
+    "research_sha256": "169d130f42211b4e",
+    "analyst_sha256": "aeafe9ff56ac8311",
+    "previous_research_sha256": "169d130f42211b4e",
+    "previous_analyst_sha256": "aeafe9ff56ac8311"
+  },
+  "actions_taken": [],
+  "notes": [
+    "6th canonical fire on this fresh-start stack; chronic-suppress regime still binding (SHAs unchanged since fire #1: research=169d130f42211b4e, analyst=aeafe9ff56ac8311).",
+    "Pattern 51 STATE-PATH guard applied at Step 0 (PROMPT path 404'd, glob fallback returned canonical 03-sales-growth/multimedia-producer/).",
+    "Counter reconciled cleanly (prior index=5, monitor-notes max marker=5 \u2192 this=6, 0-fire lag, 6th contiguous synchronized fire).",
+    "Cadence gap from fire #5 (18:38:27Z) = 35min 29sec \u2014 within 30-min target band (healthy scheduler).",
+    "state-validate.py rc=1 driven by pre-existing coord.json schema drift \u2014 sibling concern, NOT multimedia condition."
+  ],
+  "previous_tick_ts_utc": "2026-08-31T18:38:27Z"
+}

@@ -1,3 +1,15 @@
+---
+name: security-watchdog-30min
+version: 0.2.0
+owner: ai-ops-coordinator
+layer: business
+topology: stream-aligned
+archetype: specialist
+time_scale: daily
+composition:
+  - compliance-monitor
+---
+
 # security-watchdog-30min — Role Specification
 
 ## Purpose
