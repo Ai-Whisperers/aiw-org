@@ -344,3 +344,24 @@ The 90-day plan is the minimum to convert what's already built into recurring re
 - LATAM AI competitors (YvyrAI, Clutch, Consultancy.lat, TechBehemoths)
 
 **Source documents for deeper reading**: see `/opt/data/agents/research/30-research-areas.md` and `/opt/data/agents/research/200-ai-companies.md` for the broader research context.
+
+---
+
+## Per-department research cross-references (added 2026-09-01, Phase 7)
+
+This strategy doc predates the per-dept research catalogs built in Phase 7. For action-oriented research per dept, see:
+
+| Department | Catalog | Key research areas |
+|------------|---------|--------------------|
+| Operations | `research/dept-research/01-operations-research-areas.md` | Self-running org criteria, hard-stops enforcement, cron heartbeat patterns |
+| Finance & Legal | `research/dept-research/02-finance-legal-research-areas.md` | Margin reality check, EU AI Act compliance, funding landscape refresh |
+| Sales & Growth | `research/dept-research/03-sales-growth-research-areas.md` | **Sales funnel revival** (dead pipeline), LATAM market sizing, WhatsApp outreach playbook |
+| Engineering | `research/dept-research/04-engineering-research-areas.md` | 12-factor re-audit post-DEMIURGE, AI safety posture, Phase 25 revisit |
+| Research & Education | `research/dept-research/05-research-education-research-areas.md` | Citation coverage audit, course production methodology, thesis-to-product path |
+| People & Culture | `research/dept-research/06-people-culture-research-areas.md` | Ivan bandwidth audit, Kiki engineering growth path |
+| Board of Directors | `research/dept-research/board-of-directors-research-areas.md` | Co-chair decision-making, quarterly review structure, risk oversight |
+
+**Total per-dept research areas**: 52 (across 7 catalogs).
+**Total cross-org + per-dept research areas**: ~112.
+
+The 90-day action plan in Part 6 should now be cross-referenced against these catalogs.

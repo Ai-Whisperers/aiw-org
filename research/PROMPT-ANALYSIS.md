@@ -326,3 +326,21 @@ Last updated: 2026-08-13 by Erebus
 - `/opt/data/agents/research/STRATEGY.md`
 - `/opt/data/agents/research/188-questions-for-ivan.md`
 - `/opt/data/agents/research/1000-company-questions.md`
+
+---
+
+## Per-department research cross-references (added 2026-09-01, Phase 7)
+
+This prompt analysis was **Engineering & Development** territory (about the agent layer). The matching per-dept research catalog is `research/dept-research/04-engineering-research-areas.md`, which has 10 areas for the engineering dept.
+
+**Related engineering research areas from the per-dept catalog**:
+- #1 12-factor compliance re-audit post-DEMIURGE (many factors affected by Phase 5+6 changes)
+- #2 AI safety engineering — hard-stops + eval gates enforcement (the surprises from Phase 1 L1 audit)
+- #3 Around-the-clock upgrade — Phase 25 revisit (some items from this catalog are now done)
+- #4 Drift detection methodology (drift-detector agent from Phase 5 R6)
+- #5 Chaos testing methodology (chaos-test-runner agent)
+- #6 Eval gate architecture — aggregate pass_rate (the gap surfaced by Phase 5)
+- #7 State-write discipline — pattern formalization
+- #8 Cron heartbeat on/off-hours patterns
+
+**Operations dept** (closely related): `research/dept-research/01-operations-research-areas.md` Areas #1-3 (self-running, hard-stops, cron patterns).

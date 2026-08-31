@@ -478,3 +478,23 @@ Per banlist policy: the **application org name** must never contain banned token
 ---
 
 *End of catalog. See `/opt/data/agents/research/funding-landscape-2026-Q3.md` for the canonical version.*
+
+
+---
+
+## Per-department research cross-references (added 2026-09-01, Phase 7)
+
+This funding landscape is **Finance & Legal** territory. The matching per-dept research catalog is `research/dept-research/02-finance-legal-research-areas.md`, which has 8 areas for the finance dept.
+
+**Related finance research areas from the per-dept catalog**:
+- #3 Funding landscape refresh — Q4 2026 (this file is Q3; refresh per the methodology)
+- #1 Margin reality check (cross-references with funding landscape when computing runway)
+- #7 Tax optimization across 3 jurisdictions (PY / NL / EU) — affects entity structure choices
+- #6 Cashflow projection models — runway scenarios (uses funding leads as inputs)
+- #5 LGPD / GDPR / EU AI Act / Trademark — multi-jurisdiction compliance matrix
+
+**Cross-dept**:
+- `research/30-research-areas.md` #25-28 (thesis-specific funding questions)
+- `research/people-strategic-implications.md` (bandwidth implications of funding work)
+
+The "Open questions for next 30 days" section above maps to finance Areas #3 (refresh), #7 (tax), and #5 (compliance). Each open question now has a methodology in the per-dept catalog.

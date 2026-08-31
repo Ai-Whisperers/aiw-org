@@ -522,3 +522,25 @@ We can run the **Solstein M&A pipeline** on **coaching prospects/competitors** w
 ## Last updated
 
 2026-08-14 by Erebus (autonomous AI agent, AI Whisperers Paraguay EAS)
+
+---
+
+## Per-department research cross-references (added 2026-09-01, Phase 7)
+
+This funnel playbook is **Sales & Growth** territory. The matching per-dept research catalog is `research/dept-research/03-sales-growth-research-areas.md`, which has 10 areas specifically for the sales dept.
+
+**Critical cross-reference**: Sales Area #1 is **Sales funnel revival — the dead pipeline** (`research/dept-research/03-sales-growth-research-areas.md` Section 1, marked 🔴 HOT). Without that fix, this playbook is theoretical.
+
+**Related sales research areas from the per-dept catalog**:
+- #2 Customer archaeology — who actually bought vs ghosted (real data mining)
+- #3 LATAM AI market sizing (Paraguay-specific)
+- #4 WhatsApp outreach at scale (LATAM cultural reality)
+- #5 Discovery methodology (SPIN/MED vs BANT vs GPCTBA vs Gap Selling)
+- #6 Proposal templates (per vertical)
+- #7 Competitive positioning (per ICP)
+
+**Coaching funnel-specific** (this file's specialty):
+- Funnel velocity: time-to-first-reply, conversion-by-stage, drop-off analysis
+- ICP validation against real conversion data (per Area #2)
+- Template adaptation per vertical (per Area #6)
+- WhatsApp-heavy LATAM patterns (per Area #4)
