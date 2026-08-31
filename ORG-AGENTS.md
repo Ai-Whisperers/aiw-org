@@ -603,3 +603,20 @@ GitHub redirects the old URLs automatically, so any links from docs/issues/PRs s
 
 - **Product** (coaching service, GROW methodology, customer tiers, marketing): [`Ai-Whisperers/growth-coaching`](https://github.com/Ai-Whisperers/growth-coaching) (this repo)
 - **Infrastructure** (agent PROMPTs, runtime state, governance, decisions): [`Ai-Whisperers/agent-infra`](https://github.com/Ai-Whisperers/agent-infra)
+
+
+---
+
+## Agent Naming Convention (v2 — portmanteau)
+
+All agents follow the **portmanteau naming framework**:
+```
+[Domain Root] + [Personal Suffix] = [Functional Identity]
+```
+
+Examples: **Saleina** (sales-pipeline), **Devin** (engineering-roster), **Finus** (finance-controller), **Safina** (ai-safety-engineer), **Herina** (people-hr), **Scopia** (scope-intake), **Gatina** (feasibility-gate), **Chaosia** (chaos-test-runner).
+
+Full reference: `/opt/data/scratchpad/analysis/AGENT-NAMES-V2.md` (canonical, 54 agents)
+Machine-readable: `/opt/data/scratchpad/analysis/AGENT-NAMES-V2.json`
+
+The older Spanish-surname names (Hernán Coordinador, Sofía Vendedora, etc.) from `AGENT-HUMAN-NAMES.md` are still valid as informal alternatives.

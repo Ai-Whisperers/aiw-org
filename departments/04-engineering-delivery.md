@@ -184,3 +184,22 @@ Ship client sites, maintain infra uptime, keep the ParaguAI Builder running, dep
 - v0.3.0 (2026-08-28): added sales↔engineering handoff layer — `scope-intake` (Metis proposal → Kiki review), `delivery-tracker` (weekly sales status), `feasibility-gate` (blocks Metis sends without Kiki sign-off). Addresses the gap that Metis was drafting proposals with no technical input. Total sub-agents: 5 → 8.
 - v0.2.0 (2026-08-14): added 24 sub-roles (incl. AI Safety Engineer), 5 sub-agents (incl. ai-safety-engineer), AI Safety protocol, Storage architecture, Cross-references.
 - v0.1.0 (2026-08-13): initial ratification.
+
+
+---
+
+## Agent Naming (Engineering dept)
+
+Engineering's 8 v0.3.0 sub-agents use the org's portmanteau naming framework:
+- `engineering-roster` → **Devin** (the chief)
+- `devops-monitor` → **Devor** (every 30 min infra check)
+- `qa-automation-runner` → **Qualis** (tests + coverage gate)
+- `security-watchdog` → **Securia** (every 30 min security scan)
+- `ai-safety-engineer` → **Safina** (Kiro-class prevention)
+- `scope-intake` → **Scopia** (pre-contract scoping)
+- `delivery-tracker` → **Deliva** (weekly sales status)
+- `feasibility-gate` → **Gatina** (HARD STOP on Metis sends)
+
+Plus cross-cutt: `chaos-test-runner` → **Chaosia** (Engineering dept's chaos-test).
+
+See `/opt/data/scratchpad/analysis/AGENT-NAMES-V2.md` for the full reference.
