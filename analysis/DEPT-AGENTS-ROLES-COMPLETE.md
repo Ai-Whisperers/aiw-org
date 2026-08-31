@@ -6,7 +6,7 @@
 >
 > **Sources** (read on 2026-08-31):
 > - `[ORG-AGENTS.md](../ORG-AGENTS.md) (handoff matrix)` (47-agent roster, handoff matrix, 9-schema producer→consumer graph)
-> - `[ROLES-INVENTORY.md](https://github.com/Ai-Whisperers/growth-coaching/blob/master/ROLES-INVENTORY.md) (137-role catalog)` (~137 roles, 16 functional areas)
+> - `[ROLES-INVENTORY.md](../ROLES-INVENTORY.md) (137-role catalog)` (~137 roles, 16 functional areas)
 > - `[departments/01..06-*.md](../departments/)` (6 Tier-1 charters)
 > - `[packages/](https://github.com/Ai-Whisperers/growth-coaching/tree/master/packages) */agents/` (37 shipped PROMPT.md packages)
 > - `[DEFERRED-AGENTS.md](../DEFERRED-AGENTS.md)` + `DEFERRED-ROLES.md` (triggers)
@@ -28,7 +28,7 @@
 | **Tier-3 deferred departments** | 17 | Activate on triggers (5+ clients, $100K cash, EU client, etc.) |
 | **Tier-4 enterprise depts** | 5 | Only at 50+ people / $1M+ revenue scale |
 | **Total functional areas** | **36** | 6 + 8 + 17 + 5 |
-| **Total roles (target catalog)** | **~137** | Per [ROLES-INVENTORY.md](https://github.com/Ai-Whisperers/growth-coaching/blob/master/ROLES-INVENTORY.md) |
+| **Total roles (target catalog)** | **~137** | Per [ROLES-INVENTORY.md](../ROLES-INVENTORY.md) |
 | **Production agents (running)** | **49** | 34 in [aiw-org](https://github.com/Ai-Whisperers/aiw-org) (6 dept dirs + `board-of-directors/`) + 15 in [coach-agents](https://github.com/Ai-Whisperers/coach-agents) (14 coach-* + kiki-coach) |
 | **DEMIURGE agent souls** | **24** | In `aiw-org/demiurge/agents/`. Greek-mythology names. Specs (not all running). |
 | **Heritage agents (portmanteau names)** | **23** | Awaiting DEMIURGE migration |
@@ -993,7 +993,7 @@ sales/         lead-enrichment, marketing-content-producer,
 - ~146 repos total across the org
 
 ### Sister docs (cross-repo)
-- [`ROLES-INVENTORY.md`](https://github.com/Ai-Whisperers/growth-coaching/blob/master/ROLES-INVENTORY.md) — 137-role catalog (in growth-coaching)
+- [`ROLES-INVENTORY.md`](../ROLES-INVENTORY.md) — 137-role catalog (in growth-coaching)
 - [`ROADMAP-DEPT-EXPANSION.md`](https://github.com/Ai-Whisperers/growth-coaching/blob/master/ROADMAP-DEPT-EXPANSION.md) — Phase 0-4 build order
 - [`PHASE-17..25-*.md`](https://github.com/Ai-Whisperers/growth-coaching/tree/master/) — session upgrade logs
 - [`MASTER-UPGRADE-CHANGELOG.md`](https://github.com/Ai-Whisperers/growth-coaching/blob/master/MASTER-UPGRADE-CHANGELOG.md) — full changelog

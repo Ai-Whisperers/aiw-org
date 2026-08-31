@@ -6,7 +6,7 @@
 > **Structure**: Department → Roles → Sub-roles / Agents → Artifacts
 > **Scope**: 36 functional areas, ~137 roles, **49 production agents** (34 in [aiw-org](https://github.com/Ai-Whisperers/aiw-org) + 15 in [coach-agents](https://github.com/Ai-Whisperers/coach-agents)), 24 DEMIURGE souls + 23 heritage
 > **Source files** (read 2026-08-31):
-> - `[ROLES-INVENTORY.md](https://github.com/Ai-Whisperers/growth-coaching/blob/master/ROLES-INVENTORY.md) (in growth-coaching repo)` (137 roles)
+> - `[ROLES-INVENTORY.md](../ROLES-INVENTORY.md) (in growth-coaching repo)` (137 roles)
 > - `[ORG-AGENTS.md](../ORG-AGENTS.md) (handoff matrix)` (47-agent handoff matrix)
 > - `[departments/01-operations.md](../departments/01-operations.md) ... [06-people-culture.md](../departments/06-people-culture.md)` (6 Tier-1 charters)
 > - `[packages/<dept>/agents/<agent>/PROMPT.md](https://github.com/Ai-Whisperers/growth-coaching/tree/master/packages) (37 shipped packages)` (37 shipped)
@@ -1604,4 +1604,4 @@ This is the ground-truth staffing map right now (2026-08-31):
 *Companion docs:*
 - `[DEPT-AGENTS-ROLES-COMPLETE.md](DEPT-AGENTS-ROLES-COMPLETE.md) (sibling catalog)` — flat catalog
 - `[ORG-AGENTS.md](../ORG-AGENTS.md) (handoff matrix)` — handoff matrix (47 agents, 9 schemas)
-- `[ROLES-INVENTORY.md](https://github.com/Ai-Whisperers/growth-coaching/blob/master/ROLES-INVENTORY.md) (in growth-coaching repo)` — role definitions source
+- `[ROLES-INVENTORY.md](../ROLES-INVENTORY.md) (in growth-coaching repo)` — role definitions source
