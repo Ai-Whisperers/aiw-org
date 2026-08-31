@@ -6,11 +6,11 @@
 > **Structure**: Department → Roles → Sub-roles / Agents → Artifacts
 > **Scope**: 36 functional areas, ~137 roles, 47 agents, 24 DEMIURGE + 23 heritage
 > **Source files** (read 2026-08-31):
-> - `/opt/data/agents-v2/ROLES-INVENTORY.md` (137 roles)
-> - `/opt/data/agents/ORG-AGENTS.md` (47-agent handoff matrix)
-> - `/opt/data/agents/departments/0[1-6]*.md` (6 Tier-1 charters)
-> - `/opt/data/agents-v2/packages/*/agents/*/PROMPT.md` (37 shipped)
-> - `/opt/data/agents/analysis/DEPT-AGENTS-ROLES-COMPLETE.md` (consolidated catalog)
+> - `[ROLES-INVENTORY.md](https://github.com/Ai-Whisperers/growth-coaching/blob/master/ROLES-INVENTORY.md) (in growth-coaching repo)` (137 roles)
+> - `[ORG-AGENTS.md](../ORG-AGENTS.md) (handoff matrix)` (47-agent handoff matrix)
+> - `[departments/01-operations.md](../departments/01-operations.md) ... [06-people-culture.md](../departments/06-people-culture.md)` (6 Tier-1 charters)
+> - `[packages/<dept>/agents/<agent>/PROMPT.md](https://github.com/Ai-Whisperers/growth-coaching/tree/master/packages) (37 shipped packages)` (37 shipped)
+> - `[DEPT-AGENTS-ROLES-COMPLETE.md](DEPT-AGENTS-ROLES-COMPLETE.md) (sibling catalog)` (consolidated catalog)
 >
 > **Last updated**: 2026-08-31
 
@@ -64,7 +64,7 @@ Tier coding used throughout:
 **Cadence**: Biweekly coordination + daily monitoring
 **State file**: `state/coord.json`
 **Schema**: `coord.schema.json`
-**Charter**: `/opt/data/agents/departments/01-operations.md`
+**Charter**: `[departments/01-operations.md](../departments/01-operations.md)`
 **Version**: v0.2.0
 
 **Mission**: Run the org day-to-day. Set cadence. Clear blockers. Surface escalations. Maintain repo + asset hygiene.
@@ -146,7 +146,7 @@ Tier coding used throughout:
   - **GH Action** → blocks PRs with banned tokens
 - **Tools**: `trademark-scan.py`, BWS secrets, banlist file
 - **Signals**: trademark hits, regulatory mentions, license drift
-- **State files**: `state/org-state.json:trademark_hits`, `/opt/data/state/trademark-scan-cron.json`
+- **State files**: `state/org-state.json:trademark_hits`, `runtime state file `state/trademark-scan-cron.json` (canonical location: `state/` on the agent-infra deployment)`
 - **Cadence**: weekly + every 30m scan + every commit pre-hook
 - **Escalates**: trademark hit on client-facing artifact → CRITICAL (Ivan page within 5 min)
 
@@ -201,7 +201,7 @@ Tier coding used throughout:
 **Cadence**: Weekly close + daily analyst
 **State files**: `state/finance.json`, `state/analyst.json`
 **Schemas**: `finance.schema.json`, `analyst.schema.json`
-**Charter**: `/opt/data/agents/departments/02-finance-legal.md`
+**Charter**: `[departments/02-finance-legal.md](../departments/02-finance-legal.md)`
 **Version**: v0.2.0
 
 **Mission**: Own all financial decisions, sign contracts above threshold, monthly close, runway tracking.
@@ -325,7 +325,7 @@ Tier coding used throughout:
   - **License drift** → `ai-ops-coordinator` weekly audit
 - **Tools**: `compliance-monitor` agent, `trademark-scan.py`, banlist file
 - **Signals**: trademark hits, license drift, regulatory mentions
-- **State files**: `state/coord.json:compliance_flags[]`, `/opt/data/state/trademark-scan-cron.json`
+- **State files**: `state/coord.json:compliance_flags[]`, `runtime state file `state/trademark-scan-cron.json` (canonical location: `state/` on the agent-infra deployment)`
 - **Cadence**: weekly Mon 09:00 + every 30m trademark scan + every commit
 - **Escalates**: client-facing trademark hit → CRITICAL
 
@@ -412,7 +412,7 @@ Tier coding used throughout:
 **Cadence**: Daily
 **State file**: `state/sales.json`
 **Schema**: `sales.schema.json`
-**Charter**: `/opt/data/agents/departments/03-sales-growth.md`
+**Charter**: `[departments/03-sales-growth.md](../departments/03-sales-growth.md)`
 **Version**: v0.2.0
 
 **Mission**: Own revenue. Triage inbound, run discovery, close deals, expand accounts. Marketing sub-function reports here.
@@ -617,7 +617,7 @@ Tier coding used throughout:
 **Cadence**: Biweekly
 **State file**: `state/engineering.json`
 **Schema**: `engineering.schema.json`
-**Charter**: `/opt/data/agents/departments/04-engineering-delivery.md`
+**Charter**: `[departments/04-engineering-delivery.md](../departments/04-engineering-delivery.md)`
 **Version**: v0.3.0
 
 **Mission**: Own all technical decisions. Schema/infra PR signoff. Production health + Kiki's bandwidth visibility. End-to-end engineering.
@@ -718,7 +718,7 @@ Tier coding used throughout:
   - **Incident response** → Kiki + alert routing
 - **Tools**: `security-watchdog`, BWS secrets cache
 - **Signals**: secret leak, mode 600 violation, expired creds
-- **State files**: `state/org-state.json:security`, `/opt/data/state/security-watchdog.json`
+- **State files**: `state/org-state.json:security`, `runtime state file `state/security-watchdog.json``
 - **Cadence**: every 30m + biweekly audit
 - **Escalates**: secret leak → CRITICAL (5 min page)
 
@@ -840,7 +840,7 @@ Tier coding used throughout:
 **Cadence**: Weekly
 **State file**: `state/research.json`
 **Schema**: `research.schema.json`
-**Charter**: `/opt/data/agents/departments/05-research-education.md`
+**Charter**: `[departments/05-research-education.md](../departments/05-research-education.md)`
 **Version**: v0.2.0
 
 **Mission**: Knowledge backbone. Thesis + publications pipeline. Course production. Source-material curation.
@@ -988,7 +988,7 @@ Tier coding used throughout:
 **Cadence**: Weekly
 **State files**: `state/kiki.json`, `state/kiki-prep.json`, `state/people.json`
 **Schemas**: `kiki.schema.json`, `kiki-prep.schema.json`, `people.schema.json`
-**Charter**: `/opt/data/agents/departments/06-people-culture.md`
+**Charter**: `[departments/06-people-culture.md](../departments/06-people-culture.md)`
 **Version**: v0.2.0
 
 **Mission**: Coaching product (Kiki is Ivan's client AND the coach agent). People ops when first FTE hires. Cultural backbone.
@@ -1592,6 +1592,6 @@ This is the ground-truth staffing map right now (2026-08-31):
 
 *Generated 2026-08-31 by Erebus. Supersedes any prior org listing.*
 *Companion docs:*
-- `/opt/data/agents/analysis/DEPT-AGENTS-ROLES-COMPLETE.md` — flat catalog
-- `/opt/data/agents/ORG-AGENTS.md` — handoff matrix (47 agents, 9 schemas)
-- `/opt/data/agents-v2/ROLES-INVENTORY.md` — role definitions source
+- `[DEPT-AGENTS-ROLES-COMPLETE.md](DEPT-AGENTS-ROLES-COMPLETE.md) (sibling catalog)` — flat catalog
+- `[ORG-AGENTS.md](../ORG-AGENTS.md) (handoff matrix)` — handoff matrix (47 agents, 9 schemas)
+- `[ROLES-INVENTORY.md](https://github.com/Ai-Whisperers/growth-coaching/blob/master/ROLES-INVENTORY.md) (in growth-coaching repo)` — role definitions source

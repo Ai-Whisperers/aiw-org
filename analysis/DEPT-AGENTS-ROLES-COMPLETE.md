@@ -5,13 +5,13 @@
 > 24 active DEMIURGE agents + 23 heritage agents + 137 roles + 17 Tier-3 depts).
 >
 > **Sources** (read on 2026-08-31):
-> - `/opt/data/agents/ORG-AGENTS.md` (47-agent roster, handoff matrix, 9-schema producer→consumer graph)
-> - `/opt/data/agents-v2/ROLES-INVENTORY.md` (~137 roles, 16 functional areas)
-> - `/opt/data/agents/departments/0[1-6]*.md` (6 Tier-1 charters)
-> - `/opt/data/agents-v2/packages/*/agents/` (37 shipped PROMPT.md packages)
-> - `/opt/data/agents/DEFERRED-AGENTS.md` + `DEFERRED-ROLES.md` (triggers)
-> - `/opt/data/agents-v2/PHASE-{21,22,25}-*.md` (12-factor audit, around-the-clock upgrade)
-> - `/opt/data/agents-v2/ROADMAP-DEPT-EXPANSION.md` (Phase 0-4 build order)
+> - `[ORG-AGENTS.md](../ORG-AGENTS.md) (handoff matrix)` (47-agent roster, handoff matrix, 9-schema producer→consumer graph)
+> - `[ROLES-INVENTORY.md](https://github.com/Ai-Whisperers/growth-coaching/blob/master/ROLES-INVENTORY.md) (137-role catalog)` (~137 roles, 16 functional areas)
+> - `[departments/01..06-*.md](../departments/)` (6 Tier-1 charters)
+> - `[packages/](https://github.com/Ai-Whisperers/growth-coaching/tree/master/packages) */agents/` (37 shipped PROMPT.md packages)
+> - `[DEFERRED-AGENTS.md](../DEFERRED-AGENTS.md)` + `DEFERRED-ROLES.md` (triggers)
+> - `[PHASE-21/22/25-*.md](https://github.com/Ai-Whisperers/growth-coaching/tree/master/) (12-factor + around-the-clock)` (12-factor audit, around-the-clock upgrade)
+> - `[ROADMAP-DEPT-EXPANSION.md](https://github.com/Ai-Whisperers/growth-coaching/blob/master/ROADMAP-DEPT-EXPANSION.md)` (Phase 0-4 build order)
 >
 > **Last upgraded**: 2026-08-31
 > **Author**: Erebus (consolidation pass)
@@ -31,7 +31,7 @@
 | **Total agents (shipped)** | **47** | 7 Tier-1 leads + 14 T2 sub + 8 T3 cross-cut + 4 monitoring + 14 coaching |
 | **DEMIURGE agents (canonical names)** | **24** | Greek-mythology names, full PROMPT+yaml+manifest |
 | **Heritage agents (portmanteau names)** | **23** | Awaiting DEMIURGE migration |
-| **Agent packages built** | **37** | `/opt/data/agents-v2/packages/*/agents/*/PROMPT.md` |
+| **Agent packages built** | **37** | `[packages/<dept>/agents/<agent>/PROMPT.md](https://github.com/Ai-Whisperers/growth-coaching/tree/master/packages) (37 shipped)` |
 | **Active cron jobs** | **92** | After dedup from 116 in Phase 25 |
 | **Coaching skills shipped** | **16** | Tier 1 + Tier 2 |
 | **Eval-gate pass rate** | **86.6%** | Per Phase 22 |
@@ -399,7 +399,7 @@ These use **portmanteau names** (Spanish-surname + Latin suffix) until they get 
 
 ---
 
-## 10. Shipped Agent Packages (37 in `/opt/data/agents-v2/packages/`)
+## 10. Shipped Agent Packages (37 in `[packages/](https://github.com/Ai-Whisperers/growth-coaching/tree/master/packages) `)
 
 ```
 coaching/      coaching-customers, conversion-funnel, course-producer,
@@ -862,7 +862,7 @@ sales/         lead-enrichment, marketing-content-producer,
 ### Infra & monitoring (16 cron jobs)
 | Cron job | Schedule | Purpose |
 |---|---|---|
-| cron-sync | */5 * * * * | sync jobs.json from /opt/data/cron |
+| cron-sync | */5 * * * * | sync jobs.json from `cron/` on the deployment |
 | site-health | */15 * * * * | probe apex + 57 sites |
 | repo-ci-monitor | 0 11 * * * | GitHub Actions probe |
 | rbl-check | 0 12 * * * | trademark scan |
@@ -898,10 +898,10 @@ sales/         lead-enrichment, marketing-content-producer,
 ## 17. Coaching Skills (16 shipped)
 
 ### Tier 1 (4)
-- `/opt/data/skills/coaching/coaching-lead-agents/SKILL.md` (11.8 KB)
-- `/opt/data/skills/coaching/coaching-roi-tracker/SKILL.md` (15.0 KB)
-- `/opt/data/skills/coaching/coaching-content-curator/SKILL.md` (15.0 KB)
-- `/opt/data/skills/coaching/coaching-research-intelligence/SKILL.md` (20.5 KB)
+- `coaching skill `coaching-lead-agents` (in skills/ on the deployment)` (11.8 KB)
+- `coaching skill `coaching-roi-tracker` (in skills/ on the deployment)` (15.0 KB)
+- `coaching skill `coaching-content-curator` (in skills/ on the deployment)` (15.0 KB)
+- `coaching skill `coaching-research-intelligence` (in skills/ on the deployment)` (20.5 KB)
 
 ### Tier 2/3 (12 planned next)
 - Sunstein, Solstein + 10 others
@@ -932,22 +932,22 @@ sales/         lead-enrichment, marketing-content-producer,
 ## 19. Cross-References
 
 ### Local files
-- `/opt/data/agents/ORG-AGENTS.md` — full handoff matrix (47 agents, 9 schemas)
-- `/opt/data/agents/ROLLBACK-PLAYBOOK.md` — 16.2 KB
-- `/opt/data/agents/DEFERRED-AGENTS.md` — deferred agent triggers
-- `/opt/data/agents/DEFERRED-ROLES.md` — deferred role triggers
-- `/opt/data/agents/analysis/AGENT-NAMES-V2.md` — portmanteau legacy layer
-- `/opt/data/agents/analysis/NAMING-CONVENTION-ANALYSIS.md` — naming rationale
-- `/opt/data/agents-v2/ROLES-INVENTORY.md` — 137 roles catalog
-- `/opt/data/agents-v2/ROADMAP-DEPT-EXPANSION.md` — Phase 0-4 build order
-- `/opt/data/agents-v2/PHASE-{17-25}-*.md` — session upgrade logs
-- `/opt/data/agents-v2/MASTER-UPGRADE-CHANGELOG.md` — full changelog
-- `/opt/data/agents-v2/STATE-AUDIT-2026-08-14.md` — state-file audit
-- `/opt/data/agents-v2/12-FACTOR-AUDIT.md` — Factor compliance
-- `/opt/data/agents/departments/0[1-6]*.md` — 6 dept charters
-- `/opt/data/agents-v2/packages/*/agents/*/PROMPT.md` — 37 shipped agents
-- `/opt/data/cron/jobs.json` — 92 cron jobs
-- `/opt/data/state/*.json` — 9 live state files
+- `[ORG-AGENTS.md](../ORG-AGENTS.md) (handoff matrix)` — full handoff matrix (47 agents, 9 schemas)
+- `[ROLLBACK-PLAYBOOK.md](../ROLLBACK-PLAYBOOK.md)` — 16.2 KB
+- `[DEFERRED-AGENTS.md](../DEFERRED-AGENTS.md)` — deferred agent triggers
+- `[DEFERRED-ROLES.md](../DEFERRED-ROLES.md)` — deferred role triggers
+- `[AGENT-NAMES-V2.md](AGENT-NAMES-V2.md) (legacy portmanteau framework)` — portmanteau legacy layer
+- `[NAMING-CONVENTION-ANALYSIS.md](NAMING-CONVENTION-ANALYSIS.md)` — naming rationale
+- `[ROLES-INVENTORY.md](https://github.com/Ai-Whisperers/growth-coaching/blob/master/ROLES-INVENTORY.md) (137-role catalog)` — 137 roles catalog
+- `[ROADMAP-DEPT-EXPANSION.md](https://github.com/Ai-Whisperers/growth-coaching/blob/master/ROADMAP-DEPT-EXPANSION.md)` — Phase 0-4 build order
+- `[PHASE-17..25-*.md](https://github.com/Ai-Whisperers/growth-coaching/tree/master/) (session logs)` — session upgrade logs
+- `[MASTER-UPGRADE-CHANGELOG.md](https://github.com/Ai-Whisperers/growth-coaching/blob/master/MASTER-UPGRADE-CHANGELOG.md)` — full changelog
+- `[STATE-AUDIT-2026-08-14.md](https://github.com/Ai-Whisperers/growth-coaching/blob/master/STATE-AUDIT-2026-08-14.md)` — state-file audit
+- `[12-FACTOR-AUDIT.md](https://github.com/Ai-Whisperers/growth-coaching/blob/master/12-FACTOR-AUDIT.md)` — Factor compliance
+- `[departments/01..06-*.md](../departments/)` — 6 dept charters
+- `[packages/<dept>/agents/<agent>/PROMPT.md](https://github.com/Ai-Whisperers/growth-coaching/tree/master/packages) (37 shipped)` — 37 shipped agents
+- `runtime `cron/jobs.json` (92 jobs after dedup; lives in `cron/` on the deployment)` — 92 cron jobs
+- `runtime state files in `state/` on the deployment` — 9 live state files
 
 ### Repos
 - **agent-infra**: `github.com/Ai-Whisperers/agent-infra` (this doc + analysis + handoff)
