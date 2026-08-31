@@ -1,0 +1,70 @@
+{
+  "agent": "multimedia-monitor-30min",
+  "tick_ts_utc": "2026-08-31T15:09:40Z",
+  "tick_ts_pyt": "2026-08-31T11:09:40-0400",
+  "last_tick_pyt": "2026-08-31T11:09:40-0400",
+  "verdict": "OK",
+  "highest_severity": "LOW",
+  "routing": "silent",
+  "canonical_fire_number": 1,
+  "shas_match_prior": false,
+  "analyst_sha_break": true,
+  "research_sha_break": true,
+  "regime": "post-chronic-suppress (Pattern 71; fresh-start on this stack; prior fires #1-#66 from session lineage not present on disk)",
+  "previous_tick_ts_utc": null,
+  "metrics": {
+    "outbox_newest_filename_date": "2026-08-31",
+    "outbox_calendar_age_days": 0,
+    "outbox_mtime_bulk_touched": true,
+    "outbox_failed_markers": 0,
+    "outbox_file_count": 3,
+    "research_courses_ready": 0,
+    "research_courses_in_draft": 0,
+    "analyst_pipeline_usd": null,
+    "queue_len": 0,
+    "research_sha256": "169d130f42211b4e",
+    "analyst_sha256": "aeafe9ff56ac8311",
+    "previous_research_sha256": null,
+    "previous_analyst_sha256": null
+  },
+  "thresholds_evaluated": [
+    {
+      "metric": "outbox_age",
+      "value": 0,
+      "rule": ">30d CRIT, >14d HIGH, >7d MED",
+      "fired": false
+    },
+    {
+      "metric": "outbox_failed_markers",
+      "value": 0,
+      "rule": ">0 HIGH",
+      "fired": false
+    },
+    {
+      "metric": "courses_ready_x_outbox_age",
+      "value": 0,
+      "rule": "ready>0 AND age>14d HIGH",
+      "fired": false
+    },
+    {
+      "metric": "courses_in_draft",
+      "value": 0,
+      "rule": ">25 HIGH, >15 MED",
+      "fired": false
+    },
+    {
+      "metric": "pipeline_usd",
+      "value": null,
+      "rule": "=0 HIGH (null is gap, not fire)",
+      "fired": false
+    }
+  ],
+  "actions_taken": [],
+  "notes": [
+    "FRESH-START: monitor-notes/ + _last-tick.json did not exist prior to this tick. Skill lineage references fires #1-#66 from prior sessions, but on this live stack both files are absent \u2014 first canonical fire #1 on this run.",
+    "outbox/2026-08-31.md is the multimedia-producer's own NO-OP run note (not an asset); outbox age still computes 0d via filename-date.",
+    "state-validate.py rc=1 driven by coord.json schema drift (pre-existing, sibling concern, not multimedia condition).",
+    "analyst.kpi_snapshot.pipeline_usd=null is a measurement gap (per skill Pitfall), NOT a HIGH fire.",
+    "Threshold evaluation: outbox age=0d (< 7d MEDIUM), failed_markers=0, courses_ready=0 (no drain-fire), courses_in_draft=0 (< 15 MEDIUM), pipeline_usd=null (not 0). All NOT FIRED \u2192 silent routing."
+  ]
+}

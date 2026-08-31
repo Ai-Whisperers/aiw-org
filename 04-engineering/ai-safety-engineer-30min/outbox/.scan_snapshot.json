@@ -1,0 +1,34 @@
+{
+  "scan_time_utc": "2026-08-31T14:47:50+00:00",
+  "tick": "tick2",
+  "total": 68,
+  "compliant": 48,
+  "missing": [
+    "/opt/data/agents/security-watchdog-30min/PROMPT.md"
+  ],
+  "stub_dirs_no_prompt": [
+    "/opt/data/agents/.git/PROMPT.md",
+    "/opt/data/agents/accounting-automation-daily/PROMPT.md",
+    "/opt/data/agents/ai-ops-coordinator-daily/PROMPT.md",
+    "/opt/data/agents/analysis/PROMPT.md",
+    "/opt/data/agents/dashboards/PROMPT.md",
+    "/opt/data/agents/delivery-tracker/PROMPT.md",
+    "/opt/data/agents/departments/PROMPT.md",
+    "/opt/data/agents/dept-monitors/PROMPT.md",
+    "/opt/data/agents/drift-detector/PROMPT.md",
+    "/opt/data/agents/lead-enrichment-daily/PROMPT.md",
+    "/opt/data/agents/proposal-drafter-on-demand/PROMPT.md",
+    "/opt/data/agents/qa-automation-on-pr/PROMPT.md",
+    "/opt/data/agents/research/PROMPT.md",
+    "/opt/data/agents/revops-pipeline-analyzer-daily/PROMPT.md",
+    "/opt/data/agents/schemas/PROMPT.md",
+    "/opt/data/agents/scripts/PROMPT.md",
+    "/opt/data/agents/security-auditor/PROMPT.md",
+    "/opt/data/agents/state/PROMPT.md"
+  ],
+  "mtimes": {
+    "/opt/data/agents/security-watchdog-30min/PROMPT.md": "2026-08-26T21:02:15+00:00"
+  },
+  "paths_key_sha256_16": "005e2dce788897e0",
+  "note": "tick2: held-state; canonical sha byte-identical to tick1; SILENT delivery"
+}

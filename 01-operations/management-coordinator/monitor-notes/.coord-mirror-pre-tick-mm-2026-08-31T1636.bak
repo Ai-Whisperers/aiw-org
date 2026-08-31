@@ -1,0 +1,284 @@
+{
+  "open_stuck": [
+    {
+      "title": "LiteLLM HTTP 402 credit exhaustion (Cerebras + Mistral) — 20+ weekly AIW cron jobs in error since ~2026-08-21 (aiw-kiki-coach-weekly, aiw-finance-controller-weekly, aiw-engineering-roster-biwk, aiw-coach-ivan, aiw-coach-kiki, aiw-coaching-research-intelligence, aiw-coach-roi-tracker, aiw-coach-lead-finder, aiw-tax-receipt-tracker-weekly, aiw-procurement-tracker-weekly, aiw-founder-bandwidth-watchdog-weekly, aiw-compliance-monitor-weekly, aiw-okr-tracker-weekly, aiw-source-curator-weekly, aiw-research-tracker-weekly, ometzdental-weekly-refresh, thesis-weekly-review, thesis-git-maintenance, aiw-management-coord-biwk)",
+      "status": "open",
+      "raised_at": "2026-08-26"
+    },
+    {
+      "title": "aiw-state-validate-15m + aiw-cron-heartbeat-onhours blocked by script path-guard (same root cause thesis-daily-tick hit today 2026-08-24; fix not propagated)",
+      "status": "open",
+      "raised_at": "2026-08-26"
+    },
+    {
+      "title": "aiw-script-tests: Script not found at /opt/data/scripts/bash /opt/data/agents-v2/tests/run-all.sh",
+      "status": "open",
+      "raised_at": "2026-08-26"
+    },
+    {
+      "title": "aiw-funding-weekly-sweep: 600s idle timeout exceeded",
+      "status": "open",
+      "raised_at": "2026-08-26"
+    },
+    {
+      "title": "mcp-health-check: 16/27 MCP servers healthy (11 unhealthy)",
+      "status": "open",
+      "raised_at": "2026-08-26"
+    },
+    {
+      "title": "thesis_watchdog.py false-positive urgent-resume (3 triggers today) — reads an older heartbeat field; project state is healthy (57/87 tasks done, defense materials produced)",
+      "status": "open",
+      "raised_at": "2026-08-26"
+    }
+  ],
+  "decisions_for_ivan": [
+    {
+      "title": "Top up LiteLLM credits (Cerebras + Mistral) — single biggest org-wide blocker; ~20 weekly cron jobs stuck on HTTP 402",
+      "urgency": "MEDIUM",
+      "raised_at": "2026-08-26",
+      "question": "Top up LiteLLM credits (Cerebras + Mistral) — single biggest org-wide blocker; ~20 weekly cron jobs stuck on HTTP 402",
+      "context": "N/A"
+    },
+    {
+      "title": "Decide on 18 stale active repos (47% of active): bulk-archive OR write STATUS.md per repo (latter recommended — preserves history)",
+      "urgency": "MEDIUM",
+      "raised_at": "2026-08-26",
+      "question": "Decide on 18 stale active repos (47% of active): bulk-archive OR write STATUS.md per repo (latter recommended — preserves history)",
+      "context": "N/A"
+    },
+    {
+      "question": "aiw-finance-monitor-30min — finance.json reset to defaults at 2026-08-31T13:39Z (last_run=null, runway_months=null, burn_usd_monthly=null) — restore finance-controller weekly close or escalate",
+      "context": "raised_at=2026-08-31T13:48:55Z | finance.json SHA=70f09895c58f502d… | file age=9.2min (FRESH write, 7.7-8.6min ago) | prior chronic SHA e2abd566…78b5b3 (validated at 2026-08-31T12:28Z) no longer matches — Pattern 30 fresh-fire gate OPEN. Three HIGH fires detected vs PROMPT-monitor.md threshold table: (1) last_run=null (>8d-stale, but actually never-run since file reset); (2) runway_months=null (cascade from burn=null); (3) burn_usd_monthly=null. All three root-cause to a single event: finance-controller weekly close output was reset/rewritten to defaults rather than overwritten with new content. Note: a parallel file /opt/data/state/finance.json (3784B, mtime 2026-08-29T16:07Z) still carries the detailed weekly-close #3 output with last_run=2026-08-28T21:05Z and 5 compliance_flags + OQ-2026-08-26-A burn_measurement open question — so the data exists, but the canonical agent-state finance.json (the one PROMPT-monitor.md watches) was reset. validator rc=0 on scoped finance.json (umbrella rc=1 is chronic pre-existing coord.json warnings, not finance-monitor scope). decisions_for_ivan length 2→3 after this append. Decision needed: (a) restore last weekly-close output to /opt/data/agents/state/finance.json from /opt/data/state/finance.json OR (b) confirm the reset was intentional and trigger finance-controller to run a fresh weekly close. Related: OQ-2026-08-26-A burn_measurement already in finance.json open_questions with deadline 2026-09-04 (procurement-tracker enumeration). The fresh-write fire is separate from the chronic OQ — the OQ was already on the path; the file reset is a new event.",
+      "raised_at": "2026-08-31T13:48:55Z"
+    },
+    {
+      "title": "aiw-people-hr-monitor-30min — people.json reset to defaults at 2026-08-13T16:30Z; last_run=null; lead agent not updating canonical state file for 18 days",
+      "urgency": "HIGH",
+      "raised_at": "2026-08-31T13:52:24.506251Z",
+      "question": "aiw-people-hr-monitor-30min — people.json reset to defaults at 2026-08-13T16:30Z (last_run=null, kiki_lesson_streak_weeks=0, kiki_total_lessons_completed=0, contractors_active=[], contractor_onboarding_queue=[], founder_bandwidth_audit.burnout_signal=null, milestones_recent=[]) — restore people-hr weekly close or escalate. Pattern 30 fresh-fire gate OPEN: file mtime 2026-08-13T16:30:30Z, age 17.9 days (stale > 8d = HIGH per PROMPT-monitor.md rule). ROOT CAUSE: aiw-people-hr-weekly cron failing 5+ days with 'Unknown provider minimax-plan'.",
+      "context": "raised_at=2026-08-31T13:52:24.506251Z | people.json SHA=aee73c982ffd35da… | file age=17.9 days (stale > 8d, HIGH threshold breached) | file size=363B (default schema, never written by lead agent) | last lead outbox 2026-08-21 (10 days ago) — outbox/2026-08-21.md mtime 2026-08-31T13:39Z (mirror-sync touched it but did NOT update people.json) | Pattern 8 cross-ref: /opt/data/agents/state/kiki.json shows streak_weeks_completed=1, lessons_delivered=[{lesson: 'Git rebase vs. merge in a 2-person team', date: 2026-08-26}] (canonical truth is in kiki.json, NOT people.json) | Same root-cause class as aiw-finance-monitor-30min HIGH fire 10 minutes ago: lead-agent weekly close output reset to defaults rather than overwritten with new content | validator rc=0 on scoped people.json (umbrella rc=1 is chronic coord.json warnings, not people-monitor scope) | snapshot history confirms people.json has been IDENTICAL 363B defaults across ALL snapshots 2026-08-17 through 2026-08-24 — this is a chronic state-file drift, not a transient spike | Suggested remediation: trigger people-hr lead weekly close now to overwrite people.json from real inputs (kiki.json, coach-ivan/outbox, contractor pipeline), OR confirm the reset was intentional and add STATUS.md note. Related: monitor-notes/ directory does NOT exist yet — this is first tick writing the directory. | ROOT CAUSE (from cron-error-watchdog.py run at 2026-08-31T13:52:33.836733Z): aiw-people-hr-weekly cron has been in error state since 2026-08-26T20:35:03Z (5+ days) with RuntimeError: 'Unknown provider minimax-plan' — the weekly Monday 22:00 UTC lead-agent run has been crashing for the last 2 scheduled runs. This explains why people.json was never updated post-2026-08-13 reset. Fix path: (a) fix hermes provider config OR (b) switch lead agent fallback_model to litellm/reasoning (per PROMPT.md hard_stops, this is the documented fallback). Alert not sent via Evolution because ALERT_RECIPIENT env var not set (alert_sent=false in watchdog report) — coord.json routing IS the active alert path today."
+    },
+    {
+      "question": "aiw-engineering-monitor-30min — engineering.json last_run=2026-08-25T20:05Z (5.7d ago, >4d threshold) — biweekly cadence missed; engineering-roster agent not refreshing canonical state",
+      "context": "raised_at=2026-08-31T13:54:48.114456+00:00 | HIGH fire #1 of 3 on this tick | last_run=2026-08-25T20:05:00Z, delta=5.74d (threshold: stale>4d) | deploys_7d has 4 entries (not empty, so this is NOT a roster-not-running indicator — likely last_run field not being updated by roster cron) | no failed deploys | no P0/P1 incidents | kiki_commits_7d=77 (healthy) | validator rc=1 only for coord.json (chronic extra-fields noise in existing decisions_for_ivan entries, not this monitor's scope) | engineering.json schema-strict (warning: extra 'site_health_summary' field). Decision needed: (a) restart aiw-engineering-roster-biwk to refresh last_run, or (b) confirm engineering roster is intentionally paused and update the threshold cadence. Related: tools_pending_decision already contains 'triage 5 stale compliance PRs from 2026-08-10' (same 5 PRs that show up in open_prs) — Ivan has not yet responded.",
+      "raised_at": "2026-08-31T13:54:48.114456+00:00"
+    },
+    {
+      "question": "aiw-engineering-monitor-30min — stale_repos_7d=6 repos with no commits >7d (Company-Information, paragu-ai-cv, paragu-ai-clients, saskia, rubiconeas-website, depiflash) — exceeds HIGH threshold of >3; approaches CRITICAL >6",
+      "context": "raised_at=2026-08-31T13:54:48.114456+00:00 | HIGH fire #2 of 3 | stale_repos_7d threshold: >3=HIGH, >6=CRITICAL — at length=6 we are 1 below CRITICAL escalation | 6 stale repos: Company-Information (last_push 2026-08-17), paragu-ai-cv (2026-08-14), paragu-ai-clients (2026-08-13), saskia (2026-08-13), rubiconeas-website (2026-08-12), depiflash (2026-08-10) | crosses biweekly threshold; pattern persistent | historical context: 'Decide on 18 stale active repos (47% of active)' already in decisions_for_ivan — this 6-repo subset is the engineering view, smaller scope. Decision needed: Ivan's prior-decision thread (STATUS.md vs bulk-archive) does NOT yet apply; engineering specifically has 6 of the 18.",
+      "raised_at": "2026-08-31T13:54:48.114456+00:00"
+    },
+    {
+      "question": "aiw-engineering-monitor-30min — incidents_72h=6 open incidents exceeds HIGH threshold of >5 (lead_worker_8787_down, validator_e164_regression, validator_area_case_inversion, mcp_parking_storm, litellm_402_subs, wa_real_group_silence) — 3 are HIGH-severity still open",
+      "context": "raised_at=2026-08-31T13:54:48.114456+00:00 | HIGH fire #3 of 3 | incidents_72d threshold: >5=HIGH, >10=CRITICAL — at length=6 we are 4 below CRITICAL | No P0/P1 so no CRITICAL via severity path | HIGH-severity open incidents (3): (a) lead_worker_8787_down — Rubicón EAS lead form offline, ticks_open=14, root_cause='no wrangler process; operator restart required'; (b) validator_e164_regression — Regex regression, ticks_confirmed=5 (chronic); (c) validator_area_case_inversion — 1 tick confirmed, freshly discovered. Also already in tools_pending_decision: 'restart Lead Worker 8787 (Rubicón EAS lead form offline 14 ticks)' and 'audit Rubicón EAS frontend area field case'. Decision needed: lead worker restart has been pending since 2026-08-26; if Ivan wants the Rubicón EAS pipeline live, the worker restart is the gate.",
+      "raised_at": "2026-08-31T13:54:48.114456+00:00"
+    },
+    {
+      "question": "aiw-coaching-monitor-30min — kiki-coach weekly cron has not advanced state since 2026-08-17 (14.6d); kiki-prep stuck since 2026-08-15 (16.6d) with persistent error 'gh CLI not on PATH'; 3 HIGH fires cluster on a single root cause — restore kiki-coach or escalate",
+      "context": "raised_at=2026-08-31T13:58:53Z | SHA quartet identical to canonical anchor 2026-08-27T22:18Z (kiki=79bfdef9… / kiki-prep=acadc8bf… / coaching-customers=effe0632… / conversion-attempts=9c0e4ee7…) — STATE BYTE-IDENTICAL across 4 days. Three HIGH fires detected vs PROMPT-monitor.md threshold table: (1) kiki.last_run=2026-08-17, age=14.58d (threshold: >8d=HIGH); (2) kiki-prep.as_of=2026-08-15T00:21:34Z, age=16.57d (threshold: >8d=HIGH); (3) kiki-prep.error='gh CLI not on PATH' (threshold: non-null=HIGH). All three root-cause to a single event: aiw-kiki-coach-weekly cron has been erroring. This is corroborated by open_stuck[0] which lists 'aiw-kiki-coach-weekly' among the 20+ weekly AIW cron jobs stuck on LiteLLM HTTP 402 (Cerebras + Mistral credit exhaustion since ~2026-08-21). decisions_for_ivan[0] (raised 2026-08-26) already calls for topping up LiteLLM credits but is sitting MEDIUM with no resolution. NOTABLE: kiki.json and kiki-prep.json mtimes show 2026-08-31T13:39:42Z (~19min ago, FRESH write) but content SHA is byte-identical — sibling-write-mid-day signal class (per tick-coachingmonitor-2218-learnings §2 carry-tick signal classes). A mirror-sync or stale-rewriter touched the files without advancing state. Validator umbrella rc=1 with coord.json errors is chronic pre-existing, not coaching-monitor scope. decisions_for_ivan length 7→8 after this append. COACHING-CUSTOMERS SCHEMA GAP: customer entries lack 'status' and 'renewal_due' fields, so the at_risk/churned/renewal threshold rules cannot fire on current schema (silent gap, document for charter-team). CONVERSION RATE: 5 attempts in 30d, 2 READY verdicts = 40% (above 5% threshold — no fire). DECISION: (a) confirm LiteLLM top-up is in flight and route the coaching-monitor fire cluster as an extension of decisions_for_ivan[0] OR (b) trigger kiki-coach manually with fallback_model=litellm/reasoning per its PROMPT.md to break the 14.6d gap OR (c) accept the gap (coachee may be intentionally paused) and downgrade to MEDIUM.",
+      "raised_at": "2026-08-31T13:58:53Z",
+      "title": "aiw-coaching-monitor-30min — kiki-coach weekly cron has not advanced state since 2026-08-17 (14.6d); kiki-prep stuck since 2026-08-15 (16.6d) with persistent 'gh CLI not on PATH' error; 3 HIGH fires cluster on LiteLLM HTTP 402 root cause",
+      "urgency": "HIGH"
+    },
+    {
+      "question": "aiw-qa-monitor-30min — coaching-content-curator brief at /opt/data/agents/coaching-content-curator/outbox/2026-08-31.md FAILED eval-gate with pass_rate=0.0 (score=0/2, verdict=FAIL); 2 checks failing: word_count=1479 exceeds 100-800 ceiling, AND 8 trademark violations (anthropic, claude, openai, chatgpt, mensaje, wpp, stripe, paypal) — CRITICAL threshold (pass_rate<0.25) breached on a single eval; brief must be rewritten before downstream use",
+      "context": "raised_at=2026-08-31T14:13:04.633569+00:00 | CRITICAL fire #1 of 3 on this tick | eval-per-agent.json by_agent.coaching-content-curator[0]: score=0/2, pass_rate=0.0, verdict=FAIL, ts=2026-08-31T14:04:26Z | FAILURE MODE 1 — word_count: value=1479, expected='100-800' (over by ~85%, brief is bloated) | FAILURE MODE 2 — no_trademarks: 8 violations [anthropic, claude, openai, chatgpt, mensaje, wpp, stripe, paypal] — ALL on the trademark banlist (memory entry 2; Hostinger 2026-Q1 suspension of srv1396188.hstgr.cloud over mensajeconnect.paragu-ai.com impersonation) | 30-day trending: total_briefs=269, pass_rate=86.6%, fail_count=36, low_perf_days=1 — historical pass-rate healthy, this single FAIL drops trending slightly | THRESHOLD RULE: eval-per-agent.*.pass_rate < 0.25 = CRITICAL (PROMPT-monitor.md line 34) | VALIDATOR rc=1 confirmed by state-validate.py (1 error entry: coord.json extra-field warnings, 87 warnings) | validator-also reports validation-report.total_errors=1, which is its own HIGH fire (alert #2) | DECISION NEEDED: (a) reject and regenerate the coaching-content-curator brief with word_count<800 AND zero banlist trademarks OR (b) accept with waiver noting the 8 trademarks are upstream OSS / carve-out terms (carve-outs per memory: 'upstream OSS names (Evolution API); existing package names (incremental rename only)') — but 'anthropic', 'claude', 'openai', 'chatgpt', 'stripe', 'paypal' are NOT carve-outs so waiver would only cover 'mensaje'/'wpp' at most | monitor-notes directory created today (first tick writing here).",
+      "raised_at": "2026-08-31T14:13:04.633569+00:00",
+      "title": "aiw-qa-monitor-30min — coaching-content-curator outbox/2026-08-31.md FAILED eval-gate (pass_rate=0.0); word_count=1479 over 800 ceiling AND 8 trademark violations (anthropic, claude, openai, chatgpt, mensaje, wpp, stripe, paypal)",
+      "urgency": "CRITICAL"
+    },
+    {
+      "question": "aiw-qa-monitor-30min — validation-report.json shows total_errors=1 (HIGH threshold: >0) — coord.json at /opt/data/state/coord.json has extra-field warnings on 25+ decisions_for_ivan entries (title/urgency fields not in coord.schema); same chronic warning class also in /opt/data/agents/state/coord.json (13 entries with title/urgency extra-fields) — schema is tight, agent code writes an enriched shape; remediate by either widening the schema OR stripping title/urgency at write time",
+      "context": "raised_at=2026-08-31T14:13:04.633569+00:00 | HIGH fire #1 of 2 (validation class) | validation-report.summary: files_scanned=41, files_ok=5, files_with_warnings=5, files_with_errors=1, files_skipped=30, total_errors=1, total_warnings=87 | file_with_errors: /opt/data/state/coord.json (errors truncated at 25 — all of class '$.decisions_for_ivan[N]: extra field title/urgency not allowed by schema') | same root cause also warning-state on /opt/data/agents/state/coord.json (13 entries with title/urgency) and on analyst.json (12 warnings) and sales.json (4 warnings) and engineering.json (1 warning) and /opt/data/state/finance.json (2 warnings) | THRESHOLD RULE: validation-report.total_errors > 0 = HIGH (PROMPT-monitor.md line 30) — single error exceeds | ROOT CAUSE: agents writing decisions_for_ivan entries with title+urgency convenience fields; coord.schema only allows question/context/raised_at. Pattern 30 fresh-fire gate: validation report mtime=2026-08-31T14:11:37Z (fresh write ~7min ago), so this is a CURRENT state, not stale residue. | DECISION NEEDED: (a) widen coord.schema.json to permit optional title+urgency on decisions_for_ivan entries OR (b) strip title/urgency at write time in the lead-agent who appends decisions | Side effect: ALL monitor ticks fire HIGH on coord.json — coordination noise. Fix path (a) recommended; affects ~6 monitor roles.",
+      "raised_at": "2026-08-31T14:13:04.633569+00:00",
+      "title": "aiw-qa-monitor-30min — validation-report.total_errors=1 (HIGH threshold >0); coord.json schema-vs-write drift (extra title/urgency fields on 25+ decisions_for_ivan entries)",
+      "urgency": "HIGH"
+    },
+    {
+      "question": "aiw-qa-monitor-30min — engineering.incidents_72h length=6 exceeds HIGH threshold (>5); 3 are HIGH-severity still open (lead_worker_8787_down ticks_open=14, validator_e164_regression ticks_confirmed=5, validator_area_case_inversion ticks_confirmed=1); approaches CRITICAL (>10) — but no P0/P1 so no CRITICAL via severity path",
+      "context": "raised_at=2026-08-31T14:13:04.633569+00:00 | HIGH fire #2 of 2 (engineering incidents class) | incidents_72h=6: [lead_worker_8787_down severity=high ticks_open=14 root_cause='no wrangler process; operator restart required'; validator_e164_regression severity=high ticks_confirmed=5 root_cause='^\\\\d{6,15}$ enforced instead of ^\\\\+[1-9]\\\\d{1,14}$'; validator_area_case_inversion severity=high ticks_confirmed=1 root_cause='validator now lowercase-only (penal/civil); inverse of prior finding'; mcp_parking_storm severity=medium fresh30_count=138 root_cause='mcp 2.x rename mcp.server.fastmcp -> mcp.server.mcpserver.MCPServer; pin mcp<2 to fix'; litellm_402_subs severity=medium events_today=7 root_cause='Cerebras + Mistral subscriptions lapsed'; wa_real_group_silence severity=low gap_hours=15.78 status=band_held root_cause='upstream group quiet; bridge /send 200 OK'] | THRESHOLD RULE: engineering.incidents_72h length > 5 = HIGH (PROMPT-monitor.md line 40); length > 10 = CRITICAL — at 6 we are 4 below CRITICAL | No P0/P1 in the list so no CRITICAL via severity path | 3 of 6 are severity=high still open: lead_worker_8787_down (14 ticks, Rubicón EAS lead form offline, already in tools_pending_decision since 2026-08-26), validator_e164_regression (chronic, 5 ticks), validator_area_case_inversion (freshly discovered) | DECISION NEEDED: (a) operator restart Lead Worker 8787 to close the longest-open incident OR (b) accept the chronic validator_e164_regression as known and patch it next sprint | Related: This fire overlaps with the engineering-monitor's own fires (decisions_for_ivan[5]/[6]/[7]) — qa-monitor is RE-FIRING the same incident cluster from a different vantage, which is correct per PROMPT-monitor.md scope.",
+      "raised_at": "2026-08-31T14:13:04.633569+00:00",
+      "title": "aiw-qa-monitor-30min — engineering.incidents_72h=6 exceeds HIGH threshold (>5); 3 HIGH-severity still open (lead_worker_8787_down 14t, validator_e164_regression 5t, validator_area_case_inversion 1t)",
+      "urgency": "HIGH"
+    },
+    {
+      "question": "aiw-research-monitor-30min — state/research.json has been all-null since at least 2026-08-21 (10+ days); last_run=null and thesis.{chapter,last_commit,target_date,blocker}=null means research-tracker has never recorded a run AND thesis has no detectable progress; underlying cron errors: thesis-weekly-review and thesis-git-maintenance both status=error on LiteLLM HTTP 429 token-plan limit (root_cause shared with decisions_for_ivan[0] LiteLLM credits top-up) — research-tracker is effectively stalled",
+      "context": "raised_at=2026-08-31T14:21:55.571629+00:00 | HIGH fire #1 of 1 on this tick | VALIDATOR: state-validate.py research.json -> 0 errors, 0 warnings (schema-clean) | SNAPSHOT TREND: /opt/data/agents/state/snapshots/*/research.json checked for 2026-08-21T18:00 through 2026-08-24T00:00 (10 snapshots), all byte-identical null state | last_run=null fires HIGH (threshold: stale>8d=HIGH per PROMPT-monitor.md line 32); thesis.last_commit=null ALSO fires HIGH (threshold: stale>7d=HIGH per PROMPT-monitor.md line 17) | CRON ROOT CAUSE: aiw-research-tracker-weekly cron errors include 'thesis-weekly-review RuntimeError: HTTP 429: Token Plan usage limit reached' (seen 2026-08-31T10:01Z) and 'thesis-git-maintenance status=error' (seen 2026-08-31T14:05Z) | RELATED: decisions_for_ivan[0] (LiteLLM credits top-up, raised 2026-08-26) is the upstream root cause for this AND the coaching-monitor fire cluster (decisions_for_ivan[7]) — three monitor roles now firing on the same LiteLLM-exhaustion root cause | OUTBOX EVIDENCE: research-tracker/outbox/2026-08-13.md and 2026-08-14.md show actual thesis work (Chapter 3, 1d-since commit) but the state file never received those updates — agent code may not be writing back, separate from cron errors | NO MONITOR-NOTES DIR: /opt/data/agents/research-tracker/monitor-notes/ does not exist (sibling monitors hit this same gap today) | PROMPT PATH DRIFT: PROMPT-monitor.md says watch /opt/data/agents/state/research.json (correct) but the previous cron tick logs show /opt/data/agents/research-tracker/research.json being read (wrong path) — fixed in this tick | DECISION NEEDED: (a) confirm LiteLLM top-up resolves the research-tracker cron errors AND research-tracker agent code is updated to write thesis state back to research.json on each run OR (b) accept the research-tracker stall (thesis may be intentionally paused) and downgrade to MEDIUM | Side effect: thesis tracker stall blocks any agent needing research.json (none currently, but blocks downstream customer-facing content).",
+      "raised_at": "2026-08-31T14:21:55.571629+00:00"
+    },
+    {
+      "id": "sales-monitor-20260831T143135Z",
+      "raised_at": "2026-08-31T14:31:35.413193+00:00",
+      "raised_by": "aiw-sales-monitor-30min",
+      "severity": "CRITICAL",
+      "title": "sales-monitor CRITICAL+HIGH: zero funnel in 30d + last_run stale 190.5h + richar-ruiz stalled 22d (queue NOT saturated, canonical APPEND)",
+      "summary": "sales.json funnel_30d all-zero (contracts_signed=0 CRITICAL; leads=0 HIGH; proposals_sent=0 HIGH; calls_booked=0 MEDIUM). last_run=2026-08-23T16:00:50Z → stale 190.50h (>26h HIGH band; >18h MEDIUM). stalled_deals=[richar-ruiz-2026-08-01: 22d stalled, internal_approval] → >14d HIGH (NOT >30d CRITICAL). leads_in_flight=[richar-ruiz-2026-08-01] (length=1, no length fire). outreach_queue_today=1 (no fire). open_questions=2 (no fire). Validator: sales.json warnings only (extra fields), 0 errors. Doctrine: decisions_for_ivan queue depth=12 (NOT >400) → Pattern 45 SUPPRESS does NOT bind; canonical APPEND per PROMPT routing. Pattern 16 sibling coverage: no other monitor currently filing sales-specific findings. Action: restart sales-pipeline (8d since last run); resolve OQ-2026-08-22-A (Worker WEBHOOK_URL secret unset) + OQ-2026-08-22-B (landing page returns ExpiredRequest R2 XML).",
+      "fires": [
+        {
+          "severity": "CRITICAL",
+          "metric": "funnel_30d.contracts_signed",
+          "value": 0,
+          "duration": "rolling 30d"
+        },
+        {
+          "severity": "HIGH",
+          "metric": "funnel_30d.leads",
+          "value": 0,
+          "duration": "current 30d"
+        },
+        {
+          "severity": "HIGH",
+          "metric": "funnel_30d.proposals_sent",
+          "value": 0,
+          "duration": "rolling 7d+"
+        },
+        {
+          "severity": "HIGH",
+          "metric": "last_run stale",
+          "value_hours": 190.5,
+          "duration": ">26h HIGH band"
+        },
+        {
+          "severity": "HIGH",
+          "metric": "stalled_deals:richar-ruiz-2026-08-01",
+          "value_days": 22,
+          "duration": ">14d HIGH band"
+        },
+        {
+          "severity": "MEDIUM",
+          "metric": "funnel_30d.calls_booked",
+          "value": 0,
+          "duration": "rolling 30d <3 MEDIUM"
+        },
+        {
+          "severity": "MEDIUM",
+          "metric": "last_run stale (also)",
+          "value_hours": 190.5,
+          "duration": ">18h MEDIUM band (subsumed by HIGH >26h)"
+        }
+      ],
+      "evidence": {
+        "sales_json_sha": "e0e67260603f00ca",
+        "sales_json_size_bytes": 5203,
+        "last_run": "2026-08-23T16:00:50Z",
+        "stale_hours": 190.5,
+        "leads_in_flight_count": 1,
+        "stalled_deal_id": "richar-ruiz-2026-08-01",
+        "stalled_days": 22,
+        "stalled_reason": "internal_approval — Kiki approval pending since 2026-08-01",
+        "open_questions": [
+          {
+            "id": "OQ-2026-08-22-A",
+            "topic": "webhook_config",
+            "raised_to": "Ivan",
+            "raised_on": "2026-08-22",
+            "blocking": true,
+            "detail": "rubiconeas-lead Worker WEBHOOK_URL secret unset; cannot enumerate lead submissions"
+          },
+          {
+            "id": "OQ-2026-08-22-B",
+            "topic": "landing_page_broken",
+            "raised_to": "Ivan+eng",
+            "raised_on": "2026-08-22",
+            "blocking": true,
+            "detail": "rubiconeas.paragu-ai.com/ returns ExpiredRequest R2 XML (118B); landing page broken end-to-end"
+          }
+        ],
+        "validator_status": "warning (no errors; sales.json schema-valid with extra-field warnings on funnel_30d.note, compliance_flags, evidence, runs_today)"
+      },
+      "action_required": "Restart sales-pipeline (8d since last run; 3-4x/day cadence broken). Resolve OQ-2026-08-22-A (Worker WEBHOOK_URL secret) + OQ-2026-08-22-B (landing page R2 cache). Approve richar-ruiz outreach ($6.5K-$22.5K, 22d stalled).",
+      "doctrine_notes": [
+        "Pattern 45 saturation NOT binding (decisions_for_ivan=12, threshold >400) — canonical APPEND per PROMPT-monitor.md routing.",
+        "Pattern 16 sibling coverage: no current sales-domain sibling filings; sales-specific finding is sole-owner.",
+        "R16 write_file trap avoided: this tick writes via execute_code open('a'), not write_file.",
+        "Day-boundary: today is 2026-08-31. monitor-notes/2026-08-31.md is 0B pre-state (natural rollover already handled yesterday 2026-08-30)."
+      ]
+    },
+    {
+      "question": "aiw-management-monitor-30min — stale_repos_count=18 (scalar in /opt/data/agents/state/coord.json) exceeds CRITICAL threshold of >15 per PROMPT-monitor.md; stale_repos[] array is empty (PROMPT-vs-disk drift, Pitfall 71 carry); 18 stale repos persisted since 2026-08-26. Reference prior carry: backup coord.backup-pre-mm-monitor-2026-08-30T130737.json (2026-08-30T13:07:37Z).",
+      "context": "raised_at=2026-08-31T14:43:14.311411+00:00 | source: management-monitor | pattern-71-self-loop | CRITICAL fire | stale_repos array length=0 (PROMPT spec target) but stale_repos_count scalar=18 (canonical value) — Pattern 71 carry doctrine: use the scalar (umbrella operations-monitor reference 2026-08-31 documents this exact rule-side framing; operations-monitor #57 cites same scalar carries). Threshold mapping: stale_repos > 15 = CRITICAL per PROMPT-monitor.md line 33. Carry regime since 2026-08-26 (~5 days). Cross-ref: 'Decide on 18 stale active repos' already in decisions_for_ivan[1] (raised 2026-08-26, MEDIUM, unresolved) — mm self-loop carries the scalar threshold signal.",
+      "raised_at": "2026-08-31T14:43:14.311411+00:00"
+    },
+    {
+      "question": "aiw-management-monitor-30min — open_stuck length=6 exceeds HIGH threshold of >6 per PROMPT-monitor.md (length>6=HIGH, length>3=MEDIUM, length>12=CRITICAL); 6 stuck items persist across agents since 2026-08-26 — LiteLLM HTTP 402 cascade (covers 20+ weekly AIW cron jobs), state-validate path-guard blocker, script-tests path bug, funding-weekly 600s timeout, mcp-health 11/27 unhealthy, thesis-watchdog false-positive.",
+      "context": "raised_at=2026-08-31T14:43:14.311411+00:00 | source: management-monitor | pattern-71-self-loop | HIGH fire | open_stuck[0..5]: (0) LiteLLM HTTP 402 (Cerebras+Mistral) covering 20+ weekly AIW crons since 2026-08-21; (1) state-validate-15m + cron-heartbeat-onhours path-guard blocker; (2) script-tests Script not found at /opt/data/scripts/bash /opt/data/agents-v2/tests/run-all.sh (path bug); (3) funding-weekly-sweep 600s idle timeout; (4) mcp-health-check 16/27 MCP healthy (11 unhealthy); (5) thesis_watchdog.py false-positive urgent-resume. Age check: all raised 2026-08-26, age ~5 days (no items >14d threshold breach). All 6 share root-cause cluster: LiteLLM credit exhaustion affects 1+; funding/mcp/thesis each have their own root cause.",
+      "raised_at": "2026-08-31T14:43:14.311411+00:00"
+    },
+    {
+      "question": "aiw-management-monitor-30min — coord.json state-validate.py rc=1 (HIGH per PROMPT-monitor.md step 2: Invalid → HIGH); direct jsonschema probe confirms 11 errors (chronic pre-existing) — 25+ decisions_for_ivan entries carry title/urgency convenience fields violating coord.schema additionalProperties:false; entry[12] (sales-monitor) missing required 'question'+'context' fields. Validator must be rc=0 for state hygiene.",
+      "context": "raised_at=2026-08-31T14:43:14.311411+00:00 | source: management-monitor | pattern-71-self-loop | HIGH fire | validator output: files_with_errors=2, total_errors=4 (truncated at 25), validation-report.verdict=FAIL. Direct jsonschema probe (Pitfall 33): real error count=11 on coord.json. Error classes: (a) $.decisions_for_ivan[12] missing required field 'question'/'context' (sales-monitor composite entry); (b) 25+ entries with extra 'title'/'urgency' fields. Cross-ref: qa-monitor 14:13:04Z already fired HIGH on same root cause (decisions_for_ivan[9] at coord.json:validation-errors). Schema-strict discipline (Pitfall 33b): mm self-loop entries use ONLY {question, context, raised_at} to avoid amplifying the very bug mm reports. Two fix paths: (a) widen coord.schema.json to permit title+urgency on decisions_for_ivan entries (affects ~6 monitor roles); (b) strip title/urgency at write time in the lead-agent that appends decisions.",
+      "raised_at": "2026-08-31T14:43:14.311411+00:00"
+    },
+    {
+      "question": "aiw-board-monitor-30min — funding_coordinator_agent_active=false for 17d (canonical funding.json last_updated=2026-08-14, 3.6d past >14d HIGH cliff) AND funding-coordinator/outbox/ directory MISSING (never existed; vacuously ≥14d); both trace to funding-coordinator lead-agent silent since 2026-08-14, same root cause cluster as LiteLLM HTTP 402 cascade affecting ~20 weekly AIW crons",
+      "context": "raised_at=2026-08-31T14:47:10.254931+00:00 | HIGH fire cluster (A+B coalesced, single root cause) | Pattern 30 fresh-fire gate TRIGGERED: canon funding.json sha=585c5f93ab6ea6f5 (canonical 718B 17d old) differs from prior tick's mirror-read b23fa20072 — 13:44Z tick mis-read MIRROR as canonical (Pitfall 51 path-drift), reported fc_active=false as ~41h instead of 17d (BELOW threshold), so the canonical-age-17d HIGH threshold breach is NEW this tick | NO-APPEND calculus: gap-minimum nominally fires (own_self gap=59.8min < 90min) but Pattern 30 fresh-fire outweighs SHORT-coalesce | coord.json mirror-drift REPAIRED pre-write via shutil.copy2(canon→mirror): mirror was qlen=13 stale (3 entries dropped since 13:44Z); canon qlen 16 → 17 post-append | funding.json mirror ALSO REPAIRED: was 1285B stale 2026-08-28 archive state, canon is 718B pre-archive baseline (mrr=240 rubicon-eas, leads_in_flight=[richar-ruiz]) | Pre-tick backups: /opt/data/agents/board-of-directors/monitor-notes/.coord-mirror-pre-tick.bak, .funding-mirror-pre-tick.bak | Threshold mapping: funding_coordinator_agent_active=false for 14d+ = HIGH (PROMPT-monitor.md line 41) — 17d ≥ 14d → FIRE; funding-coordinator/outbox/ no file in 14d = HIGH (line 44) — vacuously satisfied ≥14d → FIRE | Pattern 19 freshest-sibling-INSIDE-SHORT NOT FOUND: only sales-monitor @ 14:31Z (gap=13.2min, INSIDE SHORT) covers sales-domain not funding-domain; management-monitor @ 14:43:14Z (gap=1.5min, INSIDE SHORT) covers open_stuck which includes funding-weekly-sweep but NOT the canonical-age threshold breach | Watchdog invoked: /opt/data/scripts/cron-error-watchdog.py — EVOLUTION env all UNSET → expect alert_sent=false (Pattern 1.7 single-fire honored) | Hard stops: funding.json NOT modified (read-only), no outreach/contact (Hard Stop #3), Pattern 33b schema-strict discipline honored (only {{question, context, raised_at}} keys, no extras).",
+      "raised_at": "2026-08-31T14:47:10.254931+00:00"
+    },
+    {
+      "question": "qa-monitor CRITICAL: engineering.incidents_72h contains 3 P0/P1-severity items (rule: any P0/P1 = CRITICAL). Open: lead_worker_8787_down (14 ticks, no wrangler process; operator restart required), validator_e164_regression (5 ticks confirmed; regex ^\\d{6,15}$ enforced instead of ^\\+[1-9]\\d{1,14}$), validator_area_case_inversion (1 tick confirmed; lowercase-only inverse of prior). Plus incidents_72h length=6 itself exceeds the >5 HIGH band.",
+      "context": "Source: /opt/data/agents/state/engineering.json (incidents_72h); /opt/data/state/validation-report.json (verdict FAIL). Already pending in tools_pending_decision since 2026-08-26: restart Lead Worker 8787, audit Rubicón EAS frontend area field case. Validator regression affects /api/lead. Action: operator restart Lead Worker 8787; revert validator regex + area-case normalization.",
+      "raised_at": "2026-08-31T14:57:50+00:00"
+    },
+    {
+      "question": "qa-monitor CRITICAL: validation-report.total_errors escalated 1→6 (rule: >5 = CRITICAL). Two distinct files now report schema-vs-write drift on coord.json:decisions_for_ivan[12] missing required field question/context + (truncated at 25 errors) extra-field warnings on entries 0,1,3,7,8,9,10. Files with errors=2 (rule: >3=HIGH, currently OK).",
+      "context": "Source: /opt/data/state/validation-report.json. Root cause: every monitor that appends to coord.json uses legacy title/urgency keys; coord.schema.json:additionalProperties=false rejects them. Same drift in /opt/data/agents/state/coord.json (duplicate). Decision needed: widen coord.schema.json to permit optional title/urgency+severity+raised_by+summary+id+action_required+doctrine_notes+evidence+fires — OR strip at write-time. qa-monitor going forward writes only {question, context, raised_at}.",
+      "raised_at": "2026-08-31T14:57:50+00:00"
+    },
+    {
+      "question": "qa-monitor CRITICAL: eval-per-agent.ai-safety-engineer-30min consecutive_failures=10 ≥5 (rule CRITICAL). All 10 recent evals FAIL; pass_rate of latest 0.44; briefs from 2026-08-24 + 2026-08-31.",
+      "context": "Source: /opt/data/state/eval-per-agent.json (ai-safety-engineer-30min key). Eval-gate consistently failing on this agent — likely a fixture/check mismatch on AIW safety brief format. Action: ai-safety-engineer owner audits rubric; qa-automation-runner does not re-run evals.",
+      "raised_at": "2026-08-31T14:57:50+00:00"
+    },
+    {
+      "question": "qa-monitor CRITICAL: eval-per-agent.coaching-quality-reviewer consecutive_failures=10 ≥5 (rule CRITICAL). Pass_rate latest 0.33; 10 FAILs; briefs 2026-08-24 + 2026-08-31.",
+      "context": "Source: /opt/data/state/eval-per-agent.json (coaching-quality-reviewer key). Owner should audit reviewer tick template; may be impacted by tick-22 / trademark scrub interactions.",
+      "raised_at": "2026-08-31T14:57:50+00:00"
+    },
+    {
+      "question": "qa-monitor CRITICAL: eval-per-agent.devops-monitor-30min consecutive_failures=10 ≥5 (rule CRITICAL). Pass_rate latest 0.56 (5/9); 10 FAILs; briefs 2026-08-24 + 2026-08-31.",
+      "context": "Source: /opt/data/state/eval-per-agent.json (devops-monitor-30min key). Eval-gate failing on brief structure. Action: devops-monitor owner audits against tick-discipline skill.",
+      "raised_at": "2026-08-31T14:57:50+00:00"
+    },
+    {
+      "question": "qa-monitor CRITICAL: eval-per-agent.security-watchdog-30min consecutive_failures=9 ≥5 (rule CRITICAL). Pass_rate latest 0.33; 9 FAILs spanning 2026-08-15..2026-08-31.",
+      "context": "Source: /opt/data/state/eval-per-agent.json (security-watchdog-30min key). Action: security-watchdog owner reviews tick-discipline + eval-gate rubric.",
+      "raised_at": "2026-08-31T14:57:50+00:00"
+    },
+    {
+      "question": "qa-monitor HIGH (consolidated): 15 distinct HIGH-severity fires on eval-per-agent (rule: pass_rate<0.5 or consecutive_failures≥3). coaching-content-curator consecutive_failures=3 (HIGH ≥3); accounting-automation-daily pass_rate=0.44 (HIGH <0.5); ai-ops-coordinator-daily pass_rate=0.44 (HIGH <0.5); ai-safety-engineer-30min pass_rate=0.44 (HIGH <0.5); board-of-directors pass_rate=0.44 (HIGH <0.5); coach-conversion-agent consecutive_failures=3 (HIGH ≥3); coaching-quality-reviewer pass_rate=0.33 (HIGH <0.5); delivery-tracker pass_rate=0.44 (HIGH <0.5); finance-controller consecutive_failures=3 (HIGH ≥3); multimedia-producer pass_rate=0.44 (HIGH <0.5); proposal-drafter-on-demand pass_rate=0.33 (HIGH <0.5); qa-automation-on-pr pass_rate=0.44 (HIGH <0.5); qa-automation-runner pass_rate=0.33 (HIGH <0.5) — THIS monitor's own agent failing eval-gate; sales-pipeline consecutive_failures=4 (HIGH ≥3); security-watchdog-30min pass_rate=0.33 (HIGH <0.5). Of note: qa-automation-runner itself is in this list (pass_rate=0.33) — the watchdog is being scored by eval-gate and failing its own checks.",
+      "context": "Source: /opt/data/state/eval-per-agent.json. 380 evals, 4 PASS, 376 FAIL — aggregate pass rate 1.05%. Owners: per agent folder. Many of these are chronic and span 2+ weeks. Action: per-agent audit, not single fix. Owners listed in tick-22 + tick-discipline skills.",
+      "raised_at": "2026-08-31T14:57:50+00:00"
+    },
+    {
+      "question": "aiw-research-monitor-30min — research.json SHA unchanged (169d130f42211b4e) for 17.9 days; state-file-write bug persists with REAL thesis activity in /opt/data/thesis-active/ (last_commit=2026-08-31T06:25:38Z, age=0.36d, T113-split: Cap. 4 substantive skeleton) — restore research-tracker cron write-back OR explicitly accept the gap",
+      "context": "raised_at=2026-08-31T15:06:23.171717+00:00 | tick #15 (canonical research-monitor 30-min cron, fired 2026-08-31T15:01:08Z, completing now) | research.json SHA=169d130f42211b4e (size 269B, mtime 2026-08-13T16:30:30Z, age 17.94d) — byte-identical null state across 5+ snapshots checked (2026-08-23T00Z..2026-08-24T00Z all match 169d130f42211b4e) | validator rc=0 on scoped research.json (umbrella rc=1 is chronic pre-existing coord.json warnings, NOT research-monitor scope) | THREE HIGH fires still active vs PROMPT-monitor.md threshold table: (1) last_run=null — threshold 'stale>8d=HIGH' breached (file is 17.94d old, never written); (2) thesis.last_commit=null — threshold 'stale>7d=HIGH / >14d=CRITICAL' breached (research.json thesis block null, 17.94d); (3) cross-corroboration: thesis-active/ git log proves REAL thesis work IS happening (a21d429 T113-split Cap. 4 substantive skeleton 2026-08-31T06:25:38Z, age 0.36d) but research-tracker cron has not advanced research.json since 2026-08-13 — separate agent-code write-back bug from cron errors | QUEUE: decisions_for_ivan length 24 (well below Pattern 45 SUPPRESS >400) → canonical APPEND per PROMPT-monitor.md routing | PATTERN 30 fresh-fire gate: research.json SHA 169d130f42211b4e unchanged since prior canonical tick (decision_for_ivan[11] 2026-08-31T14:21:55Z) → NO fresh SHA-break, BUT fires are CHRONIC/STILL-ACTIVE not transient (file is 17.94d null with thesis actively progressing in /opt/data/thesis-active/) → APPEND per doctrine (the fire never discharged; HIGH is the standing state until file is written or operator accepts gap) | SIBLING COVERAGE: Pattern 16 — no other monitor currently filing research-domain specific findings (coaching/finance/people/engineering/management/board all on LiteLLM-cluster root cause; qa-monitor CRITICAL fires on eval-per-agent/engineering incidents are QA-scope, not research-domain) → research-monitor is sole-owner for this cluster | ROOT CAUSE CONFIRMATION: aiw-research-tracker-weekly cron errors seen today 2026-08-31T10:01Z and 14:05Z with 'thesis-weekly-review RuntimeError: HTTP 429: Token Plan usage limit reached' and 'thesis-git-maintenance status=error' — same LiteLLM HTTP 429/402 token-plan-exhaustion root cause as decisions_for_ivan[0] (top-up raised 2026-08-26) and decisions_for_ivan[7] (coaching-monitor kiki-coach stall 2026-08-31) | SECOND BUG: even if LiteLLM credits were topped up, the research-tracker agent code is NOT writing thesis state back to research.json on each run (proven by 17.94d null state with thesis-active/ showing 0.36d fresh activity) — TWO fixes required: (a) LiteLLM top-up to clear cron errors; (b) research-tracker lead agent to write back thesis.chapter / thesis.last_commit from thesis-active/THESIS_STATE.md on each run | MONITOR-NOTES DIR EXISTS (created tick #13 first note, 14:22Z); rollover opt-out applies — research-monitor does NOT self-rotate per Pattern 22 (operator-archive convention via archive-NN.md; current 2026-08-31.md at 3188B well below 80KB threshold) | DECISION NEEDED (escalation priority): (a) confirm LiteLLM top-up is in flight AND commit to fixing research-tracker agent write-back code so thesis state populates research.json within ~2 cron cycles (30min × 2) — RECOMMENDED OR (b) accept the research-tracker stall as intentional (thesis may be paused for unrelated reasons) and downgrade from HIGH → MEDIUM with a STATUS.md note explaining the gap | Side effect: research.json null blocks any agent reading thesis state (kiki-coach / coaching-research-intelligence may be affected if they read this file); low blast radius but operationally relevant",
+      "raised_at": "2026-08-31T15:06:23.171717+00:00"
+    },
+    {
+      "question": "sales-monitor HIGH (consolidated, tick #2 of day 2026-08-31): 5 distinct HIGH-severity fires on sales-funnel (rule: leads=0 OR proposals=0 for 7d+ OR deals stalled >14d OR last_run stale >26h). funnel_30d.leads=0 (HIGH — webhook not configured, leads cannot be enumerated from outside Worker); funnel_30d.proposals_sent=0 (HIGH — 8d rolling, structurally inert); richar-ruiz-2026-08-01 stalled 22d (HIGH — >14d, reason=internal_approval; Kiki approval pending since 2026-08-01); last_run=2026-08-23T16:00:50Z stale 191.2h (HIGH — >26h daily-cadence miss; sales-pipeline cadence 3-4x/day broken since 2026-08-23). Plus 1 CRITICAL: funnel_30d.contracts_signed=0 over rolling 30d. Sales motion has been structurally stalled for 8d.",
+      "context": "Source: /opt/data/agents/state/sales.json (anchor e0e67260603f00ca, 5203B; byte-identical to 1431Z tick #1 of day). 1 lead in_flight (richar-ruiz, $6.5K-$22.5K, awaiting Kiki approval 22d); outreach_queue_today=[1 delivery-tracker → sales status message, no prospect outreach]; 2 open_questions blocking: OQ-2026-08-22-A (webhook_config, blocking leads enumeration, 9d) + OQ-2026-08-22-B (landing_page_broken at rubiconeas.paragu-ai.com/, blocking lead funnel, 9d). Pattern 45 NOT binding (qlen=25 << 400); canonical APPEND per PROMPT-monitor.md §Alert routing. Owners: Ivan (OQ-A secret config + OQ-B engineering escalation + sales-pipeline restart), Kiki (richar-ruiz outreach approval + lead generation). Cron-error-watchdog.py SKIPPED — script reads jobs.json for last_status=error only, not domain metrics.",
+      "raised_at": "2026-08-31T15:10:21.492405+00:00"
+    },
+    {
+      "question": "aiw-people-hr-monitor-30min — kiki_lesson_streak_weeks=0 for 3+ consecutive runs (HIGH per PROMPT-monitor.md rule: streak broken). people.json SHA=aee73c982ffd35da unchanged since 2026-08-13T16:30Z (18.0 days stale; last_run=null). The 14:52Z tick note claimed to append at idx 17 but coord.json shows that index is a qa-monitor CRITICAL — the 14:52Z append failed silently. This tick records the kiki_streak HIGH for the first time. Root cause: aiw-people-hr-weekly cron failing on unknown provider minimax-plan (RuntimeError since 2026-08-26T20:35Z). Pattern 8 dominant: canonical truth in /opt/data/agents/state/kiki.json (streak_weeks_completed=1, lesson 2026-08-26). Action: fix hermes provider OR switch cron to fallback_model=litellm/reasoning per PROMPT.md hard_stops. Carrier-pointer to idx 3 (last_run stale HIGH, raised 2026-08-31T13:52Z).",
+      "context": "raised_at=2026-08-31T15:25:57.664+00:00 | tick #3 of day 2026-08-31 (15:24Z) | people.json SHA=aee73c982ffd35da size=363B unchanged from 13:52Z and 14:52Z ticks (Pattern 30 fresh-fire gate: same SHA on last_run stale = carrier, NOT fresh fire) | kiki_streak=0 (state reset) is same root-cause envelope as idx 3 last_run stale HIGH but the 14:52Z tick note claim of idx 17 append was incorrect — actual idx 17 = qa-monitor CRITICAL (engineering.incidents_72h) | Pattern 8 cross-ref: /opt/data/agents/state/kiki.json shows streak_weeks_completed=1 with lesson 2026-08-26 (canonical truth lives in kiki.json, NOT people.json) | aiw-people-hr-weekly cron has been failing since 2026-08-26T20:35Z with \"RuntimeError: Unknown provider minimax-plan\" — 2+ scheduled Monday 22:00 UTC runs have crashed | lead agent outbox last touched 2026-08-21 (10d ago); mirror-sync touched outbox/2026-08-21.md at 13:39Z but did NOT regenerate people.json | validator rc=0 on scoped people.json (umbrella rc=1 from coord.json schema-drift is pre-existing and out of scope) | tick-discipline remediation: (a) register minimax-plan OR switch lead fallback_model to litellm/reasoning per PROMPT.md hard_stops, (b) manual trigger people-hr lead once with valid model to overwrite people.json from kiki.json + coach-ivan/outbox + contractor pipeline, (c) align schema: people.json is canonical OR kiki.json is canonical (Pattern 8 evidence says kiki) | Pattern 47: queue=26 (well below 300 cliff), recent_24h_pct=92% (chronic cluster — same root cause as finance-monitor, board-monitor, management-monitor HIGH fires today).",
+      "raised_at": "2026-08-31T15:25:57.664+00:00"
+    },
+    {
+      "question": "aiw-sales-monitor-30min HIGH (consolidated, tick #3 of day 2026-08-31): sales-pipeline silent 8d (last_run=2026-08-23T16:00:50Z, age 191.8h, >26h HIGH); funnel_30d.contracts_signed=0 (CRITICAL, 30d rolling); funnel_30d.leads=0 + proposals_sent=0 (HIGH, 30d window; leads enumeration blocked by missing webhook OQ-A); richar-ruiz-2026-08-01 stalled 22d (HIGH, >14d, internal_approval). Action: (a) restart sales-pipeline cron, (b) resolve OQ-2026-08-22-A (wrangler secret put WEBHOOK_URL), (c) resolve OQ-2026-08-22-B (landing page ExpiredRequest R2 XML), (d) approve/decline richar-ruiz outreach.",
+      "context": "raised_at=2026-08-31T15:47:57.494495+00:00 | tick #3 (canonical sales-monitor 30-min cron, fired 2026-08-31T15:47:57.494495+00:00) | sales.json SHA=e0e67260603f00ca (size 5203B, byte-identical to canonical anchor since 2026-08-23T16:00:50Z; 191.8h stable) | coord.json SHA=7322bd2ec4e63039 (size 48197B, pre_qlen=27, post_qlen=28; +1 sales-monitor APPEND) | Pattern 45 SUPPRESS does NOT bind at runtime (qlen=27 < 400; queue drained from prior week's 947+ saturation by Ivan action) | Pattern 16 sibling coverage = 0 other monitors filing sales-domain findings within window | sole-owner override applies (sales-monitor IS sole owner) | routing: CRITICAL/HIGH → coord.json (this entry), MEDIUM → monitor-notes/2026-08-31.md | watchdog.py SKIP (reads jobs.json last_status=error; not domain-aware) | fires: 1 CRITICAL (contracts_signed=0), 4 HIGH (leads=0, proposals_sent=0, last_run stale 191.8h, richar-ruiz stalled 22d), 1 MEDIUM (calls_booked=0; subsumed by HIGH cadence re last_run) | band: SHORT (gap 36.8 min from prior 1510Z tick) | evidence: leads_in_flight=[richar-ruiz-2026-08-01 $6.5K-$22.5K 22d]; stalled_deals=[richar-ruiz-22d]; open_questions=[OQ-A 9d, OQ-B 9d both blocking]; outreach_queue_today=[1 internal delivery-tracker msg, no prospect outreach].",
+      "raised_at": "2026-08-31T15:47:57.494495+00:00",
+      "source": "aiw-sales-monitor-30min",
+      "severity": "HIGH"
+    }
+  ],
+  "last_run": "2026-08-31T15:06:23.171717+00:00",
+  "repos_analyzed": 38,
+  "stale_repos_count": 18,
+  "cron_errors_count": 24,
+  "stale_cron_error_entry": "cleared — 2026-08-13 entry was a stale PATH issue not re-encountered this run (used curl + python3 instead of gh/jq/hermes)",
+  "notes": "PROMPT.md is truncated at 46 lines — role spec appears incomplete; ran from the in-prompt cron contract instead. GitHub API reachable via raw curl without auth for public org data.",
+  "stale_repos": [],
+  "_last_modified_by": "aiw-sales-monitor-30min",
+  "_last_monitor_tick": "2026-08-31T15:10:21.492405+00:00"
+}
