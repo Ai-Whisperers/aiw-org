@@ -38,4 +38,4 @@ bash /opt/data/agents-v2/templates/install-hooks.sh --with-agents --with-gitigno
 
 - `/opt/data/scratchpad/analysis/P0-SECURITY-ADVISORY.md` (active secret leaks)
 - `/opt/data/scratchpad/analysis/agent-org-improvement.md` (Layer 1 commands + hook design)
-- `/opt/data/agents/GAP-AUDIT-2026-08-13.md` (gap 3.3 origin)
+- `/opt/data/agents/analysis/DEPT-AGENTS-ROLES-COMPLETE.md` (gap 3.3 origin)

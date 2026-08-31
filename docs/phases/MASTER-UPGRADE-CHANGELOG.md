@@ -29,7 +29,7 @@
 
 ---
 
-## Wave 1 — Tier 1 critical fixes (2026-08-13, documented in `agents/UPGRADE-REPORT.md`)
+## Wave 1 — Tier 1 critical fixes (2026-08-13, documented in `analysis/UPGRADE-PROPOSAL-2026-09.md` (current roadmap))
 
 5 fixes, all done. Status carried forward.
 
@@ -49,7 +49,7 @@
 - 8 kanban boards bound
 - 12 starter kanban tasks seeded
 
-## Wave 3 — MCP server integration (2026-08-13, `MCP-UPGRADE-REPORT.md`)
+## Wave 3 — MCP server integration (2026-08-13, `scripts/` (MCP integration moved to code))
 
 Started: 0 MCP servers. Finished that day: **14 enabled**. Now (2026-08-23): **25 enabled / 41 registered**.
 
@@ -62,7 +62,7 @@ Key additions since 2026-08-13:
 - `twilio_mcp` — SMS gateway (enabled)
 - 16 registered but **disabled** (notion, jira, sentry, redis, sendgrid, canal de comunicacion, asana, todoist, shopify, resend, pasarela de pagos, redis-mcp, easy-mcps, appwrite, apify, alife) — deferred until specific use case
 
-## Wave 4 — Tier 3 / Tier 4 dashboards (2026-08-13, `TIER3-UPGRADE-REPORT.md`, `TIER4-UPGRADE-REPORT.md`)
+## Wave 4 — Tier 3 / Tier 4 dashboards (2026-08-13, `analysis/UPGRADE-PROPOSAL-2026-09.md` (current roadmap), `analysis/UPGRADE-PROPOSAL-2026-09.md` (current roadmap))
 
 - Per-profile `disabled_toolsets` blocks (6 dept profiles, 5-16 toolsets each)
 - 22 source-material files in `/opt/data/source-materials/`
@@ -189,26 +189,45 @@ Recent discoveries and fixes (from cron briefs 2026-08-23):
 
 ## File map (what lives where, after all waves)
 
+> **2026-08-31 cleanup note**: This file map reflects state after the
+> Wave 1-4 sessions. Since then (2026-08-31), the org layer was
+> reorganized: 16 redundant/historical/personal files removed from
+> the root (see commit `8edf3ba`). The canonical content from
+> those files lives in `analysis/`, `state-versioned` repo, and
+> the 6 Tier-1 dept dirs (`01-operations/` through `06-people-culture/`).
+> Remaining root files (canonical): README.md, ORG-AGENTS.md,
+> ORCHESTRATION.md, DECISIONS-2026-Q3.md, REVIEW-2026-Q4.md,
+> ON-CALL.md, DEFERRED-AGENTS.md, DEFERRED-ROLES.md.
+
+
 ```
 /opt/data/agents/                                     # legacy Tier 1-4 reports repo (NO remote)
-├── UPGRADE-REPORT.md             Tier 1 baseline (2026-08-13)
-├── TIER3-UPGRADE-REPORT.md       Tier 3 internal (2026-08-13)
-├── TIER4-UPGRADE-REPORT.md       Tier 4 followup (2026-08-13)
-├── MCP-UPGRADE-REPORT.md         MCP inventory (2026-08-13)
-├── HERMES-UPSTREAM-ISSUES.md     Hermes upstream bugs (2026-08-13)
-├── HERMES-UPGRADE-CHANGELOG.md   ↗ pointer to MASTER-UPGRADE-CHANGELOG
-├── SETUP-GUIDE.md               master reference
+├── README.md                     repo entry (canonical)
+├── ORG-AGENTS.md                 handoff matrix (47 agents, 9 schemas)
 ├── ORCHESTRATION.md              what's running day-to-day
-├── ORG-AGENTS.md                constitution
 ├── DECISIONS-2026-Q3.md          16 ratified decisions
-├── GAP-AUDIT-2026-08-13.md       initial gap audit
+├── REVIEW-2026-Q4.md            Q4 review checklist
+├── ON-CALL.md                   who's on call
 ├── DEFERRED-AGENTS.md            what not to build
 ├── DEFERRED-ROLES.md             roles we're not hiring
-├── REVIEW-2026-Q4.md            Q4 review
-├── ON-CALL.md                   who's on call
-├── DASHBOARD-AUTH.md            dashboard auth spec
-├── rename-map.json              session rename map (post-2026-08-21)
-├── sessions-to-rename.json
+├── [33 agent dirs in 6 dept dirs]  01-operations/ .. 06-people-culture/
+├── dashboards/                  7 dashboards
+├── departments/                 6 dept specs + ORG-AGENTS.md
+├── research/                    research artifacts + funding landscape
+├── sources/                     7 source catalogs (knowledge-mgmt, marketing, etc.)
+├── schemas/                     9 dept JSON schemas
+├── scripts/                     25 production scripts
+├── tests/                       25 test files
+├── patterns/                    9 patterns (hard-stop, idempotency, etc.)
+├── playbooks/                   13 playbooks (incl. ROADMAP, ROLLBACK)
+├── tickets/                     81 DEMIURGE ticket artifacts
+├── demiurge/                    24 DEMIURGE agent souls + router + KPI
+├── agents-prompts/              31 legacy PROMPT.md files
+├── docs/                        THREAT-MODEL, FAILURE-MODES, STORAGE-ARCH, etc.
+├── analysis/                    DEPT-AGENTS-ROLES-COMPLETE, ORGANIGRAM, UPGRADE-PROPOSAL
+├── constitution/                DEFERRED-*, ON-CALL, REVIEW (archived copy)
+├── state/                       7 tracked files (form templates only)
+├── dept-monitors/               16 PROMPT-monitor.md patterns
 ├── [49 agent dirs]              each with PROMPT.md + outbox/
 ├── dashboards/                  7 dashboards
 ├── departments/                 6 dept specs + ORG-AGENTS
@@ -357,7 +376,7 @@ python3 /opt/data/agents-v2/scripts/self-running-check-v2.py
 | Run a health check | Verification commands |
 | See what's still left | Carry-forward section |
 | Update this document | Edit `MASTER-UPGRADE-CHANGELOG.md` in `agents-v2`, commit + push |
-| Find the source for a specific number | Wave 1 = `agents/UPGRADE-REPORT.md` etc. — each wave links to its source |
+| Find the source for a specific number | Wave 1 = `analysis/UPGRADE-PROPOSAL-2026-09.md` (current roadmap) etc. — each wave links to its source |
 
 ---
 

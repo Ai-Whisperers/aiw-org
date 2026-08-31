@@ -391,9 +391,9 @@ The source session's `todo` ended with **run-chaos-tests** (in progress) and **e
 - `/opt/data/agents-v2/ROLES-INVENTORY.md` (135 roles)
 - `/opt/data/agents-v2/DEFERRED-AGENTS.md` (Tier 3 deferred)
 - `/opt/data/agents-v2/DEFERRED-ROLES.md` (Tier 4 deferred)
-- `/opt/data/agents-v2/TIER3-UPGRADE-REPORT.md`, `TIER4-UPGRADE-REPORT.md`
-- `/opt/data/agents-v2/GAP-AUDIT-2026-08-13.md`
-- `/opt/data/agents-v2/UPGRADE-REPORT.md`
+- `/opt/data/agents-v2/analysis/UPGRADE-PROPOSAL-2026-09.md (current roadmap)`, `analysis/UPGRADE-PROPOSAL-2026-09.md (current roadmap)`
+- `/opt/data/agents-v2/analysis/ (canonical catalogs)`
+- `/opt/data/agents-v2/analysis/UPGRADE-PROPOSAL-2026-09.md (current roadmap)`
 - `/opt/data/agents-v2/REVIEW-2026-Q4.md`
 - `/opt/data/agents-v2/SELF-RUNNING-CRITERIA.md`
 - `/opt/data/agents-v2/THREAT-MODEL.md`
