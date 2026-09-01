@@ -34,7 +34,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 EVAL_FILE = Path("/opt/data/state/eval-trending.json")
-DECISIONS_LOG = Path("/opt/data/state/eval-gate-decisions.json")
+DECISIONS_LOG = Path("/opt/data/state/eval-gate-decisions.ndjson")
 DEFAULT_BLOCK_THRESHOLD = 0.30
 DEFAULT_WARN_THRESHOLD = 0.50
 

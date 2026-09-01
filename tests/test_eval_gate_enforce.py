@@ -128,7 +128,7 @@ def test_decide_threshold_override():
 
 
 def test_decide_writes_to_log():
-    """decide() should append to eval-gate-decisions.json (NDJSON, Phase 28)."""
+    """decide() should append to eval-gate-decisions.ndjson (NDJSON, Phase 28)."""
     mod = load_module()
     eval_path = make_eval({"a": {"pass_rate": 0.95}})
     log_path = Path(tempfile.gettempdir()) / f"eval-gate-decisions-{id(eval_path)}.ndjson"

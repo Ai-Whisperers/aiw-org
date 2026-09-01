@@ -140,7 +140,7 @@ def validate_prompt(agent_name: str) -> tuple:
     return len(errors) == 0, errors
 
 
-LOG_PATH = Path("/opt/data/state/hard-stop-audit.json")
+LOG_PATH = Path("/opt/data/state/hard-stop-audit.ndjson")
 
 
 def _log_check(agent_name: str, action: str, role: str, allowed: bool) -> None:
@@ -153,7 +153,7 @@ def _log_check(agent_name: str, action: str, role: str, allowed: bool) -> None:
     NDJSON format (one JSON object per line):
       {"ts": "<ISO>", "agent": "<name>", "action": "<action>", "role": "<role>", "allowed": <bool>}
 
-    Rotation: state-roll cron (Phase 5) handles archival. We cap at 50MB.
+    Rotation: when file exceeds 50MB, archive current + start fresh.
     """
     LOG_PATH.parent.mkdir(parents=True, exist_ok=True)
     entry = {
