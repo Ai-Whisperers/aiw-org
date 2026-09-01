@@ -10,6 +10,7 @@ composition:
   - clio-customer-signal-collector
 transfer_targets:
   - 02-finance-legal/finance-controller
+parent_spec: constitution/ORG-AGENTS.md
 ---
 
 fallback_model: litellm/primary

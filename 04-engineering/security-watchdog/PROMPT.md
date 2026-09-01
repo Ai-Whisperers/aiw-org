@@ -11,6 +11,7 @@ composition:
   - compliance-monitor
 transfer_targets:
   - 04-engineering/security-watchdog-30min
+parent_spec: departments/04-engineering-delivery.md
 ---
 
 ## Hard stops

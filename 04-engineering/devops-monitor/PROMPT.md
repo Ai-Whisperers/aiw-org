@@ -11,6 +11,7 @@ composition:
   - argus-health-monitor
 transfer_targets:
   - 04-engineering/devops-monitor-30min
+parent_spec: departments/04-engineering-delivery.md
 ---
 
 ## Hard stops

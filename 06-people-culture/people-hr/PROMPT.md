@@ -19,6 +19,7 @@ hard_stops:
     approved_human: ivan+kiki
   - action: modify_eval_gates
     require_approval: true
+parent_spec: departments/06-people-culture.md
 ---
 
 # People HR Agent — Human Resources Department

@@ -9,6 +9,7 @@ time_scale: daily
 composition:
   - thoth-literature-scanner
   - hephaestus-document-miner
+parent_spec: departments/05-research-education.md
 ---
 
 ## Hard stops

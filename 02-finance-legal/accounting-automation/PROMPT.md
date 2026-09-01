@@ -11,6 +11,7 @@ composition:
   - hephaestus-document-miner
 transfer_targets:
   - 02-finance-legal/finance-controller
+parent_spec: constitution/ORG-AGENTS.md
 ---
 
 ## Hard stops

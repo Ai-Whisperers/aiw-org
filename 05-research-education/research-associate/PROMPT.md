@@ -13,6 +13,7 @@ composition:
 transfer_targets:
   - 05-research-education/research-tracker
   - 05-research-education/research-engineer
+parent_spec: departments/05-research-education.md
 ---
 
 # Research Associate — Research Dept

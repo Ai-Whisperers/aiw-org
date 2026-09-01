@@ -10,6 +10,7 @@ composition:
   - compliance-monitor
 transfer_targets:
   - 02-finance-legal/legal-counsel
+parent_spec: constitution/ORG-AGENTS.md
 ---
 
 ## Hard stops

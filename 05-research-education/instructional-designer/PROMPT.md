@@ -14,6 +14,7 @@ composition:
 transfer_targets:
   - 05-research-education/course-producer
   - 05-research-education/subject-matter-expert
+parent_spec: departments/05-research-education.md
 ---
 
 # Instructional Designer — Research Dept

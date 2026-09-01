@@ -12,7 +12,7 @@ composition:
   - ai-ops-coordinator
   - apollo-sales-lead
 transfer_targets: []
-parent_spec: /opt/data/agents/constitution/ORG-AGENTS.md
+parent_spec: constitution/ORG-AGENTS.md
 fallback_model: litellm/reasoning
 hard_stops:
   - action: read_state

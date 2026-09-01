@@ -10,6 +10,7 @@ composition:
   - themis-document-classifier
 transfer_targets:
   - 01-operations/management-coordinator
+parent_spec: constitution/ORG-AGENTS.md
 ---
 
 ## Hard stops

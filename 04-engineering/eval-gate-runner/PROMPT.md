@@ -9,6 +9,7 @@ archetype: specialist
 time_scale: daily
 composition:
   - argus-health-monitor
+parent_spec: departments/04-engineering-delivery.md
 ---
 
 ## Hard stops

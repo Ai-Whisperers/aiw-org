@@ -14,6 +14,7 @@ composition:
 transfer_targets:
   - 05-research-education/research-tracker
   - 05-research-education/thesis-tracker
+parent_spec: departments/05-research-education.md
 ---
 
 # Academic Liaison — Research Dept

@@ -12,6 +12,7 @@ composition:
 transfer_targets:
   - 03-sales-growth/sales-pipeline
   - 01-operations/management-coordinator
+parent_spec: departments/03-sales-growth.md
 ---
 
 ## Hard stops

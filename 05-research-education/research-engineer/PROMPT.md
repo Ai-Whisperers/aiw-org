@@ -14,6 +14,7 @@ composition:
 transfer_targets:
   - 05-research-education/research-tracker
   - 05-research-education/citation-coverage-enforcer
+parent_spec: departments/05-research-education.md
 ---
 
 # Research Engineer — Research Dept

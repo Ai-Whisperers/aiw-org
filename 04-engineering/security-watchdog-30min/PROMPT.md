@@ -9,6 +9,7 @@ archetype: specialist
 time_scale: daily
 composition:
   - compliance-monitor
+parent_spec: departments/04-engineering-delivery.md
 ---
 
 # security-watchdog-30min — Role Specification

@@ -14,7 +14,7 @@ name: founder-bandwidth-watchdog
 version: 0.2.0
 schedule: "0 18 * * 0"  # Weekly Sunday 18:00 PYT
 owner: ivan
-parent_spec: /opt/data/agents/departments/06-people-culture.md
+parent_spec: constitution/ORG-AGENTS.md
 fallback_model: litellm/primary
 hard_stops:
   - action: read_state

@@ -9,6 +9,7 @@ time_scale: daily
 composition:
   - hermes-router-revenue
   - business-analyst
+parent_spec: constitution/ORG-AGENTS.md
 ---
 
 ## Hard stops

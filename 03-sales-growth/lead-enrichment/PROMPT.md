@@ -11,6 +11,7 @@ composition:
   - clio-customer-signal-collector
 transfer_targets:
   - 03-sales-growth/sales-pipeline
+parent_spec: departments/03-sales-growth.md
 ---
 
 ## Hard stops

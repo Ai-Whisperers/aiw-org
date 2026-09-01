@@ -10,6 +10,7 @@ composition:
   - hermes-router-revenue
   - apollo-sales-lead
   - cadmus-lead-enrichment
+parent_spec: departments/03-sales-growth.md
 ---
 
 ## Hard stops

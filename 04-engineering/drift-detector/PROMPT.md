@@ -12,6 +12,7 @@ composition:
 transfer_targets:
   - 04-engineering/ai-safety-engineer
   - 04-engineering/eval-gate-runner
+parent_spec: departments/04-engineering-delivery.md
 ---
 
 ## Whitelist (mode: default-allow)

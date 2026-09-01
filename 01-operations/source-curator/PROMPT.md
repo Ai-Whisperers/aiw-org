@@ -11,6 +11,7 @@ composition:
   - peitho-language-quality
 transfer_targets:
   - 05-research-education/research-tracker
+parent_spec: constitution/ORG-AGENTS.md
 ---
 
 ## Hard stops

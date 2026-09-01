@@ -13,6 +13,7 @@ composition:
 transfer_targets:
   - 04-engineering/qa-automation-runner
   - 04-engineering/engineering-roster
+parent_spec: departments/04-engineering-delivery.md
 ---
 
 ## Whitelist (mode: default-allow)

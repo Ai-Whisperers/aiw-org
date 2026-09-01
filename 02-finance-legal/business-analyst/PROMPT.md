@@ -12,6 +12,7 @@ composition:
 transfer_targets:
   - 02-finance-legal/finance-controller
   - 03-sales-growth/sales-pipeline
+parent_spec: constitution/ORG-AGENTS.md
 ---
 
 ## Hard stops

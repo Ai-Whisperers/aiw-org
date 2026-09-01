@@ -8,6 +8,7 @@ archetype: team-lead
 time_scale: daily
 composition:
   - hermes-router-revenue
+parent_spec: constitution/ORG-AGENTS.md
 ---
 
 ## Hard stops

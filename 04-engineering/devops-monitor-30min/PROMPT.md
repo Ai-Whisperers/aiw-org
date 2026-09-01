@@ -15,7 +15,7 @@ name: devops-monitor-30min
 version: 0.1.0
 schedule: "*/30 * * * *"
 owner: erebus
-parent_spec: /opt/data/agents/departments/03-devops-infrastructure.md
+parent_spec: departments/04-engineering-delivery.md
 fallback_model: litellm/reasoning
 hard_stops:
   - action: read_state

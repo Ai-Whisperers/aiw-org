@@ -13,6 +13,7 @@ composition:
 transfer_targets:
   - 02-finance-legal/legal-counsel
   - 05-research-education/research-tracker
+parent_spec: departments/05-research-education.md
 ---
 
 # Ip Patent Specialist — Research Dept

@@ -11,6 +11,7 @@ composition:
   - kronos-operations-lead
 transfer_targets:
   - 04-engineering/security-watchdog-30min
+parent_spec: constitution/ORG-AGENTS.md
 ---
 
 ## Hard stops

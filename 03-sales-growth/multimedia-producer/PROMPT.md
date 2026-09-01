@@ -10,6 +10,7 @@ composition:
   - orpheus-recordings-agent
 transfer_targets:
   - 03-sales-growth/marketing-content-producer
+parent_spec: departments/03-sales-growth.md
 ---
 
 ## Hard stops

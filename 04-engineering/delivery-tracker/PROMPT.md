@@ -12,6 +12,7 @@ composition:
 transfer_targets:
   - 04-engineering/engineering-roster
   - 01-operations/management-coordinator
+parent_spec: departments/04-engineering-delivery.md
 ---
 
 ## Whitelist (mode: default-allow)

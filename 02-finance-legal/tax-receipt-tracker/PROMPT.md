@@ -10,6 +10,7 @@ composition:
   - themis-document-classifier
 transfer_targets:
   - 02-finance-legal/accounting-automation
+parent_spec: constitution/ORG-AGENTS.md
 ---
 
 ## Hard stops

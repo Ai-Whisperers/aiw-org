@@ -12,6 +12,7 @@ composition:
 transfer_targets:
   - 05-research-education/research-tracker
 cluster: run
+parent_spec: departments/05-research-education.md
 ---
 
 # Citation Coverage Enforcer — Athena's Watchdog

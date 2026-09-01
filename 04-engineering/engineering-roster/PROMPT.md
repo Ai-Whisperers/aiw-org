@@ -9,6 +9,7 @@ archetype: specialist
 time_scale: daily
 composition:
   - thoth-literature-scanner
+parent_spec: departments/04-engineering-delivery.md
 ---
 
 ## Hard stops

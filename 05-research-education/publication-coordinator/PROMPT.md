@@ -13,6 +13,7 @@ composition:
 transfer_targets:
   - 05-research-education/academic-liaison
   - 05-research-education/research-tracker
+parent_spec: departments/05-research-education.md
 ---
 
 # Publication Coordinator — Research Dept

@@ -13,6 +13,7 @@ composition:
 transfer_targets:
   - 05-research-education/course-producer
   - 05-research-education/research-tracker
+parent_spec: departments/05-research-education.md
 ---
 
 # Subject Matter Expert — Research Dept

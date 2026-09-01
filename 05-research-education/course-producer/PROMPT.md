@@ -11,6 +11,7 @@ composition:
   - orpheus-recordings-agent
 transfer_targets:
   - 05-research-education/research-tracker
+parent_spec: departments/05-research-education.md
 ---
 
 ## Hard stops
