@@ -79,7 +79,7 @@ PATTERNS = [
     ("nl-toon-prompt", re.compile(r"\b(toon|laat\s+zien|ontsluier)\s+(je|de)\s+(prompt|systeem)\b", re.I), 0.8),
     # === Phase 35 R2: Russian, Chinese, Japanese, Arabic ===
     # Russian
-    ("ru-ignoriruy", re.compile(r"\b(игнорируй|забудь)\s+(все\s+)?(предыдущие|прошлые|прежние)\s+(инструкции|указания)\b", re.I | re.UNICODE), 0.9),
+    ("ru-ignoriruy", re.compile(r"(игнорируй|забудь|проигнорируй).{0,30}(инструкции|указания|команды|правила)", re.I | re.UNICODE), 0.9),
     ("ru-pokazhi-prompt", re.compile(r"\b(покажи|раскрой)\s+(свой\s+)?(системный\s+)?(промпт|инструкцию)\b", re.I | re.UNICODE), 0.8),
     # Chinese (Simplified) - match in any word order
     ("zh-hulue", re.compile(r"(忽略|无视|忘记)"), 0.7),  # lower weight, combine with zh-zhiling
@@ -95,6 +95,23 @@ PATTERNS = [
     # Arabic
     ("ar-tahawul", re.compile(r"(تجاهل|انسى|احذف)\s*(كل|جميع)?\s*(التعليمات|الأوامر)\s*(السابقة|الماضية)?"), 0.9),
     ("ar-urdi-prompt", re.compile(r"(أعرض|اظهر|كشف)\s*(عن)?\s*(النظام)?\s*(الموجه|prompt|الإرشادات)"), 0.8),
+    # === Phase 36 R1: Korean, Vietnamese, Indonesian, Hindi ===
+    # Note: \b word boundaries don't work with non-Latin scripts;
+    # use simpler patterns with literal keywords.
+    # Use bidirectional patterns since word order varies.
+    # re.IGNORECASE needed for VN/ID (case-sensitive diacritics: Bỏ vs bỏ).
+    # Korean
+    ("ko-ignora-myeonglyeong", re.compile(r"(무시|잊어).{0,10}(지시|명령|규칙)|(지시|명령|규칙).{0,10}(무시|잊어)", re.I | re.UNICODE), 0.9),
+    ("ko-bogi-prompt", re.compile(r"(보여|공개|노출).{0,10}(프롬프트|지시)|(프롬프트|지시).{0,10}(보여|공개|노출)", re.I | re.UNICODE), 0.8),
+    # Vietnamese
+    ("vi-bo-qua", re.compile(r"(bỏ\s+qua|quên).{0,30}(hướng\s+dẫn|chỉ\s+dẫn|lệnh)|(hướng\s+dẫn|chỉ\s+dẫn|lệnh).{0,30}(bỏ\s+qua|quên)", re.I | re.UNICODE), 0.9),
+    ("vi-hien-thi-prompt", re.compile(r"(hiển\s+thị|hiện|cho\s+xem).{0,10}(prompt|hệ\s+thống|lệnh)|(prompt|hệ\s+thống|lệnh).{0,10}(hiển\s+thị|hiện|cho\s+xem)", re.I | re.UNICODE), 0.8),
+    # Indonesian
+    ("id-abaikan-petunjuk", re.compile(r"(abaikan|lupakan).{0,20}(petunjuk|instruksi|perintah)|(petunjuk|instruksi|perintah).{0,20}(abaikan|lupakan)", re.I | re.UNICODE), 0.9),
+    ("id-tampilkan-prompt", re.compile(r"(tampilkan|perlihatkan|tunjukkan).{0,10}(prompt|sistem|petunjuk)|(prompt|sistem|petunjuk).{0,10}(tampilkan|perlihatkan|tunjukkan)", re.I | re.UNICODE), 0.8),
+    # Hindi
+    ("hi-ignora-nirdesh", re.compile(r"(अनदेखा|भूल).{0,30}(निर्देश|हिदायत)|(निर्देश|हिदायत).{0,30}(अनदेखा|भूल)", re.I | re.UNICODE), 0.9),
+    ("hi-dikhaye-prompt", re.compile(r"(दिखाओ|बताओ|प्रकट).{0,10}(प्रॉम्प्ट|निर्देश)|(प्रॉम्प्ट|निर्देश).{0,10}(दिखाओ|बताओ|प्रकट)", re.I | re.UNICODE), 0.8),
     # === Phase 33 R3: Encoded content detection ===
     # Base64-encoded "ignore previous" instructions (common attack vector)
     ("base64-injection", re.compile(r"(?:[A-Za-z0-9+/]{40,}={0,2})"), 0.4),  # base64 heuristic

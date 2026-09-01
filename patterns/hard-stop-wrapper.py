@@ -121,6 +121,28 @@ def check_action(action: str, role: str, hard_stops: list) -> bool:
 
     With role=ai-agent: read_state→allowed, deploy_prod→blocked (needs ivan).
     With role=ivan: both allowed.
+
+    PHASE 36 R3 (wildcard with sensitive_actions):
+    Use `sensitive_actions: [list]` to override the wildcard for specific
+    actions. Wildcard allows everything EXCEPT these sensitive actions
+    (which still need approval).
+
+    Example:
+        hard_stops:
+          - mode: whitelist
+          - action: "*"
+          - action: delete_resource
+            sensitive_action: true
+            approval_required: true
+            approved_human: ivan
+          - action: force_push
+            sensitive_action: true
+            approval_required: true
+            approved_human: ivan+kiki
+
+    With role=ai-agent: any action allowed EXCEPT delete_resource and force_push.
+    With role=ivan: delete_resource allowed (still needs to be in approved_human).
+    With role=kiki: force_push allowed.
     """
     # Detect whitelist mode: any entry with action='*' OR 'mode: whitelist' marker
     is_whitelist = any(
@@ -130,10 +152,24 @@ def check_action(action: str, role: str, hard_stops: list) -> bool:
 
     if is_whitelist:
         # Whitelist mode: only listed actions are allowed (default-deny)
-        for s in hard_stops:
-            if s.get("action") == "*":
-                # Wildcard = allow all (overrides whitelist)
-                return True
+        has_wildcard = any(s.get("action") == "*" for s in hard_stops)
+
+        if has_wildcard:
+            # PHASE 36 R3: wildcard mode (with sensitive_actions override)
+            # Check if this action is in the sensitive_actions list
+            for s in hard_stops:
+                if s.get("action") == action and s.get("sensitive_action"):
+                    # This sensitive action still requires approval
+                    approved = s.get("approved_human", "")
+                    if isinstance(approved, list):
+                        return role in approved
+                    if "+" in approved:
+                        return role in approved.split("+")
+                    return role == approved
+            # Not a sensitive action, or no sensitive action on this entry
+            return True
+
+        # No wildcard: only listed actions are allowed (default-deny)
         # Find specific entry for this action
         entry = next(
             (s for s in hard_stops if s.get("action") == action),

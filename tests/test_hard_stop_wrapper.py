@@ -379,6 +379,48 @@ def test_check_action_whitelist_no_approval_required_default():
     assert mod.check_action("read_state", "ivan", stops) is True
 
 
+def test_check_action_wildcard_with_sensitive_action():
+    """Phase 36 R3: wildcard allows everything EXCEPT sensitive_action entries.
+
+    A sensitive_action entry still requires approval. Wildcard lets all
+    other actions through freely.
+    """
+    mod = load_module()
+    stops = [
+        {"mode": "whitelist"},
+        {"action": "*"},  # wildcard
+        {"action": "delete_resource", "sensitive_action": True,
+         "approval_required": True, "approved_human": "ivan"},
+        {"action": "force_push", "sensitive_action": True,
+         "approval_required": True, "approved_human": "ivan+kiki"},
+    ]
+    # Other actions: allowed by wildcard
+    assert mod.check_action("read_state", "ai-agent", stops) is True
+    assert mod.check_action("merge_pr", "ai-agent", stops) is True
+    assert mod.check_action("comment_on_pr", "ai-agent", stops) is True
+    # Sensitive actions: blocked for ai-agent
+    assert mod.check_action("delete_resource", "ai-agent", stops) is False
+    assert mod.check_action("force_push", "ai-agent", stops) is False
+    # Sensitive actions: allowed for approved humans
+    assert mod.check_action("delete_resource", "ivan", stops) is True
+    assert mod.check_action("force_push", "ivan", stops) is True
+    assert mod.check_action("force_push", "kiki", stops) is True
+    # Wrong human: blocked
+    assert mod.check_action("delete_resource", "kiki", stops) is False
+
+
+def test_check_action_wildcard_without_sensitive_actions():
+    """Phase 36 R3: wildcard alone (no sensitive actions) allows everything."""
+    mod = load_module()
+    stops = [
+        {"mode": "whitelist"},
+        {"action": "*"},
+    ]
+    # Everything allowed
+    for action in ["read_state", "deploy_prod", "force_push", "delete_resource"]:
+        assert mod.check_action(action, "ai-agent", stops) is True, f"{action} should be allowed"
+
+
 if __name__ == "__main__":
     test_check_action_no_rules_allows()
     test_check_action_require_approval_blocks_non_approved()
@@ -396,6 +438,8 @@ if __name__ == "__main__":
     test_check_action_whitelist_per_action_approval_any_of()
     test_check_action_whitelist_per_action_approval_list()
     test_check_action_whitelist_no_approval_required_default()
+    test_check_action_wildcard_with_sensitive_action()
+    test_check_action_wildcard_without_sensitive_actions()
     test_load_hard_stops_frontmatter()
     test_load_hard_stops_legacy_double_block()
     test_load_hard_stops_bare_block()

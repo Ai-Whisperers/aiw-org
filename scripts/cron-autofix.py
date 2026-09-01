@@ -162,17 +162,22 @@ def apply_staggers(jobs: list, new_schedules: dict) -> int:
     return applied
 
 
-def write_cron_files(jobs: list) -> None:
-    """Write jobs.json atomically + mirror to canonical."""
+def write_cron_files(jobs: list, wrapped: bool = False) -> None:
+    """Write jobs.json atomically + mirror to canonical.
+
+    If jobs is a bare list (wrapped=True), we re-wrap it as {jobs: [...]}.
+    Otherwise, we preserve the existing structure.
+    """
+    payload = {"jobs": jobs} if wrapped else jobs
     tmpname = str(CRON_PATH) + ".tmp"
     with open(tmpname, "w") as f:
-        json.dump(jobs, f, indent=2)
+        json.dump(payload, f, indent=2)
     shutil.move(tmpname, str(CRON_PATH))
 
     if CANON_PATH.exists():
         tmpname2 = str(CANON_PATH) + ".tmp"
         with open(tmpname2, "w") as f:
-            json.dump(jobs, f, indent=2)
+            json.dump(payload, f, indent=2)
         shutil.move(tmpname2, str(CANON_PATH))
 
 
@@ -203,7 +208,15 @@ def main():
         return 1
 
     with open(CRON_PATH) as f:
-        jobs = json.load(f).get("jobs", [])
+        data = json.load(f)
+    # Handle both wrapped {jobs: [...]} and bare list structures
+    if isinstance(data, list):
+        # Bare list (broken structure) - wrap it
+        jobs = data
+        wrapped = True
+    else:
+        jobs = data.get("jobs", [])
+        wrapped = False
 
     findings = load_findings()
     to_resume = find_disabled_to_resume(jobs)
@@ -239,7 +252,7 @@ def main():
     n_resumed = apply_resumes(jobs, to_resume) if not args.stagger else 0
     n_staggered = apply_staggers(jobs, new_schedules) if not args.resume else 0
     if n_resumed or n_staggered:
-        write_cron_files(jobs)
+        write_cron_files(jobs, wrapped=wrapped)
         log_audit("cron-autofix", "jobs.json", {
             "resumed": n_resumed,
             "staggered": n_staggered,
