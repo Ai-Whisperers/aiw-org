@@ -14,6 +14,8 @@ max_output_tokens: 1500
 composition:
   - instinct_generator
   - curator-evolver
+parent_spec: constitution/ORG-AGENTS.md
+max_output_tokens: 800
 
 fallback_model: litellm/reasoning
 hard_stops:

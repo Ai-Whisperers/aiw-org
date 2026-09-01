@@ -28,7 +28,7 @@ fi
 
 # Build index. Pass the source as arg; signal_index.py writes to its
 # default path unless --output is specified.
-python3 -m scripts.memory.signal_index build --source "$SOURCE" --output "$OUTPUT"
+python3 -m scripts.memory.signal_index build --source "$SOURCE" --index "$OUTPUT"
 
 EXIT=$?
 if (( EXIT == 0 )); then

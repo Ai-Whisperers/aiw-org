@@ -15,6 +15,8 @@ max_output_tokens: 1200
 composition:
   - instinct_generator
   - hard-stop-wrapper
+parent_spec: constitution/ORG-AGENTS.md
+max_output_tokens: 800
 
 fallback_model: litellm/reasoning
 hard_stops:
