@@ -166,6 +166,7 @@ def find_overlapping(jobs: list, proximity_window_min: int = 60,
         for sc in sub_clusters:
             distinct_crons = sorted({name for name, _ in sc})
             pileups.append({
+                "schedule": dow,  # legacy field for render_report compatibility
                 "day_of_week": dow,
                 "crons": distinct_crons,
                 "fire_count": len(sc),
