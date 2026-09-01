@@ -26,6 +26,8 @@ ALLOWED_CROSSCUTS = {
     "thoth-literature-scanner",  # 6 refs — research scanner
     "themis-document-classifier",  # 10 refs — classification is pervasively needed
     "peitho-language-quality",  # 6+ refs — language quality used by many agents (Phase 7 R5)
+    "compliance-monitor",  # 6 refs — compliance check is crosscut (Phase 8 R9)
+    "calliope-content-producer",  # 6 refs — content production reused across depts (Phase 8 R9)
 }
 
 
