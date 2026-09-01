@@ -159,3 +159,15 @@ state/delivery-tracker/
 **/outbox/.counter.json
 **/monitor-notes/_last-tick.json
 **/monitor-notes/.last-tick.json
+
+# CRITICAL (Phase 28 R7): scratch/ directories contain live secrets
+# (PATs, .env SHA probes, etc.) — must NEVER be tracked
+**/scratch/
+**/scratch/**
+**/tick*-body.md
+**/*-tick-body.md
+
+# Runtime probe/tick files (security-watchdog, monitors)
+**/sw-*-pats-*.txt
+**/sw-p8-*.txt
+**/sw-p3-*.txt
