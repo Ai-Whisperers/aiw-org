@@ -2,7 +2,8 @@
 
 > **For each Tier-1 dept**: agents, monitors, research, KPIs, signals, state files, scripts, executed artifacts.
 > **Built**: 2026-09-01 (Phase 8 R5).
-> **Source-of-truth**: this file is regenerated whenever dept structure changes (last regenerated: 2026-09-01).
+> **Source-of-truth (files on disk)**: this file is regenerated whenever dept structure changes (last regenerated: 2026-09-01).
+> **Source-of-truth (design meetings)**: [`meetings/department-design/README.md`](meetings/department-design/README.md).
 
 ---
 

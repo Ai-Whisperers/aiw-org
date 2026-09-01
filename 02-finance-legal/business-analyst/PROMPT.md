@@ -1,6 +1,6 @@
 ---
 name: business-analyst
-version: 0.2.0
+version: 0.2.1
 owner: ai-ops-coordinator
 layer: business
 topology: stream-aligned
@@ -51,6 +51,7 @@ hard_stops:
 
 ## CHANGELOG
 
+- v0.2.1 (2026-09-01): meeting-records path — `meetings/department-design/` is the design SoT; Analisa files dated session notes after weeklies / Magic Tower.
 - v0.2.0 (2026-08-14): upgraded to 12-section template. Added hard stops, idempotency, context-payload, fallback model, escalation triggers.
 - v0.1.0 (2026-08-13): initial rollout. 4 sections. Org-pulse.sh not yet wired.
 
@@ -79,3 +80,14 @@ print('Recent customers:', s['global']['customers'][-3:])
 - Other agents' status (for coordination)
 
 **See:** `/opt/data/skills/factor-5-unified-state/SKILL.md` for the full pattern.
+
+## Meeting records (department design)
+
+After any weekly or Magic Tower session that touches departments, roles, or agents:
+
+1. Read `meetings/department-design/DECISIONS.md` (locked vs open).
+2. File a dated note from `meetings/TEMPLATES/session.md` under `meetings/department-design/`.
+3. Split topics (org vs clients vs Hermes) so they do not mix.
+4. Update `NEXT-AGENDA.md`. Promote only ratified items into `DECISIONS.md`.
+
+Do not treat phone audio or TurboScribe dumps as the source of truth.
