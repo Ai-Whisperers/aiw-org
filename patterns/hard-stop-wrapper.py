@@ -99,6 +99,11 @@ def check_action(action: str, role: str, hard_stops: list) -> bool:
 
     Detection: if hard_stops contains an entry with action='*' OR a
     'mode: whitelist' marker, the list is treated as whitelist.
+
+    IMPORTANT (Phase 34 R4): In whitelist mode, ALL `action:` entries are
+    treated as allowed actions regardless of `require_approval` field.
+    Do NOT mix whitelist + blacklist entries — if you want allowlist + approval
+    for some actions, omit the `mode: whitelist` marker and use blacklist only.
     """
     # Detect whitelist mode: any entry with action='*' OR 'mode: whitelist' marker
     is_whitelist = any(
@@ -113,6 +118,7 @@ def check_action(action: str, role: str, hard_stops: list) -> bool:
                 # Wildcard = allow all (overrides whitelist)
                 return True
         # Collect allowed action names
+        # NOTE: ignore require_approval in whitelist mode (not relevant)
         allowed_actions = {s.get("action") for s in hard_stops
                            if s.get("action") and s.get("action") != "*"}
         return action in allowed_actions

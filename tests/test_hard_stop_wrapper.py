@@ -262,6 +262,59 @@ def test_check_action_empty_hard_stops():
     assert mod.check_action("deploy_prod", "ai-agent", []) is True
 
 
+def test_check_action_mixed_blacklist_and_whitelist():
+    """Edge case: PROMPT has BOTH blacklist-style entries AND whitelist marker.
+
+    Whitelist mode wins (default-deny). Listed actions allowed; others blocked.
+    IMPORTANT: `require_approval` annotations on whitelist entries are IGNORED
+    — whitelist mode is all-or-nothing. If you need approval for some actions,
+    use blacklist mode only (no `mode: whitelist` marker).
+    """
+    mod = load_module()
+    stops = [
+        {"mode": "whitelist"},                  # triggers whitelist mode
+        {"action": "read_state"},                # allowed
+        {"action": "write_state"},               # allowed
+        {"action": "deploy_prod", "require_approval": True, "approved_human": "ivan"},  # allowed (whitelist ignores require_approval)
+    ]
+    # Whitelisted actions allowed
+    assert mod.check_action("read_state", "ai-agent", stops) is True
+    assert mod.check_action("write_state", "ai-agent", stops) is True
+    # deploy_prod IS allowed (whitelist treats it as an allowed action)
+    assert mod.check_action("deploy_prod", "ai-agent", stops) is True
+    # Non-listed actions blocked (default-deny)
+    assert mod.check_action("force_push", "ai-agent", stops) is False
+    # Wildcard overrides everything
+    assert mod.check_action("merge_pr", "ai-agent", stops) is False  # not whitelisted
+
+
+def test_check_action_wildcard_overrides_allowlist():
+    """If action='*' is in the list, everything is allowed (escape hatch)."""
+    mod = load_module()
+    stops = [
+        {"mode": "whitelist"},
+        {"action": "*"},  # wildcard = allow all
+    ]
+    # Everything allowed
+    assert mod.check_action("read_state", "ai-agent", stops) is True
+    assert mod.check_action("deploy_prod", "ai-agent", stops) is True
+    assert mod.check_action("force_push", "ai-agent", stops) is True
+
+
+def test_check_action_blacklist_with_unrelated_actions():
+    """Blacklist mode allows everything not in the list (default-allow)."""
+    mod = load_module()
+    stops = [
+        {"action": "deploy_prod", "require_approval": True, "approved_human": "ivan"},
+        {"action": "force_push", "require_approval": True, "approved_human": "ivan"},
+    ]
+    # Listed + blocked
+    assert mod.check_action("deploy_prod", "ai-agent", stops) is False
+    # Unrelated actions allowed
+    assert mod.check_action("merge_pr", "ai-agent", stops) is True
+    assert mod.check_action("comment_on_pr", "ai-agent", stops) is True
+
+
 if __name__ == "__main__":
     test_check_action_no_rules_allows()
     test_check_action_require_approval_blocks_non_approved()
@@ -272,6 +325,9 @@ if __name__ == "__main__":
     test_check_action_whitelist_with_mode_marker()
     test_check_action_blacklist_still_works()
     test_check_action_empty_hard_stops()
+    test_check_action_mixed_blacklist_and_whitelist()
+    test_check_action_wildcard_overrides_allowlist()
+    test_check_action_blacklist_with_unrelated_actions()
     test_load_hard_stops_frontmatter()
     test_load_hard_stops_legacy_double_block()
     test_load_hard_stops_bare_block()

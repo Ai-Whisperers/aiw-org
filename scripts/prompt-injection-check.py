@@ -61,16 +61,22 @@ PATTERNS = [
     # === Phase 33 R3: Multilingual patterns ===
     # Spanish
     ("es-ignora-instrucciones", re.compile(r"\bignora\s+(todas?\s+)?(las?\s+)?instrucciones?\s+(anteriores?|previas?)\b", re.I), 0.9),
-    ("es-revela-prompt", re.compile(r"\b(revela|muestra|ens[eé]ame)\s+(tu|el)\s+(prompt|instrucciones?)\s+(del?\s+sistema)\b", re.I), 0.8),
+    ("es-revela-prompt", re.compile(r"\b(revela|muestra|ens[eé]ame|mu[eé]strame)\s+(tu|el)\s+(prompt|instrucciones?)\s+(del?\s+sistema)\b", re.I), 0.8),
     ("es-ahora-er", re.compile(r"\b(ahora\s+eres|ahora\s+act[uú]a\s+como)\s+", re.I), 0.7),
     # French
     ("fr-ignore-instructions", re.compile(r"\bignore[zr]?\s+(toutes?\s+)?(les?\s+)?instructions?\s+(pr[eé]c[eé]dentes?|ant[eé]rieures?)\b", re.I), 0.9),
-    ("fr-revele-prompt", re.compile(r"\b(r[eé]v[eè]le|affiche|montre)\s+(ton|votre|le)\s+(prompt|instructions?)\s+(syst[eè]me)\b", re.I), 0.8),
+    ("fr-revele-prompt", re.compile(r"\b(r[eé]v[eè]le|affiche|montre|donne)\s+(ton|votre|le)\s+(prompt|instructions?)\s+(syst[eè]me)\b", re.I), 0.8),
     # German
-    ("de-ignoriere-anweisungen", re.compile(r"\bignoriere?\s+(alle\s+)?(die\s+)?(vorherigen?|bisherigen?)\s+(anweisungen?|instruktionen?)\b", re.I), 0.9),
-    ("de-zeige-prompt", re.compile(r"\b(zeige|offenbare)\s+(deinen?|den)\s+(system-?prompt|system-?anweisungen?)\b", re.I), 0.8),
+    ("de-ignoriere-anweisungen", re.compile(r"\bignoriere?\s+(alle\s+)?(die\s+)?(vorherigen?|bisherigen?|fr[uü]heren?)\s+(anweisungen?|instruktionen?)\b", re.I), 0.9),
+    ("de-zeige-prompt", re.compile(r"\b(zeige|offenbare|verrate|gib)\s+(mir\s+)?(deinen?|den|das)\s+(system-?prompt|system-?anweisungen?)\b", re.I), 0.8),
     # Portuguese
     ("pt-ignore-instrucoes", re.compile(r"\bignore\s+(todas?\s+)?(as\s+)?instru[cç][oõ]es\s+(anteriores|pr[eé]vias)\b", re.I), 0.9),
+    # Italian (Phase 34 R5)
+    ("it-ignora-istruzioni", re.compile(r"\bignora\s+(tutte?\s+)?(le\s+)?istruzioni\s+(precedenti|anteriori)\b", re.I), 0.9),
+    ("it-mostra-prompt", re.compile(r"\b(mostra|rivela|visualizza)\s+(il\s+)?(mio\s+|tuo\s+)?(prompt|sistema)\b", re.I), 0.8),
+    # Dutch (Phase 34 R5)
+    ("nl-negeer-instructies", re.compile(r"\b(negeer|ignoreer)\s+(alle\s+)?(vorige|vroegere)\s+(instructies?|opdrachten)\b", re.I), 0.9),
+    ("nl-toon-prompt", re.compile(r"\b(toon|laat\s+zien|ontsluier)\s+(je|de)\s+(prompt|systeem)\b", re.I), 0.8),
     # === Phase 33 R3: Encoded content detection ===
     # Base64-encoded "ignore previous" instructions (common attack vector)
     ("base64-injection", re.compile(r"(?:[A-Za-z0-9+/]{40,}={0,2})"), 0.4),  # base64 heuristic
