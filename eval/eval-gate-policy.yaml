@@ -1,0 +1,34 @@
+# Eval Gate Policy
+# Phase 9 R3 / Tier B4 - Eval gate enforcement policy
+#
+# Defines thresholds for eval-gate-enforce.py decisions.
+# Read by scripts/eval-gate-enforce.py on each invocation.
+
+version: "1.0.0"
+schema: "eval-gate-policy-v1"
+
+# Decision thresholds (PASS_RATE = 0.0-1.0)
+thresholds:
+  # PASS_RATE >= allow_threshold: ALLOW (exit 0)
+  allow_threshold: 0.50
+  # warn_threshold <= PASS_RATE < allow_threshold: WARN (exit 0, flagged)
+  warn_threshold: 0.30
+  # PASS_RATE < warn_threshold: BLOCK (exit 1)
+  # override: --force "reason" or --threshold <value>
+
+# Pause semantics
+pause_behavior:
+  # When an agent is paused, what happens?
+  notify_ivan: true  # append to coord.json:decisions_for_ivan
+  auto_unpause_on_recovery: true  # un-pause when next eval shows pass
+  cooldown_hours: 24  # don't re-pause within this window
+
+# Sample / fixture data
+sample_agents: 5  # synthetic agents used in tests as "underperforming"
+
+# Monitoring
+monitor_cron: "aiw-eval-gate-decisions-summary"
+weekly_review_cron: "aiw-eval-gate-enforcement-review-weekly"
+
+# Last updated
+last_updated: "2026-09-01T20:42:00+00:00"
