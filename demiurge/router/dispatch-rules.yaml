@@ -77,3 +77,43 @@ dispatch_rules:
       - type: agent
         id: kronos-operations-lead
     fan_out: first_available
+
+  # Phase 3 of AIW upgrade plan: two-phase build pipeline
+  # See /opt/data/agents/docs/patterns/architect-then-builder.md
+  # and /opt/data/agents/docs/patterns/auditor-agent.md
+  # NB: rules use single-tag-match so signal doesn't need all tags.
+
+  - id: route-architect-task
+    match:
+      routing_tags: [architect]
+    deliver_to:
+      - type: agent
+        id: architect-agent
+    fan_out: first_available
+
+  - id: route-auditor-task
+    match:
+      routing_tags: [audit]
+    deliver_to:
+      - type: agent
+        id: auditor-agent
+    fan_out: first_available
+
+  - id: route-builder-task
+    match:
+      routing_tags: [implement]
+    deliver_to:
+      - type: agent
+        id: builder-agent
+    fan_out: first_available
+
+  - id: route-verify-impl-task
+    match:
+      routing_tags: [verify-impl]
+    deliver_to:
+      - type: agent
+        id: auditor-agent
+    fan_out: first_available
+
+  # Two-phase build pipeline:
+  #   spec [architect] → review [audit] → implement [implement] → verify [verify-impl]
