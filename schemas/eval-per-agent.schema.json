@@ -1,28 +1,43 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "agent.state — eval-per-agent.json",
+  "title": "agent.state \u2014 eval-per-agent.json",
   "description": "Per-agent eval-gate metrics. Phase 28 R5 (generated from live state).",
   "type": "object",
-  "required": ["version", "schema", "ts", "total", "passed", "failed", "by_agent"],
+  "required": [
+    "version",
+    "schema",
+    "ts",
+    "total",
+    "passed",
+    "failed",
+    "by_agent"
+  ],
   "properties": {
-    "version": {"type": "string"},
-    "schema": {"type": "string"},
-    "ts": {"type": "string", "format": "date-time"},
-    "total": {"type": "integer", "minimum": 0},
-    "passed": {"type": "integer", "minimum": 0},
-    "failed": {"type": "integer", "minimum": 0},
+    "version": {
+      "type": "string"
+    },
+    "schema": {
+      "type": "string"
+    },
+    "ts": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "total": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "passed": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "failed": {
+      "type": "integer",
+      "minimum": 0
+    },
     "by_agent": {
       "type": "object",
-      "additionalProperties": {
-        "type": "object",
-        "properties": {
-          "pass_rate": {"type": "number", "minimum": 0, "maximum": 1},
-          "last_eval_at": {"type": ["string", "null"], "format": "date-time"},
-          "consecutive_failures": {"type": "integer", "minimum": 0},
-          "eval_count": {"type": "integer", "minimum": 0}
-        },
-        "additionalProperties": true
-      }
+      "additionalProperties": false
     }
   },
   "additionalProperties": false

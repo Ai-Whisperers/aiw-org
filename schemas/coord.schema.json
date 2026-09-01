@@ -1,35 +1,104 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "agent.state — coord.json",
+  "title": "agent.state \u2014 coord.json",
   "description": "Management-coordinator rolling state. Phase 28 R5: refreshed with new fields.",
   "type": "object",
-  "required": ["last_run", "open_stuck", "stale_repos", "decisions_for_ivan"],
+  "required": [
+    "last_run",
+    "open_stuck",
+    "stale_repos",
+    "decisions_for_ivan"
+  ],
   "properties": {
-    "last_run": {"type": ["string", "null"], "format": "date-time"},
-    "open_stuck": {"type": "array", "items": {"type": "object"}},
-    "stale_repos": {"type": "array", "items": {"type": "object"}},
+    "last_run": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "open_stuck": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false
+      }
+    },
+    "stale_repos": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false
+      }
+    },
     "decisions_for_ivan": {
       "type": "array",
       "items": {
         "type": "object",
-        "required": ["question", "context"],
+        "required": [
+          "question",
+          "context"
+        ],
         "properties": {
-          "question": {"type": "string"},
-          "context": {"type": "string"},
-          "raised_at": {"type": "string", "format": "date-time"}
+          "question": {
+            "type": "string"
+          },
+          "context": {
+            "type": "string"
+          },
+          "raised_at": {
+            "type": "string",
+            "format": "date-time"
+          }
         },
         "additionalProperties": false
       }
     },
-    "_last_modified": {"type": ["string", "null"], "format": "date-time"},
-    "_last_modified_by": {"type": ["string", "null"]},
-    "_last_monitor_tick": {"type": ["string", "null"], "format": "date-time"},
-    "agents": {"type": "object", "additionalProperties": true},
-    "cron_errors_count": {"type": "integer", "minimum": 0},
-    "notes": {"type": "string"},
-    "repos_analyzed": {"type": "integer", "minimum": 0},
-    "stale_cron_error_entry": {"type": ["string", "null"]},
-    "stale_repos_count": {"type": "integer", "minimum": 0}
+    "_last_modified": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "_last_modified_by": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "_last_monitor_tick": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "agents": {
+      "type": "object",
+      "additionalProperties": false
+    },
+    "cron_errors_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "notes": {
+      "type": "string"
+    },
+    "repos_analyzed": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "stale_cron_error_entry": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "stale_repos_count": {
+      "type": "integer",
+      "minimum": 0
+    }
   },
   "additionalProperties": false
 }
