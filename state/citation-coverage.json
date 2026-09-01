@@ -1,25 +1,68 @@
 {
   "aggregate": {
-    "citations_per_100_lines": 16.67,
-    "citations_total": 1,
-    "coverage_pct": 16.67,
+    "citations_per_100_lines": 2.11,
+    "citations_total": 19,
+    "coverage_pct": 2.11,
     "files_healthy": 0,
-    "files_low": 1,
+    "files_low": 5,
     "files_orphan": 0,
-    "files_total": 1,
+    "files_total": 5,
     "files_warning": 0,
-    "lines_total": 6
+    "lines_total": 902
   },
-  "computed_at": "2026-09-01T17:49:26.226273+00:00",
+  "computed_at": "2026-09-01T20:08:26.294950+00:00",
   "files": [
+    {
+      "by_type": {
+        "doi": 2,
+        "url": 4
+      },
+      "citation_count": 6,
+      "coverage_score": 1.0,
+      "lines": 193,
+      "path": "research/methodology/data-collection-protocol.md",
+      "status": "low"
+    },
+    {
+      "by_type": {
+        "doi": 2,
+        "url": 4
+      },
+      "citation_count": 6,
+      "coverage_score": 1.0,
+      "lines": 208,
+      "path": "research/methodology/paper-structure-template.md",
+      "status": "low"
+    },
+    {
+      "by_type": {
+        "doi": 2,
+        "url": 3
+      },
+      "citation_count": 5,
+      "coverage_score": 1.0,
+      "lines": 198,
+      "path": "research/methodology/literature-review-protocol.md",
+      "status": "low"
+    },
     {
       "by_type": {
         "url": 1
       },
       "citation_count": 1,
       "coverage_score": 1.0,
-      "lines": 6,
-      "path": "research/test-cited-temp.md",
+      "lines": 162,
+      "path": "research/dept-research/04-engineering-gap-audit.md",
+      "status": "low"
+    },
+    {
+      "by_type": {
+        "url": 1
+      },
+      "citation_count": 1,
+      "coverage_score": 1.0,
+      "lines": 141,
+      "path": "research/methodology/thesis-defense-prep.md",
       "status": "low"
     }
   ],
