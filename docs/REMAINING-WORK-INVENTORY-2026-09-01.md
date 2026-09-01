@@ -55,10 +55,21 @@
 
 ## How to use this inventory
 
-1. **Run this session**: zero P0 items open. All 5 mitigations shipped.
-2. **Operator asks only**: R2, R10, R11 — and the 4 ADR-0004 deferrals.
-3. **Next session suggestion**: If R2 unlocked, do Tier-3 funnel revival pass.
-4. **If not**: stay operational; this is the production state.
+1. **P0 items open (per WS-2 item 4 + the 2026-09-02 audit `fb2b81f`)**:
+   - **4 credential leaks** open since 2026-08-31 (operator-action only):
+     - `SUPABASE_SERVICE_ROLE_KEY` in `work/research-repos/paragu-ai-builder/.env`
+     - 3 GitHub PATs (`ghp_q4J5yi…`, `ghp_u0Cs76…`, `ghp_1hSXVI…`) potentially live
+     - 16 R2 presigned URLs in `rubicon-eas-website/worker.js` (Kiki-task)
+     - `/opt/data/.hermes/.env` world-readable (operator-task: chmod 600 + install sudo)
+   - **79 of 168 enabled cron jobs broken** (47%, not 42% as previously reported):
+     - 40 `litellm-primary` jobs → Cerebras → payment-required (HTTP 402)
+     - 18 `litellm-fast` jobs → OpenRouter free tier → 404
+     - 29 empty-provider jobs (script-only or erroring)
+     - 26 jobs with `provider: litellm` but no model field
+   - **Lower-priority but real:** 1 `aiw-signal-indexer` cron never ran (None status); 424 items in `coord.json:decisions_for_ivan` (overloaded operator queue).
+   - **FIXED this turn (2026-09-02):** token-cap.py unit-mismatch (`e03a52a`) — was firing daily on test events; now disabled with exit-0 advisory until replacement ships.
+2. **Operator asks only**: 4 credential rotations + sudo install + 79-cron provider decision (deferred per Phase Kernel brief §4: "Leave dead for now. Do not re-point, do not buy a provider, do not retire. Document them and move on. Ivan will decide later.").
+3. **Next session suggestion**: WS-2 item 4 (correct this inventory) is the last item open on WS-2; WS-3 (portability) is the next largest queue.
 
 ---
 
