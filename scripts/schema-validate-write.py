@@ -74,7 +74,11 @@ def _find_state_file(state_file: Path) -> Path | None:
 
 
 def _check_additional_properties(obj, schema, path=""):
-    """Walk obj + schema, check additionalProperties: false everywhere."""
+    """Walk obj + schema, check additionalProperties: false everywhere.
+
+    Phase 29 fix (BUG-HUNT H4): now recurses into array items.
+    Previously missed nested-object fields inside arrays.
+    """
     errors = []
     if not isinstance(obj, dict):
         return errors
@@ -88,11 +92,21 @@ def _check_additional_properties(obj, schema, path=""):
         sub_schema = schema_props.get(k)
         if isinstance(sub_schema, dict):
             errors.extend(_check_additional_properties(v, sub_schema, f"{path}.{k}" if path else k))
+            # If schema is array, recurse into items
+            if isinstance(v, list) and "items" in sub_schema:
+                items_schema = sub_schema["items"]
+                if isinstance(items_schema, dict):
+                    for i, item in enumerate(v):
+                        errors.extend(_check_additional_properties(item, items_schema, f"{path}.{k}[{i}]" if path else f"{k}[{i}]"))
     return errors
 
 
 def _check_required(obj, schema, path=""):
-    """Check required fields are present."""
+    """Check required fields are present.
+
+    Phase 29 fix (BUG-HUNT H5): now recurses into array items.
+    Previously missed required-field checks inside array-of-objects.
+    """
     errors = []
     if not isinstance(obj, dict):
         return errors
@@ -105,6 +119,16 @@ def _check_required(obj, schema, path=""):
         sub = schema_props.get(k)
         if isinstance(sub, dict):
             errors.extend(_check_required(v, sub, f"{path}.{k}" if path else k))
+            # If schema is array, check items' required fields
+            if isinstance(v, list) and "items" in sub:
+                items_schema = sub["items"]
+                if isinstance(items_schema, dict):
+                    items_required = items_schema.get("required", [])
+                    for i, item in enumerate(v):
+                        if isinstance(item, dict):
+                            for req in items_required:
+                                if req not in item:
+                                    errors.append(f"{path}.{k}[{i}]: missing required field '{req}'" if path else f"{k}[{i}]: missing required field '{req}'")
     return errors
 
 

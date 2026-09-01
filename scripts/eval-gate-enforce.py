@@ -50,13 +50,19 @@ def _load_eval_trending() -> dict:
 
 
 def _agent_pass_rate(agent_name: str, eval_data: dict) -> float | None:
-    """Look up pass_rate for the given agent. None if unknown."""
+    """Look up pass_rate for the given agent. None if unknown.
+
+    Phase 29 fix (BUG-HUNT H3): returns the raw value (even if non-numeric)
+    so decide() can flag invalid values. Previously returned None for any
+    non-(int|float), which silently treated strings as "no data".
+    """
     by_agent = eval_data.get("by_agent", {})
     agent_data = by_agent.get(agent_name)
     if not agent_data:
         return None
     pr = agent_data.get("pass_rate")
-    return pr if isinstance(pr, (int, float)) else None
+    # Return the raw value; decide() handles None + NaN + non-numeric.
+    return pr
 
 
 def _log_decision(decision: dict) -> None:
@@ -95,6 +101,13 @@ def decide(agent_name: str, force: str | None, threshold: float) -> dict:
         decision["decision"] = "warn"
         decision["reason"] = "no eval data (agent never ran or no eval recorded)"
 
+    elif not isinstance(pass_rate, (int, float)) or pass_rate != pass_rate:
+        # Phase 29 fix (BUG-HUNT H2+H3): NaN + non-numeric pass_rate
+        # NaN: `nan != nan` is True; `nan >= x` is False; treated as no-data
+        # String: "0.95" or other non-numeric — same handling
+        decision["decision"] = "warn"
+        decision["reason"] = f"invalid pass_rate value: {pass_rate!r} (expected number 0.0-1.0)"
+
     elif pass_rate < threshold:
         # Below block threshold
         if force:
@@ -123,7 +136,17 @@ def main():
     parser.add_argument("--force", help="Override block with reason (logged)")
     parser.add_argument("--threshold", type=float, default=DEFAULT_BLOCK_THRESHOLD,
                         help=f"Block threshold (default {DEFAULT_BLOCK_THRESHOLD})")
+    parser.add_argument("--strict-threshold", action="store_true",
+                        help="Refuse thresholds outside [0, 1] (default: warn but accept)")
     args = parser.parse_args()
+
+    # Phase 29 fix (BUG-HUNT H7): validate threshold range
+    if not 0.0 <= args.threshold <= 1.0:
+        if args.strict_threshold:
+            print(f"ERROR: threshold {args.threshold} outside [0, 1]", file=sys.stderr)
+            sys.exit(2)
+        else:
+            print(f"WARN: threshold {args.threshold} outside [0, 1] (use --strict-threshold to refuse)", file=sys.stderr)
 
     decision = decide(args.agent, args.force, args.threshold)
 

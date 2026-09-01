@@ -58,8 +58,19 @@ def check(action: str, agent_name: str, role: str = "ai-agent", log: bool = True
 
     Raises:
         HardStopViolation if blocked AND raise_on_block=True.
+        ValueError if agent_name contains path traversal (Phase 29 fix BUG-HUNT H1).
     """
-    prompt_path = Path(f"/opt/data/agents/{agent_name}/PROMPT.md")
+    # Phase 29 fix (BUG-HUNT H1): validate agent_name against path traversal
+    if not agent_name:
+        raise ValueError("agent_name is required")
+    if ".." in agent_name.split("/") or agent_name.startswith("/") or "\\" in agent_name:
+        raise ValueError(f"invalid agent_name (path traversal): {agent_name!r}")
+    prompt_path = (Path("/opt/data/agents") / agent_name).resolve() / "PROMPT.md"
+    # Defense in depth: ensure resolved path stays under agents root
+    try:
+        prompt_path.relative_to(Path("/opt/data/agents").resolve())
+    except ValueError:
+        raise ValueError(f"invalid agent_name (escapes agents root): {agent_name!r}")
     if not prompt_path.exists():
         if log:
             hard_stop_wrapper._log_check(agent_name, action, role, True)  # default allow

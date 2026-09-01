@@ -134,7 +134,32 @@ def _match_cost(name: str, agent_costs: dict) -> dict | None:
     return None
 
 
-def correlate(jobs: list, costs: dict) -> dict:
+def compute_recipients(rule):  # not used here, but kept for clarity
+    """Not used in cost-per-cron; kept for future extension."""
+    return rule.get("deliver_to", [])
+
+
+# Phase 29 fix (BUG-HUNT H8): model-appropriate estimate rates
+# Real rates from cost-tracker.json (live values):
+#   primary: $0.0375/run, fast: $0.0016/run, reasoning: $0.0016/run (assumed)
+# Use cost-tracker's `model_pricing` if available, fallback to defaults.
+_ESTIMATE_RATES = {
+    "primary": 0.0375,
+    "fast": 0.0016,
+    "reasoning": 0.0016,
+    "vision": 0.005,  # estimated
+    "default": 0.010,  # mid-tier fallback
+}
+
+
+def _estimate_rate_for_unmatched(model_name: str | None) -> float:
+    """Pick model-appropriate estimate rate for unmatched crons."""
+    if not model_name:
+        return _ESTIMATE_RATES["default"]
+    return _ESTIMATE_RATES.get(model_name.lower(), _ESTIMATE_RATES["default"])
+
+
+def correlate(jobs: list, costs: dict, model_name: str | None = None) -> dict:
     """Build per-cron cost report."""
     # Map cron name -> cost agent data
     agent_costs = costs.get("agents", {})
@@ -161,14 +186,18 @@ def correlate(jobs: list, costs: dict) -> dict:
                 "model": matched_cost.get("model", "primary"),
             })
         else:
-            # Estimate from runs_per_day
-            estimate = runs_per_day * 0.0375  # mid-tier cost
+            # Estimate from cost-tracker's per-run rate, not a flat $0.0375
+            # Phase 29 fix (BUG-HUNT H8): the flat rate was 22-30x too high for coach-* agents.
+            # Use cost-tracker's `cost_per_run_usd` if available, else pick model-appropriate rate.
+            estimate_rate = _estimate_rate_for_unmatched(model_name)
+            estimate = runs_per_day * estimate_rate
             cron_costs.append({
                 "cron_name": name,
                 "runs_per_day": runs_per_day,
                 "daily_usd": round(estimate, 4),
                 "monthly_usd": round(estimate * 30, 2),
                 "model": "estimated",
+                "estimate_rate_per_run": estimate_rate,
             })
             uncategorized.append({"cron_name": name, "runs_per_day": runs_per_day})
 
