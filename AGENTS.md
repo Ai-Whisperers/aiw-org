@@ -1,0 +1,142 @@
+# AGENTS.md — AIW Org (aiw-org)
+
+> **The single authoritative collaboration rulebook for all coding agents working in this org.**
+> Applies to: Claude Code, Codex, Cursor, Gemini CLI, Windsurf, Kimi, OpenClaw, Hermes, and any other vendor.
+> Vendor-specific files (`CLAUDE.md`, `AGENTS.md` per repo) are pointers to this doc.
+> **Conflicts are resolved in favor of this file.**
+
+---
+
+## Before starting work — three required steps
+
+1. **Read in fixed order:**
+   - `README*` (any language)
+   - This `AGENTS.md`
+   - `docs/HANDOFF.md` (current state of work)
+   - `docs/adr/` (architectural decisions)
+   - `git log -10 --oneline` (recent history)
+
+2. **Run the verification command for the project** (see "Verification commands" below).
+   - **If baseline is red → fix baseline FIRST. Never stack new changes on a red baseline.**
+
+3. **Restate the current task and acceptance criteria in your own words**, confirm alignment with HANDOFF before touching code.
+
+---
+
+## Before declaring work done — three required steps
+
+1. **Run the FULL verification command**, confirm all green.
+2. **Update `docs/HANDOFF.md`**: current goal / completed / in-progress (with file paths and locations) / known pitfalls / next steps / how to verify.
+3. **Commit git**: no uncommitted half-finished work; commit message uses Conventional Commits and explains WHY not just WHAT.
+
+---
+
+## Verification commands (canonical baseline)
+
+For Python projects in this org (most agents and scripts):
+```bash
+cd /opt/data/agents && bash tests/run-all.sh
+```
+
+Expected output:
+- `=== Lint PROMPTs ===` (passes)
+- `=== Validate state ===` (passes)
+- `=== Run unit tests ===` (e.g. `210 passed`)
+- `Total failures: 0`
+
+For Python module changes specifically:
+```bash
+cd /opt/data/agents && /opt/data/.venv/bin/python3 -m pytest tests/<changed_module>.py -v
+```
+
+For Hermes skill/plugin changes:
+```bash
+/opt/hermes/bin/hermes skills list        # confirm enabled
+/opt/hermes/bin/hermes plugins list       # confirm enabled
+```
+
+**If the verification command changes, update this section in the same commit.**
+
+---
+
+## Architecture Decision Records (ADR)
+
+- **Any "why this change" decision** for architecture / approach / schema changes goes in `docs/adr/`.
+- Format: see `docs/adr/0000-template.md`.
+- **Decisions only in chat = decisions that didn't happen.** Write them down.
+
+---
+
+## Git discipline
+
+- **Forbidden: `git add -A`** — use `git add -u` or per-file `git add <path>`. New files must be explicitly added.
+- Before commit, `git diff --stat` to verify no surprise changes to `Dockerfile`, `nginx.conf`, `docker-compose.yml`, etc. Infrastructure files in separate commits.
+- Small commits. One commit = one change. One task = one branch.
+- Branch names: `feat/<short-name>`, `fix/<short-name>`, `chore/<short-name>`. No special chars.
+
+---
+
+## Anti-patterns (forbidden)
+
+- ❌ Putting critical context in vendor-private directories (`.claude/`, `.cursor/`, `.codex/`)
+- ❌ Relying on conversation summaries / context compression to pass state between sessions
+- ❌ Stacking new features on a red test baseline
+- ❌ Tackling tasks larger than "can be explained in half a day" before handoff
+- ❌ Claiming "Done!" or "All tests pass" without FRESH verification evidence in the same response
+- ❌ Trusting agent success reports without independent VCS diff verification
+- ❌ Leaving uncommitted work at session end
+
+---
+
+## Engineering principles
+
+- **Don't preserve backward compat:** delete obsolete paths, don't add compat shims, fallbacks, or migration code.
+- **Choose the simplest implementation that fully meets current needs.** Avoid speculative abstractions, config, and indirection layers.
+- **Layered evolution:** start with a working end-to-end minimum, then layer new capabilities on top. Never replace a working product with half-finished complexity.
+- **Modular components, clear separation of concerns.**
+- **Prefer mature, well-maintained libraries** (when they reduce overall complexity or improve reliability). Don't reinvent common functionality without a reason.
+- **Use existing project dependencies first.** Don't assume a library lacks a capability — check docs and types first.
+- **Architecture decisions are long-term.** No "works now, definitely replace later" temporary solutions.
+- **Conflict resolution:** architectural boundaries follow long-term design; implementation within boundaries follows current simplest.
+
+## Handoff boundary integrity (ADR-0003)
+
+**Every handoff between agents MUST:**
+- Include an explicit `Audience:` header listing who can read it
+- Include an explicit `Visibility:` scope (`internal` | `dept-scoped:<id>` | `agent-scoped:<id>` | `public`)
+- Be full-text — **NEVER auto-summarize** handoff artifacts. Compressed handoffs lose boundary metadata at 73% leakage rate (per arXiv 2026).
+- Go through `pre_dispatch_check` validation before writing
+
+**Rationale:** "Facts Without Rules: Boundary Metadata Collapse in Multi-Agent LLM Handoffs" (arXiv 2026) measured 73% privacy leakage when handoffs are compressed to ≤25 words. AIW's full-text markdown outbox preserves boundaries; this rule prevents future contributors from accidentally introducing compression. See `/opt/data/agents/docs/adr/0003-handoff-boundary-integrity.md`.
+
+---
+
+## Safety red lines
+
+- **NEVER commit secrets, credentials, IDs, or customer PII.** If you find existing secrets in a repo, **report and stop — do not silently fix.**
+- **NEVER push to a remote without explicit authorization** (this org uses `github-push-from-bws` wrapper; raw `git push` blocked by safety hook).
+- **NEVER print token-shaped strings to chat** (token-leak failure mode). If a token appears in chat, treat as compromised, rotate in BWS.
+- **NEVER modify `state/coord.json` directly** — go through the AIW agent that owns that signal.
+- **NEVER add a new cron job without an entry in `/opt/data/agents/ORCHESTRATION.md`** explaining its purpose and SLA.
+
+---
+
+## Quick links
+
+- Operations runbook: `/opt/data/agents/OPERATIONS.md`
+- Orchestration spec: `/opt/data/agents/ORCHESTRATION.md`
+- Current state: `/opt/data/agents/docs/HANDOFF.md` (to be created)
+- ADRs: `/opt/data/agents/docs/adr/` (to be created)
+- Org structure: `/opt/data/agents/ORG-AGENTS.md`
+- BWS credential skill: `~/.hermes/skills/aiw-bws-credential-quirks/SKILL.md`
+
+---
+
+## Provenance
+
+This document is adapted from `iPythoning/b2b-sdr-agent-template/AGENTS.md` (the closest peer-project AGENTS.md we found) and merged with AIW-specific safety red lines and verification commands. See research docs:
+- `/opt/data/profiles/ivan/plans/2026-09-01-aiw-research-round-3-communities.md`
+- `/opt/data/profiles/ivan/plans/2026-09-01-aiw-research-round-4-upgrades-templates.md`
+
+**Maintainer:** AIW org (Ivan Weiss Van Der Pol)
+**Last updated:** 2026-09-01
