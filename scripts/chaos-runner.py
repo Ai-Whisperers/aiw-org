@@ -16,10 +16,13 @@ Scenario 1 (state corruption):
 Safe to run repeatedly. Staging dir is isolated.
 """
 import argparse
+import atexit
 import json
+import os
 import shutil
 import subprocess
 import sys
+import tempfile
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -40,7 +43,15 @@ def snapshot_to_staging(source: Path, dest: Path) -> int:
 
 
 def run_scenario_1(staging_dir: Path) -> dict:
-    """Scenario 1: state file corruption (coord.json)."""
+    """Scenario 1: state file corruption (coord.json).
+
+    Fixes (BUG-HUNT-2026-09-01.md C2/C3, Phase 9 R2):
+      C2: backup path now uses a unique tmp file per run (uuid4 + mkstemp).
+          Two concurrent chaos runs cannot overwrite each other's backup.
+      C3: eval-trending.json prod write is now restored from the pre-run
+          snapshot (or deleted if there was no pre-existing file).
+          Previously the cleanup was a literal `pass`.
+    """
     result = {"scenario": 1, "checks": [], "errors": []}
     staging_dir.mkdir(parents=True, exist_ok=True)
 
@@ -94,12 +105,60 @@ def run_scenario_1(staging_dir: Path) -> dict:
         },
         "summary": {"total_agents": 2},
     }))
-    # Backup prod eval, swap with synthetic, run, restore
+
+    # --- C2 fix: unique tmp backup per run (was constant filename, C2) ---
+    # Use mkstemp so we get a real O_EXCL create; the path is unique even
+    # under concurrent chaos runs.
     prod_eval = SOURCE_STATE / "eval-per-agent.json"
-    backup = None
+    backup_path = None
+    trending_existed_before = (SOURCE_STATE / "eval-trending.json").exists()
+    trending_snapshot = snap / "eval-trending.json"
+
+    def restore_prod():
+        """Idempotent restore — called from both finally and atexit."""
+        # Restore eval-per-agent.json from backup
+        if backup_path is not None and backup_path.exists():
+            try:
+                shutil.copy2(backup_path, prod_eval)
+            except OSError as e:
+                result.setdefault("errors", []).append(
+                    f"backup restore failed: {e}"
+                )
+            finally:
+                try:
+                    backup_path.unlink()
+                except OSError:
+                    pass
+
+        # --- C3 fix: restore or delete eval-trending.json ---
+        prod_trending = SOURCE_STATE / "eval-trending.json"
+        try:
+            if trending_existed_before and trending_snapshot.exists():
+                # Restore from the pre-run snapshot
+                shutil.copy2(trending_snapshot, prod_trending)
+            else:
+                # Pre-run didn't have this file — delete the synthetic write
+                if prod_trending.exists():
+                    prod_trending.unlink()
+        except OSError as e:
+            result.setdefault("errors", []).append(
+                f"trending restore failed: {e}"
+            )
+
+    # Register atexit as a safety net — covers KeyboardInterrupt, SystemExit,
+    # unhandled exceptions, and any early-return paths we add later.
+    atexit.register(restore_prod)
+
     if prod_eval.exists():
-        backup = SOURCE_STATE / "eval-per-agent.json.backup.chaos"
-        shutil.copy2(prod_eval, backup)
+        backup_fd, backup_name = tempfile.mkstemp(
+            prefix="eval-per-agent.json.backup.chaos.",
+            suffix=".tmp",
+            dir=str(SOURCE_STATE),
+        )
+        os.close(backup_fd)
+        backup_path = Path(backup_name)
+        shutil.copy2(prod_eval, backup_path)
+
     shutil.copy2(synthetic_eval, prod_eval)
     output_eval = staging_dir / "eval-trending.json"
     try:
@@ -114,17 +173,9 @@ def run_scenario_1(staging_dir: Path) -> dict:
             "stdout_tail": r.stdout[-300:] if r.stdout else "",
             "stderr_tail": r.stderr[-300:] if r.stderr else "",
         })
-        # Cleanup the trending.json prod write to avoid confusion
-        prod_trending = SOURCE_STATE / "eval-trending.json"
-        if prod_trending.exists():
-            # Restore prod's eval-trending.json if there was one before
-            # (For now, just leave it - it's overwritten anyway by the next nightly run)
-            pass
     finally:
-        # Always restore prod eval-per-agent.json
-        if backup and backup.exists():
-            shutil.copy2(backup, prod_eval)
-            backup.unlink()
+        # Inline restore; atexit is the safety net for abnormal exits.
+        restore_prod()
 
     # 5. Verify rollback (snapshot still intact)
     if (snap / "coord.json").exists():

@@ -25,7 +25,7 @@
 
 | # | Risk | Likelihood | Impact | Score | Tier | Mitigation | Owner |
 |---|------|-----------|--------|-------|------|------------|-------|
-| R1 | Hard-stops wrapper unenforced (LLM can violate declarations) | 4 | 5 | **20** | 🔴 | Phase 8 #2: invoke wrapper (8-16h, Kiki) | ai-safety-engineer |
+| R1 | Hard-stops wrapper unenforced (LLM can violate declarations) | 4 | 5 | **20** | 🔴 | **ACCEPTED 2026-09-01** (ADR-0004) — wrapper invocation deferred; declarations remain advisory. Mitigated by pre-commit secret-leak + trademark-scrub guards + human-in-loop for destructive ops | Ivan (decision), ai-safety-engineer (monitor) |
 | R2 | Sales pipeline dead (0 leads, Worker 404) | 5 | 4 | **20** | 🔴 | Phase 8 #19: funnel revival | sales-pipeline |
 | R3 | Token-plan exhaustion on Sunday-evening weekly stack | 4 | 3 | **12** | 🟡 | Spread crons (Phase 8 #3) | ai-ops-coordinator |
 | R4 | Eval aggregate pass_rate unknown | 4 | 3 | **12** | 🟡 | Run eval-aggregate-pass-rate.py nightly | ai-safety-engineer |
@@ -40,11 +40,26 @@
 
 ---
 
+## Tier-2 decisions ratified 2026-09-01 (ADR-0004)
+
+| Decision | Status | Owner |
+|----------|--------|-------|
+| Delete Tier-2 `departments-taxonomy/` | Already gone (effective) | n/a |
+| Portmanteau naming canonical (Greek → portmanteau migration) | Migration in progress (DEMIURGE-082) | ai-ops-coordinator |
+| Keep `aiw-org` and `growth-coaching` separate | Active; coaching = future product department | Ivan |
+| R1 hard-stops: ACCEPT risk | See row above; row updated | ai-safety-engineer |
+| Formspree lead form | DEFERRED until engineering tier stable | sales-pipeline |
+| Start-Up Chile application | DEFERRED until engineering tier stable | Ivan |
+| Open-source the framework | DEFERRED until engineering tier stable | Ivan |
+| Keep public repo (deliberate) | Active; threat model acknowledges external exposure | ai-safety-engineer |
+
+---
+
 ## 3 critical risks needing board attention
 
-1. **R1: Hard-stops wrapper** — AI safety hole. 8-16h to fix. Kiki decision required.
-2. **R2: Sales pipeline dead** — No revenue. Trivial to fix (Worker fix or replacement).
-3. **R11: Ivan bandwidth** — Single point of failure. Mitigated by hiring (Tier-3 deferred).
+1. **R2: Sales pipeline dead** — No revenue. Trivial to fix (Worker fix or replacement). **DEFERRED** per ADR-0004 until engineering tier stable.
+2. **R11: Ivan bandwidth** — Single point of failure. Mitigated by hiring (Tier-3 deferred).
+3. **R1: Hard-stops wrapper** — **ACCEPTED 2026-09-01 per ADR-0004**. Mitigated by pre-commit guards (Phase 9) + human-in-loop on destructive ops. Reassess if/when budget allows 8-16h enforcement work.
 
 ---
 
