@@ -1,0 +1,37 @@
+[
+  {
+    "name": "nexaparaguay.com.py",
+    "host": "nexaparaguay.com.py",
+    "category": "client_prod",
+    "slo_availability": 0.999,
+    "slo_latency_p95_ms": 500
+  },
+  {
+    "name": "ometzdental.com",
+    "host": "ometzdental.com",
+    "category": "client_prod",
+    "slo_availability": 0.999,
+    "slo_latency_p95_ms": 500
+  },
+  {
+    "name": "ai-whisperers.org",
+    "host": "ai-whisperers.org",
+    "category": "corp_site",
+    "slo_availability": 0.99,
+    "slo_latency_p95_ms": 1000
+  },
+  {
+    "name": "el-gato-siames",
+    "host": "el-gato-siames.com",
+    "category": "client_prod",
+    "slo_availability": 0.99,
+    "slo_latency_p95_ms": 1000
+  },
+  {
+    "name": "refugio-animal-paraguay",
+    "host": "refugio-animal-paraguay.com.py",
+    "category": "client_prod",
+    "slo_availability": 0.99,
+    "slo_latency_p95_ms": 1000
+  }
+]

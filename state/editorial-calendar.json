@@ -1,0 +1,37 @@
+{
+  "entries": [
+    {
+      "created_at": "2026-09-01T17:49:54.669493+00:00",
+      "deadline": "2026-12-01",
+      "id": "db5c3750",
+      "notes": "",
+      "owner": "ivan",
+      "status": "idea",
+      "title": "GeoData v2 Chapter 4 (Results)",
+      "type": "thesis_chapter"
+    },
+    {
+      "created_at": "2026-09-01T17:49:54.719760+00:00",
+      "deadline": "2026-10-15",
+      "id": "31c60f73",
+      "notes": "",
+      "owner": "ivan",
+      "status": "idea",
+      "title": "Hero's Journey Curriculum Framework",
+      "type": "whitepaper"
+    },
+    {
+      "created_at": "2026-09-01T17:49:54.770937+00:00",
+      "deadline": "2026-09-15",
+      "id": "9aae7352",
+      "notes": "",
+      "owner": "ivan",
+      "status": "peer_review",
+      "status_updated_at": "2026-09-01T17:49:58.942675+00:00",
+      "title": "Coaching Funnel Playbook public version",
+      "type": "blog_post"
+    }
+  ],
+  "updated_at": "2026-09-01T17:49:58.942688+00:00",
+  "version": "1.0.0"
+}

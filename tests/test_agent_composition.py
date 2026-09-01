@@ -25,6 +25,7 @@ ALLOWED_CROSSCUTS = {
     "ai-ops-coordinator",
     "thoth-literature-scanner",  # 6 refs — research scanner
     "themis-document-classifier",  # 10 refs — classification is pervasively needed
+    "peitho-language-quality",  # 6+ refs — language quality used by many agents (Phase 7 R5)
 }
 
 

@@ -1,0 +1,48 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "SLO Budget Tracker",
+  "description": "Per-service SLO + error-budget tracking. Built Phase 7 R5 per implementation plan §4 Phase 1.3.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["version", "computed_at", "services", "aggregate"],
+  "properties": {
+    "version": {"type": "string", "const": "1.0.0"},
+    "computed_at": {"type": "string", "format": "date-time"},
+    "services": {
+      "type": "object",
+      "additionalProperties": false,
+      "propertyNames": {"maxLength": 64},
+      "patternProperties": {
+        "^[a-z0-9][a-z0-9-]{0,62}[a-z0-9]$": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["slo_availability", "slo_latency_p95_ms", "window_days", "samples", "availability_pct", "latency_p95_ms", "error_budget_pct", "budget_status"],
+          "properties": {
+            "slo_availability": {"type": "number", "minimum": 0.0, "maximum": 1.0, "description": "Target availability (e.g. 0.999 = 99.9%)"},
+            "slo_latency_p95_ms": {"type": "number", "minimum": 0, "description": "p95 latency target in ms"},
+            "window_days": {"type": "integer", "minimum": 1, "maximum": 90},
+            "samples": {"type": "integer", "minimum": 0},
+            "availability_pct": {"type": "number", "minimum": 0.0, "maximum": 1.0},
+            "latency_p95_ms": {"type": ["number", "null"], "minimum": 0},
+            "error_budget_used_pct": {"type": "number", "minimum": 0.0, "description": "How much of the budget consumed (0=healthy, 100=exhausted)"},
+            "error_budget_remaining_pct": {"type": "number", "minimum": 0.0},
+            "budget_status": {"type": "string", "enum": ["healthy", "warning", "exhausted", "unknown"]},
+            "last_check_at": {"type": "string", "format": "date-time"}
+          }
+        }
+      }
+    },
+    "aggregate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["services_total", "services_healthy", "services_warning", "services_exhausted"],
+      "properties": {
+        "services_total": {"type": "integer", "minimum": 0},
+        "services_healthy": {"type": "integer", "minimum": 0},
+        "services_warning": {"type": "integer", "minimum": 0},
+        "services_exhausted": {"type": "integer", "minimum": 0},
+        "alert": {"type": ["string", "null"], "enum": [null, "WARNING", "CRITICAL"]}
+      }
+    }
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "computed_at": "2026-09-01T17:52:38.159333+00:00",
+  "agent_count": 0,
+  "aggregate_pass_rate": 0.0,
+  "passing_agents": 0,
+  "warning_agents": 0,
+  "failing_agents": 0,
+  "longest_streak": {
+    "agent": null,
+    "consecutive_failures": 0
+  },
+  "per_agent": {},
+  "alert": null
+}

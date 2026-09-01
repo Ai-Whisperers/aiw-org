@@ -1,0 +1,74 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "DORA Metrics",
+  "description": "DORA 4-metrics aggregator output. Built Phase 7 R5 per implementation plan §4 Phase 1.1.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["version", "computed_at", "window_days", "performance", "classification", "summary"],
+  "properties": {
+    "version": {"type": "string", "const": "1.0.0"},
+    "computed_at": {"type": "string", "format": "date-time"},
+    "window_days": {"type": "integer", "minimum": 1, "maximum": 365},
+    "performance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["deploy_frequency", "lead_time", "change_failure_rate", "mttr"],
+      "properties": {
+        "deploy_frequency": {"$ref": "#/definitions/deploy_frequency"},
+        "lead_time": {"$ref": "#/definitions/deploy_frequency"},
+        "change_failure_rate": {"$ref": "#/definitions/change_failure_rate"},
+        "mttr": {"$ref": "#/definitions/mttr"}
+      }
+    },
+    "classification": {"type": "string", "enum": ["elite", "high", "medium", "low"]},
+    "summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["deploys_per_week", "lead_time_hours_avg", "change_failure_rate_pct", "mttr_minutes", "deploy_frequency_label"],
+      "properties": {
+        "deploys_per_week": {"type": "number", "minimum": 0},
+        "lead_time_hours_avg": {"type": ["number", "null"], "minimum": 0},
+        "change_failure_rate_pct": {"type": ["number", "null"], "minimum": 0},
+        "mttr_minutes": {"type": ["number", "null"], "minimum": 0},
+        "deploy_frequency_label": {"type": "string", "enum": ["on-demand", "daily-weekly", "weekly-monthly", "<monthly"]}
+      }
+    }
+  },
+  "definitions": {
+    "deploy_frequency": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["deploy_count", "deploys_per_week", "lead_time_hours_avg", "first_deploy_at", "last_deploy_at", "source"],
+      "properties": {
+        "deploy_count": {"type": "integer", "minimum": 0},
+        "deploys_per_week": {"type": "number", "minimum": 0},
+        "lead_time_hours_avg": {"type": ["number", "null"], "minimum": 0},
+        "first_deploy_at": {"type": ["string", "null"], "format": "date-time"},
+        "last_deploy_at": {"type": ["string", "null"], "format": "date-time"},
+        "source": {"type": "string"}
+      }
+    },
+    "change_failure_rate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["cfr_pct", "incidents_in_window", "deploy_count", "source", "details"],
+      "properties": {
+        "cfr_pct": {"type": ["number", "null"], "minimum": 0},
+        "incidents_in_window": {"type": "integer", "minimum": 0},
+        "deploy_count": {"type": "integer", "minimum": 0},
+        "source": {"type": "string"},
+        "details": {"type": "array", "items": {"type": "object"}}
+      }
+    },
+    "mttr": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["mttr_minutes", "samples", "source"],
+      "properties": {
+        "mttr_minutes": {"type": ["number", "null"], "minimum": 0},
+        "samples": {"type": "integer", "minimum": 0},
+        "source": {"type": "string"}
+      }
+    }
+  }
+}

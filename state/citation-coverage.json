@@ -1,0 +1,28 @@
+{
+  "aggregate": {
+    "citations_per_100_lines": 16.67,
+    "citations_total": 1,
+    "coverage_pct": 16.67,
+    "files_healthy": 0,
+    "files_low": 1,
+    "files_orphan": 0,
+    "files_total": 1,
+    "files_warning": 0,
+    "lines_total": 6
+  },
+  "computed_at": "2026-09-01T17:49:26.226273+00:00",
+  "files": [
+    {
+      "by_type": {
+        "url": 1
+      },
+      "citation_count": 1,
+      "coverage_score": 1.0,
+      "lines": 6,
+      "path": "research/test-cited-temp.md",
+      "status": "low"
+    }
+  ],
+  "threshold_pct": 1.0,
+  "version": "1.0.0"
+}

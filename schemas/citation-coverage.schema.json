@@ -1,0 +1,45 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Citation Coverage Report",
+  "description": "Per-file + aggregate citation coverage for Research dept outputs. Built Phase 7 R5.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["version", "computed_at", "threshold_pct", "aggregate", "files"],
+  "properties": {
+    "version": {"type": "string", "const": "1.0.0"},
+    "computed_at": {"type": "string", "format": "date-time"},
+    "threshold_pct": {"type": "number", "minimum": 0.0, "maximum": 100.0},
+    "aggregate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["files_total", "files_healthy", "files_warning", "files_low", "files_orphan", "lines_total", "citations_total", "coverage_pct", "citations_per_100_lines"],
+      "properties": {
+        "files_total": {"type": "integer", "minimum": 0},
+        "files_healthy": {"type": "integer", "minimum": 0},
+        "files_warning": {"type": "integer", "minimum": 0},
+        "files_low": {"type": "integer", "minimum": 0},
+        "files_orphan": {"type": "integer", "minimum": 0},
+        "lines_total": {"type": "integer", "minimum": 0},
+        "citations_total": {"type": "integer", "minimum": 0},
+        "coverage_pct": {"type": "number", "minimum": 0.0},
+        "citations_per_100_lines": {"type": "number", "minimum": 0.0}
+      }
+    },
+    "files": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["path", "lines", "citation_count", "by_type", "coverage_score", "status"],
+        "properties": {
+          "path": {"type": "string"},
+          "lines": {"type": "integer", "minimum": 0},
+          "citation_count": {"type": "integer", "minimum": 0},
+          "by_type": {"type": "object", "additionalProperties": {"type": "integer"}},
+          "coverage_score": {"type": "number", "minimum": 0.0},
+          "status": {"type": "string", "enum": ["healthy", "warning", "low", "orphan"]}
+        }
+      }
+    }
+  }
+}

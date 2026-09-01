@@ -1,0 +1,624 @@
+{
+  "agent_count": 60,
+  "by_cluster": {
+    "build": 6,
+    "enable": 3,
+    "run": 8,
+    "unset": 43
+  },
+  "by_topology": {
+    "platform": 21,
+    "stream-aligned": 39
+  },
+  "comparison_prior_state": null,
+  "computed_at": "2026-09-01T17:50:23.320201+00:00",
+  "diff_vs_prior": {
+    "added": [
+      "accounting-automation",
+      "ai-ops-coordinator",
+      "ai-safety-engineer",
+      "ai-safety-engineer-30min",
+      "apollo-sales-lead",
+      "architect-agent",
+      "argus-health-monitor",
+      "athena-product-discovery-lead",
+      "auditor-agent",
+      "bizops-tracker",
+      "business-analyst",
+      "cadmus-lead-enrichment",
+      "calliope-content-producer",
+      "chaos-test-runner",
+      "citation-checker",
+      "citation-coverage-enforcer",
+      "clio-customer-signal-collector",
+      "compliance-monitor",
+      "course-producer",
+      "delivery-tracker",
+      "devops-monitor",
+      "devops-monitor-30min",
+      "drift-detector",
+      "echo-community-scanner",
+      "engineering-roster",
+      "eval-gate-runner",
+      "finance-controller",
+      "founder-bandwidth-watchdog",
+      "funding-coordinator",
+      "hephaestus-document-miner",
+      "hera-marketing-lead",
+      "hermes-router-revenue",
+      "iris-community-monitor",
+      "kronos-operations-lead",
+      "lead-enrichment",
+      "management-coordinator",
+      "marketing-content-producer",
+      "metis-proposal-drafter",
+      "mnemosyne-document-archivist",
+      "multimedia-producer",
+      "okr-tracker",
+      "orpheus-recordings-agent",
+      "peitho-language-quality",
+      "people-hr",
+      "pheme-document-router",
+      "procurement-tracker",
+      "proposal-drafter",
+      "qa-automation-on-pr",
+      "qa-automation-runner",
+      "research-tracker",
+      "revops-pipeline-analyzer",
+      "sales-pipeline",
+      "security-auditor",
+      "security-watchdog",
+      "security-watchdog-30min",
+      "source-curator",
+      "tax-receipt-tracker",
+      "themis-document-classifier",
+      "thesis-tracker",
+      "thoth-literature-scanner"
+    ],
+    "changed": [],
+    "removed": []
+  },
+  "roster": {
+    "accounting-automation": {
+      "archetype": "specialist",
+      "cluster": null,
+      "layer": "business",
+      "owner": "ai-ops-coordinator",
+      "path": "02-finance-legal/accounting-automation/PROMPT.md",
+      "topology": "stream-aligned",
+      "version": "0.2.0"
+    },
+    "ai-ops-coordinator": {
+      "archetype": "team-lead",
+      "cluster": null,
+      "layer": "business",
+      "owner": "ai-ops-coordinator",
+      "path": "01-operations/ai-ops-coordinator/PROMPT.md",
+      "topology": "stream-aligned",
+      "version": "0.2.0"
+    },
+    "ai-safety-engineer": {
+      "archetype": "specialist",
+      "cluster": "run",
+      "layer": "business",
+      "owner": "ai-ops-coordinator",
+      "path": "04-engineering/ai-safety-engineer/PROMPT.md",
+      "topology": "stream-aligned",
+      "version": "0.2.0"
+    },
+    "ai-safety-engineer-30min": {
+      "archetype": "specialist",
+      "cluster": "run",
+      "layer": "business",
+      "owner": "ai-ops-coordinator",
+      "path": "04-engineering/ai-safety-engineer-30min/PROMPT.md",
+      "topology": "stream-aligned",
+      "version": "0.2.0"
+    },
+    "apollo-sales-lead": {
+      "archetype": "team-lead",
+      "cluster": null,
+      "layer": "atomic",
+      "owner": "ai-ops-coordinator",
+      "path": "demiurge/agents/apollo-sales-lead/PROMPT.md",
+      "topology": "platform",
+      "version": "0.2.0"
+    },
+    "architect-agent": {
+      "archetype": "architect",
+      "cluster": "enable",
+      "layer": "atomic",
+      "owner": "ai-ops-coordinator",
+      "path": "demiurge/agents/architect-agent/PROMPT.md",
+      "topology": "platform",
+      "version": "0.1.0"
+    },
+    "argus-health-monitor": {
+      "archetype": "specialist",
+      "cluster": null,
+      "layer": "atomic",
+      "owner": "ai-ops-coordinator",
+      "path": "demiurge/agents/argus-health-monitor/PROMPT.md",
+      "topology": "platform",
+      "version": "0.2.0"
+    },
+    "athena-product-discovery-lead": {
+      "archetype": "team-lead",
+      "cluster": null,
+      "layer": "atomic",
+      "owner": "ai-ops-coordinator",
+      "path": "demiurge/agents/athena-product-discovery-lead/PROMPT.md",
+      "topology": "platform",
+      "version": "0.2.0"
+    },
+    "auditor-agent": {
+      "archetype": "specialist",
+      "cluster": "enable",
+      "layer": "atomic",
+      "owner": "qa-monitor",
+      "path": "demiurge/agents/auditor-agent/PROMPT.md",
+      "topology": "platform",
+      "version": "0.1.0"
+    },
+    "bizops-tracker": {
+      "archetype": "specialist",
+      "cluster": null,
+      "layer": "business",
+      "owner": "ai-ops-coordinator",
+      "path": "01-operations/bizops-tracker/PROMPT.md",
+      "topology": "stream-aligned",
+      "version": "0.2.0"
+    },
+    "business-analyst": {
+      "archetype": "specialist",
+      "cluster": null,
+      "layer": "business",
+      "owner": "ai-ops-coordinator",
+      "path": "02-finance-legal/business-analyst/PROMPT.md",
+      "topology": "stream-aligned",
+      "version": "0.2.0"
+    },
+    "cadmus-lead-enrichment": {
+      "archetype": "solver",
+      "cluster": null,
+      "layer": "atomic",
+      "owner": "ai-ops-coordinator",
+      "path": "demiurge/agents/cadmus-lead-enrichment/PROMPT.md",
+      "topology": "platform",
+      "version": "0.2.0"
+    },
+    "calliope-content-producer": {
+      "archetype": "solver",
+      "cluster": null,
+      "layer": "atomic",
+      "owner": "ai-ops-coordinator",
+      "path": "demiurge/agents/calliope-content-producer/PROMPT.md",
+      "topology": "platform",
+      "version": "0.2.0"
+    },
+    "chaos-test-runner": {
+      "archetype": "specialist",
+      "cluster": "run",
+      "layer": "business",
+      "owner": "ai-ops-coordinator",
+      "path": "04-engineering/chaos-test-runner/PROMPT.md",
+      "topology": "stream-aligned",
+      "version": "0.2.0"
+    },
+    "citation-checker": {
+      "archetype": "specialist",
+      "cluster": null,
+      "layer": "business",
+      "owner": "ai-ops-coordinator",
+      "path": "05-research-education/citation-checker/PROMPT.md",
+      "topology": "stream-aligned",
+      "version": "0.2.0"
+    },
+    "citation-coverage-enforcer": {
+      "archetype": "specialist",
+      "cluster": "run",
+      "layer": "business",
+      "owner": "research-tracker",
+      "path": "05-research-education/citation-coverage-enforcer/PROMPT.md",
+      "topology": "stream-aligned",
+      "version": "0.1.0"
+    },
+    "clio-customer-signal-collector": {
+      "archetype": "solver",
+      "cluster": null,
+      "layer": "atomic",
+      "owner": "ai-ops-coordinator",
+      "path": "demiurge/agents/clio-customer-signal-collector/PROMPT.md",
+      "topology": "platform",
+      "version": "0.2.0"
+    },
+    "compliance-monitor": {
+      "archetype": "specialist",
+      "cluster": null,
+      "layer": "business",
+      "owner": "ai-ops-coordinator",
+      "path": "01-operations/compliance-monitor/PROMPT.md",
+      "topology": "stream-aligned",
+      "version": "0.2.0"
+    },
+    "course-producer": {
+      "archetype": "specialist",
+      "cluster": null,
+      "layer": "business",
+      "owner": "ai-ops-coordinator",
+      "path": "05-research-education/course-producer/PROMPT.md",
+      "topology": "stream-aligned",
+      "version": "0.2.0"
+    },
+    "delivery-tracker": {
+      "archetype": "specialist",
+      "cluster": "enable",
+      "layer": "business",
+      "owner": "ai-ops-coordinator",
+      "path": "04-engineering/delivery-tracker/PROMPT.md",
+      "topology": "stream-aligned",
+      "version": "0.1.0"
+    },
+    "devops-monitor": {
+      "archetype": "specialist",
+      "cluster": "run",
+      "layer": "business",
+      "owner": "ai-ops-coordinator",
+      "path": "04-engineering/devops-monitor/PROMPT.md",
+      "topology": "stream-aligned",
+      "version": "0.2.0"
+    },
+    "devops-monitor-30min": {
+      "archetype": "specialist",
+      "cluster": "run",
+      "layer": "business",
+      "owner": "ai-ops-coordinator",
+      "path": "04-engineering/devops-monitor-30min/PROMPT.md",
+      "topology": "stream-aligned",
+      "version": "0.2.0"
+    },
+    "drift-detector": {
+      "archetype": "specialist",
+      "cluster": "run",
+      "layer": "business",
+      "owner": "ai-ops-coordinator",
+      "path": "04-engineering/drift-detector/PROMPT.md",
+      "topology": "stream-aligned",
+      "version": "0.1.0"
+    },
+    "echo-community-scanner": {
+      "archetype": "solver",
+      "cluster": null,
+      "layer": "atomic",
+      "owner": "ai-ops-coordinator",
+      "path": "demiurge/agents/echo-community-scanner/PROMPT.md",
+      "topology": "platform",
+      "version": "0.2.0"
+    },
+    "engineering-roster": {
+      "archetype": "specialist",
+      "cluster": "build",
+      "layer": "business",
+      "owner": "ai-ops-coordinator",
+      "path": "04-engineering/engineering-roster/PROMPT.md",
+      "topology": "stream-aligned",
+      "version": "0.2.0"
+    },
+    "eval-gate-runner": {
+      "archetype": "specialist",
+      "cluster": "run",
+      "layer": "business",
+      "owner": "ai-ops-coordinator",
+      "path": "04-engineering/eval-gate-runner/PROMPT.md",
+      "topology": "stream-aligned",
+      "version": "0.2.0"
+    },
+    "finance-controller": {
+      "archetype": "team-lead",
+      "cluster": null,
+      "layer": "business",
+      "owner": "ai-ops-coordinator",
+      "path": "02-finance-legal/finance-controller/PROMPT.md",
+      "topology": "stream-aligned",
+      "version": "0.2.0"
+    },
+    "founder-bandwidth-watchdog": {
+      "archetype": "right-hand",
+      "cluster": null,
+      "layer": "business",
+      "owner": "ai-ops-coordinator",
+      "path": "01-operations/founder-bandwidth-watchdog/PROMPT.md",
+      "topology": "stream-aligned",
+      "version": "0.2.0"
+    },
+    "funding-coordinator": {
+      "archetype": "specialist",
+      "cluster": null,
+      "layer": "business",
+      "owner": "ai-ops-coordinator",
+      "path": "02-finance-legal/funding-coordinator/PROMPT.md",
+      "topology": "stream-aligned",
+      "version": "0.2.0"
+    },
+    "hephaestus-document-miner": {
+      "archetype": "solver",
+      "cluster": null,
+      "layer": "atomic",
+      "owner": "ai-ops-coordinator",
+      "path": "demiurge/agents/hephaestus-document-miner/PROMPT.md",
+      "topology": "platform",
+      "version": "0.2.0"
+    },
+    "hera-marketing-lead": {
+      "archetype": "team-lead",
+      "cluster": null,
+      "layer": "atomic",
+      "owner": "ai-ops-coordinator",
+      "path": "demiurge/agents/hera-marketing-lead/PROMPT.md",
+      "topology": "platform",
+      "version": "0.2.0"
+    },
+    "hermes-router-revenue": {
+      "archetype": "architect",
+      "cluster": null,
+      "layer": "atomic",
+      "owner": "ai-ops-coordinator",
+      "path": "demiurge/agents/hermes-router-revenue/PROMPT.md",
+      "topology": "platform",
+      "version": "0.2.0"
+    },
+    "iris-community-monitor": {
+      "archetype": "solver",
+      "cluster": null,
+      "layer": "atomic",
+      "owner": "ai-ops-coordinator",
+      "path": "demiurge/agents/iris-community-monitor/PROMPT.md",
+      "topology": "platform",
+      "version": "0.2.0"
+    },
+    "kronos-operations-lead": {
+      "archetype": "team-lead",
+      "cluster": null,
+      "layer": "atomic",
+      "owner": "ai-ops-coordinator",
+      "path": "demiurge/agents/kronos-operations-lead/PROMPT.md",
+      "topology": "platform",
+      "version": "0.2.0"
+    },
+    "lead-enrichment": {
+      "archetype": "specialist",
+      "cluster": null,
+      "layer": "business",
+      "owner": "ai-ops-coordinator",
+      "path": "03-sales-growth/lead-enrichment/PROMPT.md",
+      "topology": "stream-aligned",
+      "version": "0.2.0"
+    },
+    "management-coordinator": {
+      "archetype": "team-lead",
+      "cluster": null,
+      "layer": "business",
+      "owner": "ai-ops-coordinator",
+      "path": "01-operations/management-coordinator/PROMPT.md",
+      "topology": "stream-aligned",
+      "version": "0.2.0"
+    },
+    "marketing-content-producer": {
+      "archetype": "specialist",
+      "cluster": null,
+      "layer": "business",
+      "owner": "ai-ops-coordinator",
+      "path": "03-sales-growth/marketing-content-producer/PROMPT.md",
+      "topology": "stream-aligned",
+      "version": "0.2.0"
+    },
+    "metis-proposal-drafter": {
+      "archetype": "solver",
+      "cluster": null,
+      "layer": "atomic",
+      "owner": "ai-ops-coordinator",
+      "path": "demiurge/agents/metis-proposal-drafter/PROMPT.md",
+      "topology": "platform",
+      "version": "0.2.0"
+    },
+    "mnemosyne-document-archivist": {
+      "archetype": "solver",
+      "cluster": null,
+      "layer": "atomic",
+      "owner": "ai-ops-coordinator",
+      "path": "demiurge/agents/mnemosyne-document-archivist/PROMPT.md",
+      "topology": "platform",
+      "version": "0.2.0"
+    },
+    "multimedia-producer": {
+      "archetype": "specialist",
+      "cluster": null,
+      "layer": "business",
+      "owner": "ai-ops-coordinator",
+      "path": "03-sales-growth/multimedia-producer/PROMPT.md",
+      "topology": "stream-aligned",
+      "version": "0.2.0"
+    },
+    "okr-tracker": {
+      "archetype": "specialist",
+      "cluster": null,
+      "layer": "business",
+      "owner": "ai-ops-coordinator",
+      "path": "01-operations/okr-tracker/PROMPT.md",
+      "topology": "stream-aligned",
+      "version": "0.2.0"
+    },
+    "orpheus-recordings-agent": {
+      "archetype": "solver",
+      "cluster": null,
+      "layer": "atomic",
+      "owner": "ai-ops-coordinator",
+      "path": "demiurge/agents/orpheus-recordings-agent/PROMPT.md",
+      "topology": "platform",
+      "version": "0.2.0"
+    },
+    "peitho-language-quality": {
+      "archetype": "solver",
+      "cluster": null,
+      "layer": "atomic",
+      "owner": "ai-ops-coordinator",
+      "path": "demiurge/agents/peitho-language-quality/PROMPT.md",
+      "topology": "platform",
+      "version": "0.2.0"
+    },
+    "people-hr": {
+      "archetype": "team-lead",
+      "cluster": null,
+      "layer": "business",
+      "owner": "ivan",
+      "path": "06-people-culture/people-hr/PROMPT.md",
+      "topology": "stream-aligned",
+      "version": "0.1.0"
+    },
+    "pheme-document-router": {
+      "archetype": "solver",
+      "cluster": null,
+      "layer": "atomic",
+      "owner": "ai-ops-coordinator",
+      "path": "demiurge/agents/pheme-document-router/PROMPT.md",
+      "topology": "platform",
+      "version": "0.2.0"
+    },
+    "procurement-tracker": {
+      "archetype": "specialist",
+      "cluster": null,
+      "layer": "business",
+      "owner": "ai-ops-coordinator",
+      "path": "01-operations/procurement-tracker/PROMPT.md",
+      "topology": "stream-aligned",
+      "version": "0.2.0"
+    },
+    "proposal-drafter": {
+      "archetype": "specialist",
+      "cluster": null,
+      "layer": "business",
+      "owner": "ai-ops-coordinator",
+      "path": "03-sales-growth/proposal-drafter/PROMPT.md",
+      "topology": "stream-aligned",
+      "version": "0.2.0"
+    },
+    "qa-automation-on-pr": {
+      "archetype": "specialist",
+      "cluster": "build",
+      "layer": "business",
+      "owner": "ai-ops-coordinator",
+      "path": "04-engineering/qa-automation-on-pr/PROMPT.md",
+      "topology": "stream-aligned",
+      "version": "0.1.0"
+    },
+    "qa-automation-runner": {
+      "archetype": "specialist",
+      "cluster": "build",
+      "layer": "business",
+      "owner": "ai-ops-coordinator",
+      "path": "04-engineering/qa-automation-runner/PROMPT.md",
+      "topology": "stream-aligned",
+      "version": "0.2.0"
+    },
+    "research-tracker": {
+      "archetype": "team-lead",
+      "cluster": null,
+      "layer": "business",
+      "owner": "ai-ops-coordinator",
+      "path": "05-research-education/research-tracker/PROMPT.md",
+      "topology": "stream-aligned",
+      "version": "0.2.0"
+    },
+    "revops-pipeline-analyzer": {
+      "archetype": "specialist",
+      "cluster": null,
+      "layer": "business",
+      "owner": "ai-ops-coordinator",
+      "path": "03-sales-growth/revops-pipeline-analyzer/PROMPT.md",
+      "topology": "stream-aligned",
+      "version": "0.2.0"
+    },
+    "sales-pipeline": {
+      "archetype": "team-lead",
+      "cluster": null,
+      "layer": "business",
+      "owner": "ai-ops-coordinator",
+      "path": "03-sales-growth/sales-pipeline/PROMPT.md",
+      "topology": "stream-aligned",
+      "version": "0.2.0"
+    },
+    "security-auditor": {
+      "archetype": "specialist",
+      "cluster": "build",
+      "layer": "business",
+      "owner": "ai-ops-coordinator",
+      "path": "04-engineering/security-auditor/PROMPT.md",
+      "topology": "stream-aligned",
+      "version": "0.1.0"
+    },
+    "security-watchdog": {
+      "archetype": "specialist",
+      "cluster": "build",
+      "layer": "business",
+      "owner": "ai-ops-coordinator",
+      "path": "04-engineering/security-watchdog/PROMPT.md",
+      "topology": "stream-aligned",
+      "version": "0.2.0"
+    },
+    "security-watchdog-30min": {
+      "archetype": "specialist",
+      "cluster": "build",
+      "layer": "business",
+      "owner": "ai-ops-coordinator",
+      "path": "04-engineering/security-watchdog-30min/PROMPT.md",
+      "topology": "stream-aligned",
+      "version": "0.2.0"
+    },
+    "source-curator": {
+      "archetype": "specialist",
+      "cluster": null,
+      "layer": "business",
+      "owner": "ai-ops-coordinator",
+      "path": "01-operations/source-curator/PROMPT.md",
+      "topology": "stream-aligned",
+      "version": "0.2.0"
+    },
+    "tax-receipt-tracker": {
+      "archetype": "specialist",
+      "cluster": null,
+      "layer": "business",
+      "owner": "ai-ops-coordinator",
+      "path": "02-finance-legal/tax-receipt-tracker/PROMPT.md",
+      "topology": "stream-aligned",
+      "version": "0.2.0"
+    },
+    "themis-document-classifier": {
+      "archetype": "solver",
+      "cluster": null,
+      "layer": "atomic",
+      "owner": "ai-ops-coordinator",
+      "path": "demiurge/agents/themis-document-classifier/PROMPT.md",
+      "topology": "platform",
+      "version": "0.2.0"
+    },
+    "thesis-tracker": {
+      "archetype": "specialist",
+      "cluster": null,
+      "layer": "business",
+      "owner": "ai-ops-coordinator",
+      "path": "05-research-education/thesis-tracker/PROMPT.md",
+      "topology": "stream-aligned",
+      "version": "0.2.0"
+    },
+    "thoth-literature-scanner": {
+      "archetype": "solver",
+      "cluster": null,
+      "layer": "atomic",
+      "owner": "ai-ops-coordinator",
+      "path": "demiurge/agents/thoth-literature-scanner/PROMPT.md",
+      "topology": "platform",
+      "version": "0.2.0"
+    }
+  },
+  "version": "1.0.0"
+}
