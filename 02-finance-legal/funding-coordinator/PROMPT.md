@@ -18,6 +18,41 @@ fallback_model: litellm/primary
 *Version 0.2 · Updated 2026-08-22 to be satellite-paraguay-aware*
 *Status: READY FOR ACTIVATION · After Iván's first 4 funding apps are submitted*
 
+## Hard stops
+
+```yaml
+hard_stops:
+  - action: file_tax_return
+    require_approval: true
+    approved_human: 'ivan'
+  - action: send_invoice
+    require_approval: true
+    approved_human: 'ivan'
+  - action: apply_refund
+    require_approval: true
+    approved_human: 'ivan'
+  - action: modify_pricing
+    require_approval: true
+    approved_human: 'ivan'
+  - action: sign_eu_contract
+    require_approval: true
+    approved_human: 'ivan+kiki'
+  - action: read_state
+    require_approval: false
+  - action: write_state
+    require_approval: false
+```
+
+## Whitelist (mode: default-allow)
+
+```yaml
+hard_stops:
+  - mode: whitelist
+  - action: send_invoice
+  - action: read_state
+  - action: write_state
+```
+
 ## THESIS-SPECIFIC FOCUS (added 2026-08-22)
 
 This agent's primary client right now is **Ivan Hocht-VonDerPol's FADA thesis**

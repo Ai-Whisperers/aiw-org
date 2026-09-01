@@ -13,6 +13,56 @@ transfer_targets:
   - 03-sales-growth/sales-pipeline
 ---
 
+## Hard stops
+
+```yaml
+hard_stops:
+  - action: send_outreach
+    require_approval: false
+  - action: send_proposal
+    require_approval: false
+  - action: apply_discount
+    require_approval: true
+    approved_human: 'ivan'
+  - action: apply_refund
+    require_approval: true
+    approved_human: 'ivan'
+  - action: sign_contract
+    require_approval: true
+    approved_human: 'ivan+kiki'
+  - action: modify_pricing
+    require_approval: true
+    approved_human: 'ivan'
+  - action: send_external_message
+    require_approval: false
+  - action: send_invoice
+    require_approval: true
+    approved_human: 'ivan'
+  - action: update_deal_stage
+    require_approval: false
+  - action: close_issue
+    require_approval: false
+  - action: write_state
+    require_approval: false
+  - action: read_state
+    require_approval: false
+```
+
+## Whitelist (mode: default-allow)
+
+```yaml
+hard_stops:
+  - mode: whitelist
+  - action: send_outreach
+  - action: send_proposal
+  - action: update_deal_stage
+  - action: comment_on_issue
+  - action: send_external_message
+  - action: close_issue
+  - action: read_state
+  - action: write_state
+```
+
 ## CHANGELOG
 
 - v0.2.0 (2026-08-14): initial creation. HITL agent with reflection loop.

@@ -12,6 +12,65 @@ transfer_targets:
   - 02-finance-legal/finance-controller
 ---
 
+## Hard stops
+
+```yaml
+hard_stops:
+  - action: delete_resource
+    require_approval: true
+    approved_human: 'ivan'
+  - action: disable_hardstop
+    require_approval: true
+    approved_human: 'ivan+kiki'
+  - action: disable_eval_gate
+    require_approval: true
+    approved_human: 'ivan'
+  - action: modify_eval_gates
+    require_approval: true
+    approved_human: 'ivan'
+  - action: restart_service
+    require_approval: true
+    approved_human: 'ivan'
+  - action: rotate_credential
+    require_approval: true
+    approved_human: 'ivan+kiki'
+  - action: block_ip
+    require_approval: true
+    approved_human: 'ivan'
+  - action: modify_curriculum
+    require_approval: true
+    approved_human: 'ivan'
+  - action: force_push
+    require_approval: true
+    approved_human: 'ivan'
+  - action: git_force_push
+    require_approval: true
+    approved_human: 'ivan'
+  - action: publish_post
+    require_approval: true
+    approved_human: 'ivan'
+  - action: send_external_message
+    require_approval: false
+  - action: read_state
+    require_approval: false
+  - action: write_state
+    require_approval: false
+```
+
+## Whitelist (mode: default-allow)
+
+```yaml
+hard_stops:
+  - mode: whitelist
+  - action: comment_on_issue
+  - action: block_merge
+  - action: block_output
+  - action: restart_service
+  - action: block_ip
+  - action: read_state
+  - action: write_state
+```
+
 ## CHANGELOG
 
 - v0.2.0 (2026-08-14): initial creation.

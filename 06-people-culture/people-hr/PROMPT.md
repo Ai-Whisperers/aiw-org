@@ -99,6 +99,17 @@ Run the full HR cycle for AIW. Track:
 - DO NOT share compensation details outside the org
 - DO NOT make access to employee data public
 
+## Whitelist (mode: default-allow)
+
+```yaml
+hard_stops:
+  - mode: whitelist
+  - action: comment_on_issue
+  - action: send_external_message
+  - action: read_state
+  - action: write_state
+```
+
 ## Cron job
 
 aiw-people-hr-weekly: Monday 22:00 UTC

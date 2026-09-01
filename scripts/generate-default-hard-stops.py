@@ -265,31 +265,50 @@ def main():
 
     if args.apply:
         print("\n=== APPLY (modifying PROMPT.md files!) ===")
+        applied = 0
         for p, rel in unprotected:
-            content = p.read_text()
+            # p is the parent dir; PROMPT.md is inside
+            prompt_file = p / "PROMPT.md"
+            if not prompt_file.exists():
+                print(f"  SKIP {rel}: PROMPT.md not found in {p}")
+                continue
+            content = prompt_file.read_text()
+
+            # Skip if already has hard_stops section (idempotency)
+            if "## Hard stops" in content:
+                print(f"  SKIP {rel}: already has hard_stops")
+                continue
+
             # Find agent draft
             draft = next((d for d in drafts if d["agent_path"] == rel), None)
             if not draft:
                 continue
-            # Find where to insert: after the frontmatter `---` block, before `## ` sections
+
+            # Insert hard_stops as a new section AFTER the first H1 or H2 heading
+            # (PROMPT.md files here have a title at top, not YAML frontmatter)
             yaml_block = "## Hard stops\n\n```yaml\n" + draft["draft_yaml"] + "\n```\n"
-            # Insert before first `## ` after frontmatter
-            parts = content.split("\n---\n", 2)
-            if len(parts) == 3:
-                frontmatter, body = parts[1], parts[2]
-                # Find first ## in body
-                idx = body.find("\n## ")
-                if idx >= 0:
-                    new_body = body[:idx + 1] + "\n" + yaml_block + body[idx + 1:]
-                    new_content = parts[0] + "\n---\n" + frontmatter + "\n---\n" + new_body
-                else:
-                    new_content = content + "\n\n" + yaml_block
+
+            lines = content.split("\n")
+            insert_idx = None
+            # Find first H2 (## ...) heading
+            for i, line in enumerate(lines):
+                if line.startswith("## ") and not line.startswith("## Hard"):
+                    insert_idx = i
+                    break
+
+            if insert_idx is None:
+                # No H2 found — append at end
+                new_content = content + "\n\n" + yaml_block
             else:
-                # No frontmatter; append at top
-                new_content = yaml_block + "\n" + content
-            p.write_text(new_content)
+                # Insert before the first H2
+                lines.insert(insert_idx, yaml_block.rstrip())
+                lines.insert(insert_idx + 1, "")  # blank line after
+                new_content = "\n".join(lines)
+
+            prompt_file.write_text(new_content)
+            applied += 1
             print(f"  ✓ {rel}")
-        print(f"\nApplied hard_stops to {len(unprotected)} PROMPTs")
+        print(f"\nApplied hard_stops to {applied} PROMPTs")
         print("Run: scripts/lint-prompts.py to verify")
 
 

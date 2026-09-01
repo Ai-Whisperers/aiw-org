@@ -13,6 +13,22 @@ transfer_targets:
   - 04-engineering/security-watchdog-30min
 ---
 
+## Whitelist (mode: default-allow)
+
+```yaml
+hard_stops:
+  - mode: whitelist
+  - action: merge_pr
+  - action: comment_on_pr
+  - action: block_merge
+  - action: block_output
+  - action: restart_service
+  - action: close_issue
+  - action: comment_on_issue
+  - action: read_state
+  - action: write_state
+```
+
 ## CHANGELOG
 
 - v0.1.0 (2026-09-01): initial creation (Phase 5 Round 6). Concept: weekly deep security audit, complementing security-watchdog's daily tactical checks.

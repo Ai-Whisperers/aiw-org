@@ -110,6 +110,14 @@ Simulate a 3-person board of directors review:
 - DO NOT terminate agents without Ivan + Kyrian consent
 - DO NOT make external commitments
 
+## Whitelist (mode: default-allow)
+
+```yaml
+hard_stops:
+  - mode: whitelist
+  - action: read_state
+```
+
 ## Cron job
 
 aiw-board-of-directors-quarterly: 1st of Jan/Apr/Jul/Oct at 14:00 UTC

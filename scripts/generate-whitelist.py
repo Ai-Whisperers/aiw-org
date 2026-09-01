@@ -162,10 +162,68 @@ def generate_drafts() -> list[dict]:
     return out
 
 
+def render_yaml(draft: dict) -> str:
+    """Render whitelist as YAML for embedding into PROMPT.md."""
+    lines = ["hard_stops:", "  - mode: whitelist"]
+    for action in draft.get("default_allow", []):
+        lines.append(f"  - action: {action}")
+    return "\n".join(lines)
+
+
+def apply_to_prompts(drafts: list) -> int:
+    """Apply whitelists to PROMPT.md files. Returns count applied."""
+    applied = 0
+    for draft in drafts:
+        agent_path = draft.get("agent_path", "")
+        if not agent_path:
+            continue
+        prompt_file = ROOT / agent_path
+        if not prompt_file.exists():
+            print(f"  SKIP {agent_path}: file not found")
+            continue
+        content = prompt_file.read_text()
+        # Skip if already has whitelist mode
+        if "mode: whitelist" in content:
+            print(f"  SKIP {agent_path}: already has whitelist")
+            continue
+        yaml_block = "## Whitelist (mode: default-allow)\n\n```yaml\n" + render_yaml(draft) + "\n```\n"
+
+        lines = content.split("\n")
+        insert_idx = None
+        for i, line in enumerate(lines):
+            if line.startswith("## Hard stops"):
+                # Insert AFTER the hard_stops section
+                # Find next ## heading
+                for j in range(i + 1, len(lines)):
+                    if lines[j].startswith("## "):
+                        insert_idx = j
+                        break
+                break
+        if insert_idx is None:
+            # No hard_stops section — find first ## heading
+            for i, line in enumerate(lines):
+                if line.startswith("## ") and not line.startswith("## Hard") and not line.startswith("## White"):
+                    insert_idx = i
+                    break
+        if insert_idx is None:
+            # Append at end
+            new_content = content + "\n\n" + yaml_block
+        else:
+            lines.insert(insert_idx, yaml_block.rstrip())
+            lines.insert(insert_idx + 1, "")
+            new_content = "\n".join(lines)
+        prompt_file.write_text(new_content)
+        applied += 1
+        print(f"  ✓ {agent_path}")
+    return applied
+
+
 def main():
     parser = argparse.ArgumentParser(description="Generate default-allow whitelists")
     parser.add_argument("--dry-run", action="store_true")
     parser.add_argument("--output", action="store_true")
+    parser.add_argument("--apply", action="store_true",
+                        help="Apply whitelist directly to PROMPT.md files")
     args = parser.parse_args()
 
     drafts = generate_drafts()
@@ -193,6 +251,12 @@ def main():
             for d in drafts:
                 f.write(json.dumps(d, separators=(",", ":")) + "\n")
         print(f"Wrote {len(drafts)} drafts to {OUTPUT}")
+
+    if args.apply:
+        print("\n=== APPLY (adding whitelist sections to PROMPT.md) ===")
+        n = apply_to_prompts(drafts)
+        print(f"\nApplied whitelist to {n} PROMPTs")
+        print("Run: scripts/lint-prompts.py to verify")
 
 
 if __name__ == "__main__":

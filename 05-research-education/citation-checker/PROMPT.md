@@ -14,6 +14,44 @@ transfer_targets:
   - 05-research-education/thesis-tracker
 ---
 
+## Hard stops
+
+```yaml
+hard_stops:
+  - action: submit_arxiv
+    require_approval: true
+    approved_human: 'ivan'
+  - action: publish_course_module
+    require_approval: true
+    approved_human: 'ivan+kiki'
+  - action: publish_module
+    require_approval: true
+    approved_human: 'ivan+kiki'
+  - action: publish_paper
+    require_approval: true
+    approved_human: 'ivan+kiki'
+  - action: publish_post
+    require_approval: true
+    approved_human: 'ivan'
+  - action: update_thesis_metadata
+    require_approval: false
+  - action: read_state
+    require_approval: false
+  - action: write_state
+    require_approval: false
+```
+
+## Whitelist (mode: default-allow)
+
+```yaml
+hard_stops:
+  - mode: whitelist
+  - action: update_thesis_metadata
+  - action: publish_post
+  - action: read_state
+  - action: write_state
+```
+
 ## CHANGELOG
 
 - v0.2.0 (2026-08-14): initial creation.

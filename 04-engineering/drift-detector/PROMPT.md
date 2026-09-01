@@ -13,6 +13,22 @@ transfer_targets:
   - 04-engineering/eval-gate-runner
 ---
 
+## Whitelist (mode: default-allow)
+
+```yaml
+hard_stops:
+  - mode: whitelist
+  - action: merge_pr
+  - action: comment_on_pr
+  - action: block_merge
+  - action: block_output
+  - action: restart_service
+  - action: close_issue
+  - action: comment_on_issue
+  - action: read_state
+  - action: write_state
+```
+
 ## CHANGELOG
 
 - v0.1.0 (2026-09-01): initial creation (Phase 5 Round 6). Concept: detect statistical drift in agent outputs and state values.

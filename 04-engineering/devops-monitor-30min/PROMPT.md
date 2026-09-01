@@ -28,6 +28,22 @@ hard_stops:
     require_approval: true
     approved_human: ivan
 
+## Whitelist (mode: default-allow)
+
+```yaml
+hard_stops:
+  - mode: whitelist
+  - action: merge_pr
+  - action: comment_on_pr
+  - action: block_merge
+  - action: block_output
+  - action: restart_service
+  - action: close_issue
+  - action: comment_on_issue
+  - action: read_state
+  - action: write_state
+```
+
 ## Read Org State (Factor 5)
 
 Before running, read the unified org state for context:

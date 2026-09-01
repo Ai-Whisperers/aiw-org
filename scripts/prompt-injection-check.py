@@ -43,6 +43,7 @@ class InjectionVerdict:
 # Pattern catalog: each (name, regex, weight)
 # Higher weight = stronger signal of injection
 PATTERNS = [
+    # === English ===
     # Direct instruction override
     ("ignore-previous", re.compile(r"\b(ignore|disregard|forget)\s+(all\s+)?(previous|prior|above|earlier)\s+(instructions?|rules?|prompts?)\b", re.I), 0.9),
     ("you-are-now", re.compile(r"\byou\s+are\s+now\s+(a|an|the)\s+", re.I), 0.7),
@@ -52,11 +53,31 @@ PATTERNS = [
     ("role-override", re.compile(r"\boverride\s+(your|the)\s+(rules?|instructions?)\b", re.I), 0.7),
     ("hidden-instruction", re.compile(r"\[INST\]|<<SYS>>|<\|im_start\|>", re.I), 0.6),
     # Data exfiltration
-    ("exfiltrate", re.compile(r"\b(exfiltrate|extract|reveal)\s+(user|customer|private|secret)\s+data\b", re.I), 0.8),
+    ("exfiltrate", re.compile(r"\b(exfiltrate|extract|reveal)\b[^.]{0,30}?\b(user|customer|private|secret)\s+data\b", re.I | re.S), 0.8),
     # Instruction injection in data fields
     ("execute-this", re.compile(r"\b(execute|run|eval)\s+(this|the\s+following)\s+(code|command|sql)\b", re.I), 0.7),
     # Bypass safety phrases
-    ("pretend-no-rules", re.compile(r"\bpretend\s+(you|there\s+are)\s+(no|haven'?t)\s+rules?\b", re.I), 0.9),
+    ("pretend-no-rules", re.compile(r"\bpretend\s+(you|there\s+are)\s+(?:don'?t\s+have\s+|haven'?t\s+|have\s+no\s+|no\s+)?rules?\b", re.I), 0.9),
+    # === Phase 33 R3: Multilingual patterns ===
+    # Spanish
+    ("es-ignora-instrucciones", re.compile(r"\bignora\s+(todas?\s+)?(las?\s+)?instrucciones?\s+(anteriores?|previas?)\b", re.I), 0.9),
+    ("es-revela-prompt", re.compile(r"\b(revela|muestra|ens[eé]ame)\s+(tu|el)\s+(prompt|instrucciones?)\s+(del?\s+sistema)\b", re.I), 0.8),
+    ("es-ahora-er", re.compile(r"\b(ahora\s+eres|ahora\s+act[uú]a\s+como)\s+", re.I), 0.7),
+    # French
+    ("fr-ignore-instructions", re.compile(r"\bignore[zr]?\s+(toutes?\s+)?(les?\s+)?instructions?\s+(pr[eé]c[eé]dentes?|ant[eé]rieures?)\b", re.I), 0.9),
+    ("fr-revele-prompt", re.compile(r"\b(r[eé]v[eè]le|affiche|montre)\s+(ton|votre|le)\s+(prompt|instructions?)\s+(syst[eè]me)\b", re.I), 0.8),
+    # German
+    ("de-ignoriere-anweisungen", re.compile(r"\bignoriere?\s+(alle\s+)?(die\s+)?(vorherigen?|bisherigen?)\s+(anweisungen?|instruktionen?)\b", re.I), 0.9),
+    ("de-zeige-prompt", re.compile(r"\b(zeige|offenbare)\s+(deinen?|den)\s+(system-?prompt|system-?anweisungen?)\b", re.I), 0.8),
+    # Portuguese
+    ("pt-ignore-instrucoes", re.compile(r"\bignore\s+(todas?\s+)?(as\s+)?instru[cç][oõ]es\s+(anteriores|pr[eé]vias)\b", re.I), 0.9),
+    # === Phase 33 R3: Encoded content detection ===
+    # Base64-encoded "ignore previous" instructions (common attack vector)
+    ("base64-injection", re.compile(r"(?:[A-Za-z0-9+/]{40,}={0,2})"), 0.4),  # base64 heuristic
+    # Hex-encoded instruction markers
+    ("hex-injection", re.compile(r"\\x[0-9a-fA-F]{2}\\x[0-9a-fA-F]{2}\\x[0-9a-fA-F]{2}"), 0.6),
+    # Zero-width unicode characters (used to hide instructions)
+    ("zero-width-unicode", re.compile(r"[\u200b\u200c\u200d\u200e\u200f\ufeff]"), 0.7),
 ]
 
 

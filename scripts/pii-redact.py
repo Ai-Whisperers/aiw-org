@@ -41,6 +41,8 @@ PATTERNS = [
     ("ssn", re.compile(r"\b\d{3}-\d{2}-\d{4}\b"), "[SSN]"),
     # US phone (10 digits, various formats)
     ("phone-us", re.compile(r"\b\d{3}[-.]?\d{3}[-.]?\d{4}\b"), "[PHONE]"),
+    # Phase 33 R3: US phone with parentheses (555) 123-4567
+    ("phone-us-parens", re.compile(r"\(\d{3}\)\s?\d{3}[-.]?\d{4}\b"), "[PHONE]"),
     # International phone (basic)
     ("phone-intl", re.compile(r"\+\d{1,3}[-.\s]?\d{1,4}[-.\s]?\d{1,9}[-.\s]?\d{1,9}\b"), "[PHONE]"),
     # Credit card (16 digits, possibly with spaces/dashes)

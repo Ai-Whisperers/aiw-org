@@ -10,6 +10,78 @@ composition:
   - argus-health-monitor
 ---
 
+## Hard stops
+
+```yaml
+hard_stops:
+  - action: deploy_prod
+    require_approval: true
+    approved_human: 'ivan'
+  - action: rollback
+    require_approval: true
+    approved_human: 'ivan'
+  - action: force_push
+    require_approval: true
+    approved_human: 'ivan'
+  - action: git_force_push
+    require_approval: true
+    approved_human: 'ivan'
+  - action: merge_pr
+    require_approval: false
+  - action: delete_resource
+    require_approval: true
+    approved_human: 'ivan'
+  - action: close_issue
+    require_approval: false
+  - action: comment_on_pr
+    require_approval: false
+  - action: block_merge
+    require_approval: false
+  - action: block_output
+    require_approval: false
+  - action: modify_eval_gates
+    require_approval: true
+    approved_human: 'ivan'
+  - action: disable_hardstop
+    require_approval: true
+    approved_human: 'ivan+kiki'
+  - action: disable_eval_gate
+    require_approval: true
+    approved_human: 'ivan'
+  - action: restart_service
+    require_approval: true
+    approved_human: 'ivan'
+  - action: rotate_credential
+    require_approval: true
+    approved_human: 'ivan+kiki'
+  - action: block_ip
+    require_approval: true
+    approved_human: 'ivan'
+  - action: approve_compliance_officer
+    require_approval: true
+    approved_human: 'ivan'
+  - action: write_state
+    require_approval: false
+  - action: read_state
+    require_approval: false
+```
+
+## Whitelist (mode: default-allow)
+
+```yaml
+hard_stops:
+  - mode: whitelist
+  - action: merge_pr
+  - action: comment_on_pr
+  - action: block_merge
+  - action: block_output
+  - action: restart_service
+  - action: close_issue
+  - action: comment_on_issue
+  - action: read_state
+  - action: write_state
+```
+
 ## CHANGELOG
 
 - v0.2.0 (2026-08-14): initial creation (POC deferred to 30-day loop per Q3).

@@ -91,7 +91,33 @@ def load_hard_stops(prompt_path: Path) -> list:
 
 
 def check_action(action: str, role: str, hard_stops: list) -> bool:
-    """Returns True if action allowed for role."""
+    """Returns True if action allowed for role.
+
+    Supports TWO modes (Phase 33 R1):
+    - blacklist (hard_stops): block specific actions (default)
+    - whitelist (default_allow): only allow listed actions, block everything else
+
+    Detection: if hard_stops contains an entry with action='*' OR a
+    'mode: whitelist' marker, the list is treated as whitelist.
+    """
+    # Detect whitelist mode: any entry with action='*' OR 'mode: whitelist' marker
+    is_whitelist = any(
+        s.get("action") == "*" or s.get("mode") == "whitelist"
+        for s in hard_stops
+    )
+
+    if is_whitelist:
+        # Whitelist mode: only listed actions are allowed (default-deny)
+        for s in hard_stops:
+            if s.get("action") == "*":
+                # Wildcard = allow all (overrides whitelist)
+                return True
+        # Collect allowed action names
+        allowed_actions = {s.get("action") for s in hard_stops
+                           if s.get("action") and s.get("action") != "*"}
+        return action in allowed_actions
+
+    # Blacklist mode (default)
     rules = next((s for s in hard_stops if s.get("action") == action), None)
     if not rules:
         return True  # Not in rules = allowed

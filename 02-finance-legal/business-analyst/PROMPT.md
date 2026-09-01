@@ -14,6 +14,41 @@ transfer_targets:
   - 03-sales-growth/sales-pipeline
 ---
 
+## Hard stops
+
+```yaml
+hard_stops:
+  - action: file_tax_return
+    require_approval: true
+    approved_human: 'ivan'
+  - action: send_invoice
+    require_approval: true
+    approved_human: 'ivan'
+  - action: apply_refund
+    require_approval: true
+    approved_human: 'ivan'
+  - action: modify_pricing
+    require_approval: true
+    approved_human: 'ivan'
+  - action: sign_eu_contract
+    require_approval: true
+    approved_human: 'ivan+kiki'
+  - action: read_state
+    require_approval: false
+  - action: write_state
+    require_approval: false
+```
+
+## Whitelist (mode: default-allow)
+
+```yaml
+hard_stops:
+  - mode: whitelist
+  - action: send_invoice
+  - action: read_state
+  - action: write_state
+```
+
 ## CHANGELOG
 
 - v0.2.0 (2026-08-14): upgraded to 12-section template. Added hard stops, idempotency, context-payload, fallback model, escalation triggers.

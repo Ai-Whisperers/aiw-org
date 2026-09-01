@@ -200,11 +200,78 @@ def test_validate_prompt_real_file():
     assert valid, f"expected valid, got errors: {errors}"
 
 
+def test_check_action_wildcard_allows_all():
+    """Whitelist with action='*' allows everything."""
+    mod = load_module()
+    stops = [{"action": "*", "mode": "whitelist"}]
+    # Wildcard overrides whitelist — all allowed
+    assert mod.check_action("deploy_prod", "ai-agent", stops) is True
+    assert mod.check_action("anything", "ai-agent", stops) is True
+
+
+def test_check_action_whitelist_mode():
+    """Whitelist mode: only listed actions allowed."""
+    mod = load_module()
+    stops = [
+        {"mode": "whitelist"},
+        {"action": "read_state"},
+        {"action": "write_state"},
+    ]
+    # Listed actions allowed
+    assert mod.check_action("read_state", "ai-agent", stops) is True
+    assert mod.check_action("write_state", "ai-agent", stops) is True
+    # Unlisted actions blocked (default-deny)
+    assert mod.check_action("deploy_prod", "ai-agent", stops) is False
+    assert mod.check_action("git_push", "ai-agent", stops) is False
+
+
+def test_check_action_whitelist_with_mode_marker():
+    """Detection: 'mode: whitelist' marker activates whitelist mode."""
+    mod = load_module()
+    stops = [
+        {"mode": "whitelist"},
+        {"action": "merge_pr"},
+        {"action": "comment_on_pr"},
+    ]
+    # Listed actions allowed
+    assert mod.check_action("merge_pr", "ai-agent", stops) is True
+    # Unlisted blocked
+    assert mod.check_action("deploy_prod", "ai-agent", stops) is False
+    assert mod.check_action("delete_resource", "ai-agent", stops) is False
+
+
+def test_check_action_blacklist_still_works():
+    """Verify blacklist mode unchanged after whitelist addition."""
+    mod = load_module()
+    stops = [
+        {"action": "deploy_prod", "require_approval": True, "approved_human": "ivan"},
+        {"action": "force_push", "require_approval": True, "approved_human": "ivan"},
+    ]
+    # Blocked for ai-agent
+    assert mod.check_action("deploy_prod", "ai-agent", stops) is False
+    assert mod.check_action("force_push", "ai-agent", stops) is False
+    # Allowed for ivan
+    assert mod.check_action("deploy_prod", "ivan", stops) is True
+    # Unrelated action allowed by default (blacklist)
+    assert mod.check_action("read_state", "ai-agent", stops) is True
+
+
+def test_check_action_empty_hard_stops():
+    """Empty hard_stops allows all actions (default blacklist behavior)."""
+    mod = load_module()
+    assert mod.check_action("deploy_prod", "ai-agent", []) is True
+
+
 if __name__ == "__main__":
     test_check_action_no_rules_allows()
     test_check_action_require_approval_blocks_non_approved()
     test_check_action_any_of_approved()
     test_check_action_list_approved()
+    test_check_action_wildcard_allows_all()
+    test_check_action_whitelist_mode()
+    test_check_action_whitelist_with_mode_marker()
+    test_check_action_blacklist_still_works()
+    test_check_action_empty_hard_stops()
     test_load_hard_stops_frontmatter()
     test_load_hard_stops_legacy_double_block()
     test_load_hard_stops_bare_block()
