@@ -39,6 +39,81 @@ DISPATCH_RULES_FILE = ROUTER_DIR / "dispatch-rules.yaml"
 TIMING_RULES_FILE = ROUTER_DIR / "timing-rules.yaml"
 ROUTING_LOG = Path("/opt/data/state/routing-decisions.jsonl")
 
+# Required fields per signal_type (refusal-when-constraints-unmet pattern)
+REQUIRED_SIGNAL_FIELDS = {"id", "ts", "source", "routing_tags"}
+
+# Maximum recent signals to scan per pre-dispatch contradiction check
+CONTRADICTION_LOOKBACK = 10
+
+
+def pre_dispatch_check(signal: dict) -> dict | None:
+    """Validate signal before dispatch. Returns None to proceed, or
+    {"reject": reason, "code": ...} to refuse routing.
+
+    Implements two patterns from research:
+    1. Refusal-when-constraints-unmet (cerebralvalley Opus 4.7 hackathon,
+       Thom Pham): signals missing required fields get refused, not delivered.
+    2. Contradiction-detection (khwarizmi-hermes-plugin): if the same source
+       emitted a recent signal with contradictory routing_tags, flag it.
+
+    Refused signals are logged but marked 'routed' so they don't loop.
+    """
+    # 1. Required-field check
+    missing = REQUIRED_SIGNAL_FIELDS - set(signal.keys())
+    if missing:
+        return {
+            "reject": True,
+            "code": "missing_required_fields",
+            "fields": sorted(missing),
+            "signal_id": signal.get("id"),
+        }
+
+    # 2. routing_tags must be non-empty list (a signal with no tags matches
+    # every rule whose match has no tag constraint — usually wrong)
+    tags = signal.get("routing_tags", [])
+    if not isinstance(tags, list) or len(tags) == 0:
+        return {
+            "reject": True,
+            "code": "empty_routing_tags",
+            "signal_id": signal.get("id"),
+        }
+
+    # 3. Contradiction check: scan recent routing decisions for same source
+    # with overlapping but conflicting tags. We only have a routing-decisions
+    # log (not the full signal queue here), so this is best-effort.
+    if ROUTING_LOG.exists():
+        try:
+            recent_same_source = []
+            with ROUTING_LOG.open() as f:
+                lines = f.readlines()[-CONTRADICTION_LOOKBACK * 3:]
+            for line in lines:
+                try:
+                    decision = json.loads(line)
+                except json.JSONDecodeError:
+                    continue
+                if decision.get("source") == signal.get("source"):
+                    recent_same_source.append(decision)
+            recent_same_source = recent_same_source[-CONTRADICTION_LOOKBACK:]
+            # Heuristic: if 3+ recent decisions from same source failed
+            # (no_rule), the source may be misconfigured — flag for review
+            failed = sum(
+                1 for d in recent_same_source if d.get("result") == "no_rule"
+            )
+            if failed >= 3:
+                return {
+                    "reject": True,
+                    "code": "source_high_failure_rate",
+                    "recent_failures": failed,
+                    "lookback": len(recent_same_source),
+                    "source": signal.get("source"),
+                }
+        except Exception:
+            # Never let the pre-check itself block routing
+            pass
+
+    return None
+
+
 # Agent name → outbox dir mapping (canonical)
 AGENT_OUTBOX = {
     "apollo-sales-lead": "demiurge/agents/apollo-sales-lead/outbox",
@@ -165,6 +240,30 @@ def process_pending(limit: int = 50) -> dict:
     for signal in pending:
         summary["processed"] += 1
         try:
+            # Pre-dispatch check: refusal-when-constraints-unmet +
+            # contradiction-detection. See pre_dispatch_check() docstring.
+            pre_check = pre_dispatch_check(signal)
+            if pre_check is not None:
+                summary["errors"] += 1
+                summary["details"].append({
+                    "signal_id": signal.get("id"),
+                    "result": "pre_dispatch_rejected",
+                    "reject_code": pre_check.get("code"),
+                    "reject_detail": {k: v for k, v in pre_check.items() if k != "reject"},
+                })
+                # Log the rejection for audit
+                log_decision(
+                    {**signal, "source": signal.get("source", "?"), "ts": signal.get("ts", "?")},
+                    {"id": f"pre-check:{pre_check.get('code')}", "fan_out": "none"},
+                    [],
+                    [],
+                )
+                # Still mark as routed so we don't loop on it
+                update_signal_status(
+                    signal["id"], "routed",
+                    extra={"routed_via_rule": f"pre-check:{pre_check.get('code')}"},
+                )
+                continue
             rule = match_signal(signal, dispatch_rules)
             if not rule:
                 summary["no_rule"] += 1

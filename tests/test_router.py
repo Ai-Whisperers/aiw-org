@@ -279,6 +279,106 @@ def test_load_rules_missing_files():
         mod.TIMING_RULES_FILE = orig_timing
 
 
+def test_pre_dispatch_check_valid_signal():
+    """Valid signal should return None (proceed)."""
+    mod = load_module()
+    result = mod.pre_dispatch_check({
+        "id": "sig-test-1",
+        "ts": "2026-09-01T00:00:00Z",
+        "source": "test-webhook",
+        "routing_tags": ["lead", "inbound"],
+    })
+    assert result is None
+
+
+def test_pre_dispatch_check_missing_fields():
+    """Signal missing required fields should be rejected with code 'missing_required_fields'."""
+    mod = load_module()
+    result = mod.pre_dispatch_check({"id": "sig-test-2"})
+    assert result is not None
+    assert result["reject"] is True
+    assert result["code"] == "missing_required_fields"
+    assert "routing_tags" in result["fields"]
+    assert "source" in result["fields"]
+    assert "ts" in result["fields"]
+
+
+def test_pre_dispatch_check_empty_tags():
+    """Signal with empty routing_tags should be rejected."""
+    mod = load_module()
+    result = mod.pre_dispatch_check({
+        "id": "sig-test-3",
+        "ts": "2026-09-01T00:00:00Z",
+        "source": "test",
+        "routing_tags": [],
+    })
+    assert result is not None
+    assert result["code"] == "empty_routing_tags"
+
+
+def test_pre_dispatch_check_tags_not_list():
+    """Signal with routing_tags not a list should be rejected."""
+    mod = load_module()
+    result = mod.pre_dispatch_check({
+        "id": "sig-test-4",
+        "ts": "2026-09-01T00:00:00Z",
+        "source": "test",
+        "routing_tags": "lead",  # string instead of list
+    })
+    assert result is not None
+    assert result["code"] == "empty_routing_tags"
+
+
+def test_pre_dispatch_check_high_failure_source():
+    """Signal from a source with 3+ recent no_rule decisions should be rejected."""
+    mod = load_module()
+    # Write a fake routing-decisions log with 3 failed decisions from same source
+    import tempfile
+    with tempfile.NamedTemporaryFile(mode="w", suffix=".jsonl", delete=False) as f:
+        for i in range(3):
+            f.write(
+                json.dumps({
+                    "ts": f"2026-09-01T0{i}:00:00Z",
+                    "signal_id": f"sig-old-{i}",
+                    "result": "no_rule",
+                    "source": "noisy-source",
+                }) + "\n"
+            )
+        tmp_path = f.name
+    orig_log = mod.ROUTING_LOG
+    try:
+        mod.ROUTING_LOG = Path(tmp_path)
+        result = mod.pre_dispatch_check({
+            "id": "sig-new",
+            "ts": "2026-09-01T01:00:00Z",
+            "source": "noisy-source",
+            "routing_tags": ["lead"],
+        })
+        assert result is not None
+        assert result["code"] == "source_high_failure_rate"
+        assert result["recent_failures"] >= 3
+    finally:
+        mod.ROUTING_LOG = orig_log
+        Path(tmp_path).unlink(missing_ok=True)
+
+
+def test_pre_dispatch_check_handles_missing_log():
+    """If routing-decisions log doesn't exist, pre-check should not crash."""
+    mod = load_module()
+    orig_log = mod.ROUTING_LOG
+    try:
+        mod.ROUTING_LOG = Path("/tmp/nonexistent_xyz_12345.jsonl")
+        result = mod.pre_dispatch_check({
+            "id": "sig-test-5",
+            "ts": "2026-09-01T00:00:00Z",
+            "source": "test",
+            "routing_tags": ["lead"],
+        })
+        assert result is None
+    finally:
+        mod.ROUTING_LOG = orig_log
+
+
 if __name__ == "__main__":
     test_match_signal_finds_rule()
     test_match_signal_requires_all_tags()
@@ -291,4 +391,10 @@ if __name__ == "__main__":
     test_process_pending_routes_signal()
     test_process_pending_no_matching_rule()
     test_load_rules_missing_files()
+    test_pre_dispatch_check_valid_signal()
+    test_pre_dispatch_check_missing_fields()
+    test_pre_dispatch_check_empty_tags()
+    test_pre_dispatch_check_tags_not_list()
+    test_pre_dispatch_check_high_failure_source()
+    test_pre_dispatch_check_handles_missing_log()
     print("\nAll router tests passed!")
