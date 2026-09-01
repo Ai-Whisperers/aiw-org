@@ -171,3 +171,10 @@ state/delivery-tracker/
 **/sw-*-pats-*.txt
 **/sw-p8-*.txt
 **/sw-p3-*.txt
+.quarantine/
+
+# Temp coord.json backups from various monitors (coaching, qa, eng, etc.)
+**/state/coord.json.*monitor-*.bak
+**/state/coord.json.coaching-monitor-*
+**/state/coord.json.*-monitor-*.bak
+**/state/coord.json.pre-*-tick-*.bak
