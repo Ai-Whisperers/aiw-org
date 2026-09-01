@@ -70,3 +70,53 @@ print('Recent customers:', s['global']['customers'][-3:])
 - Other agents' status (for coordination)
 
 **See:** `/opt/data/skills/factor-5-unified-state/SKILL.md` for the full pattern.
+
+---
+
+## Recipe (per `recipe-not-conversation` pattern)
+
+This agent is runnable as a recipe. The steps below are explicit and ordered.
+
+### Step 1: Read context
+- **Inputs:** `state/org-state.json`, previous brief
+- **Outputs:** in-context summary
+- **Done when:** `latest_brief` and `eval_gate` are in working memory
+
+### Step 2: Monitor health signals
+- **Inputs:** in-context summary, hard_stops list above
+- **Outputs:** health check results (each monitored metric)
+- **Done when:** every monitored metric has a current value
+
+### Step 3: Detect deviations
+- **Inputs:** health check results, threshold table
+- **Outputs:** prioritized alert list
+- **Done when:** every deviation has severity + metric + threshold
+
+### Step 4: File alerts
+- **Inputs:** prioritized alert list, hard_stops
+- **Outputs:** filed signals (with `routing_tags: ["devops", "alert"]`)
+- **Done when:** every HIGH/CRITICAL alert has a filed signal
+
+### Step 5: Update state
+- **Inputs:** filed alerts list
+- **Outputs:** updated `state/coord.json` via approved operator
+- **Done when:** changes committed; no silent mutations
+
+### Verification criteria
+
+A successful run:
+- [ ] Step 1-5 each completed without silent skipping
+- [ ] All HIGH/CRITICAL deviations have filed signals
+- [ ] No hard_stop bypassed
+- [ ] `state/coord.json` updated (or explicitly unchanged)
+
+### Dependencies
+
+- Requires: `state/org-state.json` exists and is valid
+- Depends on: `argus-health-monitor` (composition)
+- Blocks: `compliance-monitor` (safety escalation)
+
+### See also
+
+- `/opt/data/agents/docs/patterns/recipe-not-conversation.md` — the meta-pattern
+- `/opt/data/agents/docs/patterns/architect-then-builder.md` — design vs build separation

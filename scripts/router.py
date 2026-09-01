@@ -242,6 +242,40 @@ def log_decision(signal: dict, rule: dict, recipients: list[dict], delivered: li
         f.write(json.dumps(decision, separators=(",", ":")) + "\n")
 
 
+# Path for per-signal commitment extraction log
+# Append-only NDJSON. The daily aiw-commitments-extractor cron dedupes +
+# merges these into coord.json.
+COMMITMENTS_LOG = Path("/opt/data/state/commitments-from-signals.jsonl")
+
+
+def extract_and_log_commitments(signal: dict) -> int:
+    """Extract commitments from a routed signal and append to commitments log.
+
+    Returns the number of commitments extracted (0 if none).
+    Pattern: iPythoning L1 schema. See memory/commitments.py.
+
+    Failures are silent: must never break routing.
+    """
+    try:
+        from memory.commitments import extract_commitments_from_signal
+    except ImportError:
+        return 0
+    try:
+        extracted = extract_commitments_from_signal(signal)
+    except Exception:
+        return 0
+    if not extracted:
+        return 0
+    try:
+        COMMITMENTS_LOG.parent.mkdir(parents=True, exist_ok=True)
+        with COMMITMENTS_LOG.open("a") as f:
+            for c in extracted:
+                f.write(json.dumps(c, separators=(",", ":")) + "\n")
+    except Exception:
+        return 0
+    return len(extracted)
+
+
 def rule_avg_latency_ms(rule_id: str, lookback: int = 50) -> float | None:
     """Return mean latency_ms for the last N decisions of a given rule.
 
@@ -348,6 +382,11 @@ def process_pending(limit: int = 50) -> dict:
                     })
             latency_ms = int((time.monotonic() - _t0) * 1000)
             log_decision(signal, rule, recipients, delivered, latency_ms=latency_ms)
+
+            # L1 schema: extract commitments from this signal (per-signal path).
+            # Daily aiw-commitments-extractor cron dedupes + merges into coord.json.
+            # Failures are silent (must never break routing).
+            commitment_count = extract_and_log_commitments(signal)
 
             # Flag degraded rules (chronos pattern). Add warning to summary.
             rule_id = rule.get("id")
