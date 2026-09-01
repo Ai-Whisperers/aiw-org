@@ -122,6 +122,7 @@
 | 5.10 | Research Engineer | 🟡 T2 | Builds tools used in research: eval harnesses, data pipelines. |
 | 5.11 | IP / Patent Specialist | 🟠 T3 | Manages patents, trademarks for IP. |
 | 5.12 | Publication Coordinator | 🟡 T2 | Manages publications pipeline: submissions, embargoes. |
+| 5.13 | Research Associate | 🟡 T2 | Supports experiments (MIT career ladder pattern); activates when we have research execution volume. |
 
 ---
 
@@ -271,7 +272,7 @@
 | Finance & Legal | 14 | 6 | 4 | 4 |
 | Sales & Growth | 18 | 5 | 6 | 7 |
 | Engineering | 24 | 7 | 2 | 15 |
-| Research | 12 | 5 | 4 | 3 |
+| Research | 13 | 5 | 5 | 3 |
 | People | 8 | 3 | 0 | 5 |
 | AI Ops | 6 | 1 | 3 | 2 |
 | Compliance | 4 | 1 | 1 | 2 |
@@ -283,10 +284,10 @@
 | Procurement | 4 | 0 | 4 | 0 |
 | Tier 3 depts | 12 | 0 | 0 | 12 |
 | Tier 4 depts | 5 | 0 | 0 | 5 |
-| **TOTAL** | **~135** | **~36** | **~31** | **~68** |
+| **TOTAL** | **~136** | **~36** | **~31** | **~69** |
 
 ---
 
 **Document path**: `/opt/data/agents-v2/ROLES-INVENTORY.md`
-**Total roles**: ~135
-**Last updated**: 2026-08-14
+**Total roles**: ~136
+**Last updated**: 2026-09-01 (added 5.13 Research Associate per Phase 7 R5 implementation plan)

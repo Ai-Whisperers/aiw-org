@@ -85,8 +85,14 @@ def parse_frontmatter(text: str) -> dict:
 
 
 def scan_agents() -> dict:
-    """Scan all PROMPT.md files and build roster."""
+    """Scan all PROMPT.md files and build roster.
+
+    Handles duplicate agent names across paths (e.g. compliance-monitor
+    exists in both 01-operations/ and demiurge/agents/) by suffixing with
+    the parent directory.
+    """
     roster = {}
+    seen_names = {}  # name -> count
     for parent in SCAN_PATHS:
         if not parent.exists():
             continue
@@ -98,15 +104,32 @@ def scan_agents() -> dict:
                 fm = parse_frontmatter(text)
                 if "name" not in fm:
                     continue
-                roster[fm["name"]] = {
-                    "path": str(prompt.relative_to(AGENTS_REPO)),
-                    "topology": fm.get("topology"),
-                    "cluster": fm.get("cluster"),
-                    "layer": fm.get("layer"),
-                    "archetype": fm.get("archetype"),
-                    "owner": fm.get("owner"),
-                    "version": fm.get("version"),
-                }
+                name = fm["name"]
+                # Disambiguate duplicate names with parent dir
+                if name in roster:
+                    # The first one wins; suffix with parent dir name
+                    parent_short = prompt.parent.name
+                    key = f"{name}@{parent_short}"
+                    roster[key] = {
+                        "path": str(prompt.relative_to(AGENTS_REPO)),
+                        "topology": fm.get("topology"),
+                        "cluster": fm.get("cluster"),
+                        "layer": fm.get("layer"),
+                        "archetype": fm.get("archetype"),
+                        "owner": fm.get("owner"),
+                        "version": fm.get("version"),
+                        "original_name": name,
+                    }
+                else:
+                    roster[name] = {
+                        "path": str(prompt.relative_to(AGENTS_REPO)),
+                        "topology": fm.get("topology"),
+                        "cluster": fm.get("cluster"),
+                        "layer": fm.get("layer"),
+                        "archetype": fm.get("archetype"),
+                        "owner": fm.get("owner"),
+                        "version": fm.get("version"),
+                    }
             except (OSError, UnicodeError):
                 pass
     return roster
