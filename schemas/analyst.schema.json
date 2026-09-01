@@ -42,6 +42,18 @@
         "leads_24h": {"type": "integer", "minimum": 0}
       },
       "additionalProperties": false
+    },
+    "questions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "question": {"type": "string"},
+          "priority": {"enum": ["low", "medium", "high", "critical"]},
+          "raised_at": {"type": "string", "format": "date-time"}
+        },
+        "additionalProperties": true
+      }
     }
   },
   "additionalProperties": false

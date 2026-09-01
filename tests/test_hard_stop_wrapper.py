@@ -127,41 +127,70 @@ name: test
 
 
 def test_audit_log_writes_entry():
-    """Verify _log_check writes to /opt/data/state/hard-stop-audit.json (use temp override)."""
+    """Verify _log_check writes NDJSON (Phase 28 fix for race condition)."""
     mod = load_module()
     with tempfile.TemporaryDirectory() as tmp:
-        # Override LOG_PATH
-        log_path = Path(tmp) / "audit.json"
+        log_path = Path(tmp) / "audit.ndjson"
         orig = mod.LOG_PATH
         setattr(mod, "LOG_PATH", log_path)
         try:
             mod._log_check("test-agent", "foo_action", "ai-agent", True)
             mod._log_check("test-agent", "bar_action", "ai-agent", False)
             assert log_path.exists()
-            log = json.loads(log_path.read_text())
-            assert len(log) == 2
-            assert log[0]["action"] == "foo_action"
-            assert log[0]["allowed"] is True
-            assert log[1]["allowed"] is False
+            # NDJSON: one JSON per line
+            lines = log_path.read_text().strip().split("\n")
+            assert len(lines) == 2
+            entry1 = json.loads(lines[0])
+            entry2 = json.loads(lines[1])
+            assert entry1["action"] == "foo_action"
+            assert entry1["allowed"] is True
+            assert entry2["allowed"] is False
         finally:
-            mod.LOG_PATH = orig
+            setattr(mod, "LOG_PATH", orig)
 
 
-def test_audit_log_caps_at_1000():
+def test_audit_log_concurrent_writes_safe():
+    """Phase 28: NDJSON append-only means concurrent writes don't corrupt."""
+    import threading
     mod = load_module()
     with tempfile.TemporaryDirectory() as tmp:
-        log_path = Path(tmp) / "audit.json"
+        log_path = Path(tmp) / "audit.ndjson"
         orig = mod.LOG_PATH
         setattr(mod, "LOG_PATH", log_path)
         try:
-            for i in range(1500):
-                mod._log_check("test-agent", f"action_{i}", "ai-agent", True)
-            log = json.loads(log_path.read_text())
-            assert len(log) == 1000
-            # Last entry should be action_1499
-            assert log[-1]["action"] == "action_1499"
+            threads = []
+            for i in range(10):
+                t = threading.Thread(
+                    target=lambda j=[i]: [mod._log_check(f"agent-{j[0]}", "act", "ai-agent", True) for _ in range(5)]
+                )
+                threads.append(t)
+                t.start()
+            for t in threads:
+                t.join()
+            lines = log_path.read_text().strip().split("\n")
+            assert len(lines) == 50
+            # All lines must parse as valid JSON
+            for line in lines:
+                json.loads(line)
         finally:
-            mod.LOG_PATH = orig
+            setattr(mod, "LOG_PATH", orig)
+
+
+def test_audit_log_rotates_at_50mb():
+    """Phase 28: rotate log when it exceeds 50MB."""
+    mod = load_module()
+    with tempfile.TemporaryDirectory() as tmp:
+        log_path = Path(tmp) / "audit.ndjson"
+        log_path.write_text("x" * (51 * 1024 * 1024))
+        orig = mod.LOG_PATH
+        setattr(mod, "LOG_PATH", log_path)
+        try:
+            mod._log_check("test", "action", "ai-agent", True)
+            files = list(Path(tmp).iterdir())
+            assert any(f.name.startswith("audit.audit-") for f in files), f"No rotated file. Files: {[f.name for f in files]}"
+            assert log_path.exists()
+        finally:
+            setattr(mod, "LOG_PATH", orig)
 
 
 def test_validate_prompt_real_file():
@@ -181,6 +210,7 @@ if __name__ == "__main__":
     test_load_hard_stops_bare_block()
     test_load_hard_stops_missing()
     test_audit_log_writes_entry()
-    test_audit_log_caps_at_1000()
+    test_audit_log_concurrent_writes_safe()
+    test_audit_log_rotates_at_50mb()
     test_validate_prompt_real_file()
     print("\nAll hard-stop-wrapper tests passed!")

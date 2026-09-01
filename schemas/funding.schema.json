@@ -1,0 +1,71 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "agent.state — funding.json",
+  "description": "Funding coordinator rolling state. Phase 28 R5 (generated from live state).",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "last_updated",
+    "last_updated_by",
+    "applications_in_flight",
+    "credits_received_usd",
+    "credits_in_flight_usd",
+    "grants_approved_usd",
+    "grants_in_flight_usd",
+    "accelerator_acceptances",
+    "next_deadlines"
+  ],
+  "properties": {
+    "schema_version": {"type": "string"},
+    "last_updated": {"type": ["string", "null"], "format": "date-time"},
+    "last_updated_by": {"type": ["string", "null"]},
+    "applications_in_flight": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "amount_usd", "status"],
+        "properties": {
+          "name": {"type": "string"},
+          "amount_usd": {"type": "number"},
+          "status": {"type": "string"},
+          "submitted_at": {"type": "string", "format": "date-time"}
+        },
+        "additionalProperties": true
+      }
+    },
+    "credits_received_usd": {"type": "number", "minimum": 0},
+    "credits_in_flight_usd": {"type": "number", "minimum": 0},
+    "grants_approved_usd": {"type": "number", "minimum": 0},
+    "grants_in_flight_usd": {"type": "number", "minimum": 0},
+    "accelerator_acceptances": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {"type": "string"},
+          "amount_usd": {"type": "number"},
+          "accepted_at": {"type": "string", "format": "date-time"}
+        },
+        "additionalProperties": true
+      }
+    },
+    "next_deadlines": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {"type": "string"},
+          "deadline": {"type": "string", "format": "date-time"},
+          "amount_usd": {"type": "number"}
+        },
+        "additionalProperties": true
+      }
+    },
+    "key_metrics": {"type": "object", "additionalProperties": true},
+    "founder_narrative_version": {"type": ["string", "null"]},
+    "deck_version": {"type": ["string", "null"]},
+    "metrics_sheet_version": {"type": ["string", "null"]},
+    "funding_coordinator_agent_active": {"type": "boolean"}
+  },
+  "additionalProperties": false
+}

@@ -1,76 +1,48 @@
 {
   "agent": "multimedia-monitor-30min",
-  "tick_ts_utc": "2026-08-31T21:30:37Z",
-  "tick_ts_pyt": "2026-08-31T17:30:3700000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000%0400",
-  "last_tick_pyt": "2026-08-31T16:50:58-0400",
-  "last_tick_ts_utc": "2026-08-31T20:50:58Z",
-  "canonical_fire_number": 10,
-  "regime": "chronic-suppress (Pattern 71 \u2014 both SHAs stable since fire #1)",
+  "tick_ts_utc": "2026-09-01T13:57:47Z",
+  "tick_ts_pyt": "2026-09-01T09:57:47-04:00",
+  "last_tick_pyt": "2026-09-01T09:57:47-04:00",
+  "last_tick_ts_utc": "2026-09-01T13:57:47Z",
+  "previous_tick_ts_utc": "2026-09-01T13:18:08Z",
+  "canonical_fire_number": 30,
+  "regime": "standard",
   "shas_match_prior": true,
   "analyst_sha_break": false,
   "research_sha_break": false,
   "verdict": "OK",
-  "reason": "All 8 thresholds NOT FIRED; outbox age 0d, courses_ready=0, courses_in_draft=0, pipeline_usd=null, 0 failed markers.",
+  "reason": "regime=standard; all 8 thresholds NOT FIRED -> silent-audit; SHAs byte-identical to fire #29 (research=169d130f42211b4e; analyst=e163cecce484ffe2) - no fresh evidence -> Pattern 71 chronic-suppress anchor still binding",
   "last_verdict": "OK",
   "highest_severity": "LOW",
-  "routing": "silent",
-  "thresholds_evaluated": [
-    {
-      "metric": "outbox_age_days",
-      "value": 0,
-      "rule": ">30d CRITICAL, >14d HIGH, >7d MEDIUM",
-      "fired": false
-    },
-    {
-      "metric": "outbox_failed_markers",
-      "value": 0,
-      "rule": "any HIGH",
-      "fired": false
-    },
-    {
-      "metric": "courses_ready",
-      "value": 0,
-      "rule": ">0 AND outbox>14d HIGH (queue not draining)",
-      "fired": false
-    },
-    {
-      "metric": "courses_in_draft",
-      "value": 0,
-      "rule": ">25 HIGH, >15 MEDIUM",
-      "fired": false
-    },
-    {
-      "metric": "pipeline_usd",
-      "value": null,
-      "rule": "=0 HIGH (null is gap, not zero)",
-      "fired": false
-    }
-  ],
+  "routing": "silent-audit",
+  "thresholds_evaluated": {
+    "outbox_age_gt_30d_critical": false,
+    "outbox_age_gt_14d_high": false,
+    "outbox_age_gt_7d_medium": false,
+    "failed_markers_high": false,
+    "courses_ready_and_stale_high": false,
+    "courses_in_draft_gt_25_high": false,
+    "courses_in_draft_gt_15_medium": false,
+    "pipeline_usd_literal_zero_high": false
+  },
   "metrics": {
     "outbox_newest_filename_date": "2026-08-31",
-    "outbox_calendar_age_days": 0,
+    "outbox_calendar_age_days": 1,
+    "outbox_mtime_age_hours": 21.6,
     "outbox_mtime_bulk_touched": true,
     "outbox_failed_markers": 0,
     "research_courses_ready": 0,
     "research_courses_in_draft": 0,
     "analyst_pipeline_usd": null,
     "research_sha256": "169d130f42211b4e",
-    "analyst_sha256": "aeafe9ff56ac8311",
+    "analyst_sha256": "e163cecce484ffe2",
     "previous_research_sha256": "169d130f42211b4e",
-    "previous_analyst_sha256": "aeafe9ff56ac8311"
+    "previous_analyst_sha256": "e163cecce484ffe2"
   },
   "actions_taken": [
-    "coord.json: NO-OP (chronic-suppress regime, no threshold fired)",
-    "Evolution alert: NOT triggered (no CRITICAL/HIGH)",
-    "monitor-notes/2026-08-31.md: APPENDED fire #10 row (Pattern C atomic)",
-    "_last-tick.json: ATOMIC WRITEBACK (Pattern C, +carry-forward preserved)"
+    "orphan_hygiene_zero_removed",
+    "monitor_notes_append_pattern_b",
+    "index_writeback_pattern_c"
   ],
-  "notes": [
-    "All 8 thresholds NOT FIRED \u2192 silent-audit",
-    "Cadence gap from fire #9 = 39min 39sec (healthy 30-min band)",
-    "Pattern 71 chronic-suppress: both SHAs stable since fire #1",
-    "Counter reconciled: prior=9, max_in_notes=9 \u2192 this=10, 0-fire lag",
-    "Pitfall 33 carry-forward applied"
-  ],
-  "previous_tick_ts_utc": "2026-08-31T20:50:58Z"
+  "cadence_gap_from_prior_min": 39.66
 }

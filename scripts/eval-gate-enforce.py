@@ -60,19 +60,15 @@ def _agent_pass_rate(agent_name: str, eval_data: dict) -> float | None:
 
 
 def _log_decision(decision: dict) -> None:
-    """Append a decision to the audit log."""
+    """Append a decision to the audit log (NDJSON, Phase 28 race-condition fix)."""
     DECISIONS_LOG.parent.mkdir(parents=True, exist_ok=True)
-    if DECISIONS_LOG.exists():
-        try:
-            log = json.loads(DECISIONS_LOG.read_text())
-        except (json.JSONDecodeError, OSError):
-            log = []
-    else:
-        log = []
-    log.append(decision)
-    if len(log) > 1000:
-        log = log[-1000:]
-    DECISIONS_LOG.write_text(json.dumps(log, indent=2))
+    line = json.dumps(decision, separators=(",", ":")) + "\n"
+    # Rotate at 50MB
+    if DECISIONS_LOG.exists() and DECISIONS_LOG.stat().st_size > 50 * 1024 * 1024:
+        archive = DECISIONS_LOG.with_suffix(f".decisions-{datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%SZ')}.ndjson")
+        DECISIONS_LOG.rename(archive)
+    with DECISIONS_LOG.open("a") as f:
+        f.write(line)
 
 
 def decide(agent_name: str, force: str | None, threshold: float) -> dict:

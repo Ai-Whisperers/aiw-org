@@ -144,9 +144,16 @@ LOG_PATH = Path("/opt/data/state/hard-stop-audit.json")
 
 
 def _log_check(agent_name: str, action: str, role: str, allowed: bool) -> None:
-    """Append a check event to the audit log.
+    """Append a check event to the audit log (NDJSON format).
 
-    Format: array of {ts, agent, action, role, allowed}
+    Phase 28 fix: switched from read-append-write (race condition) to
+    append-only NDJSON. Each line is a complete JSON event. Concurrent
+    appends are atomic on POSIX (kernel guarantees writes <PIPE_BUF are atomic).
+
+    NDJSON format (one JSON object per line):
+      {"ts": "<ISO>", "agent": "<name>", "action": "<action>", "role": "<role>", "allowed": <bool>}
+
+    Rotation: state-roll cron (Phase 5) handles archival. We cap at 50MB.
     """
     LOG_PATH.parent.mkdir(parents=True, exist_ok=True)
     entry = {
@@ -156,20 +163,15 @@ def _log_check(agent_name: str, action: str, role: str, allowed: bool) -> None:
         "role": role,
         "allowed": allowed,
     }
-    if LOG_PATH.exists():
-        try:
-            with LOG_PATH.open() as f:
-                log = json.load(f)
-        except (json.JSONDecodeError, OSError):
-            log = []
-    else:
-        log = []
-    log.append(entry)
-    # Cap at 1000 entries
-    if len(log) > 1000:
-        log = log[-1000:]
-    with LOG_PATH.open("w") as f:
-        json.dump(log, f, indent=2)
+    # Use NDJSON (one event per line) for atomic append
+    line = json.dumps(entry, separators=(",", ":")) + "\n"
+    # Check size before append
+    if LOG_PATH.exists() and LOG_PATH.stat().st_size > 50 * 1024 * 1024:
+        # Rotate: archive current, start fresh
+        archive = LOG_PATH.with_suffix(f".audit-{datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%SZ')}.ndjson")
+        LOG_PATH.rename(archive)
+    with LOG_PATH.open("a") as f:
+        f.write(line)
 
 
 def main():

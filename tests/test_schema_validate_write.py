@@ -72,7 +72,8 @@ def test_check_nested():
 def test_validate_file_no_schema_returns_warn():
     mod = load_module()
     with tempfile.TemporaryDirectory() as tmp:
-        p = Path(tmp) / "funding.json"
+        # Use a filename that isn't in FILE_TO_SCHEMA (post-Phase 28 all registered files have schemas)
+        p = Path(tmp) / "no-schema-test.json"
         p.write_text("{}")
         is_valid, errors, schema_path = mod.validate_file(p)
         # No schema registered = warn + allow

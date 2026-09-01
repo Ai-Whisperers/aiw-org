@@ -48,6 +48,11 @@ FILE_TO_SCHEMA = {
     "kiki.json": "kiki.schema.json",
     "kiki-prep.json": "kiki-prep.schema.json",
     "analyst.json": "analyst.schema.json",
+    # Phase 28 R5: 4 new schemas
+    "funding.json": "funding.schema.json",
+    "eval-per-agent.json": "eval-per-agent.schema.json",
+    "org-state.json": "org-state.schema.json",
+    "cron-error-watchdog.json": "cron-error-watchdog.schema.json",
 }
 
 # State paths to search (in priority order)

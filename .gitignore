@@ -140,3 +140,22 @@ state/delivery-tracker/
 # Generic monitor-notes pre-tick backups (added 2026-09-01)
 **/monitor-notes/.*pre-*.*.bak
 **/monitor-notes/.*pre-*.bak
+
+# Phase 28 additions (A9: backup pollution cleanup)
+# All .bak files (any depth, any dir) — was missing for state/
+**/*.bak
+**/*.BAK
+
+# State dir runtime artifacts (audit logs, chaos test results)
+# These are NOT state files — they're operational logs
+# Allowlisted: *.json (state) and *.jsonl (NDJSON audit)
+# Blocklisted:
+# NOTE: /opt/data/state/ is OUTSIDE the repo (/opt/data/agents/)
+# Those files are not tracked at all — no gitignore needed
+
+# Phase 28 additions for stale tracked runtime files
+# (counter.json, _last-tick.json are runtime counters that should be ignored)
+**/outbox/counter.json
+**/outbox/.counter.json
+**/monitor-notes/_last-tick.json
+**/monitor-notes/.last-tick.json

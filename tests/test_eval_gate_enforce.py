@@ -128,9 +128,10 @@ def test_decide_threshold_override():
 
 
 def test_decide_writes_to_log():
+    """decide() should append to eval-gate-decisions.json (NDJSON, Phase 28)."""
     mod = load_module()
     eval_path = make_eval({"a": {"pass_rate": 0.95}})
-    log_path = Path(tempfile.gettempdir()) / f"eval-gate-decisions-{id(eval_path)}.json"
+    log_path = Path(tempfile.gettempdir()) / f"eval-gate-decisions-{id(eval_path)}.ndjson"
     if log_path.exists():
         log_path.unlink()
     orig_eval = mod.EVAL_FILE
@@ -140,9 +141,10 @@ def test_decide_writes_to_log():
     try:
         mod.decide("a", force=None, threshold=0.30)
         assert log_path.exists()
-        log = json.loads(log_path.read_text())
-        assert len(log) == 1
-        assert log[0]["agent"] == "a"
+        lines = log_path.read_text().strip().split("\n")
+        assert len(lines) == 1
+        entry = json.loads(lines[0])
+        assert entry["agent"] == "a"
     finally:
         _set(mod, "EVAL_FILE", orig_eval)
         _set(mod, "DECISIONS_LOG", orig_log)
