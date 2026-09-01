@@ -23,6 +23,8 @@ Usage:
 import argparse
 import json
 import sys
+import time
+from collections import deque
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -44,6 +46,13 @@ REQUIRED_SIGNAL_FIELDS = {"id", "ts", "source", "routing_tags"}
 
 # Maximum recent signals to scan per pre-dispatch contradiction check
 CONTRADICTION_LOOKBACK = 10
+
+# Time-awareness: per-rule latency baseline (ms) + degradation multiplier.
+# Pattern from OthmanAdi/chronos (arxiv 2510.23853 — even frontier models
+# with timestamps reach only 65% temporal reasoning alignment; agents need
+# explicit rules for when to look at the clock).
+RULE_LATENCY_BASELINE_MS = 5000       # 5s — typical rule match + deliver
+RULE_LATENCY_DEGRADED_MULTIPLIER = 3  # 15s+ = degraded
 
 
 def pre_dispatch_check(signal: dict) -> dict | None:
@@ -211,8 +220,13 @@ def deliver_to_outbox(recipient: dict, signal: dict) -> str:
     return str(out_path)
 
 
-def log_decision(signal: dict, rule: dict, recipients: list[dict], delivered: list[str]):
-    """Append routing decision to log (NDJSON)."""
+def log_decision(signal: dict, rule: dict, recipients: list[dict], delivered: list[str],
+                 latency_ms: int | None = None):
+    """Append routing decision to log (NDJSON).
+
+    latency_ms: optional wall-clock duration of this routing decision. Used
+    for chronos-style time awareness — degraded rules get flagged.
+    """
     decision = {
         "ts": datetime.now(timezone.utc).isoformat(),
         "signal_id": signal.get("id"),
@@ -221,9 +235,49 @@ def log_decision(signal: dict, rule: dict, recipients: list[dict], delivered: li
         "delivered_to": delivered,
         "fan_out": rule.get("fan_out"),
     }
+    if latency_ms is not None:
+        decision["latency_ms"] = latency_ms
     ROUTING_LOG.parent.mkdir(parents=True, exist_ok=True)
     with ROUTING_LOG.open("a") as f:
         f.write(json.dumps(decision, separators=(",", ":")) + "\n")
+
+
+def rule_avg_latency_ms(rule_id: str, lookback: int = 50) -> float | None:
+    """Return mean latency_ms for the last N decisions of a given rule.
+
+    Reads ROUTING_LOG (NDJSON). Returns None if no data or rule never ran.
+    Pattern: OthmanAdi/chronos time-awareness ledger.
+    """
+    if not ROUTING_LOG.exists():
+        return None
+    latencies: list[int] = []
+    try:
+        with ROUTING_LOG.open() as f:
+            # Read tail (cheaper than full file). NDJSON, one decision per line.
+            # Use deque with maxlen to keep memory bounded.
+            tail = deque(maxlen=lookback * 5)  # ~5x lookback for rule filtering
+            for line in f:
+                tail.append(line)
+        for line in tail:
+            try:
+                d = json.loads(line)
+            except json.JSONDecodeError:
+                continue
+            if d.get("rule_id") == rule_id and isinstance(d.get("latency_ms"), int):
+                latencies.append(d["latency_ms"])
+    except Exception:
+        return None
+    if not latencies:
+        return None
+    return sum(latencies[-lookback:]) / len(latencies[-lookback:])
+
+
+def is_rule_degraded(rule_id: str) -> bool:
+    """Time-awareness check: rule is degraded if avg latency exceeds baseline * multiplier."""
+    avg = rule_avg_latency_ms(rule_id)
+    if avg is None:
+        return False  # no data, don't claim degradation
+    return avg > RULE_LATENCY_BASELINE_MS * RULE_LATENCY_DEGRADED_MULTIPLIER
 
 
 def process_pending(limit: int = 50) -> dict:
@@ -274,6 +328,10 @@ def process_pending(limit: int = 50) -> dict:
                 # Still mark as routed (so we don't loop on it)
                 update_signal_status(signal["id"], "routed", extra={"routed_via_rule": None})
                 continue
+
+            # Time-awareness: chronos pattern — track per-rule latency.
+            # Measure the routing decision itself (match + compute + deliver).
+            _t0 = time.monotonic()
             recipients = compute_recipients(rule)
             signal["routed_via_rule"] = rule.get("id")
             delivered = []
@@ -288,20 +346,29 @@ def process_pending(limit: int = 50) -> dict:
                         "result": "delivery_error",
                         "error": str(e),
                     })
-            log_decision(signal, rule, recipients, delivered)
-            update_signal_status(
-                signal["id"], "routed",
-                extra={
-                    "routed_via_rule": rule.get("id"),
-                    "routed_to": [r.get("id") for r in recipients],
-                },
-            )
+            latency_ms = int((time.monotonic() - _t0) * 1000)
+            log_decision(signal, rule, recipients, delivered, latency_ms=latency_ms)
+
+            # Flag degraded rules (chronos pattern). Add warning to summary.
+            rule_id = rule.get("id")
+            degraded = is_rule_degraded(rule_id) if rule_id else False
+            extra_update = {
+                "routed_via_rule": rule.get("id"),
+                "routed_to": [r.get("id") for r in recipients],
+                "latency_ms": latency_ms,
+            }
+            if degraded:
+                extra_update["degraded_rule_warning"] = True
+                summary.setdefault("degraded_rules", set()).add(rule.get("id"))
+            update_signal_status(signal["id"], "routed", extra=extra_update)
             summary["routed"] += 1
             summary["details"].append({
                 "signal_id": signal.get("id"),
                 "rule_id": rule.get("id"),
                 "recipients": [r.get("id") for r in recipients],
                 "delivered": delivered,
+                "latency_ms": latency_ms,
+                "degraded": degraded,
             })
         except Exception as e:
             summary["errors"] += 1

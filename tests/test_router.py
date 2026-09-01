@@ -379,6 +379,144 @@ def test_pre_dispatch_check_handles_missing_log():
         mod.ROUTING_LOG = orig_log
 
 
+def test_log_decision_with_latency():
+    """log_decision should accept and persist latency_ms."""
+    mod = load_module()
+    import tempfile
+    with tempfile.NamedTemporaryFile(mode="w", suffix=".jsonl", delete=False) as f:
+        tmp = Path(f.name)
+    orig_log = mod.ROUTING_LOG
+    try:
+        mod.ROUTING_LOG = tmp
+        mod.log_decision(
+            {"id": "s1", "source": "test", "ts": "2026-09-01T00:00:00Z"},
+            {"id": "rule-a"},
+            [{"id": "agent-1"}],
+            ["/path/to/s1.md"],
+            latency_ms=1234,
+        )
+        content = tmp.read_text().strip()
+        assert "latency_ms" in content
+        assert "1234" in content
+    finally:
+        mod.ROUTING_LOG = orig_log
+        tmp.unlink(missing_ok=True)
+
+
+def test_rule_avg_latency_ms_no_data():
+    """Empty / missing log should return None."""
+    mod = load_module()
+    orig_log = mod.ROUTING_LOG
+    try:
+        mod.ROUTING_LOG = Path("/tmp/nonexistent_xyz_99999.jsonl")
+        assert mod.rule_avg_latency_ms("any-rule") is None
+    finally:
+        mod.ROUTING_LOG = orig_log
+
+
+def test_rule_avg_latency_ms_with_data():
+    """Should compute mean latency for matching rule_id only."""
+    mod = load_module()
+    import tempfile
+    with tempfile.NamedTemporaryFile(mode="w", suffix=".jsonl", delete=False) as f:
+        # 3 entries for rule-a: latencies 100, 200, 300 → avg 200
+        for lat in [100, 200, 300]:
+            f.write(json.dumps({
+                "ts": "2026-09-01T00:00:00Z",
+                "signal_id": f"s-{lat}",
+                "rule_id": "rule-a",
+                "latency_ms": lat,
+            }) + "\n")
+        # 1 entry for rule-b (should not affect rule-a avg)
+        f.write(json.dumps({
+            "ts": "2026-09-01T00:00:00Z",
+            "signal_id": "s-b",
+            "rule_id": "rule-b",
+            "latency_ms": 99999,
+        }) + "\n")
+        tmp = Path(f.name)
+    orig_log = mod.ROUTING_LOG
+    try:
+        mod.ROUTING_LOG = tmp
+        avg = mod.rule_avg_latency_ms("rule-a")
+        assert avg == 200.0, f"expected 200.0, got {avg}"
+        # rule-b avg should be 99999
+        avg_b = mod.rule_avg_latency_ms("rule-b")
+        assert avg_b == 99999.0, f"expected 99999.0, got {avg_b}"
+    finally:
+        mod.ROUTING_LOG = orig_log
+        tmp.unlink(missing_ok=True)
+
+
+def test_is_rule_degraded_true():
+    """Rule with avg latency > baseline * multiplier should be degraded."""
+    mod = load_module()
+    import tempfile
+    with tempfile.NamedTemporaryFile(mode="w", suffix=".jsonl", delete=False) as f:
+        # Baseline 5000ms, multiplier 3 = threshold 15000ms
+        # 5 entries at 20000ms avg → degraded
+        for _ in range(5):
+            f.write(json.dumps({
+                "ts": "2026-09-01T00:00:00Z",
+                "signal_id": "s-slow",
+                "rule_id": "slow-rule",
+                "latency_ms": 20000,
+            }) + "\n")
+        tmp = Path(f.name)
+    orig_log = mod.ROUTING_LOG
+    try:
+        mod.ROUTING_LOG = tmp
+        assert mod.is_rule_degraded("slow-rule") is True
+    finally:
+        mod.ROUTING_LOG = orig_log
+        tmp.unlink(missing_ok=True)
+
+
+def test_is_rule_degraded_false():
+    """Rule with avg latency below threshold should NOT be degraded."""
+    mod = load_module()
+    import tempfile
+    with tempfile.NamedTemporaryFile(mode="w", suffix=".jsonl", delete=False) as f:
+        # 5 entries at 200ms avg → not degraded
+        for _ in range(5):
+            f.write(json.dumps({
+                "ts": "2026-09-01T00:00:00Z",
+                "signal_id": "s-fast",
+                "rule_id": "fast-rule",
+                "latency_ms": 200,
+            }) + "\n")
+        tmp = Path(f.name)
+    orig_log = mod.ROUTING_LOG
+    try:
+        mod.ROUTING_LOG = tmp
+        assert mod.is_rule_degraded("fast-rule") is False
+    finally:
+        mod.ROUTING_LOG = orig_log
+        tmp.unlink(missing_ok=True)
+
+
+def test_is_rule_degraded_no_data():
+    """Rule with no data should NOT be claimed degraded (avoid false positives)."""
+    mod = load_module()
+    import tempfile
+    with tempfile.NamedTemporaryFile(mode="w", suffix=".jsonl", delete=False) as f:
+        f.write(json.dumps({
+            "ts": "2026-09-01T00:00:00Z",
+            "signal_id": "s-other",
+            "rule_id": "other-rule",
+            "latency_ms": 100,
+        }) + "\n")
+        tmp = Path(f.name)
+    orig_log = mod.ROUTING_LOG
+    try:
+        mod.ROUTING_LOG = tmp
+        # never-seen rule → returns False, not error
+        assert mod.is_rule_degraded("never-seen-rule") is False
+    finally:
+        mod.ROUTING_LOG = orig_log
+        tmp.unlink(missing_ok=True)
+
+
 if __name__ == "__main__":
     test_match_signal_finds_rule()
     test_match_signal_requires_all_tags()
@@ -397,4 +535,10 @@ if __name__ == "__main__":
     test_pre_dispatch_check_tags_not_list()
     test_pre_dispatch_check_high_failure_source()
     test_pre_dispatch_check_handles_missing_log()
+    test_log_decision_with_latency()
+    test_rule_avg_latency_ms_no_data()
+    test_rule_avg_latency_ms_with_data()
+    test_is_rule_degraded_true()
+    test_is_rule_degraded_false()
+    test_is_rule_degraded_no_data()
     print("\nAll router tests passed!")
