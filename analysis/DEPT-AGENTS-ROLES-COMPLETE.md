@@ -1001,6 +1001,7 @@ sales/         lead-enrichment, marketing-content-producer,
 - [`12-FACTOR-AUDIT.md`](https://github.com/Ai-Whisperers/growth-coaching/blob/master/12-FACTOR-AUDIT.md) — Factor compliance
 
 ### Local files (in this repo)
+- [meetings/department-design/README.md](../meetings/department-design/README.md) — **design-meeting source of truth** (Magic Tower, 28 Aug sessions, ratified decisions)
 - [ORG-AGENTS.md](../ORG-AGENTS.md) — full handoff matrix
 - [ROLLBACK-PLAYBOOK.md](../playbooks/ROLLBACK-PLAYBOOK.md)
 - [DEFERRED-AGENTS.md](../DEFERRED-AGENTS.md) — deferred agent triggers
@@ -1036,4 +1037,4 @@ Open naming tickets (3):
 
 ---
 
-*Generated 2026-08-31 by Erebus consolidation pass. Single source of truth: this file. Supersedes DEPT-AGENTS-ROLES-COMPLETE-v1 (2026-08-14) and the AGENT-NAMES-V2 portmanteau framework (now legacy layer).*
+*Generated 2026-08-31 by Erebus consolidation pass. **Implementation** source of truth: this file (what exists in git). **Design-meeting** source of truth: `meetings/department-design/`. Supersedes DEPT-AGENTS-ROLES-COMPLETE-v1 (2026-08-14) and the AGENT-NAMES-V2 portmanteau framework (now legacy layer).*

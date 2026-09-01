@@ -504,4 +504,4 @@ From `engineering/phase-25-revisit-2026.md`:
 
 ---
 
-**TL;DR**: The org is 49 agents + 131 cron jobs + ~50 state files, organized into 6 charter depts + 1 board, monitored by 35 PROMPT-monitor.md files, and documented in 52 research areas across 7 dept catalogs. L1-L2 is 100% complete; L3 is partial; L4-L5 are deferred per gate. Read [department-index.md](department-index.md) for what's where, and [ON-CALL.md](ON-CALL.md) for what to do when X breaks.
+**TL;DR**: The org is 49 agents + 131 cron jobs + ~50 state files, organized into 6 charter depts + 1 board, monitored by 35 PROMPT-monitor.md files, and documented in 52 research areas across 7 dept catalogs. L1-L2 is 100% complete; L3 is partial; L4-L5 are deferred per gate. Read [department-index.md](department-index.md) for what's where, [meetings/department-design/README.md](meetings/department-design/README.md) for design-meeting decisions, and [ON-CALL.md](ON-CALL.md) for what to do when X breaks.
