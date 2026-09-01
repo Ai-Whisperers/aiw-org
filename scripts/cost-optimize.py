@@ -87,22 +87,98 @@ def find_failing(jobs: list, watchdog: dict) -> list:
     ]
 
 
-def find_overlapping(jobs: list) -> list:
-    """Find crons scheduled at the same time (overlap)."""
-    by_schedule = defaultdict(list)
+def find_overlapping(jobs: list, proximity_window_min: int = 60,
+                    min_cluster_size: int = 3) -> list:
+    """Find crons that pile up in the same time window on the same day.
+
+    Phase 9 R3 / Tier B2 fix. The previous implementation bucketed by exact
+    cron-expr string, which missed real pile-ups like the 2026-08-30 Sunday
+    stack ('0 18 * * 0', '30 19 * * 0', '0 20 * * 0', '0 21 * * 0' — 4
+    distinct strings but all within ~3.5h on Sunday causing 429s).
+
+    Algorithm:
+      1. For each cron, generate fire times for the next 7 days
+      2. Cluster fires by (day_of_week, hour) — so all Sunday-19:00 fires
+         are in one cluster regardless of which cron produced them
+      3. Report clusters with >= min_cluster_size distinct crons that fire
+         within proximity_window_min of each other
+
+    Args:
+      jobs: list of cron job dicts (with schedule.expr and enabled)
+      proximity_window_min: minutes within which to consider fires "same time"
+      min_cluster_size: minimum distinct crons to flag a cluster as pile-up
+
+    Returns:
+      List of {day, hour, crons, fire_count} dicts (real pile-ups only)
+    """
+    from collections import defaultdict
+    from datetime import datetime, timedelta, timezone
+    from croniter import croniter
+
+    horizon = datetime.now(timezone.utc) + timedelta(days=7)
+    fires_by_job = {}
     for j in jobs:
         if not j.get("enabled", True):
             continue
         expr = j.get("schedule", {}).get("expr")
         if not expr:
             continue
-        by_schedule[expr].append(j.get("name"))
-    overlaps = [
-        {"schedule": expr, "crons": names}
-        for expr, names in by_schedule.items()
-        if len(names) > 1
-    ]
-    return overlaps
+        try:
+            it = croniter(expr, datetime.now(timezone.utc))
+            fires = []
+            while len(fires) < 50:
+                nxt = it.get_next(datetime)
+                if nxt > horizon:
+                    break
+                fires.append(nxt)
+            fires_by_job[j["name"]] = fires
+        except Exception:
+            continue
+
+    # Cluster: bucket = (dow) → list of (job_name, fire_time)
+    # (not by hour — fires within proximity_window_min can span hours)
+    clusters = defaultdict(list)
+    for name, fires in fires_by_job.items():
+        for f in fires:
+            if f.tzinfo is None:
+                f = f.replace(tzinfo=timezone.utc)
+            else:
+                f = f.astimezone(timezone.utc)
+            key = f.weekday()
+            clusters[key].append((name, f))
+
+    # For each (day) cluster, find sub-clusters where fires are within proximity_window_min
+    pileups = []
+    for dow, entries in clusters.items():
+        entries.sort(key=lambda x: x[1])
+        sub_clusters = []
+        current = [entries[0]]
+        for e in entries[1:]:
+            if (e[1] - current[-1][1]).total_seconds() / 60 <= proximity_window_min:
+                current.append(e)
+            else:
+                if len({name for name, _ in current}) >= min_cluster_size:
+                    sub_clusters.append(current)
+                current = [e]
+        if len({name for name, _ in current}) >= min_cluster_size:
+            sub_clusters.append(current)
+
+        for sc in sub_clusters:
+            distinct_crons = sorted({name for name, _ in sc})
+            pileups.append({
+                "day_of_week": dow,
+                "crons": distinct_crons,
+                "fire_count": len(sc),
+                "earliest_fire": sc[0][1].isoformat(),
+                "latest_fire": sc[-1][1].isoformat(),
+                "spread_minutes": round(
+                    (sc[-1][1] - sc[0][1]).total_seconds() / 60, 1
+                ),
+            })
+
+    # Sort by fire_count desc
+    pileups.sort(key=lambda x: -x["fire_count"])
+    return pileups
 
 
 def find_low_activity(jobs: list, watchdog: dict) -> list:
