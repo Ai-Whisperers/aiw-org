@@ -251,16 +251,17 @@ def main():
             print(f"Stagger {len(findings['overlapping'])} overlapping schedules")
         return
 
-    print(json.dumps({
+    # JSON to stdout (parseable) + paths to stderr (informational)
+    sys.stdout.write(json.dumps({
         "total_jobs": summary["total_jobs"],
         "enabled": summary["enabled"],
         "disabled": summary["disabled_count"],
         "failing": summary["failing_count"],
         "overlapping": summary["overlapping_count"],
         "low_activity": summary["low_activity_count"],
-    }, indent=2))
-    print(f"\nReport: {OUTPUT_MD}")
-    print(f"JSON: {OUTPUT_JSON}")
+    }, indent=2) + "\n")
+    sys.stderr.write(f"Report: {OUTPUT_MD}\n")
+    sys.stderr.write(f"JSON: {OUTPUT_JSON}\n")
 
 
 if __name__ == "__main__":
