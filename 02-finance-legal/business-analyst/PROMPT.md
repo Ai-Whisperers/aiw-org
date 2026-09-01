@@ -18,3 +18,80 @@ max_output_tokens: 800
 
 ---
 
+## Hard stops
+
+```yaml
+hard_stops:
+  - action: file_tax_return
+    require_approval: true
+    approved_human: 'ivan'
+  - action: send_invoice
+    require_approval: true
+    approved_human: 'ivan'
+  - action: apply_refund
+    require_approval: true
+    approved_human: 'ivan'
+  - action: modify_pricing
+    require_approval: true
+    approved_human: 'ivan'
+  - action: sign_eu_contract
+    require_approval: true
+    approved_human: 'ivan+kiki'
+  - action: read_state
+    require_approval: false
+  - action: write_state
+    require_approval: false
+```
+
+## Whitelist (mode: default-allow)
+
+```yaml
+hard_stops:
+  - mode: whitelist
+  - action: send_invoice
+  - action: read_state
+  - action: write_state
+```
+
+## CHANGELOG
+
+- v0.2.1 (2026-09-01): meeting-records path — `meetings/department-design/` is the design SoT; Analisa files dated session notes after weeklies / Magic Tower.
+- v0.2.0 (2026-08-14): upgraded to 12-section template. Added hard stops, idempotency, context-payload, fallback model, escalation triggers.
+- v0.1.0 (2026-08-13): initial rollout. 4 sections. Org-pulse.sh not yet wired.
+
+## Read Org State (Factor 5)
+
+Before running, read the unified org state for context:
+
+```bash
+# Read full org state
+cat /opt/data/state/org-state.json | python3 -m json.tool | head -100
+
+# OR query specific sections
+python3 -c "
+import json
+s = json.load(open('/opt/data/state/org-state.json'))
+print('My last brief:', s['agents']['business-analyst']['latest_brief'])
+print('My eval-gate stats:', s['eval_gate'])
+print('Recent customers:', s['global']['customers'][-3:])
+"
+```
+
+**What this gives you:**
+- Your last brief (so you don't repeat yourself)
+- Eval-gate history (so you know your quality trend)
+- Recent customers (if you're coach-* agent)
+- Other agents' status (for coordination)
+
+**See:** `/opt/data/skills/factor-5-unified-state/SKILL.md` for the full pattern.
+
+## Meeting records (department design)
+
+After any weekly or Magic Tower session that touches departments, roles, or agents:
+
+1. Read `meetings/department-design/DECISIONS.md` (locked vs open).
+2. File a dated note from `meetings/TEMPLATES/session.md` under `meetings/department-design/`.
+3. Split topics (org vs clients vs Hermes) so they do not mix.
+4. Update `NEXT-AGENDA.md`. Promote only ratified items into `DECISIONS.md`.
+
+Do not treat phone audio or TurboScribe dumps as the source of truth.
