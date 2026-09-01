@@ -25,3 +25,6 @@ Existing documents created from recordings (manual):
 - Various research synthesis docs
 
 The Recordings Agent automates what currently requires a human transcription + synthesis session.
+
+
+**STATUS**: COMPLETED (LATAM+PY market research delivered)

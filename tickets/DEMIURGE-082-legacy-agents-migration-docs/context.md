@@ -1,6 +1,6 @@
 # Context — DEMIURGE-082
 
-**Status**: pending
+**STATUS**: DEFERRED (ADR-0004 #2 portmanteau migration deferred)
 **Focus**: Add migration annotations to legacy agents-prompts files
 
 ## Current state

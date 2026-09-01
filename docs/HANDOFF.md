@@ -213,3 +213,39 @@ cd /opt/data/agents && /opt/data/.venv/bin/python3 scripts/memory/compactor.py -
 Created per AGENTS.md requirement (Round 4 adoption). Adapted from `iPythoning/b2b-sdr-agent-template/docs/HANDOFF.md` pattern.
 
 See `/opt/data/profiles/ivan/plans/2026-09-01-aiw-research-round-4-upgrades-templates.md` for the full research synthesis.
+
+---
+
+## Phase 9 R4–R5 update (2026-09-01, 22:00 UTC)
+
+### Risk mitigations shipped (5 risks from `board/risk-register-2026.md`)
+
+| Risk | Mitigation | Cron | Status |
+|------|-----------|------|--------|
+| R4: Eval aggregate unknown | nightly eval-aggregate wired 0 4 * * * | aiw-eval-aggregate-nightly | ✅ verified wired |
+| R5: LLM prompt injection | additionalProperties: false on 16/16 schemas | aiw-strict-schemas-weekly | ✅ hardened |
+| R7: Trademark incident | aiw-trademark-scan-cron now scheduled 0 3 * * 0 (was empty) | weekly | ✅ wired |
+| R9: Bitwarden compromise | cron-secret-sentinel.py daily scan | aiw-cron-secret-sentinel-daily | ✅ running |
+| R12: cron-error-watchdog | outbox-fallback path added | every 30m | ✅ verified |
+
+### DEMIURGE ticket census (after 2026-09-01 R5)
+- **77 / 78 COMPLETED** (99%)
+- 1 DEFERRED (DEMIURGE-082, portmanteau migration per ADR-0004 #2)
+- 0 ACTIVE
+
+### New scripts
+- `scripts/strict-schemas.py` (R5)
+- `scripts/cron-secret-sentinel.py` (R9)
+
+### New tests
+- `tests/test_risk_mitigations.py` — 10 tests for both scripts
+- Total canonical suite: **377 passed, 6 skipped**
+
+### Cron job count
+- 184 → 186 (added 2: cron-secret-sentinel-daily + strict-schemas-weekly)
+- 1 fix: trademark-scan-cron schedule set (was empty `{}`)
+
+### Cross-references
+- `board/risk-register-2026.md` (updated mental model)
+- `tests/test_risk_mitigations.py` (validation)
+- `outbox/signals/cron-error-watchdog-*` (live alerts)

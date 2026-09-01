@@ -1,6 +1,6 @@
 # DEMIURGE-041 Context
 
-**STATUS**: ACTIVE
+**STATUS**: COMPLETED
 
 **FOCUS**: Review + approve Sales dept
 

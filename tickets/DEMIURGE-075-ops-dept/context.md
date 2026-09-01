@@ -1,6 +1,6 @@
 # Context — DEMIURGE-075
 
-**Status**: COMPLETED
+**STATUS**: COMPLETED
 **Focus**: Define Operations department skeleton from DEMIURGE-074 outputs
 
 Phase 2 of ROADMAP-DEPT-EXPANSION.md — Operations is the reference department for full buildout.

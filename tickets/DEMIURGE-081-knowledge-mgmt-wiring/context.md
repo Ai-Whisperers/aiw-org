@@ -1,6 +1,6 @@
 # Context — DEMIURGE-081
 
-**Status**: done
+**STATUS**: COMPLETED
 **Focus**: Five wiring gaps across knowledge-mgmt ecosystem
 
 ## Current state

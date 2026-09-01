@@ -1,6 +1,6 @@
 # DEMIURGE-033 Context
 
-**STATUS**: ACTIVE
+**STATUS**: COMPLETED
 
 **FOCUS**: Review + approve Marketing dept
 

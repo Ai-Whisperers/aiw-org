@@ -6,3 +6,6 @@ Source files:
 - `docs/demiurge/department-taxonomy-v1.md` — target file to update
 - `ROLES-INVENTORY.md` — role definitions for new depts
 - `docs/CONVERSATION-NOTES-AND-LONG-DEPT-LIST.md` — original-20 dept list (source for multimedia + board)
+
+
+**STATUS**: COMPLETED (LATAM+PY market research delivered)

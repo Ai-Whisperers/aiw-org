@@ -1,6 +1,6 @@
 # DEMIURGE-008 Context
 
-**STATUS**: ACTIVE
+**STATUS**: COMPLETED
 
 **FOCUS**: Review + approve full domain model
 

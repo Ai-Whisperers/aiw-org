@@ -1,6 +1,6 @@
 # Context — DEMIURGE-076
 
-**Status**: COMPLETED
+**STATUS**: COMPLETED
 **Focus**: Kronos soul designed; Operations dept active
 
 Phase 2 of ROADMAP-DEPT-EXPANSION.md — Operations is the reference department for full buildout. DEMIURGE-075 delivered the dept skeleton; this ticket activates it.

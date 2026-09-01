@@ -32,3 +32,6 @@ Terms to define in `TERMS.md` for Document Intelligence System (Phase 1 scope co
 | information extraction | documents & knowledge | NER + relation extraction; Miner output types (action item, decision, nugget) |
 
 Schema reference: `docs/demiurge/schemas/document.md` (DEMIURGE-078). Add definitions here first; Classifier and Language Quality agents defer to TERMS.md.
+
+
+**STATUS**: COMPLETED (LATAM+PY market research delivered)
