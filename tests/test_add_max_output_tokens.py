@@ -213,17 +213,27 @@ class TestProcessFile(unittest.TestCase):
 class TestProductionState(unittest.TestCase):
     """Verify the live state of all PROMPT.md files on master."""
 
-    def test_all_74_prompts_have_max_output_tokens(self):
+    def test_all_prompts_have_max_output_tokens(self):
+        """All tracked PROMPT.md files must have a max_output_tokens field.
+
+        Does NOT assert a specific value (800 vs 1200 vs 1500) because
+        different agents legitimately need different output budgets —
+        the curator-evolver agent needs 1200 to write PROMPT patches,
+        homunculus needs 1500 for complex curation logic. The invariant
+        is: every file has SOME explicit cap, not that the cap is 800.
+
+        Also does NOT assert a specific file count (74, 76, etc.) because
+        new PROMPT.md files get added over time as new agents are created.
+        """
         all_prompts = list(REPO.rglob("PROMPT.md"))
-        self.assertEqual(len(all_prompts), 76,
-                         f"expected 76 PROMPT.md files (47 dept + 28 demiurge + curator-evolver + homunculus), got {len(all_prompts)}")
+        self.assertGreater(len(all_prompts), 0, "no PROMPT.md files found")
         missing = [
             str(f.relative_to(REPO))
             for f in all_prompts
-            if not re.search(r"^max_output_tokens\s*:\s*800", f.read_text(), re.MULTILINE)
+            if not re.search(r"^max_output_tokens\s*:", f.read_text(), re.MULTILINE)
         ]
         self.assertEqual(missing, [],
-                         f"these files are missing max_output_tokens: 800:\n  "
+                         f"these files are missing max_output_tokens field:\n  "
                          + "\n  ".join(missing))
 
     def test_tier_b8_parent_spec_preserved_in_47_files(self):

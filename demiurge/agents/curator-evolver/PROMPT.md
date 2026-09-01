@@ -12,12 +12,6 @@ schedule: "0 2 * * 1"  # Monday 02:00 PYT
 parent_spec: constitution/ORG-AGENTS.md
 max_output_tokens: 1200
 
-composition:
-  - instinct_generator
-  - hard-stop-wrapper
-parent_spec: constitution/ORG-AGENTS.md
-max_output_tokens: 800
-
 fallback_model: litellm/reasoning
 hard_stops:
   - action: read_state
@@ -28,6 +22,7 @@ hard_stops:
     require_approval: true
     approved_human: ivan
 
+---
 # Curator-Evolver Agent (Phase 9 R3 / Tier C5)
 #
 # ADR-0002 implementation: takes harvested instincts from

@@ -11,12 +11,6 @@ time_scale: on-demand
 parent_spec: constitution/ORG-AGENTS.md
 max_output_tokens: 1500
 
-composition:
-  - instinct_generator
-  - curator-evolver
-parent_spec: constitution/ORG-AGENTS.md
-max_output_tokens: 800
-
 fallback_model: litellm/reasoning
 hard_stops:
   - action: read_state
@@ -27,6 +21,7 @@ hard_stops:
     require_approval: true
     approved_human: ivan
 
+---
 # Homunculus Agent (Phase 9 R3 / Tier C5)
 #
 # ADR-0002 implementation: the "inner self" that operates between

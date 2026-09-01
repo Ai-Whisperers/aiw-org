@@ -25,6 +25,7 @@ hard_stops:
     require_approval: true
     approved_human: ivan
 
+---
 ## Cron Schedule
 
 - Every 30 minutes

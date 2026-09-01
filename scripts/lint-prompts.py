@@ -18,8 +18,8 @@ ROOT = Path("/opt/data/agents")
 REQUIRED_FIELDS = {"name", "version", "owner"}
 RECOMMENDED_LAYER3 = {"layer", "topology", "archetype"}
 VALID_TOPOLOGIES = {"stream-aligned", "platform", "enabling", "complicated-subsystem"}
-VALID_LAYERS = {"atomic", "business", "governance"}
-VALID_ARCHETYPES = {"team-lead", "architect", "solver", "right-hand", "specialist"}
+VALID_LAYERS = {"atomic", "business", "governance", "crosscut"}
+VALID_ARCHETYPES = {"team-lead", "architect", "solver", "right-hand", "specialist", "meta-curator"}
 
 
 def parse_frontmatter(content: str):

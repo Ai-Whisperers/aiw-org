@@ -4,6 +4,9 @@ name: founder-bandwidth-watchdog
 version: 0.2.0
 schedule: "0 18 * * 0"  # Weekly Sunday 18:00 PYT
 owner: ivan
+layer: business
+topology: stream-aligned
+archetype: specialist
 parent_spec: constitution/ORG-AGENTS.md
 max_output_tokens: 800
 fallback_model: litellm/primary
@@ -19,6 +22,7 @@ hard_stops:
     require_approval: true
     approved_human: ivan
 
+---
 ## Whitelist (mode: default-allow)
 
 ```yaml
