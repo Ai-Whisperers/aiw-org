@@ -104,6 +104,23 @@ def check_action(action: str, role: str, hard_stops: list) -> bool:
     treated as allowed actions regardless of `require_approval` field.
     Do NOT mix whitelist + blacklist entries — if you want allowlist + approval
     for some actions, omit the `mode: whitelist` marker and use blacklist only.
+
+    PHASE 35 R3 (per-action approval in whitelist mode):
+    Use `approval_required: true` (distinct from `require_approval`) to mark
+    specific whitelisted actions as needing human approval. This works
+    orthogonally with the whitelist: action is allowed by the list, but
+    still requires the named human (or kiki) to approve at runtime.
+
+    Example:
+        hard_stops:
+          - mode: whitelist
+          - action: read_state
+          - action: deploy_prod
+            approval_required: true
+            approved_human: ivan
+
+    With role=ai-agent: read_state→allowed, deploy_prod→blocked (needs ivan).
+    With role=ivan: both allowed.
     """
     # Detect whitelist mode: any entry with action='*' OR 'mode: whitelist' marker
     is_whitelist = any(
@@ -117,11 +134,23 @@ def check_action(action: str, role: str, hard_stops: list) -> bool:
             if s.get("action") == "*":
                 # Wildcard = allow all (overrides whitelist)
                 return True
-        # Collect allowed action names
-        # NOTE: ignore require_approval in whitelist mode (not relevant)
-        allowed_actions = {s.get("action") for s in hard_stops
-                           if s.get("action") and s.get("action") != "*"}
-        return action in allowed_actions
+        # Find specific entry for this action
+        entry = next(
+            (s for s in hard_stops if s.get("action") == action),
+            None
+        )
+        if entry is None:
+            # Action not in whitelist
+            return False
+        # PHASE 35 R3: per-action approval check
+        if entry.get("approval_required", False):
+            approved = entry.get("approved_human", "")
+            if isinstance(approved, list):
+                return role in approved
+            if "+" in approved:
+                return role in approved.split("+")
+            return role == approved
+        return True
 
     # Blacklist mode (default)
     rules = next((s for s in hard_stops if s.get("action") == action), None)

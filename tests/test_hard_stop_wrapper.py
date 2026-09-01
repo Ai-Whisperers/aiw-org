@@ -315,6 +315,70 @@ def test_check_action_blacklist_with_unrelated_actions():
     assert mod.check_action("comment_on_pr", "ai-agent", stops) is True
 
 
+def test_check_action_whitelist_per_action_approval_required():
+    """Phase 35 R3: per-action approval in whitelist mode.
+
+    In whitelist mode, an entry with `approval_required: true` still requires
+    human approval (e.g., ivan). Without approval_required, the whitelisted
+    action is freely allowed.
+    """
+    mod = load_module()
+    stops = [
+        {"mode": "whitelist"},
+        {"action": "read_state"},  # freely allowed
+        {"action": "deploy_prod", "approval_required": True, "approved_human": "ivan"},
+    ]
+    # read_state: whitelisted, no approval needed
+    assert mod.check_action("read_state", "ai-agent", stops) is True
+    # deploy_prod: whitelisted but requires ivan
+    assert mod.check_action("deploy_prod", "ai-agent", stops) is False
+    assert mod.check_action("deploy_prod", "ivan", stops) is True
+    # Other roles blocked
+    assert mod.check_action("deploy_prod", "kiki", stops) is False
+    # Non-listed actions blocked
+    assert mod.check_action("merge_pr", "ai-agent", stops) is False
+
+
+def test_check_action_whitelist_per_action_approval_any_of():
+    """Phase 35 R3: approval_required with multiple approved humans (any-of)."""
+    mod = load_module()
+    stops = [
+        {"mode": "whitelist"},
+        {"action": "deploy_prod", "approval_required": True, "approved_human": "ivan+kiki"},
+    ]
+    # Either ivan OR kiki can approve
+    assert mod.check_action("deploy_prod", "ivan", stops) is True
+    assert mod.check_action("deploy_prod", "kiki", stops) is True
+    assert mod.check_action("deploy_prod", "ai-agent", stops) is False
+
+
+def test_check_action_whitelist_per_action_approval_list():
+    """Phase 35 R3: approved_human as a list."""
+    mod = load_module()
+    stops = [
+        {"mode": "whitelist"},
+        {"action": "deploy_prod", "approval_required": True,
+         "approved_human": ["ivan", "kiki", "admin"]},
+    ]
+    for role in ["ivan", "kiki", "admin"]:
+        assert mod.check_action("deploy_prod", role, stops) is True, f"role {role} should be allowed"
+    assert mod.check_action("deploy_prod", "ai-agent", stops) is False
+
+
+def test_check_action_whitelist_no_approval_required_default():
+    """Phase 35 R3: whitelist entry WITHOUT approval_required is freely allowed."""
+    mod = load_module()
+    stops = [
+        {"mode": "whitelist"},
+        {"action": "read_state"},
+        {"action": "merge_pr"},  # no approval_required
+    ]
+    # Both freely allowed for any role
+    assert mod.check_action("read_state", "ai-agent", stops) is True
+    assert mod.check_action("merge_pr", "ai-agent", stops) is True
+    assert mod.check_action("read_state", "ivan", stops) is True
+
+
 if __name__ == "__main__":
     test_check_action_no_rules_allows()
     test_check_action_require_approval_blocks_non_approved()
@@ -328,6 +392,10 @@ if __name__ == "__main__":
     test_check_action_mixed_blacklist_and_whitelist()
     test_check_action_wildcard_overrides_allowlist()
     test_check_action_blacklist_with_unrelated_actions()
+    test_check_action_whitelist_per_action_approval_required()
+    test_check_action_whitelist_per_action_approval_any_of()
+    test_check_action_whitelist_per_action_approval_list()
+    test_check_action_whitelist_no_approval_required_default()
     test_load_hard_stops_frontmatter()
     test_load_hard_stops_legacy_double_block()
     test_load_hard_stops_bare_block()

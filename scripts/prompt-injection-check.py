@@ -77,6 +77,24 @@ PATTERNS = [
     # Dutch (Phase 34 R5)
     ("nl-negeer-instructies", re.compile(r"\b(negeer|ignoreer)\s+(alle\s+)?(vorige|vroegere)\s+(instructies?|opdrachten)\b", re.I), 0.9),
     ("nl-toon-prompt", re.compile(r"\b(toon|laat\s+zien|ontsluier)\s+(je|de)\s+(prompt|systeem)\b", re.I), 0.8),
+    # === Phase 35 R2: Russian, Chinese, Japanese, Arabic ===
+    # Russian
+    ("ru-ignoriruy", re.compile(r"\b(игнорируй|забудь)\s+(все\s+)?(предыдущие|прошлые|прежние)\s+(инструкции|указания)\b", re.I | re.UNICODE), 0.9),
+    ("ru-pokazhi-prompt", re.compile(r"\b(покажи|раскрой)\s+(свой\s+)?(системный\s+)?(промпт|инструкцию)\b", re.I | re.UNICODE), 0.8),
+    # Chinese (Simplified) - match in any word order
+    ("zh-hulue", re.compile(r"(忽略|无视|忘记)"), 0.7),  # lower weight, combine with zh-zhiling
+    ("zh-zhiling", re.compile(r"(指令|说明|规则)"), 0.3),  # match common instruction words
+    # Combined Chinese pattern: ignore + instructions
+    ("zh-ignore-instructions", re.compile(r"忽略.{0,10}(指令|说明|规则)|(指令|说明|规则).{0,10}(忽略|无视)"), 0.9),
+    ("zh-show-prompt", re.compile(r"(显示|展示|透露).{0,10}(提示|prompt|指令)|(提示|prompt|指令).{0,10}(显示|展示)"), 0.8),
+    # Japanese - simpler patterns
+    ("ja-mushikaishi", re.compile(r"(無視|忘れ)"), 0.6),
+    ("ja-shiji", re.compile(r"(指示|ルール|命令)"), 0.3),
+    ("ja-ignore-instructions", re.compile(r"(無視|忘れ).{0,15}(指示|ルール|命令)|(指示|ルール|命令).{0,15}(無視|忘れ)"), 0.9),
+    ("ja-show-prompt", re.compile(r"(表示|見せ|開示).{0,15}(プロンプト|指示)|(プロンプト|指示).{0,15}(表示|見せ|開示)"), 0.8),
+    # Arabic
+    ("ar-tahawul", re.compile(r"(تجاهل|انسى|احذف)\s*(كل|جميع)?\s*(التعليمات|الأوامر)\s*(السابقة|الماضية)?"), 0.9),
+    ("ar-urdi-prompt", re.compile(r"(أعرض|اظهر|كشف)\s*(عن)?\s*(النظام)?\s*(الموجه|prompt|الإرشادات)"), 0.8),
     # === Phase 33 R3: Encoded content detection ===
     # Base64-encoded "ignore previous" instructions (common attack vector)
     ("base64-injection", re.compile(r"(?:[A-Za-z0-9+/]{40,}={0,2})"), 0.4),  # base64 heuristic
