@@ -12,23 +12,23 @@
 | | Count | Where to find |
 |---|---:|---|
 | Tier-1 charter departments | 7 (6 + board) | `01..06-*/`, `board-of-directors/` |
-| Atomic DEMIURGE agents | 24 | `demiurge/agents/` |
-| Sub-agents (Tier-2/Tier-3) | 49 | `<dept>/<agent>/PROMPT.md` |
+| Atomic DEMIURGE agents | 28 | `demiurge/agents/` |
+| Sub-agents (Tier-2/Tier-3) | 35 | `<dept>/<agent>/PROMPT.md` |
 | PROMPT.md files (all agents) | **63** | every agent dir |
-| PROMPT-monitor.md files (wiring + thresholds) | **35** | every monitored agent dir |
-| Cron jobs (heartbeat) | **131** | `/opt/data/.hermes/cron/jobs.json` |
+| PROMPT-monitor.md files (wiring + thresholds) | **63** | every monitored agent dir |
+| Cron jobs (heartbeat) | **167** | `/opt/data/.hermes/cron/jobs.json` |
 | KPI stacks (per dept) | 7 | `demiurge/kpi/*-stack.yaml` |
 | Signal routes (per dept) | 7 | `demiurge/signals/*.yaml` |
-| State files (live + versioned) | ~50 | `state/`, `/opt/data/state/` |
+| State files (live + versioned) | 86+ | `state/`, `/opt/data/state/` |
 | Research catalogs (per dept) | 7 | `research/dept-research/{01..06,board}-research-areas.md` |
 | Research areas documented | **52** | (per `DEPT-RESEARCH-METHODOLOGY.md`) |
 | Research areas executed (Phase 8) | **30** | `engineering/`, `operations/`, `sales/`, `finance/`, `research/`, `board/` |
-| Tests | **72** | `tests/` (incl. new `test_eval_aggregate.py`) |
-| Scripts (production) | 36 | `scripts/` |
-| Smoke gate | 100% pass, 9s | `scripts/smoke-test.sh all` |
+| Tests | **278** | `tests/` (38 test files) |
+| Scripts (production) | 96 | `scripts/` (incl. chaos-runner, token-ledger, eval-gate) |
+| Smoke gate | 100% pass, ~3s | `scripts/smoke-test.sh all` |
 | Lint | 63/63 pass | `scripts/lint-prompts.py` |
 
-**Active phases**: 5 (setup parity), 6 (execution gaps), 7 (per-dept research), 8 (executing 30 research areas). See `analysis/PHASE-*-FEEDBACK.md`.
+**Active phases**: 9 (R-series close-out). See `analysis/PHASE-*-FEEDBACK.md` and `docs/HANDOFF-PHASE-8.md`.
 
 ---
 
@@ -49,14 +49,14 @@
 - **[department-index.md](department-index.md)** — per-department overview (agents, monitors, research, KPIs)
 - **[ON-CALL.md](ON-CALL.md)** — who/what to do when things break
 - **[REVIEW-2026-Q4.md](REVIEW-2026-Q4.md)** — current quarter review + Phase 26 candidates
-- **[ORG-AGENTS.md](ORG-AGENTS.md)** — full 47-agent handoff matrix + 9 schemas + producer→consumer
+- **[ORG-AGENTS.md](ORG-AGENTS.md)** — full 63-agent handoff matrix + 13 schemas + producer→consumer
 - **[departments/](departments/)** — 6 Tier-1 dept charters
 - **[analysis/](analysis/)** — phase feedback docs + L1-L4 hygiene + naming catalogs
 - **[research/](research/)** — research areas + methodology + cross-dept research catalogs
 - **[research/dept-research/](research/dept-research/)** — 7 per-dept research catalogs (52 areas)
-- **[dept-monitors/](dept-monitors/)** — 35 PROMPT-monitor.md patterns + INDEX
-- **[demiurge/](demiurge/)** — DEMIURGE agent framework (24 souls) + KPI stacks + signals
-- **[schemas/](schemas/)** — 9 agent-state schemas (additionalProperties: false enforced)
+- **[dept-monitors/](dept-monitors/)** — 63 PROMPT-monitor.md patterns + INDEX
+- **[demiurge/](demiurge/)** — DEMIURGE agent framework (28 souls) + KPI stacks + signals
+- **[schemas/](schemas/)** — 13 agent-state schemas (additionalProperties: false enforced)
 - **[state/](state/)** — LIVE runtime state (mirrored from `/opt/data/state/`)
 - **[patterns/](patterns/)** — hard-stop-wrapper, idempotency, trademark-scrub
 - **[playbooks/](playbooks/)** — 00-INDEX + 8 dept playbooks + ROADMAP

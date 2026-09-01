@@ -8,7 +8,7 @@
 
 ## 1. The org in one paragraph
 
-AI Whisperers Paraguay EAS is a **2-person co-founder org** (Ivan + Kiki) that runs a **layered agent organization** on top of Hermes Agent + cron. **49 agents** are organized into **6 charter departments + 1 board**, monitored by **35 PROMPT-monitor.md files**, scheduled by **131 cron jobs**, persisting state to JSON files at `/opt/data/state/` and `/opt/data/agents/state/`, and producing output to per-agent `outbox/` directories.
+AI Whisperers Paraguay EAS is a **2-person co-founder org** (Ivan + Kiki) that runs a **layered agent organization** on top of Hermes Agent + cron. **63 agents** are organized into **6 charter departments + 1 board**, monitored by **63 PROMPT-monitor.md files**, scheduled by **167 cron jobs**, persisting state to JSON files at `/opt/data/state/` and `/opt/data/agents/state/`, and producing output to per-agent `outbox/` directories.
 
 ---
 
@@ -243,10 +243,11 @@ Critical scripts:
 - `state-write.sh` — atomic write wrapper
 - `cron-heartbeat-onhours.sh` / `-offhours.sh` — heartbeats
 
-### Tests (32 test files, 72 tests)
+### Tests (38 test files, 278 tests)
 
-- All 72 pass
+- All 278 pass (canonical gate)
 - New `tests/test_eval_aggregate.py` (Phase 8) — 6 tests for the eval aggregate script
+- `tests/test_agent_composition.py` (Phase 8) — 7 tests for crosscut agents
 - Pre-commit runs lint + smoke + tests
 
 ### Pre-commit hooks
