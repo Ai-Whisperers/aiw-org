@@ -78,13 +78,13 @@ class TestExtractFrontmatterRegression(unittest.TestCase):
     def setUp(self):
         self.mod = load_module()
 
-    @unittest.skip("implementation-detail: edge case not critical to gate")
     def test_handles_malformed_double_block_gracefully(self):
         """v1 bug: re.search found FIRST --- and dropped everything after.
 
-        v2 must return SOMETHING (not None, not crash) for malformed input.
-        The exact behavior is acceptable as long as it doesn't silently
-        truncate by claiming just the first block is frontmatter.
+        v2 must NOT silently drop the body. For a malformed double-block
+        file, v2 returns the FIRST block's frontmatter and the rest as
+        'body' (which would be the second block). The total content is
+        preserved on round-trip.
         """
         malformed = (
             "---\n"
@@ -102,16 +102,32 @@ class TestExtractFrontmatterRegression(unittest.TestCase):
         parts = self.mod.extract_frontmatter(malformed)
         # Must not return None on malformed input
         self.assertIsNotNone(parts, "extract_frontmatter returned None on malformed input")
-        # The full content must be preserved (fm_text + suffix covers everything)
-        prefix, fm_text, suffix = parts
-        full_reconstructed = prefix + fm_text + suffix
-        self.assertIn("more content", full_reconstructed,
-                      "v2 must not lose content past the malformed first --- close")
-        self.assertIn("parent_spec", full_reconstructed,
-                      "v2 must preserve parent_spec visibility")
+        # v2 returns 4-tuple
+        prefix, fm_text, suffix, body = parts
+        # Round-trip must be LOSS-LESS: input == reconstruct
+        full_reconstructed = prefix + fm_text + suffix + body
+        self.assertEqual(full_reconstructed, malformed,
+                         "v2 round-trip must preserve the input exactly. "
+                         "If this fails, the v1 body-destruction bug "
+                         "has regressed.")
+        # The body field must contain 'more content' (NOT discarded)
+        self.assertIn("more content", body,
+                      "v2 must preserve body content as separate field "
+                      "rather than discarding it like v1 did")
+        # The fm_text captures only the FIRST valid-looking block
+        self.assertIn("name: malformed", fm_text)
+        self.assertIn("version: 0.1.0", fm_text)
 
-    @unittest.skip("implementation-detail: body comes after suffix, not in it")
     def test_handles_well_formed_single_block(self):
+        """The regression test for the v1 bug that destroyed 72 PROMPT bodies.
+
+        Per Phase Kernel brief R1: 'a skipped test is a failing test.'
+        The v1 skip said 'implementation-detail: body comes after suffix,
+        not in it' -- which was exactly the warning sign that was missed.
+
+        v2 fix (DEMIURGE-092): extract_frontmatter returns 4-tuple, body
+        captured separately. process_file() includes body in write.
+        """
         well_formed = (
             "---\n"
             "name: foo\n"
@@ -121,12 +137,27 @@ class TestExtractFrontmatterRegression(unittest.TestCase):
             "---\n"
             "\n"
             "## Body\n"
+            "body content\n"
         )
         parts = self.mod.extract_frontmatter(well_formed)
         self.assertIsNotNone(parts)
-        prefix, fm_text, suffix = parts
+        # v2 returns 4-tuple
+        prefix, fm_text, suffix, body = parts
+        # Frontmatter captures the YAML
         self.assertIn("parent_spec", fm_text)
-        self.assertIn("## Body", suffix)
+        # Closing delimiter captured in suffix
+        self.assertIn("---", suffix)
+        # Body captured separately — NOT discarded
+        self.assertIn("## Body", body)
+        self.assertIn("body content", body)
+        # Round-trip must preserve everything
+        full_reconstructed = prefix + fm_text + suffix + body
+        self.assertEqual(full_reconstructed, well_formed,
+                         "v2 round-trip must be lossless")
+        # CRITICAL: the body field must be non-empty (NOT empty string)
+        self.assertGreater(len(body.strip()), 0,
+                           "v2 body field must contain real content; "
+                           "empty body would indicate v1 regression")
 
     def test_returns_none_for_no_frontmatter(self):
         no_fm = "name: foo\nversion: 0.1.0\n"  # no --- at start

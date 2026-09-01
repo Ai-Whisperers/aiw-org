@@ -4,7 +4,21 @@
 Tier-aware insertion: places max_output_tokens AFTER parent_spec (added
 by Tier-B8) and BEFORE the closing --- marker.
 
-Idempotent — safe to re-run. Skips files with malformed frontmatter.
+Idempotent -- safe to re-run.
+
+v2 fix 2026-09-02 (per Phase Kernel WS-1 item 4 / DEMIURGE-092):
+The original v1 (commit fffd7c4) returned (prefix, fm_text, suffix) from
+extract_frontmatter() and then wrote prefix + new_fm + suffix -- DISCAR-
+DING everything after the closing --- separator. This silently trun-
+cated 72 of 76 PROMPT.md files (each lost its body). See:
+  analysis/INCIDENT-2026-09-01-PROMPT-TRUNCATION.md
+  tests/test_add_max_output_tokens.py::test_handles_well_formed_single_block
+  (the test that would have caught this was skipped as "implementation
+   detail" -- per Phase Kernel brief R1, a skipped test is a failing test)
+
+v2 fix: extract_frontmatter() now returns 4-tuple (prefix, fm_text,
+suffix, body). process_file() writes prefix + new_fm + suffix + body --
+so the body is preserved across round-trips.
 """
 import re
 import sys
@@ -19,14 +33,40 @@ def find_prompt_files(root: Path) -> list[Path]:
     return sorted(root.rglob("PROMPT.md"))
 
 
-def extract_frontmatter(content: str) -> tuple[str, str, str] | None:
-    """Return (prefix '---\n', fm_text, suffix '\n---\n') or None."""
+def extract_frontmatter(content: str) -> tuple[str, str, str, str] | None:
+    """Return (prefix '---\\n', fm_text, suffix '\\n---\\n', body) or None.
+
+    v2 fix: also captures the body so process_file() can preserve it. The
+    previous v1 discarded the body. This was the root cause of the
+    2026-09-01 prompt-body destruction incident.
+
+    Slice math explained:
+      content[0:3]   = "---"           the opening delimiter (3 chars)
+      content[3]     = "\n"             newline that ENDS the opening line
+      content[4:mstart]              frontmatter (YAML, no leading \n)
+      content[mstart:mend] = "\n---\n"  the closing delimiter (newline + --- + newline)
+      content[mend:]                 the body
+
+    To keep the math simple, we slice from content[3:] and treat that as
+    "everything after opening ---\\n". The first character of that slice
+    is the leading \\n of the frontmatter-block, but the YAML block
+    boundaries don't care about leading whitespace.
+    """
     if not content.startswith("---"):
         return None
-    m = re.search(r"\n---\s*\n", content[3:])
+    # IMPORTANT: skip past the opening "---\n" (offsets 0-3). Anything
+    # before that is not frontmatter.
+    m = re.search(r"\n---\n", content[4:])
     if not m:
         return None
-    return ("---\n", content[3 : 3 + m.start()], content[3 + m.start() : 3 + m.end()])
+    prefix = "---\n"
+    # content[4:] slice begins with the frontmatter (no leading \n).
+    # The closing \n is part of m.group() = "\n---\n".
+    # fm_text ends just BEFORE the closing \n; it has no trailing newline.
+    fm_text = content[4 : 4 + m.start()]
+    suffix = "\n---\n"  # standard closing delimiter
+    body = content[4 + m.end() :]  # everything after closing --- + \n
+    return (prefix, fm_text, suffix, body)
 
 
 def has_target(fm_text: str) -> bool:
@@ -59,12 +99,15 @@ def process_file(path: Path) -> str:
     if parts is None:
         return "skipped:no-frontmatter"
 
-    prefix, fm_text, suffix = parts
+    prefix, fm_text, suffix, body = parts
     if has_target(fm_text):
         return "present"
 
     new_fm = insert_target(fm_text)
-    new_content = prefix + new_fm + suffix
+    # v2 fix: include body in the new content. The previous version did
+    # `prefix + new_fm + suffix` and discarded body. That destroyed 72
+    # PROMPT.md bodies in fffd7c4.
+    new_content = prefix + new_fm + suffix + body
     try:
         path.write_text(new_content)
         return "added"
