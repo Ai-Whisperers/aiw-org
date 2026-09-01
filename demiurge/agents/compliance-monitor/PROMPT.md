@@ -4,6 +4,7 @@ version: 0.2.0
 owner: ai-ops-coordinator
 layer: atomic
 topology: platform
+cluster: run
 archetype: solver
 time_scale: minutes
 transfer_targets:

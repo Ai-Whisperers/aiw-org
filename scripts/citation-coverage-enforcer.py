@@ -342,6 +342,12 @@ def main(argv=None) -> int:
     if agg["files_orphan"] > 0:
         print(f"  WARN: {agg['files_orphan']} files have ZERO citations")
 
+    # Critical: with --files mode, fail if ANY staged file has 0 citations,
+    # not just if aggregate < threshold. A cited file can otherwise mask
+    # an orphan's zero-citation status.
+    if args.strict and any(r.get("citation_count", 0) == 0 for r in results):
+        print(f"  STRICT FAIL: at least one file has 0 citations", file=sys.stderr)
+        return 1
     if args.strict and agg["coverage_pct"] < args.threshold:
         print(f"  STRICT FAIL: {agg['coverage_pct']}% < threshold {args.threshold}%", file=sys.stderr)
         return 1

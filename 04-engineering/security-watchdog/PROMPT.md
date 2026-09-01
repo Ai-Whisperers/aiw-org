@@ -4,6 +4,7 @@ version: 0.2.0
 owner: ai-ops-coordinator
 layer: business
 topology: stream-aligned
+cluster: build
 archetype: specialist
 time_scale: daily
 composition:

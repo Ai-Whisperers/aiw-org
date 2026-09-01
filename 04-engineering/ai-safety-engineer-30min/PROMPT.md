@@ -4,6 +4,7 @@ version: 0.2.0
 owner: ai-ops-coordinator
 layer: business
 topology: stream-aligned
+cluster: run
 archetype: specialist
 time_scale: daily
 composition:
@@ -111,3 +112,53 @@ print('Recent customers:', s['global']['customers'][-3:])
 - Other agents' status (for coordination)
 
 **See:** `/opt/data/skills/factor-5-unified-state/SKILL.md` for the full pattern.
+
+---
+
+## Recipe (per `recipe-not-conversation` pattern)
+
+This agent is runnable as a recipe. The steps below are explicit and ordered.
+
+### Step 1: Read context
+- **Inputs:** `state/org-state.json`, previous brief
+- **Outputs:** in-context summary
+- **Done when:** `latest_brief` and `eval_gate` are in working memory
+
+### Step 2: Compute safety check
+- **Inputs:** in-context summary, hard_stops list above
+- **Outputs:** action set (which hard_stops to enforce)
+- **Done when:** every hard_stop action has a known disposition
+
+### Step 3: Detect issues
+- **Inputs:** in-context summary, recent traces
+- **Outputs:** prioritized issue list
+- **Done when:** every issue has severity + assignee
+
+### Step 4: Fire feedback loops
+- **Inputs:** prioritized issue list, hard_stops
+- **Outputs:** filed signals (with `routing_tags: ["safety", "alert"]`)
+- **Done when:** every HIGH/CRITICAL issue has a filed signal
+
+### Step 5: Update state
+- **Inputs:** fired signals list
+- **Outputs:** updated `state/coord.json` via approved operator
+- **Done when:** changes committed; no silent mutations
+
+### Verification criteria
+
+A successful run:
+- [ ] Step 1-5 each completed without silent skipping
+- [ ] All HIGH/CRITICAL issues have filed signals
+- [ ] No hard_stop bypassed
+- [ ] `state/coord.json` updated (or explicitly unchanged)
+
+### Dependencies
+
+- Requires: `state/org-state.json` exists and is valid
+- Depends on: `compliance-monitor` (composition)
+- Blocks: any downstream agent waiting on safety signal
+
+### See also
+
+- `/opt/data/agents/docs/patterns/recipe-not-conversation.md` — the meta-pattern
+- `/opt/data/agents/docs/patterns/architect-then-builder.md` — design vs build separation
