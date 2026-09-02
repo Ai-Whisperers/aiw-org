@@ -40,9 +40,19 @@ import tempfile
 from datetime import datetime, timezone
 from pathlib import Path
 
+# --- AIW_ROOT path bootstrap (DEMIURGE-098) ---
+import sys as _sys_bootstrap_098
+from pathlib import Path as _Path_bootstrap_098
+_PY_PATHS_ROOT = _Path_bootstrap_098(__file__).resolve().parent.parent
+if str(_PY_PATHS_ROOT) not in _sys_bootstrap_098.path:
+    _sys_bootstrap_098.path.insert(0, str(_PY_PATHS_ROOT))
+from _paths import AGENTS, AIW_ROOT
+# --- end bootstrap ---
+
+
 # --- Configuration ----------------------------------------------------------
 
-AGENTS_REPO = Path("/opt/data/agents")
+AGENTS_REPO = AGENTS
 RESEARCH_DIR = AGENTS_REPO / "research"
 STATE_FILE_AGENT = Path("/opt/data/agents/state/citation-coverage.json")
 STATE_FILE_LIVE = Path("/opt/data/state/citation-coverage.json")
