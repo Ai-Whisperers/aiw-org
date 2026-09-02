@@ -175,25 +175,28 @@ class TestPlanContract(unittest.TestCase):
         for it in items:
             self.assertLess(it["current_body_lines"], mod.MIN_BODY_LINES)
 
-    def test_plan_finds_seven_unrecoverable_files(self):
-        """Per the brief, exactly 7 files have no recoverable history."""
+    def test_plan_finds_seven_stubs_now_marked_explicit(self):
+        """Per Phase Kernel brief WS-1 item 3: the 7 short files are
+        INTENTIONALLY stubs (not corruption). They are now marked
+        explicitly via DEMIURGE-095 (2026-09-02) with body >= 20 lines
+        (the '## Intentional stub' marker is ~42 lines).
+
+        After DEMIURGE-095: plan() should find ZERO truncated files
+        because every PROMPT.md has a body >= MIN_BODY_LINES. The 7
+        unrecoverable are no longer in plan() at all.
+
+        If this test ever fails because plan() returns non-empty, that
+        means a NEW truncation has occurred — the original incident
+        has regressed.
+        """
         mod = load_module()
         items = mod.plan(REPO)
-        unrecoverable = [i for i in items if not i["recoverable"]]
-        # The brief identifies these 7
-        expected_names = {
-            "argus-health-monitor",
-            "athena-product-discovery-lead",
-            "cadmus-lead-enrichment",
-            "calliope-content-producer",
-            "clio-customer-signal-collector",
-            "iris-community-monitor",
-            "metis-proposal-drafter",
-        }
-        actual_names = {i["file"].split("/")[-2] for i in unrecoverable}
-        self.assertEqual(expected_names, actual_names,
-                         f"Unrecoverable files don't match brief: "
-                         f"expected {expected_names}, got {actual_names}")
+        # The 7 stubs are now >20 lines (they have explicit markers).
+        # plan() should find nothing.
+        self.assertEqual(items, [],
+                         f"plan() found {len(items)} truncated files after "
+                         f"DEMIURGE-095 stub-marking; expected 0. "
+                         f"Files: {[i['file'] for i in items]}")
 
 
 class TestIdempotency(unittest.TestCase):
@@ -214,21 +217,21 @@ class TestBodyPreservationContract(unittest.TestCase):
     (max_output_tokens, etc.) AND old body content (e.g. '# Mission')."""
 
     def test_post_apply_min_body_lines_satisfied(self):
-        """After apply ran in an earlier test, MIN_BODY_LINES is satisfied
-        for all recoverable files. plan() now returns the 7 unrecoverable
-        only, and verify() reports >= 69/76."""
+        """After the WS-1 close-out (320ffdc) and the DEMIURGE-095
+        stub-marking, every PROMPT.md has body >= MIN_BODY_LINES (either
+        a real body or the explicit '## Intentional stub' marker).
+        plan() now returns an empty list.
+
+        If this test ever fails because plan() returns non-empty, that
+        means a NEW truncation has occurred — the original incident
+        has regressed.
+        """
         mod = load_module()
         items = mod.plan(REPO)
-        # The 7 unrecoverable are still recoverable:False, but everything
-        # else should NOT be in the plan (body >= MIN_BODY_LINES).
-        for it in items:
-            self.assertFalse(it["recoverable"],
-                             f"{it['file']} unexpectedly in plan after apply")
-            self.assertIn(it["file"].split("/")[-2],
-                          {"argus-health-monitor", "athena-product-discovery-lead",
-                           "cadmus-lead-enrichment", "calliope-content-producer",
-                           "clio-customer-signal-collector", "iris-community-monitor",
-                           "metis-proposal-drafter"})
+        self.assertEqual(items, [],
+                         f"plan() found {len(items)} truncated files; "
+                         f"expected 0 after DEMIURGE-095 + 320ffdc. "
+                         f"Files: {[i['file'] for i in items]}")
 
     def test_restored_file_has_both_frontmatter_and_body(self):
         """A restored file must have BOTH the new frontmatter fields
