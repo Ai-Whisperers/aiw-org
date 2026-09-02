@@ -17,7 +17,17 @@ import os
 from pathlib import Path
 from datetime import datetime, timezone, timedelta
 
-STATE_DIR = Path("/opt/data/state")
+# --- AIW_ROOT path bootstrap (DEMIURGE-098) ---
+import sys as _sys_bootstrap_098
+from pathlib import Path as _Path_bootstrap_098
+_PY_PATHS_ROOT = _Path_bootstrap_098(__file__).resolve().parent.parent
+if str(_PY_PATHS_ROOT) not in _sys_bootstrap_098.path:
+    _sys_bootstrap_098.path.insert(0, str(_PY_PATHS_ROOT))
+from _paths import AIW_ROOT, STATE
+# --- end bootstrap ---
+
+
+STATE_DIR = STATE
 ORG_STATE = STATE_DIR / "org-state.json"
 COST_TRACKER = STATE_DIR / "cost-tracker.json"
 ERRORS_FILE = STATE_DIR / "errors.json"
