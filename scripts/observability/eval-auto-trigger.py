@@ -12,8 +12,18 @@ import time
 from pathlib import Path
 from datetime import datetime, timezone, timedelta
 
-AGENTS_DIR = Path("/opt/data/agents")
-STATE_DIR = Path("/opt/data/state")
+# --- AIW_ROOT path bootstrap (DEMIURGE-098) ---
+import sys as _sys_bootstrap_098
+from pathlib import Path as _Path_bootstrap_098
+_PY_PATHS_ROOT = _Path_bootstrap_098(__file__).resolve().parent.parent
+if str(_PY_PATHS_ROOT) not in _sys_bootstrap_098.path:
+    _sys_bootstrap_098.path.insert(0, str(_PY_PATHS_ROOT))
+from _paths import AGENTS, AIW_ROOT, STATE
+# --- end bootstrap ---
+
+
+AGENTS_DIR = AGENTS
+STATE_DIR = STATE
 LOG_FILE = STATE_DIR / "auto-eval-log.jsonl"
 
 
