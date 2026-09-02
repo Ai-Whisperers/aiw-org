@@ -14,7 +14,17 @@ import subprocess
 from pathlib import Path
 from datetime import datetime, timezone
 
-STATE_DIR = Path("/opt/data/state")
+# --- AIW_ROOT path bootstrap (DEMIURGE-098) ---
+import sys as _sys_bootstrap_098
+from pathlib import Path as _Path_bootstrap_098
+_PY_PATHS_ROOT = _Path_bootstrap_098(__file__).resolve().parent.parent
+if str(_PY_PATHS_ROOT) not in _sys_bootstrap_098.path:
+    _sys_bootstrap_098.path.insert(0, str(_PY_PATHS_ROOT))
+from _paths import AIW_ROOT, STATE
+# --- end bootstrap ---
+
+
+STATE_DIR = STATE
 COST_FILE = STATE_DIR / "cost-tracker.json"
 WHATSAPP_HELPER = "/opt/data/scripts/whatsapp-send.py"
 
