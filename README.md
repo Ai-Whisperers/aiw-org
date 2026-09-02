@@ -20,7 +20,7 @@ All numbers verified against live state on 2026-09-01 via `find`/`grep` + `BASEL
 | Tier-1 charter departments | 7 (6 + board) | `01..06-*/`, `board-of-directors/` |
 | Atomic DEMIURGE agents | 28 | `demiurge/agents/` |
 | Department sub-agents (Tier-2/Tier-3) | 46 | `0?-*/<agent>/PROMPT.md` |
-| **PROMPT.md files (all agents)** | **74** | 46 dept + 27 DEMIURGE + 1 board |
+| **PROMPT.md files (all agents)** | **76** | 45 dept + 30 DEMIURGE + 1 board (incl. 7 explicit stubs from DEMIURGE-095) |
 | **PROMPT-monitor.md files** | **71** | one per monitored agent |
 | **Cron jobs (heartbeat)** | **168** | `/opt/data/.hermes/cron/jobs.json` |
 | KPI stacks (per dept) | 8 | `demiurge/kpi/*-stack.yaml` |
