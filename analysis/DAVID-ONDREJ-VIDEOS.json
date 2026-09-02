@@ -1,0 +1,4356 @@
+{
+  "channel_id": "UCPGrgwfbkjTIgPoOh2q1BAg",
+  "channel": "David Ondrej",
+  "fetched_at": "2026-09-02T15:16:08.413266Z",
+  "method": "RSS + yt-dlp flat-playlist (no auth)",
+  "rss_count": 15,
+  "playlist_count": 145,
+  "videos_tab_count": 383,
+  "total": 543,
+  "videos": [
+    {
+      "title": "How I Ship Faster Than 99% of Devs (just copy me)",
+      "video_id": "c9nRxEy1kUY",
+      "url": "https://www.youtube.com/watch?v=c9nRxEy1kUY",
+      "published": "2026-09-02T10:11:55+00:00",
+      "source": "rss",
+      "view_count": null
+    },
+    {
+      "title": "Build a $5,000 AI Datacenter at Home, Here’s How",
+      "video_id": "fuECuGW_Eeo",
+      "url": "https://www.youtube.com/watch?v=fuECuGW_Eeo",
+      "published": "2026-08-27T10:06:40+00:00",
+      "source": "rss",
+      "view_count": null
+    },
+    {
+      "title": "$75M founder reveals his Agentic Engineering setup",
+      "video_id": "QBfXiWvM0qc",
+      "url": "https://www.youtube.com/watch?v=QBfXiWvM0qc",
+      "published": "2026-08-20T19:05:23+00:00",
+      "source": "rss",
+      "view_count": null
+    },
+    {
+      "title": "Does harness matter more than the model?",
+      "video_id": "e2W5HLrj-w4",
+      "url": "https://www.youtube.com/shorts/e2W5HLrj-w4",
+      "published": "2026-08-16T22:36:44+00:00",
+      "source": "rss",
+      "view_count": null
+    },
+    {
+      "title": "Open-source is not what you think...",
+      "video_id": "zbbgb6-AoJA",
+      "url": "https://www.youtube.com/shorts/zbbgb6-AoJA",
+      "published": "2026-08-14T22:49:46+00:00",
+      "source": "rss",
+      "view_count": null
+    },
+    {
+      "title": "Zuck is finally back...",
+      "video_id": "HHlWC6uAgkc",
+      "url": "https://www.youtube.com/shorts/HHlWC6uAgkc",
+      "published": "2026-08-12T19:33:38+00:00",
+      "source": "rss",
+      "view_count": null
+    },
+    {
+      "title": "Ex-Uber dev explains his Multi-Agent Workflow",
+      "video_id": "utb7zYbK10c",
+      "url": "https://www.youtube.com/watch?v=utb7zYbK10c",
+      "published": "2026-08-10T21:12:37+00:00",
+      "source": "rss",
+      "view_count": null
+    },
+    {
+      "title": "My double DGX Spark setup",
+      "video_id": "hST4u6lhY5U",
+      "url": "https://www.youtube.com/shorts/hST4u6lhY5U",
+      "published": "2026-08-08T19:28:20+00:00",
+      "source": "rss",
+      "view_count": null
+    },
+    {
+      "title": "Ex-NASA dev reveals his Agentic Engineering Workflow",
+      "video_id": "xgkjtF89-44",
+      "url": "https://www.youtube.com/watch?v=xgkjtF89-44",
+      "published": "2026-08-07T07:46:24+00:00",
+      "source": "rss",
+      "view_count": null
+    },
+    {
+      "title": "GUIs are not dead",
+      "video_id": "08lTuvYITxQ",
+      "url": "https://www.youtube.com/shorts/08lTuvYITxQ",
+      "published": "2026-08-06T19:43:36+00:00",
+      "source": "rss",
+      "view_count": null
+    },
+    {
+      "title": "Let agents write your tests",
+      "video_id": "i-S99NwmsQA",
+      "url": "https://www.youtube.com/shorts/i-S99NwmsQA",
+      "published": "2026-08-05T18:59:46+00:00",
+      "source": "rss",
+      "view_count": null
+    },
+    {
+      "title": "DeepSeek V4 Flash is INSANE",
+      "video_id": "I_ap_mlJBqg",
+      "url": "https://www.youtube.com/shorts/I_ap_mlJBqg",
+      "published": "2026-08-04T17:26:35+00:00",
+      "source": "rss",
+      "view_count": null
+    },
+    {
+      "title": "The Most Important Paper in AI History",
+      "video_id": "52_wce7E3aQ",
+      "url": "https://www.youtube.com/shorts/52_wce7E3aQ",
+      "published": "2026-08-02T18:57:44+00:00",
+      "source": "rss",
+      "view_count": null
+    },
+    {
+      "title": "Don’t use AI Agents without using these 8 skills",
+      "video_id": "clrUbBtD2j4",
+      "url": "https://www.youtube.com/watch?v=clrUbBtD2j4",
+      "published": "2026-08-02T18:39:17+00:00",
+      "source": "rss",
+      "view_count": null
+    },
+    {
+      "title": "My Biggest AI Mistake...",
+      "video_id": "FtyePPCE5q0",
+      "url": "https://www.youtube.com/shorts/FtyePPCE5q0",
+      "published": "2026-08-01T18:44:39+00:00",
+      "source": "rss",
+      "view_count": null
+    },
+    {
+      "title": "I sold my AI startup for $1,800,000 – here’s why",
+      "video_id": "zocqnx1vx1E",
+      "duration": "5:57",
+      "view_count": 42000,
+      "upload_date": null,
+      "source": "vectal.ai"
+    },
+    {
+      "title": "Use AI Agents to increase productivity, here’s how",
+      "video_id": "QEhwXWUeGAE",
+      "duration": "42:41",
+      "view_count": 8500,
+      "upload_date": null,
+      "source": "vectal.ai"
+    },
+    {
+      "title": "Google just destroyed ChatGPT forever… (Gemini 2.5 Pro)",
+      "video_id": "Ck9-3WDw0Kk",
+      "duration": "12:45",
+      "view_count": 32000,
+      "upload_date": null,
+      "source": "vectal.ai"
+    },
+    {
+      "title": "I built a $100,000 AI startup, here’s what i learned",
+      "video_id": "NyUtXqhitXo",
+      "duration": "21:11",
+      "view_count": 12000,
+      "upload_date": null,
+      "source": "vectal.ai"
+    },
+    {
+      "title": "How To Succeed in AI in 2025",
+      "video_id": "C61wQPwDw_0",
+      "duration": "2:17:01",
+      "view_count": 27000,
+      "upload_date": null,
+      "source": "vectal.ai"
+    },
+    {
+      "title": "Build anything with n8n, here’s how",
+      "video_id": "-BDq59Saii4",
+      "duration": "19:04",
+      "view_count": 50000,
+      "upload_date": null,
+      "source": "vectal.ai"
+    },
+    {
+      "title": "QwQ 32B - the AI model that changes everything",
+      "video_id": "AUOnCcaju80",
+      "duration": "18:48",
+      "view_count": 29000,
+      "upload_date": null,
+      "source": "vectal.ai"
+    },
+    {
+      "title": "I spent $500 on ChatGPT 4.5, here’s what I learned",
+      "video_id": "bLF4ZcNhiZs",
+      "duration": "28:17",
+      "view_count": 24000,
+      "upload_date": null,
+      "source": "vectal.ai"
+    },
+    {
+      "title": "Build Anything with Claude 3.7, Here’s How",
+      "video_id": "Gjos--a5Npw",
+      "duration": "35:18",
+      "view_count": 88000,
+      "upload_date": null,
+      "source": "vectal.ai"
+    },
+    {
+      "title": "Build Anything with Grok 3, Here's How",
+      "video_id": "picePk8lb48",
+      "duration": "30:51",
+      "view_count": 110000,
+      "upload_date": null,
+      "source": "vectal.ai"
+    },
+    {
+      "title": "How to build a $7,000/mo app with Cursor (step-by-step)",
+      "video_id": "XVDnkti4Li8",
+      "duration": "1:39:25",
+      "view_count": 82000,
+      "upload_date": null,
+      "source": "vectal.ai"
+    },
+    {
+      "title": "Introducing Vectal",
+      "video_id": "9d7gnw6z4Rk",
+      "duration": "14:37",
+      "view_count": 52000,
+      "upload_date": null,
+      "source": "vectal.ai"
+    },
+    {
+      "title": "Browser Use: this new AI Agent can do anything, just watch",
+      "video_id": "-vlB9ErtZn0",
+      "duration": "16:26",
+      "view_count": 115000,
+      "upload_date": null,
+      "source": "vectal.ai"
+    },
+    {
+      "title": "Build anything with DeepSeek R1, here’s how",
+      "video_id": "BdMEQzt_js0",
+      "duration": "21:36",
+      "view_count": 590000,
+      "upload_date": null,
+      "source": "vectal.ai"
+    },
+    {
+      "title": "week in the life of an AI startup founder in Dubai",
+      "video_id": "rh0MrQcU568",
+      "duration": "25:24",
+      "view_count": 28000,
+      "upload_date": null,
+      "source": "vectal.ai"
+    },
+    {
+      "title": "I built an AI tool to make myself more productive",
+      "video_id": "gXOKM3Awr-M",
+      "duration": "13:09",
+      "view_count": 18000,
+      "upload_date": null,
+      "source": "vectal.ai"
+    },
+    {
+      "title": "Build Anything With ChatGPT, Here’s How",
+      "video_id": "N_P4pJjVTKc",
+      "duration": "1:24:05",
+      "view_count": 1100000,
+      "upload_date": null,
+      "source": "AI Programming"
+    },
+    {
+      "title": "Build Any Website With ChatGPT, Here’s How",
+      "video_id": "dXSfqzRW43I",
+      "duration": "1:28:42",
+      "view_count": 18000,
+      "upload_date": null,
+      "source": "AI Programming"
+    },
+    {
+      "title": "Can AI code Tetris? Watch ChatGPT try",
+      "video_id": "DKwnUM_c1Xs",
+      "duration": "10:12",
+      "view_count": 5000,
+      "upload_date": null,
+      "source": "AI Programming"
+    },
+    {
+      "title": "Build Anything With ChatGPT API, Here’s How",
+      "video_id": "qgT-quk3JEo",
+      "duration": "12:11",
+      "view_count": 216000,
+      "upload_date": null,
+      "source": "AI Programming"
+    },
+    {
+      "title": "Build Anything with AI Agents, Here's How",
+      "video_id": "AxnL5GtWVNA",
+      "duration": "29:49",
+      "view_count": 349000,
+      "upload_date": null,
+      "source": "AI Programming"
+    },
+    {
+      "title": "Build Anything with Perplexity, Here’s How",
+      "video_id": "w_YRnA8RdnU",
+      "duration": "42:16",
+      "view_count": 254000,
+      "upload_date": null,
+      "source": "AI Programming"
+    },
+    {
+      "title": "the most powerful AI tool for coding - Claude Engineer",
+      "video_id": "tq9yN-j5o3M",
+      "duration": "28:01",
+      "view_count": 45000,
+      "upload_date": null,
+      "source": "AI Programming"
+    },
+    {
+      "title": "Learn Python in 7 Days with ChatGPT, Here’s How",
+      "video_id": "FLcDFRco6Eo",
+      "duration": "35:17",
+      "view_count": 16000,
+      "upload_date": null,
+      "source": "AI Programming"
+    },
+    {
+      "title": "I completed Andrej Karpathy’s AI challenge (advanced)",
+      "video_id": "h0aWeR8pjc8",
+      "duration": "6:39:49",
+      "view_count": 11000,
+      "upload_date": null,
+      "source": "AI Programming"
+    },
+    {
+      "title": "This 100% automatic AI Agent can do anything, just watch",
+      "video_id": "_Pionjv4hGc",
+      "duration": "1:19:48",
+      "view_count": 116000,
+      "upload_date": null,
+      "source": "AI Programming"
+    },
+    {
+      "title": "Build Anything with Llama 3.1 Agents, Here’s How",
+      "video_id": "1SsPNc2zldM",
+      "duration": "1:00:31",
+      "view_count": 75000,
+      "upload_date": null,
+      "source": "AI Programming"
+    },
+    {
+      "title": "How I made AI Agents do my work for me – Agency Swarm",
+      "video_id": "Wgrc3y97i9w",
+      "duration": "12:38",
+      "view_count": 18000,
+      "upload_date": null,
+      "source": "AI Programming"
+    },
+    {
+      "title": "Build Anything with Agent Zero, Here’s How",
+      "video_id": "AwGkl-Bvkok",
+      "duration": "30:30",
+      "view_count": 41000,
+      "upload_date": null,
+      "source": "AI Programming"
+    },
+    {
+      "title": "Build Anything with LangGraph Studio, Here’s How",
+      "video_id": "oWHTXTIy3J4",
+      "duration": "16:38",
+      "view_count": 45000,
+      "upload_date": null,
+      "source": "AI Programming"
+    },
+    {
+      "title": "\"I need AI photos that look like me\" - Here's how",
+      "video_id": "LIk7GF0oeK8",
+      "duration": "22:18",
+      "view_count": 61000,
+      "upload_date": null,
+      "source": "AI Programming"
+    },
+    {
+      "title": "Build Anything with Cursor, Here’s How",
+      "video_id": "C59LC1WJIbE",
+      "duration": "49:31",
+      "view_count": 56000,
+      "upload_date": null,
+      "source": "AI Programming"
+    },
+    {
+      "title": "Llama 3.2 just dropped and it destroys 100B models… let’s run it",
+      "video_id": "32k6DRcX4pA",
+      "duration": "27:34",
+      "view_count": 66000,
+      "upload_date": null,
+      "source": "AI Programming"
+    },
+    {
+      "title": "I can't believe I coded an app with AI in 31 minutes - v0",
+      "video_id": "ih5sUZT5tEY",
+      "duration": "31:33",
+      "view_count": 25000,
+      "upload_date": null,
+      "source": "AI Programming"
+    },
+    {
+      "title": "Build Anything with ChatGPT Canvas, Here’s How",
+      "video_id": "7OJM3YRXQy4",
+      "duration": "25:24",
+      "view_count": 44000,
+      "upload_date": null,
+      "source": "AI Programming"
+    },
+    {
+      "title": "How To Build Web Apps using v0 + Bolt.new + Cursor",
+      "video_id": "p0ohq8RX_T4",
+      "duration": "33:06",
+      "view_count": 49000,
+      "upload_date": null,
+      "source": "AI Programming"
+    },
+    {
+      "title": "Build anything with o1 agents - Here’s how",
+      "video_id": "CK0oj9Ktfec",
+      "duration": "39:26",
+      "view_count": 176000,
+      "upload_date": null,
+      "source": "AI Programming"
+    },
+    {
+      "title": "I’m building a billion-dollar AI startup, here’s how",
+      "video_id": "TLeoNc5JTRM",
+      "duration": "1:37:09",
+      "view_count": 20000,
+      "upload_date": null,
+      "source": "AI Programming"
+    },
+    {
+      "title": "Code Anything with Claude AI, Here’s How",
+      "video_id": "81D7rUK0IeA",
+      "duration": "26:39",
+      "view_count": 49000,
+      "upload_date": null,
+      "source": "AI Programming"
+    },
+    {
+      "title": "Build your own local o1 - here’s how",
+      "video_id": "kzAjdas6nwE",
+      "duration": "36:09",
+      "view_count": 61000,
+      "upload_date": null,
+      "source": "AI Programming"
+    },
+    {
+      "title": "\"Build an AI startup in 2025!\" - Professional AI agent developer",
+      "video_id": "uUosHefPnWs",
+      "duration": "51:50",
+      "view_count": 40000,
+      "upload_date": null,
+      "source": "AI Programming"
+    },
+    {
+      "title": "Build Anything with Grok-2, Here’s How",
+      "video_id": "ssBdJqBF1CA",
+      "duration": "36:34",
+      "view_count": 135000,
+      "upload_date": null,
+      "source": "AI Programming"
+    },
+    {
+      "title": "How to use Cursor Agent for beginners",
+      "video_id": "2gBcO3ht0ws",
+      "duration": "32:14",
+      "view_count": 87000,
+      "upload_date": null,
+      "source": "AI Programming"
+    },
+    {
+      "title": "Code Anything with Perplexity, Here's How",
+      "video_id": "Xd2b81Q2qL0",
+      "duration": "21:44",
+      "view_count": 62000,
+      "upload_date": null,
+      "source": "AI Programming"
+    },
+    {
+      "title": "Build Anything with Windsurf AI, Here's How",
+      "video_id": "7YhvKnizrcU",
+      "duration": "21:17",
+      "view_count": 41000,
+      "upload_date": null,
+      "source": "AI Programming"
+    },
+    {
+      "title": "Llama 3.3 – better than ChatGPT, runs locally, 100% private",
+      "video_id": "lk7dQ6_KaBE",
+      "duration": "12:25",
+      "view_count": 51000,
+      "upload_date": null,
+      "source": "AI Programming"
+    },
+    {
+      "title": "Build anything with Gemini 2.0 - here’s how",
+      "video_id": "3jcvtzFWLMk",
+      "duration": "27:04",
+      "view_count": 100000,
+      "upload_date": null,
+      "source": "AI Programming"
+    },
+    {
+      "title": "This new AI tool can code any web app, just watch",
+      "video_id": "_ry8QW9gw9I",
+      "duration": "21:57",
+      "view_count": 48000,
+      "upload_date": null,
+      "source": "AI Programming"
+    },
+    {
+      "title": "Build anything with DeepSeek R1, here’s how",
+      "video_id": "BdMEQzt_js0",
+      "duration": "21:36",
+      "view_count": 590000,
+      "upload_date": null,
+      "source": "AI Programming"
+    },
+    {
+      "title": "How to build a $7,000/mo app with Cursor (step-by-step)",
+      "video_id": "XVDnkti4Li8",
+      "duration": "1:39:25",
+      "view_count": 82000,
+      "upload_date": null,
+      "source": "AI Programming"
+    },
+    {
+      "title": "Build Anything with Claude 3.7, Here’s How",
+      "video_id": "Gjos--a5Npw",
+      "duration": "35:18",
+      "view_count": 88000,
+      "upload_date": null,
+      "source": "AI Programming"
+    },
+    {
+      "title": "QwQ 32B - the AI model that changes everything",
+      "video_id": "AUOnCcaju80",
+      "duration": "18:48",
+      "view_count": 29000,
+      "upload_date": null,
+      "source": "AI Programming"
+    },
+    {
+      "title": "Start Vibe Coding Like a Pro, Here’s How",
+      "video_id": "faPSZV5XwyI",
+      "duration": "21:49",
+      "view_count": 43000,
+      "upload_date": null,
+      "source": "AI Programming"
+    },
+    {
+      "title": "Build Anything with Gemini 2.5 Pro, Here’s How",
+      "video_id": "JW69tWxLFQU",
+      "duration": "23:33",
+      "view_count": 63000,
+      "upload_date": null,
+      "source": "AI Programming"
+    },
+    {
+      "title": "“ok but I want AI agents for my specific use case” - Here’s how",
+      "video_id": "wyKtHjGsmIM",
+      "duration": "15:47",
+      "view_count": 21000,
+      "upload_date": null,
+      "source": "AI Programming"
+    },
+    {
+      "title": "Build AI Agents with GPT 4.1 - Step by step",
+      "video_id": "02rOcvzNLvE",
+      "duration": "31:08",
+      "view_count": 13000,
+      "upload_date": null,
+      "source": "AI Programming"
+    },
+    {
+      "title": "Anthropic just shocked the world with Claude 4 Opus…",
+      "video_id": "yGpZbU7kcQ4",
+      "duration": "22:57",
+      "view_count": 27000,
+      "upload_date": null,
+      "source": "AI Programming"
+    },
+    {
+      "title": "Ultimate Vibe Coding Setup: o3 pro, Cursor, Codex, Claude Code",
+      "video_id": "z2IN9H4UGog",
+      "duration": "50:35",
+      "view_count": 19000,
+      "upload_date": null,
+      "source": "AI Programming"
+    },
+    {
+      "title": "This new vibe coding app is insane… Pythagora",
+      "video_id": "lO0lQLZKzI0",
+      "duration": "43:13",
+      "view_count": 17000,
+      "upload_date": null,
+      "source": "AI Programming"
+    },
+    {
+      "title": "Gemini CLI – the real Claude Code killer?",
+      "video_id": "xHKgxxuGwGw",
+      "duration": "16:18",
+      "view_count": 23000,
+      "upload_date": null,
+      "source": "AI Programming"
+    },
+    {
+      "title": "Claude Code: From Beginner to Expert in 19 Minutes",
+      "video_id": "zW28e7LGPRQ",
+      "duration": "18:48",
+      "view_count": 71000,
+      "upload_date": null,
+      "source": "AI Programming"
+    },
+    {
+      "title": "The 7 essential skills that every AI DEV needs to know!",
+      "video_id": "TJ5v23JcGIU",
+      "duration": "17:57",
+      "view_count": 9000,
+      "upload_date": null,
+      "source": "AI Programming"
+    },
+    {
+      "title": "Build Anything with Claude Code, Here’s How",
+      "video_id": "hq8J-nj_Sr0",
+      "duration": "1:41:00",
+      "view_count": 33000,
+      "upload_date": null,
+      "source": "AI Programming"
+    },
+    {
+      "title": "GPT-5 Pro is the most powerful AI agent ever… just watch",
+      "video_id": "eRl6UWSjlxM",
+      "duration": "39:56",
+      "view_count": 21000,
+      "upload_date": null,
+      "source": "AI Programming"
+    },
+    {
+      "title": "Build Any Mobile App with AI (Step-By-Step)",
+      "video_id": "THcQjlasv7k",
+      "duration": "12:49",
+      "view_count": 12000,
+      "upload_date": null,
+      "source": "AI Programming"
+    },
+    {
+      "title": "OpenAI just destroyed AI coding… Codex 2.0",
+      "video_id": "C06FBVXMLCY",
+      "duration": "54:01",
+      "view_count": 76000,
+      "upload_date": null,
+      "source": "AI Programming"
+    },
+    {
+      "title": "Build Anything with Claude, Here's How",
+      "video_id": "SJWwk_moO50",
+      "duration": "51:55",
+      "view_count": 22000,
+      "upload_date": null,
+      "source": "AI Programming"
+    },
+    {
+      "title": "AI coding extensions will make you a 10x developer…",
+      "video_id": "tp_QBQVpfbk",
+      "duration": "38:22",
+      "view_count": 31000,
+      "upload_date": null,
+      "source": "AI Programming"
+    },
+    {
+      "title": "Build anything with Haiku 4.5, here’s how",
+      "video_id": "NaNgXEQUJkQ",
+      "duration": "39:57",
+      "view_count": 9500,
+      "upload_date": null,
+      "source": "AI Programming"
+    },
+    {
+      "title": "Stop using Claude Code, start using Droid (trust me)",
+      "video_id": "LoUUNcnScYk",
+      "duration": "39:42",
+      "view_count": 27000,
+      "upload_date": null,
+      "source": "AI Programming"
+    },
+    {
+      "title": "build anything with the n8n code node, here’s how",
+      "video_id": "PwQUTOlpoxk",
+      "duration": "24:02",
+      "view_count": 9900,
+      "upload_date": null,
+      "source": "AI Programming"
+    },
+    {
+      "title": "If you’re still Vibe Coding, you’re falling behind",
+      "video_id": "XuAThYV62BQ",
+      "duration": "23:43",
+      "view_count": 56000,
+      "upload_date": null,
+      "source": "AI Programming"
+    },
+    {
+      "title": "How To Build & Deploy an AI SaaS End To End",
+      "video_id": "g-JgaoheyTo",
+      "duration": "52:10",
+      "view_count": 23000,
+      "upload_date": null,
+      "source": "AI Programming"
+    },
+    {
+      "title": "Claude Code is crazy good in 2026… just watch",
+      "video_id": "smMC1W-Mjt4",
+      "duration": "46:03",
+      "view_count": 25000,
+      "upload_date": null,
+      "source": "AI Programming"
+    },
+    {
+      "title": "Google just destroyed all vibe-coding apps (Antigravity)",
+      "video_id": "V4lFIbAeWpQ",
+      "duration": "33:29",
+      "view_count": 45000,
+      "upload_date": null,
+      "source": "AI Programming"
+    },
+    {
+      "title": "OpenCode just killed all vibe coding apps (it’s insane)",
+      "video_id": "syK7yprJknM",
+      "duration": "1:00:38",
+      "view_count": 145000,
+      "upload_date": null,
+      "source": "AI Programming"
+    },
+    {
+      "title": "Anthropic’s 7 Hour Claude Code Course in 27 Minutes",
+      "video_id": "XuSFUvUdvQA",
+      "duration": "27:42",
+      "view_count": 44000,
+      "upload_date": null,
+      "source": "AI Programming"
+    },
+    {
+      "title": "8 Insane OpenCode Use Cases! (just copy me)",
+      "video_id": "6KB73J01fGw",
+      "duration": "29:06",
+      "view_count": 92000,
+      "upload_date": null,
+      "source": "AI Programming"
+    },
+    {
+      "title": "Codex is the future of Agentic Engineering… just watch",
+      "video_id": "nUxuCoqJzlA",
+      "duration": "1:28:17",
+      "view_count": 21000,
+      "upload_date": null,
+      "source": "AI Programming"
+    },
+    {
+      "title": "This AI agent builds $200k mobile apps in minutes…",
+      "video_id": "ds1k2cmtqdI",
+      "duration": "10:49",
+      "view_count": 14000,
+      "upload_date": null,
+      "source": "AI Programming"
+    },
+    {
+      "title": "Gemini 3.1 Pro in Antigravity can do anything… just watch",
+      "video_id": "mAwJYUJib1I",
+      "duration": "16:29",
+      "view_count": 40000,
+      "upload_date": null,
+      "source": "AI Programming"
+    },
+    {
+      "title": "GPT 5.4 hit a wall. It’s over.",
+      "video_id": "BVD49yi_Yhs",
+      "duration": "42:51",
+      "view_count": 31000,
+      "upload_date": null,
+      "source": "AI Programming"
+    },
+    {
+      "title": "CODEX FULL COURSE: From Zero to Deployed App (2026)",
+      "video_id": "hoCWD1aI60Y",
+      "duration": "1:24:14",
+      "view_count": 60000,
+      "upload_date": null,
+      "source": "AI Programming"
+    },
+    {
+      "title": "Claude can build any MOBILE APP you want… just watch",
+      "video_id": "rQY-yB-Gob4",
+      "duration": "11:11",
+      "view_count": 11000,
+      "upload_date": null,
+      "source": "AI Programming"
+    },
+    {
+      "title": "OpenAI just shipped the Mythos killer (GPT 5.5)",
+      "video_id": "T_xyhjfFCdY",
+      "duration": "32:31",
+      "view_count": 19000,
+      "upload_date": null,
+      "source": "AI Programming"
+    },
+    {
+      "title": "Everyone is switching to Hermes Agent… you should too.",
+      "video_id": "1nDiiXfMUK4",
+      "duration": "42:57",
+      "view_count": 76000,
+      "upload_date": null,
+      "source": "AI Programming"
+    },
+    {
+      "title": "How I Ship Faster Than 99% of Devs (just copy me)",
+      "video_id": "c9nRxEy1kUY",
+      "duration": "54:20",
+      "view_count": 5300,
+      "upload_date": null,
+      "source": "AI Programming"
+    },
+    {
+      "title": "Build a $5,000 AI Datacenter at Home, Here’s How",
+      "video_id": "fuECuGW_Eeo",
+      "duration": "55:18",
+      "view_count": 135000,
+      "upload_date": null,
+      "source": "David Ondrej Podcast"
+    },
+    {
+      "title": "$75M founder reveals his Agentic Engineering setup",
+      "video_id": "QBfXiWvM0qc",
+      "duration": "51:55",
+      "view_count": 44000,
+      "upload_date": null,
+      "source": "David Ondrej Podcast"
+    },
+    {
+      "title": "Ex-Uber dev explains his Multi-Agent Workflow",
+      "video_id": "utb7zYbK10c",
+      "duration": "45:26",
+      "view_count": 37000,
+      "upload_date": null,
+      "source": "David Ondrej Podcast"
+    },
+    {
+      "title": "Ex-NASA dev reveals his Agentic Engineering Workflow",
+      "video_id": "xgkjtF89-44",
+      "duration": "58:37",
+      "view_count": 233000,
+      "upload_date": null,
+      "source": "David Ondrej Podcast"
+    },
+    {
+      "title": "Agentic Engineering, explained by a 10x developer",
+      "video_id": "FU5_kpTAVDo",
+      "duration": "42:33",
+      "view_count": 84000,
+      "upload_date": null,
+      "source": "David Ondrej Podcast"
+    },
+    {
+      "title": "L8 Principal's Agentic Engineering Setup (just copy him)",
+      "video_id": "8ZgpAXe5V5w",
+      "duration": "1:01:50",
+      "view_count": 120000,
+      "upload_date": null,
+      "source": "David Ondrej Podcast"
+    },
+    {
+      "title": "What Top 1% of Agentic Engineers Do Differently",
+      "video_id": "EWk9PBbKqzc",
+      "duration": "53:31",
+      "view_count": 27000,
+      "upload_date": null,
+      "source": "David Ondrej Podcast"
+    },
+    {
+      "title": "Fable 5 is back… here is my plan",
+      "video_id": "0akM-5lBurA",
+      "duration": "30:30",
+      "view_count": 22000,
+      "upload_date": null,
+      "source": "David Ondrej Podcast"
+    },
+    {
+      "title": "GPT 5.6 banned, Fable banned… it’s actually over.",
+      "video_id": "IloXWEYXen8",
+      "duration": "41:48",
+      "view_count": 42000,
+      "upload_date": null,
+      "source": "David Ondrej Podcast"
+    },
+    {
+      "title": "He spent $7k of his own money to make GLM-5.2 better - 0xSero",
+      "video_id": "ImPESBftwr8",
+      "duration": "1:35:53",
+      "view_count": 48000,
+      "upload_date": null,
+      "source": "David Ondrej Podcast"
+    },
+    {
+      "title": "Matt Pocock’s Agentic Engineering Workflow (just copy him)",
+      "video_id": "nQwJVHCtDDY",
+      "duration": "1:02:25",
+      "view_count": 377000,
+      "upload_date": null,
+      "source": "David Ondrej Podcast"
+    },
+    {
+      "title": "Fable 5 is never coming back, here's why",
+      "video_id": "qlx40oVrXTY",
+      "duration": "28:39",
+      "view_count": 58000,
+      "upload_date": null,
+      "source": "David Ondrej Podcast"
+    },
+    {
+      "title": "Watch this 100x developer use Codex… it’s insane",
+      "video_id": "mMuuLocDkog",
+      "duration": "48:03",
+      "view_count": 51000,
+      "upload_date": null,
+      "source": "David Ondrej Podcast"
+    },
+    {
+      "title": "The Philosophy of David Ondrej",
+      "video_id": "_9-8s6zMwhc",
+      "duration": "2:26:13",
+      "view_count": 26000,
+      "upload_date": null,
+      "source": "David Ondrej Podcast"
+    },
+    {
+      "title": "Why This Dev Ships 100x Faster Than 99% of Engineers",
+      "video_id": "PzVV4X37ihg",
+      "duration": "53:52",
+      "view_count": 215000,
+      "upload_date": null,
+      "source": "David Ondrej Podcast"
+    },
+    {
+      "title": "Harness Engineering is the future… trust me.",
+      "video_id": "k8o_UgtrGyA",
+      "duration": "46:56",
+      "view_count": 27000,
+      "upload_date": null,
+      "source": "David Ondrej Podcast"
+    },
+    {
+      "title": "Tokens can make you rich, just do this – Mario Zechner",
+      "video_id": "sqtX2OmgOF0",
+      "duration": "47:41",
+      "view_count": 229000,
+      "upload_date": null,
+      "source": "David Ondrej Podcast"
+    },
+    {
+      "title": "“Self-Improving AI Agents Are Almost Here…” – DeepSeek Insider",
+      "video_id": "wak7R0luB90",
+      "duration": "59:44",
+      "view_count": 13000,
+      "upload_date": null,
+      "source": "David Ondrej Podcast"
+    },
+    {
+      "title": "AgentZero just released the OpenClaw killer (it’s over)",
+      "video_id": "F4w1sCvqtTU",
+      "duration": "1:07:10",
+      "view_count": 75000,
+      "upload_date": null,
+      "source": "David Ondrej Podcast"
+    },
+    {
+      "title": "How to crush 2026 in the AI field",
+      "video_id": "Y4GXrYEJNu8",
+      "duration": "49:00",
+      "view_count": 10000,
+      "upload_date": null,
+      "source": "David Ondrej Podcast"
+    },
+    {
+      "title": "28 months of AI lessons in 32 minutes",
+      "video_id": "bbDFPHhpkc4",
+      "duration": "32:37",
+      "view_count": 25000,
+      "upload_date": null,
+      "source": "David Ondrej Podcast"
+    },
+    {
+      "title": "“Anthropic will destroy OpenAI by 2027, here’s why” - Dylan Patel",
+      "video_id": "07HtHbbK5jQ",
+      "duration": "46:35",
+      "view_count": 53000,
+      "upload_date": null,
+      "source": "David Ondrej Podcast"
+    },
+    {
+      "title": "Master Vibe Coding in 22 Minutes – Lee Robinson",
+      "video_id": "hZL7tw8jp2M",
+      "duration": "22:51",
+      "view_count": 12000,
+      "upload_date": null,
+      "source": "David Ondrej Podcast"
+    },
+    {
+      "title": "“How to prompt AI like a tech millionaire” – Balaji Srinivasan",
+      "video_id": "AYbFMDxnK70",
+      "duration": "1:05:31",
+      "view_count": 11000,
+      "upload_date": null,
+      "source": "David Ondrej Podcast"
+    },
+    {
+      "title": "“I built 500+ AI agents, here’s everything I know” - Nate Herk",
+      "video_id": "Svp7fbF0g2I",
+      "duration": "54:35",
+      "view_count": 17000,
+      "upload_date": null,
+      "source": "David Ondrej Podcast"
+    },
+    {
+      "title": "He makes $3,000 a day Vibe Coding apps - here’s how",
+      "video_id": "y_EHSs7j65M",
+      "duration": "54:03",
+      "view_count": 16000,
+      "upload_date": null,
+      "source": "David Ondrej Podcast"
+    },
+    {
+      "title": "The man who wants to build 1 billion AI Agents - Adam Silverman",
+      "video_id": "YSss30HKyjE",
+      "duration": "51:12",
+      "view_count": 9500,
+      "upload_date": null,
+      "source": "David Ondrej Podcast"
+    },
+    {
+      "title": "“Forget AI Agents, VOICE AGENTS are the future” – Jannis Moore",
+      "video_id": "468NVA8_a1k",
+      "duration": "2:33:27",
+      "view_count": 18000,
+      "upload_date": null,
+      "source": "David Ondrej Podcast"
+    },
+    {
+      "title": "he made $1m with AI Automations, here's how:",
+      "video_id": "akjKelVER9Q",
+      "duration": "1:38:08",
+      "view_count": 16000,
+      "upload_date": null,
+      "source": "David Ondrej Podcast"
+    },
+    {
+      "title": "Tech With Tim - AGI, Vibe Coding, Building a Startup, Future of Software",
+      "video_id": "0ItQIrYiUCc",
+      "duration": "1:47:13",
+      "view_count": 45000,
+      "upload_date": null,
+      "source": "David Ondrej Podcast"
+    },
+    {
+      "title": "How To Succeed in AI in 2025",
+      "video_id": "C61wQPwDw_0",
+      "duration": "2:17:01",
+      "view_count": 27000,
+      "upload_date": null,
+      "source": "David Ondrej Podcast"
+    },
+    {
+      "title": "“How to build an AGI startup” – Logan Kilpatrick",
+      "video_id": "6wlDAOB7hz0",
+      "duration": "44:28",
+      "view_count": 21000,
+      "upload_date": null,
+      "source": "David Ondrej Podcast"
+    },
+    {
+      "title": "I automated 50+ businesses with AI Agents, here's how",
+      "video_id": "wOlqLo7oUxM",
+      "duration": "35:59",
+      "view_count": 88000,
+      "upload_date": null,
+      "source": "David Ondrej Podcast"
+    },
+    {
+      "title": "\"Build an AI startup in 2025!\" - Professional AI agent developer",
+      "video_id": "uUosHefPnWs",
+      "duration": "51:50",
+      "view_count": 40000,
+      "upload_date": null,
+      "source": "David Ondrej Podcast"
+    },
+    {
+      "title": "How To Build Web Apps using v0 + Bolt.new + Cursor",
+      "video_id": "p0ohq8RX_T4",
+      "duration": "33:06",
+      "view_count": 49000,
+      "upload_date": null,
+      "source": "David Ondrej Podcast"
+    },
+    {
+      "title": "“We automated 150 tasks with AI Agents, just copy us” - Microsoft AI",
+      "video_id": "lQeYRmy8nHQ",
+      "duration": "39:06",
+      "view_count": 96000,
+      "upload_date": null,
+      "source": "David Ondrej Podcast"
+    },
+    {
+      "title": "If you don't use OpenAI Advanced Voice, you’re falling behind",
+      "video_id": "ukQe9Uwc140",
+      "duration": "42:49",
+      "view_count": 19000,
+      "upload_date": null,
+      "source": "David Ondrej Podcast"
+    },
+    {
+      "title": "“With o1 you can code any app, just watch” - Pietro Schirano",
+      "video_id": "-qPeR9GnEzo",
+      "duration": "39:46",
+      "view_count": 58000,
+      "upload_date": null,
+      "source": "David Ondrej Podcast"
+    },
+    {
+      "title": "Get RICH by making AI images for companies – here’s how",
+      "video_id": "cfoRTXMtBKU",
+      "duration": "44:27",
+      "view_count": 13000,
+      "upload_date": null,
+      "source": "David Ondrej Podcast"
+    },
+    {
+      "title": "“AI is cool, but 98% of the Human Brain is unknown” - Artem Kirsanov",
+      "video_id": "m-vruXl3db8",
+      "duration": "1:03:09",
+      "view_count": 5500,
+      "upload_date": null,
+      "source": "David Ondrej Podcast"
+    },
+    {
+      "title": "\"I tested 400 AI Agents, these are the best\" - Adam Silverman",
+      "video_id": "z4QsBsO3SS0",
+      "duration": "26:34",
+      "view_count": 173000,
+      "upload_date": null,
+      "source": "David Ondrej Podcast"
+    },
+    {
+      "title": "“Llama 4 will make you forget about ChatGPT” - John Coogan",
+      "video_id": "cbLqIo0jz9Y",
+      "duration": "48:26",
+      "view_count": 6300,
+      "upload_date": null,
+      "source": "David Ondrej Podcast"
+    },
+    {
+      "title": "Automate Anything with Make.com, Here’s How",
+      "video_id": "FRyBCkJdCuE",
+      "duration": "43:48",
+      "view_count": 22000,
+      "upload_date": null,
+      "source": "David Ondrej Podcast"
+    },
+    {
+      "title": "AI Expert: “Automate half of your work with AI, here’s how”",
+      "video_id": "G5ZKVJScgfA",
+      "duration": "1:07:09",
+      "view_count": 11000,
+      "upload_date": null,
+      "source": "David Ondrej Podcast"
+    },
+    {
+      "title": "AI Expert: “it’s not easy to work in AI, unless you do this”",
+      "video_id": "AhfRp4PbI9g",
+      "duration": "1:08:24",
+      "view_count": 6700,
+      "upload_date": null,
+      "source": "David Ondrej Podcast"
+    },
+    {
+      "title": "AI Expert: Here’s how AI Agents 10x my productivity",
+      "video_id": "CtOGupq0r7M",
+      "duration": "54:09",
+      "view_count": 18000,
+      "upload_date": null,
+      "source": "David Ondrej Podcast"
+    },
+    {
+      "title": "AI Expert: ChatGPT is dumb, start making Agents instead",
+      "video_id": "kCDfmSCbnz4",
+      "duration": "46:47",
+      "view_count": 8800,
+      "upload_date": null,
+      "source": "David Ondrej Podcast"
+    },
+    {
+      "title": "“If you don’t build AI Agents, you’ll be left behind.” - VRSEN",
+      "video_id": "wcA0E20KpbA",
+      "duration": "1:13:09",
+      "view_count": 16000,
+      "upload_date": null,
+      "source": "David Ondrej Podcast"
+    },
+    {
+      "title": "“Llama 3 with Agents gives you Godlike power” - Pietro Schirano",
+      "video_id": "wfNNlz5zFAM",
+      "duration": "1:14:59",
+      "view_count": 26000,
+      "upload_date": null,
+      "source": "David Ondrej Podcast"
+    },
+    {
+      "title": "\"The Agent wave is coming, start preparing now\" - Adam Silverman",
+      "video_id": "EDDtamlqEAU",
+      "duration": "26:42",
+      "view_count": 25000,
+      "upload_date": null,
+      "source": "David Ondrej Podcast"
+    },
+    {
+      "title": "Stop using ChatGPT, build Agents instead - Maya Akim",
+      "video_id": "fsIipBuM4Nc",
+      "duration": "1:28:47",
+      "view_count": 67000,
+      "upload_date": null,
+      "source": "David Ondrej Podcast"
+    },
+    {
+      "title": "AI Expert: Anyone can build Agents, here’s how",
+      "video_id": "IpvzXlUuxFk",
+      "duration": "53:22",
+      "view_count": 24000,
+      "upload_date": null,
+      "source": "David Ondrej Podcast"
+    },
+    {
+      "title": "Top Programmer: AGI in 2025, Devin is just the beginning",
+      "video_id": "ny9HE1Pi0Kw",
+      "duration": "1:19:42",
+      "view_count": 10000,
+      "upload_date": null,
+      "source": "David Ondrej Podcast"
+    },
+    {
+      "title": "I convinced Elon Musk to open-source Grok",
+      "video_id": "30P0WEL1-zs",
+      "duration": "22:28",
+      "view_count": 12000,
+      "upload_date": null,
+      "source": "David Ondrej Podcast"
+    },
+    {
+      "title": "Running an AI Startup is BRUTAL.",
+      "video_id": "D8EidYUiCJU",
+      "duration": "44",
+      "view_count": 15000,
+      "upload_date": null,
+      "source": "David Ondrej Podcast"
+    },
+    {
+      "title": "AI Founder: OpenAI is Destroying Startups, Here’s Why",
+      "video_id": "gqcK9KnvJtM",
+      "duration": "1:44:12",
+      "view_count": 33000,
+      "upload_date": null,
+      "source": "David Ondrej Podcast"
+    },
+    {
+      "title": "He Built a $450M Company In 3 Years, Here's How",
+      "video_id": "_vkqpeXCDQM",
+      "duration": "31:56",
+      "view_count": 66000,
+      "upload_date": null,
+      "source": "David Ondrej Podcast"
+    },
+    {
+      "title": "Will AI Control The World?",
+      "video_id": "LrFUdR1fn8s",
+      "duration": "1:51:01",
+      "view_count": 1100,
+      "upload_date": null,
+      "source": "David Ondrej Podcast"
+    },
+    {
+      "title": "How I Ship Faster Than 99% of Devs (just copy me)",
+      "video_id": "c9nRxEy1kUY",
+      "duration": "54:20",
+      "view_count": 5300,
+      "upload_date": "2026-09-02",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Build a $5,000 AI Datacenter at Home, Here’s How",
+      "video_id": "fuECuGW_Eeo",
+      "duration": "55:18",
+      "view_count": 135000,
+      "upload_date": "2026-08-28",
+      "source": "videos_tab"
+    },
+    {
+      "title": "$75M founder reveals his Agentic Engineering setup",
+      "video_id": "QBfXiWvM0qc",
+      "duration": "51:55",
+      "view_count": 44000,
+      "upload_date": "2026-08-22",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Ex-Uber dev explains his Multi-Agent Workflow",
+      "video_id": "utb7zYbK10c",
+      "duration": "45:26",
+      "view_count": 37000,
+      "upload_date": "2026-08-13",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Ex-NASA dev reveals his Agentic Engineering Workflow",
+      "video_id": "xgkjtF89-44",
+      "duration": "58:37",
+      "view_count": 233000,
+      "upload_date": "2026-08-13",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Don’t use AI Agents without using these 8 skills",
+      "video_id": "clrUbBtD2j4",
+      "duration": "30:52",
+      "view_count": 46000,
+      "upload_date": "2026-08-06",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Agentic Engineering, explained by a 10x developer",
+      "video_id": "FU5_kpTAVDo",
+      "duration": "42:33",
+      "view_count": 84000,
+      "upload_date": "2026-08-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Build Anything with Kimi K3, Here’s How",
+      "video_id": "ZW7R3qNw4nk",
+      "duration": "30:16",
+      "view_count": 147000,
+      "upload_date": "2026-08-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "L8 Principal's Agentic Engineering Setup (just copy him)",
+      "video_id": "8ZgpAXe5V5w",
+      "duration": "1:01:50",
+      "view_count": 120000,
+      "upload_date": "2026-08-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Tailscale, Clearly Explained (Beginner's Guide)",
+      "video_id": "eNn2tT-lrz4",
+      "duration": "28:29",
+      "view_count": 47000,
+      "upload_date": "2026-08-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "What Top 1% of Agentic Engineers Do Differently",
+      "video_id": "EWk9PBbKqzc",
+      "duration": "53:31",
+      "view_count": 27000,
+      "upload_date": "2026-08-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Fine-Tune the biggest open-source models (even with a bad PC)",
+      "video_id": "kxstlfc8Lw4",
+      "duration": "29:08",
+      "view_count": 27000,
+      "upload_date": "2026-08-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Fable 5 is back… here is my plan",
+      "video_id": "0akM-5lBurA",
+      "duration": "30:30",
+      "view_count": 22000,
+      "upload_date": "2026-08-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Hermes Agent just reached Fable level… Mixture Of Agents",
+      "video_id": "40ikbH0Ba-g",
+      "duration": "36:01",
+      "view_count": 48000,
+      "upload_date": "2026-07-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "GPT 5.6 banned, Fable banned… it’s actually over.",
+      "video_id": "IloXWEYXen8",
+      "duration": "41:48",
+      "view_count": 42000,
+      "upload_date": "2026-07-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "He spent $7k of his own money to make GLM-5.2 better - 0xSero",
+      "video_id": "ImPESBftwr8",
+      "duration": "1:35:53",
+      "view_count": 48000,
+      "upload_date": "2026-07-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Obsidian Just 10x’d Everyone’s Hermes Agent",
+      "video_id": "Q0HTefP9DFU",
+      "duration": "30:50",
+      "view_count": 68000,
+      "upload_date": "2026-07-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Matt Pocock’s Agentic Engineering Workflow (just copy him)",
+      "video_id": "nQwJVHCtDDY",
+      "duration": "1:02:25",
+      "view_count": 377000,
+      "upload_date": "2026-07-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "This MCP makes Hermes Agent 10x more powerful",
+      "video_id": "V80QfRa7t_c",
+      "duration": "22:26",
+      "view_count": 28000,
+      "upload_date": "2026-07-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Fable 5 is never coming back, here's why",
+      "video_id": "qlx40oVrXTY",
+      "duration": "28:39",
+      "view_count": 58000,
+      "upload_date": "2026-07-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "If you don’t run Pi locally you’re falling behind…",
+      "video_id": "jcUqsNpDDDk",
+      "duration": "47:03",
+      "view_count": 61000,
+      "upload_date": "2026-07-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Don't use Fable 5 in Claude… do this instead",
+      "video_id": "BxR-r4F4Pbw",
+      "duration": "32:29",
+      "view_count": 48000,
+      "upload_date": "2026-07-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Hermes Agent is crazy… 180,000+ github stars",
+      "video_id": "u6L9aedHqZc",
+      "duration": "20:18",
+      "view_count": 83000,
+      "upload_date": "2026-07-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Watch this 100x developer use Codex… it’s insane",
+      "video_id": "mMuuLocDkog",
+      "duration": "48:03",
+      "view_count": 51000,
+      "upload_date": "2026-07-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "This 100% open-source terminal is insane… just watch",
+      "video_id": "8jDXI4_rJOE",
+      "duration": "25:24",
+      "view_count": 34000,
+      "upload_date": "2026-06-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Unsloth Studio is insane… fine-tune any AI model locally",
+      "video_id": "BFH9D05UFvM",
+      "duration": "32:57",
+      "view_count": 124000,
+      "upload_date": "2026-06-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "The Philosophy of David Ondrej",
+      "video_id": "_9-8s6zMwhc",
+      "duration": "2:26:13",
+      "view_count": 26000,
+      "upload_date": "2026-06-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Build Anything with Tmux, Here's How",
+      "video_id": "z7xyZQVK4Dg",
+      "duration": "25:39",
+      "view_count": 82000,
+      "upload_date": "2026-06-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "I opened an office in Katowice (the next Dubai)",
+      "video_id": "pDEbyDkE0hw",
+      "duration": "31:14",
+      "view_count": 26000,
+      "upload_date": "2026-06-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "I gave my Hermes Agent a phone number (it’s crazy)",
+      "video_id": "zHE434sBw2U",
+      "duration": "31:01",
+      "view_count": 48000,
+      "upload_date": "2026-06-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Why This Dev Ships 100x Faster Than 99% of Engineers",
+      "video_id": "PzVV4X37ihg",
+      "duration": "53:52",
+      "view_count": 215000,
+      "upload_date": "2026-06-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Hermes /goal is insane… just watch",
+      "video_id": "9oOZ3PB6n4Y",
+      "duration": "26:04",
+      "view_count": 81000,
+      "upload_date": "2026-06-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Harness Engineering is the future… trust me.",
+      "video_id": "k8o_UgtrGyA",
+      "duration": "46:56",
+      "view_count": 27000,
+      "upload_date": "2026-06-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Codex can now make videos… it’s insane",
+      "video_id": "oyWSdPYeQwQ",
+      "duration": "22:34",
+      "view_count": 52000,
+      "upload_date": "2026-06-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "100 hours of Hermes Agent lessons in 46 minutes",
+      "video_id": "G47mnkGkYwQ",
+      "duration": "47:00",
+      "view_count": 167000,
+      "upload_date": "2026-06-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Tokens can make you rich, just do this – Mario Zechner",
+      "video_id": "sqtX2OmgOF0",
+      "duration": "47:41",
+      "view_count": 229000,
+      "upload_date": "2026-06-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Everyone is switching to Hermes Agent… you should too.",
+      "video_id": "1nDiiXfMUK4",
+      "duration": "42:57",
+      "view_count": 76000,
+      "upload_date": "2026-05-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "This AI Agent can actually self-evolve… just watch",
+      "video_id": "F3ZzNgf-R7Y",
+      "duration": "46:50",
+      "view_count": 71000,
+      "upload_date": "2026-05-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "DeepSeek V4 just shocked the AI industry…",
+      "video_id": "UVObNdNmzzw",
+      "duration": "29:53",
+      "view_count": 66000,
+      "upload_date": "2026-05-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "OpenAI just destroyed all AI image tools… GPT Images 2.0",
+      "video_id": "XdQq90Ug8eY",
+      "duration": "24:04",
+      "view_count": 10000,
+      "upload_date": "2026-05-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "OpenAI just shipped the Mythos killer (GPT 5.5)",
+      "video_id": "T_xyhjfFCdY",
+      "duration": "32:31",
+      "view_count": 19000,
+      "upload_date": "2026-05-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Hermes Agent is insane… 100,000+ github stars",
+      "video_id": "4Sln_6K2z8c",
+      "duration": "32:45",
+      "view_count": 184000,
+      "upload_date": "2026-05-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Claude Code + Opus 4.7 = Ultimate Coding Agent",
+      "video_id": "Tv3lIkbdAGc",
+      "duration": "38:54",
+      "view_count": 15000,
+      "upload_date": "2026-05-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Claude can build any MOBILE APP you want… just watch",
+      "video_id": "rQY-yB-Gob4",
+      "duration": "11:11",
+      "view_count": 11000,
+      "upload_date": "2026-05-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "CODEX FULL COURSE: From Zero to Deployed App (2026)",
+      "video_id": "hoCWD1aI60Y",
+      "duration": "1:24:14",
+      "view_count": 60000,
+      "upload_date": "2026-05-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Claude Mythos might actually be AGI… wtf",
+      "video_id": "ZruZhMdFdl8",
+      "duration": "35:23",
+      "view_count": 39000,
+      "upload_date": "2026-05-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "This 100% minimal AI Agent can do anything… just watch",
+      "video_id": "9KYfx_GzY1o",
+      "duration": "31:32",
+      "view_count": 67000,
+      "upload_date": "2026-05-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Google just destroyed all open-source models (Gemma 4)",
+      "video_id": "HdohxOTO6lo",
+      "duration": "23:38",
+      "view_count": 93000,
+      "upload_date": "2026-05-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "How To Run a Zero-Human Company (Paperclip)",
+      "video_id": "rx4w6zhrhPY",
+      "duration": "44:38",
+      "view_count": 45000,
+      "upload_date": "2026-04-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "This 100% self-improving AI Agent is insane… just watch",
+      "video_id": "EHlqRx0r4BI",
+      "duration": "25:28",
+      "view_count": 60000,
+      "upload_date": "2026-04-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "The only AutoResearch tutorial you’ll ever need",
+      "video_id": "uBWuKh1nZ2Y",
+      "duration": "19:53",
+      "view_count": 282000,
+      "upload_date": "2026-04-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "RIP OpenClaw… this 100% private AI Agent is insane",
+      "video_id": "JLIFx9r5EDg",
+      "duration": "22:28",
+      "view_count": 46000,
+      "upload_date": "2026-04-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Git Worktrees Clearly Explained (and how to use them)",
+      "video_id": "JVM40liIElk",
+      "duration": "22:35",
+      "view_count": 20000,
+      "upload_date": "2026-04-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Perplexity just destroyed OpenClaw… (Computer)",
+      "video_id": "tJ-INHRf8SY",
+      "duration": "36:07",
+      "view_count": 27000,
+      "upload_date": "2026-04-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "OpenClaw 2.0 is here.",
+      "video_id": "6vPaitNQMGY",
+      "duration": "26:57",
+      "view_count": 44000,
+      "upload_date": "2026-04-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "GPT 5.4 hit a wall. It’s over.",
+      "video_id": "BVD49yi_Yhs",
+      "duration": "42:51",
+      "view_count": 31000,
+      "upload_date": "2026-04-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "“Self-Improving AI Agents Are Almost Here…” – DeepSeek Insider",
+      "video_id": "wak7R0luB90",
+      "duration": "59:44",
+      "view_count": 13000,
+      "upload_date": "2026-04-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Gemini 3.1 Pro in Antigravity can do anything… just watch",
+      "video_id": "mAwJYUJib1I",
+      "duration": "16:29",
+      "view_count": 40000,
+      "upload_date": "2026-03-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "This AI agent builds $200k mobile apps in minutes…",
+      "video_id": "ds1k2cmtqdI",
+      "duration": "10:49",
+      "view_count": 14000,
+      "upload_date": "2026-03-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "How OpenClaw runs my entire business (step by step)",
+      "video_id": "Cx2oPWU8qjY",
+      "duration": "43:08",
+      "view_count": 38000,
+      "upload_date": "2026-03-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Codex is the future of Agentic Engineering… just watch",
+      "video_id": "nUxuCoqJzlA",
+      "duration": "1:28:17",
+      "view_count": 21000,
+      "upload_date": "2026-03-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "AgentZero just released the OpenClaw killer (it’s over)",
+      "video_id": "F4w1sCvqtTU",
+      "duration": "1:07:10",
+      "view_count": 75000,
+      "upload_date": "2026-03-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Don’t start an AI business before watching this (seriously)",
+      "video_id": "NQ1IR4Z_3RY",
+      "duration": "16:20",
+      "view_count": 19000,
+      "upload_date": "2026-03-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "I made my OpenClaw 10x more powerful (seriously)",
+      "video_id": "cod50CWlZeU",
+      "duration": "43:45",
+      "view_count": 107000,
+      "upload_date": "2026-03-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "This 100% private AI Agent just destroyed Clawdbot",
+      "video_id": "45-Y8I_Nn4I",
+      "duration": "28:17",
+      "view_count": 46000,
+      "upload_date": "2026-03-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Web Scraping, and how it gives AI Agents 100x more power",
+      "video_id": "wk8joeKtXBA",
+      "duration": "23:53",
+      "view_count": 29000,
+      "upload_date": "2026-03-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "OpenAI is killing open-source… here’s why",
+      "video_id": "yk088BCn4Vk",
+      "duration": "11:11",
+      "view_count": 14000,
+      "upload_date": "2026-02-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Build anything with Kimi 2.5, here’s how",
+      "video_id": "aiLZMvMLYMg",
+      "duration": "27:58",
+      "view_count": 79000,
+      "upload_date": "2026-02-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "I just replaced myself with Clawdbot… here's how",
+      "video_id": "2zWGFLrTVmI",
+      "duration": "20:09",
+      "view_count": 90000,
+      "upload_date": "2026-02-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Claude Code can now make videos, here’s how",
+      "video_id": "fOY0_WCR3eY",
+      "duration": "16:10",
+      "view_count": 161000,
+      "upload_date": "2026-02-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "8 Insane OpenCode Use Cases! (just copy me)",
+      "video_id": "6KB73J01fGw",
+      "duration": "29:06",
+      "view_count": 92000,
+      "upload_date": "2026-02-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Anthropic’s 7 Hour Claude Code Course in 27 Minutes",
+      "video_id": "XuSFUvUdvQA",
+      "duration": "27:42",
+      "view_count": 44000,
+      "upload_date": "2026-02-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Making $$$ with AI SaaS (I might delete this)",
+      "video_id": "nS62guAxeGA",
+      "duration": "28:50",
+      "view_count": 29000,
+      "upload_date": "2026-02-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Claude Cowork replaces your AI tech stack (full demo)",
+      "video_id": "4uZ4dpwbGcY",
+      "duration": "22:42",
+      "view_count": 18000,
+      "upload_date": "2026-02-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "OpenCode just killed all vibe coding apps (it’s insane)",
+      "video_id": "syK7yprJknM",
+      "duration": "1:00:38",
+      "view_count": 145000,
+      "upload_date": "2026-02-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "This 100% private AI Agent can do anything… just watch",
+      "video_id": "SEBWHaX2L5s",
+      "duration": "32:06",
+      "view_count": 180000,
+      "upload_date": "2026-02-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Google just destroyed all vibe-coding apps (Antigravity)",
+      "video_id": "V4lFIbAeWpQ",
+      "duration": "33:29",
+      "view_count": 45000,
+      "upload_date": "2026-02-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Stop f**king around in your startup, watch this",
+      "video_id": "LisbEo-nbZs",
+      "duration": "47:22",
+      "view_count": 6300,
+      "upload_date": "2026-02-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "n8n Tutorial for 2026: How To Build AI Agents for FREE (step by step)",
+      "video_id": "Pqp4qJ5sS5g",
+      "duration": "3:48:50",
+      "view_count": 25000,
+      "upload_date": "2026-02-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Claude Code is crazy good in 2026… just watch",
+      "video_id": "smMC1W-Mjt4",
+      "duration": "46:03",
+      "view_count": 25000,
+      "upload_date": "2026-02-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "How to crush 2026 in the AI field",
+      "video_id": "Y4GXrYEJNu8",
+      "duration": "49:00",
+      "view_count": 10000,
+      "upload_date": "2026-01-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Build anything with Local AI Models, here's how",
+      "video_id": "811ctT3HqcE",
+      "duration": "17:35",
+      "view_count": 34000,
+      "upload_date": "2026-01-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "This unique AI business model will make millionaires in 2026",
+      "video_id": "Ta5g-OxjPO4",
+      "duration": "41:26",
+      "view_count": 100000,
+      "upload_date": "2026-01-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Building AGI from the Fjords of Norway",
+      "video_id": "WaBdtmkU-Us",
+      "duration": "22:48",
+      "view_count": 7300,
+      "upload_date": "2026-01-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "GPT 5.2 is the first AI model I’d actually give my work to",
+      "video_id": "QB3l9sFV2Kk",
+      "duration": "27:55",
+      "view_count": 20000,
+      "upload_date": "2026-01-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "How To Build & Deploy an AI SaaS End To End",
+      "video_id": "g-JgaoheyTo",
+      "duration": "52:10",
+      "view_count": 23000,
+      "upload_date": "2026-01-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "I uninstalled Chrome because of this AI browser.",
+      "video_id": "Wkn8YDwcyB0",
+      "duration": "8:45",
+      "view_count": 10000,
+      "upload_date": "2026-01-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Create Anything with Nano Banana Pro, Here’s How",
+      "video_id": "2VktR2fAmF0",
+      "duration": "58:07",
+      "view_count": 42000,
+      "upload_date": "2025-12-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "I’m concerned about AI, for real.",
+      "video_id": "GRo73YZ0p_c",
+      "duration": "45:26",
+      "view_count": 38000,
+      "upload_date": "2025-12-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Put your AI Agents on a VPS… trust me",
+      "video_id": "pPRoAs8xh2o",
+      "duration": "19:57",
+      "view_count": 21000,
+      "upload_date": "2025-12-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Gemini 3.0 just destroyed all AI models… it’s insane",
+      "video_id": "7-Qyk6soh1k",
+      "duration": "19:04",
+      "view_count": 43000,
+      "upload_date": "2025-12-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "NotebookLM just got 10x better… let’s run it",
+      "video_id": "UhKEU7HWkUA",
+      "duration": "39:25",
+      "view_count": 86000,
+      "upload_date": "2025-12-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "99% of Developers Don’t Get Docker",
+      "video_id": "zvOjvAsXGWY",
+      "duration": "10:09",
+      "view_count": 16000,
+      "upload_date": "2025-12-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "POV: moving from Dubai to Poland as a 23yo entrepreneur",
+      "video_id": "xv5nVVE9IYw",
+      "duration": "12:44",
+      "view_count": 15000,
+      "upload_date": "2025-12-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "If you’re still Vibe Coding, you’re falling behind",
+      "video_id": "XuAThYV62BQ",
+      "duration": "23:43",
+      "view_count": 56000,
+      "upload_date": "2025-12-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "If you don’t run AI locally you’re falling behind…",
+      "video_id": "89CQRxq0YSg",
+      "duration": "28:17",
+      "view_count": 216000,
+      "upload_date": "2025-12-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "build anything with the n8n code node, here’s how",
+      "video_id": "PwQUTOlpoxk",
+      "duration": "24:02",
+      "view_count": 9900,
+      "upload_date": "2025-11-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "The INSANE truth about Jensen Huang",
+      "video_id": "ep58GeP2bic",
+      "duration": "10:24",
+      "view_count": 4500,
+      "upload_date": "2025-11-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Build Anything with Google Colab, Here’s How",
+      "video_id": "JsCU1V7Hjpc",
+      "duration": "13:01",
+      "view_count": 134000,
+      "upload_date": "2025-11-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Sam Altman wants to replace Chrome (ChatGPT Atlas)",
+      "video_id": "gzXvaLvSfrU",
+      "duration": "18:29",
+      "view_count": 7400,
+      "upload_date": "2025-11-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Stop using Claude Code, start using Droid (trust me)",
+      "video_id": "LoUUNcnScYk",
+      "duration": "39:42",
+      "view_count": 27000,
+      "upload_date": "2025-11-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "28 months of AI lessons in 32 minutes",
+      "video_id": "bbDFPHhpkc4",
+      "duration": "32:37",
+      "view_count": 25000,
+      "upload_date": "2025-11-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Build anything with Haiku 4.5, here’s how",
+      "video_id": "NaNgXEQUJkQ",
+      "duration": "39:57",
+      "view_count": 9500,
+      "upload_date": "2025-11-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Build Any n8n Workflow in Minutes, Here’s How",
+      "video_id": "XC9a29aPtw4",
+      "duration": "27:59",
+      "view_count": 25000,
+      "upload_date": "2025-11-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Fine-tune your own LLM in 13 minutes, here’s how",
+      "video_id": "g80Q1sVtikE",
+      "duration": "13:09",
+      "view_count": 163000,
+      "upload_date": "2025-11-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "AI coding extensions will make you a 10x developer…",
+      "video_id": "tp_QBQVpfbk",
+      "duration": "38:22",
+      "view_count": 31000,
+      "upload_date": "2025-11-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "OpenAI just destroyed 100 startups… yours is next",
+      "video_id": "IHb_TKFAIf0",
+      "duration": "25:51",
+      "view_count": 27000,
+      "upload_date": "2025-11-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Build Anything with Claude, Here's How",
+      "video_id": "SJWwk_moO50",
+      "duration": "51:55",
+      "view_count": 22000,
+      "upload_date": "2025-11-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "The 3 AI Agents everyone should have…",
+      "video_id": "6MCxSJd1ZPY",
+      "duration": "20:48",
+      "view_count": 6500,
+      "upload_date": "2025-10-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "ChatGPT just became 100X more agentic…",
+      "video_id": "oowzvdpH_2o",
+      "duration": "9:52",
+      "view_count": 30000,
+      "upload_date": "2025-10-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "POV: building an AI empire in NYC",
+      "video_id": "1kqZ2SF97DM",
+      "duration": "23:38",
+      "view_count": 7400,
+      "upload_date": "2025-10-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "“Anthropic will destroy OpenAI by 2027, here’s why” - Dylan Patel",
+      "video_id": "07HtHbbK5jQ",
+      "duration": "46:35",
+      "view_count": 53000,
+      "upload_date": "2025-10-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "“I want ChatGPT with infinite local memory” - Here’s how",
+      "video_id": "R4I_YaFYv3M",
+      "duration": "24:37",
+      "view_count": 49000,
+      "upload_date": "2025-10-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "6 simple AI Agents you must have - beginners guide",
+      "video_id": "mnQmBFJEqPg",
+      "duration": "55:08",
+      "view_count": 11000,
+      "upload_date": "2025-10-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "OpenAI just destroyed AI coding… Codex 2.0",
+      "video_id": "C06FBVXMLCY",
+      "duration": "54:01",
+      "view_count": 76000,
+      "upload_date": "2025-10-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "I built a team of AI Agents with Nano Banana (it’s I-N-S-A-N-E)",
+      "video_id": "vePNTU3T8WY",
+      "duration": "30:31",
+      "view_count": 27000,
+      "upload_date": "2025-10-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Build Any Mobile App with AI (Step-By-Step)",
+      "video_id": "THcQjlasv7k",
+      "duration": "12:49",
+      "view_count": 12000,
+      "upload_date": "2025-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Master Vibe Coding in 22 Minutes – Lee Robinson",
+      "video_id": "hZL7tw8jp2M",
+      "duration": "22:51",
+      "view_count": 12000,
+      "upload_date": "2025-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Stop using Chrome. This AI browser is insane…",
+      "video_id": "ZsBniZ_M7hs",
+      "duration": "10:36",
+      "view_count": 32000,
+      "upload_date": "2025-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "This AI Voice Agent can do anything… just watch",
+      "video_id": "oU_rr-bOrK8",
+      "duration": "18:11",
+      "view_count": 18000,
+      "upload_date": "2025-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "GPT-5 Pro is the most powerful AI agent ever… just watch",
+      "video_id": "eRl6UWSjlxM",
+      "duration": "39:56",
+      "view_count": 21000,
+      "upload_date": "2025-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Build Anything with Claude Code, Here’s How",
+      "video_id": "hq8J-nj_Sr0",
+      "duration": "1:41:00",
+      "view_count": 33000,
+      "upload_date": "2025-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "ChatGPT 5 explained in 7 minutes",
+      "video_id": "bLZDNf2-jf8",
+      "duration": "6:39",
+      "view_count": 42000,
+      "upload_date": "2025-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "The 7 essential skills that every AI DEV needs to know!",
+      "video_id": "TJ5v23JcGIU",
+      "duration": "17:57",
+      "view_count": 9000,
+      "upload_date": "2025-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Claude Code can build any AI Agent in n8n… just watch",
+      "video_id": "7LlQZKPBKgs",
+      "duration": "14:16",
+      "view_count": 72000,
+      "upload_date": "2025-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "David Ondrej takes over Morocco for 10 days",
+      "video_id": "VRHVNgYZx7M",
+      "duration": "8:53",
+      "view_count": 8800,
+      "upload_date": "2025-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Claude Code: From Beginner to Expert in 19 Minutes",
+      "video_id": "zW28e7LGPRQ",
+      "duration": "18:48",
+      "view_count": 71000,
+      "upload_date": "2025-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Build anything with Augment Code, here’s how",
+      "video_id": "Cu5kevu384U",
+      "duration": "42:38",
+      "view_count": 21000,
+      "upload_date": "2025-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Build an army of Kimi K2 agents - here’s how",
+      "video_id": "Y2GVqUQ_QxU",
+      "duration": "22:58",
+      "view_count": 19000,
+      "upload_date": "2025-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "5 simple Claude Code workflows you must have - beginners guide",
+      "video_id": "yAslhELtKEg",
+      "duration": "19:54",
+      "view_count": 25000,
+      "upload_date": "2025-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Build anything with Grok 4, here's how",
+      "video_id": "MuXWT5wx47k",
+      "duration": "35:31",
+      "view_count": 37000,
+      "upload_date": "2025-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "“How to prompt AI like a tech millionaire” – Balaji Srinivasan",
+      "video_id": "AYbFMDxnK70",
+      "duration": "1:05:31",
+      "view_count": 11000,
+      "upload_date": "2025-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "I spend $2,000/mo on AI tools, here are the best ones",
+      "video_id": "gJQce1SERFM",
+      "duration": "21:15",
+      "view_count": 45000,
+      "upload_date": "2025-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Build Your First AI Agent in 16 Minutes (No Coding)",
+      "video_id": "hx0b9JK8Wxk",
+      "duration": "16:00",
+      "view_count": 10000,
+      "upload_date": "2025-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Context Engineering is the future of AI Agents - here’s why",
+      "video_id": "YwUD3l7--V8",
+      "duration": "23:39",
+      "view_count": 44000,
+      "upload_date": "2025-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Learn n8n in 21 Minutes (Beginner's Guide)",
+      "video_id": "ZVjD1AfXLEo",
+      "duration": "21:10",
+      "view_count": 14000,
+      "upload_date": "2025-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Gemini CLI – the real Claude Code killer?",
+      "video_id": "xHKgxxuGwGw",
+      "duration": "16:18",
+      "view_count": 23000,
+      "upload_date": "2025-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "This new vibe coding app is insane… Pythagora",
+      "video_id": "lO0lQLZKzI0",
+      "duration": "43:13",
+      "view_count": 17000,
+      "upload_date": "2025-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "“I built 500+ AI agents, here’s everything I know” - Nate Herk",
+      "video_id": "Svp7fbF0g2I",
+      "duration": "54:35",
+      "view_count": 17000,
+      "upload_date": "2025-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Ultimate Vibe Coding Setup: o3 pro, Cursor, Codex, Claude Code",
+      "video_id": "z2IN9H4UGog",
+      "duration": "50:35",
+      "view_count": 19000,
+      "upload_date": "2025-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "He makes $3,000 a day Vibe Coding apps - here’s how",
+      "video_id": "y_EHSs7j65M",
+      "duration": "54:03",
+      "view_count": 16000,
+      "upload_date": "2025-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Claude Code: Everything You Need To Know",
+      "video_id": "Yhn42p7VE0c",
+      "duration": "2:31:21",
+      "view_count": 23000,
+      "upload_date": "2025-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Build n8n agents into full-stack apps, here’s how",
+      "video_id": "UaJSXjNX3wo",
+      "duration": "27:19",
+      "view_count": 24000,
+      "upload_date": "2025-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Claude Code just destroyed all coding apps… it’s insane",
+      "video_id": "PhhUB4OQlnw",
+      "duration": "46:51",
+      "view_count": 100000,
+      "upload_date": "2025-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "I spent 700+ hours in Cursor, here’s what I learned",
+      "video_id": "JPWX2lFRaRE",
+      "duration": "43:16",
+      "view_count": 30000,
+      "upload_date": "2025-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "The man who wants to build 1 billion AI Agents - Adam Silverman",
+      "video_id": "YSss30HKyjE",
+      "duration": "51:12",
+      "view_count": 9500,
+      "upload_date": "2025-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "POV: spending $32,000 on AI developers at 23 years old (Poland)",
+      "video_id": "2Dl5n7W9bSk",
+      "duration": "23:26",
+      "view_count": 12000,
+      "upload_date": "2025-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "This AI Agent can do basically everything - Agent Zero",
+      "video_id": "kTs3kDlKc8w",
+      "duration": "58:48",
+      "view_count": 34000,
+      "upload_date": "2025-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "How to create any n8n workflow using ChatGPT",
+      "video_id": "lZuxqbw8IX4",
+      "duration": "28:54",
+      "view_count": 82000,
+      "upload_date": "2025-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Anthropic just shocked the world with Claude 4 Opus…",
+      "video_id": "yGpZbU7kcQ4",
+      "duration": "22:57",
+      "view_count": 27000,
+      "upload_date": "2025-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Build Anything with Codex, Here’s How",
+      "video_id": "TYe4pi7_svM",
+      "duration": "30:58",
+      "view_count": 34000,
+      "upload_date": "2025-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "OpenAI just destroyed all coding apps - Codex",
+      "video_id": "3xi7ZqGo1tU",
+      "duration": "22:50",
+      "view_count": 121000,
+      "upload_date": "2025-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Use AI Agents to increase productivity, here’s how",
+      "video_id": "QEhwXWUeGAE",
+      "duration": "42:41",
+      "view_count": 8500,
+      "upload_date": "2025-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "5 simple AI Agents you must have - beginners guide",
+      "video_id": "WLvQCIUWebs",
+      "duration": "40:43",
+      "view_count": 279000,
+      "upload_date": "2025-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Google just destroyed ChatGPT forever… (Gemini 2.5 Pro)",
+      "video_id": "Ck9-3WDw0Kk",
+      "duration": "12:45",
+      "view_count": 32000,
+      "upload_date": "2025-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "I built a $100,000 AI startup, here’s what i learned",
+      "video_id": "NyUtXqhitXo",
+      "duration": "21:11",
+      "view_count": 12000,
+      "upload_date": "2025-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Cline - the most underrated AI code editor",
+      "video_id": "TFU33etuKb0",
+      "duration": "14:42",
+      "view_count": 68000,
+      "upload_date": "2025-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "“Forget AI Agents, VOICE AGENTS are the future” – Jannis Moore",
+      "video_id": "468NVA8_a1k",
+      "duration": "2:33:27",
+      "view_count": 18000,
+      "upload_date": "2025-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "People are getting RICH with AI mobile apps… let’s build one",
+      "video_id": "0P7F4ceq3O4",
+      "duration": "22:07",
+      "view_count": 85000,
+      "upload_date": "2025-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "how to build a killer team of AI Agents (n8n masterclass)",
+      "video_id": "FByI3Xl846A",
+      "duration": "42:35",
+      "view_count": 54000,
+      "upload_date": "2025-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "OpenAI’s 7 Hour AI Agents Course in 15 Minutes",
+      "video_id": "CxCslLiG_Kc",
+      "duration": "15:34",
+      "view_count": 76000,
+      "upload_date": "2025-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Lovable 2.0 is insane… vibe-code anything in minutes!",
+      "video_id": "zDFY--jbaeU",
+      "duration": "17:32",
+      "view_count": 71000,
+      "upload_date": "2025-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Build AI Agents for anything & everything - here’s how",
+      "video_id": "Z6MPDx7e1Po",
+      "duration": "39:21",
+      "view_count": 46000,
+      "upload_date": "2025-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Agent2Agent Protocol (A2A), clearly explained (why it matters)",
+      "video_id": "mDcULe4GMyA",
+      "duration": "23:19",
+      "view_count": 34000,
+      "upload_date": "2025-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "he made $1m with AI Automations, here's how:",
+      "video_id": "akjKelVER9Q",
+      "duration": "1:38:08",
+      "view_count": 16000,
+      "upload_date": "2025-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Build Anything with OpenAI o3, Here’s How",
+      "video_id": "_whn-VpVtjo",
+      "duration": "57:52",
+      "view_count": 21000,
+      "upload_date": "2025-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Build AI Agents with GPT 4.1 - Step by step",
+      "video_id": "02rOcvzNLvE",
+      "duration": "31:08",
+      "view_count": 13000,
+      "upload_date": "2025-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Google just destroyed all vibe-coding apps (Firebase Studio)",
+      "video_id": "LjL3J_TLt08",
+      "duration": "21:40",
+      "view_count": 416000,
+      "upload_date": "2025-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "I spent 500 hours in ChatGPT, here’s what I learned",
+      "video_id": "xN2_t4vYS4g",
+      "duration": "34:02",
+      "view_count": 11000,
+      "upload_date": "2025-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Build Anything with Llama 4, Here's How",
+      "video_id": "Dv-goT8oMMw",
+      "duration": "24:53",
+      "view_count": 20000,
+      "upload_date": "2025-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "“ok but I want AI agents for my specific use case” - Here’s how",
+      "video_id": "wyKtHjGsmIM",
+      "duration": "15:47",
+      "view_count": 21000,
+      "upload_date": "2025-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Building an AI Startup in Swiss Alps (week in the life)",
+      "video_id": "MKQle4x-UVc",
+      "duration": "19:21",
+      "view_count": 11000,
+      "upload_date": "2025-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Build Anything with Gemini 2.5 Pro, Here’s How",
+      "video_id": "JW69tWxLFQU",
+      "duration": "23:33",
+      "view_count": 63000,
+      "upload_date": "2025-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Lovable: the best AI app builder in the world",
+      "video_id": "TxpqGVi7Cxo",
+      "duration": "26:28",
+      "view_count": 23000,
+      "upload_date": "2025-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Tech With Tim - AGI, Vibe Coding, Building a Startup, Future of Software",
+      "video_id": "0ItQIrYiUCc",
+      "duration": "1:47:13",
+      "view_count": 45000,
+      "upload_date": "2025-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Start Vibe Coding Like a Pro, Here’s How",
+      "video_id": "faPSZV5XwyI",
+      "duration": "21:49",
+      "view_count": 43000,
+      "upload_date": "2025-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "How To Succeed in AI in 2025",
+      "video_id": "C61wQPwDw_0",
+      "duration": "2:17:01",
+      "view_count": 27000,
+      "upload_date": "2025-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Build anything with n8n, here’s how",
+      "video_id": "-BDq59Saii4",
+      "duration": "19:04",
+      "view_count": 50000,
+      "upload_date": "2025-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "QwQ 32B - the AI model that changes everything",
+      "video_id": "AUOnCcaju80",
+      "duration": "18:48",
+      "view_count": 29000,
+      "upload_date": "2025-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Build Anything with MCP Agents, Here’s How",
+      "video_id": "TQsP_PlCY1I",
+      "duration": "25:12",
+      "view_count": 233000,
+      "upload_date": "2025-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "I spent $500 on ChatGPT 4.5, here’s what I learned",
+      "video_id": "bLF4ZcNhiZs",
+      "duration": "28:17",
+      "view_count": 24000,
+      "upload_date": "2025-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Build Anything with Claude 3.7, Here’s How",
+      "video_id": "Gjos--a5Npw",
+      "duration": "35:18",
+      "view_count": 88000,
+      "upload_date": "2025-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "“How to build an AGI startup” – Logan Kilpatrick",
+      "video_id": "6wlDAOB7hz0",
+      "duration": "44:28",
+      "view_count": 21000,
+      "upload_date": "2025-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Build Anything with Grok 3, Here's How",
+      "video_id": "picePk8lb48",
+      "duration": "30:51",
+      "view_count": 110000,
+      "upload_date": "2025-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "How to build a $7,000/mo app with Cursor (step-by-step)",
+      "video_id": "XVDnkti4Li8",
+      "duration": "1:39:25",
+      "view_count": 82000,
+      "upload_date": "2025-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Build Anything with Mistral AI, Here’s How",
+      "video_id": "RcdsH09wpNk",
+      "duration": "13:39",
+      "view_count": 40000,
+      "upload_date": "2025-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Introducing Vectal",
+      "video_id": "9d7gnw6z4Rk",
+      "duration": "14:37",
+      "view_count": 52000,
+      "upload_date": "2025-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Build Anything on AI Agents, Here’s How",
+      "video_id": "B_1nBG0ofhc",
+      "duration": "23:05",
+      "view_count": 122000,
+      "upload_date": "2025-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "build anything with o3-mini, here’s how",
+      "video_id": "UBX59pYqBjg",
+      "duration": "23:51",
+      "view_count": 30000,
+      "upload_date": "2025-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "How to run DeepSeek on your computer (100% private)",
+      "video_id": "7DVOGxCAEJc",
+      "duration": "20:11",
+      "view_count": 100000,
+      "upload_date": "2025-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Browser Use: this new AI Agent can do anything, just watch",
+      "video_id": "-vlB9ErtZn0",
+      "duration": "16:26",
+      "view_count": 115000,
+      "upload_date": "2025-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Build anything with DeepSeek R1, here’s how",
+      "video_id": "BdMEQzt_js0",
+      "duration": "21:36",
+      "view_count": 590000,
+      "upload_date": "2025-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "I spent 400+ hours in Cursor, here’s what I learned",
+      "video_id": "gYLNxUxVomY",
+      "duration": "46:40",
+      "view_count": 187000,
+      "upload_date": "2025-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Build Everything with AI Agents: Here's How",
+      "video_id": "XVO3zsHdvio",
+      "duration": "39:58",
+      "view_count": 1700000,
+      "upload_date": "2025-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "I automated 50+ businesses with AI Agents, here's how",
+      "video_id": "wOlqLo7oUxM",
+      "duration": "35:59",
+      "view_count": 88000,
+      "upload_date": "2025-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "This new AI tool can code any web app, just watch",
+      "video_id": "_ry8QW9gw9I",
+      "duration": "21:57",
+      "view_count": 48000,
+      "upload_date": "2025-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "week in the life of an AI startup founder in Dubai",
+      "video_id": "rh0MrQcU568",
+      "duration": "25:24",
+      "view_count": 28000,
+      "upload_date": "2025-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Build anything with DeepSeek V3, here’s how",
+      "video_id": "NCaRixtXNIo",
+      "duration": "14:34",
+      "view_count": 278000,
+      "upload_date": "2025-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "I built an AI tool to make myself more productive",
+      "video_id": "gXOKM3Awr-M",
+      "duration": "13:09",
+      "view_count": 18000,
+      "upload_date": "2025-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Build anything with Gemini 2.0 - here’s how",
+      "video_id": "3jcvtzFWLMk",
+      "duration": "27:04",
+      "view_count": 100000,
+      "upload_date": "2025-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Llama 3.3 – better than ChatGPT, runs locally, 100% private",
+      "video_id": "lk7dQ6_KaBE",
+      "duration": "12:25",
+      "view_count": 51000,
+      "upload_date": "2025-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "This $500/mo AI Agent can code anything, just watch",
+      "video_id": "_N9N9A5Jxzg",
+      "duration": "23:25",
+      "view_count": 33000,
+      "upload_date": "2025-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Build Anything with Windsurf AI, Here's How",
+      "video_id": "7YhvKnizrcU",
+      "duration": "21:17",
+      "view_count": 41000,
+      "upload_date": "2025-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Code Anything with Perplexity, Here's How",
+      "video_id": "Xd2b81Q2qL0",
+      "duration": "21:44",
+      "view_count": 62000,
+      "upload_date": "2025-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Build Anything with ChatGPT Pro, Here’s How",
+      "video_id": "NLq2qvr867Q",
+      "duration": "25:53",
+      "view_count": 37000,
+      "upload_date": "2025-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "How to use Cursor Agent for beginners",
+      "video_id": "2gBcO3ht0ws",
+      "duration": "32:14",
+      "view_count": 87000,
+      "upload_date": "2025-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Build Anything with Claude Agents, Here’s How",
+      "video_id": "5CmAKm1wWW0",
+      "duration": "18:35",
+      "view_count": 301000,
+      "upload_date": "2025-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Build anything with v0, here’s how",
+      "video_id": "wNIx74HOIQY",
+      "duration": "12:15",
+      "view_count": 21000,
+      "upload_date": "2025-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "With Bolt.new you can code anything… just watch",
+      "video_id": "ht22YzW-Swc",
+      "duration": "13:20",
+      "view_count": 23000,
+      "upload_date": "2025-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "This 100% uncensored AI model will answer anything, just watch",
+      "video_id": "8DPFQOS4p_M",
+      "duration": "21:02",
+      "view_count": 217000,
+      "upload_date": "2025-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "How to automate any task with Make.com (step-by-step)",
+      "video_id": "OygSPm3wv3g",
+      "duration": "24:04",
+      "view_count": 16000,
+      "upload_date": "2025-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Build anything with bolt.new, here’s how",
+      "video_id": "i0bQ495vMBA",
+      "duration": "21:15",
+      "view_count": 200000,
+      "upload_date": "2025-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Make Money with OpenAI o1, Here’s How",
+      "video_id": "upuKtF_q0dc",
+      "duration": "38:18",
+      "view_count": 22000,
+      "upload_date": "2025-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Build Anything with Grok-2, Here’s How",
+      "video_id": "ssBdJqBF1CA",
+      "duration": "36:34",
+      "view_count": 135000,
+      "upload_date": "2025-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "\"Build an AI startup in 2025!\" - Professional AI agent developer",
+      "video_id": "uUosHefPnWs",
+      "duration": "51:50",
+      "view_count": 40000,
+      "upload_date": "2025-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Build your own local o1 - here’s how",
+      "video_id": "kzAjdas6nwE",
+      "duration": "36:09",
+      "view_count": 61000,
+      "upload_date": "2025-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Code Anything with Claude AI, Here’s How",
+      "video_id": "81D7rUK0IeA",
+      "duration": "26:39",
+      "view_count": 49000,
+      "upload_date": "2025-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Build Anything with OpenAI Swarm, Here’s How",
+      "video_id": "Cw0ME8OZ0xI",
+      "duration": "44:22",
+      "view_count": 71000,
+      "upload_date": "2025-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "I’m building a billion-dollar AI startup, here’s how",
+      "video_id": "TLeoNc5JTRM",
+      "duration": "1:37:09",
+      "view_count": 20000,
+      "upload_date": "2025-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Build anything with o1 agents - Here’s how",
+      "video_id": "CK0oj9Ktfec",
+      "duration": "39:26",
+      "view_count": 176000,
+      "upload_date": "2025-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "How To Build Web Apps using v0 + Bolt.new + Cursor",
+      "video_id": "p0ohq8RX_T4",
+      "duration": "33:06",
+      "view_count": 49000,
+      "upload_date": "2025-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "“We automated 150 tasks with AI Agents, just copy us” - Microsoft AI",
+      "video_id": "lQeYRmy8nHQ",
+      "duration": "39:06",
+      "view_count": 96000,
+      "upload_date": "2025-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Build Anything with ChatGPT Canvas, Here’s How",
+      "video_id": "7OJM3YRXQy4",
+      "duration": "25:24",
+      "view_count": 44000,
+      "upload_date": "2025-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "I can't believe I coded an app with AI in 31 minutes - v0",
+      "video_id": "ih5sUZT5tEY",
+      "duration": "31:33",
+      "view_count": 25000,
+      "upload_date": "2025-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Build Anything with Replit Agent, Here's How",
+      "video_id": "fNnmWtf9wYo",
+      "duration": "46:41",
+      "view_count": 59000,
+      "upload_date": "2025-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "If you don't use OpenAI Advanced Voice, you’re falling behind",
+      "video_id": "ukQe9Uwc140",
+      "duration": "42:49",
+      "view_count": 19000,
+      "upload_date": "2025-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Llama 3.2 just dropped and it destroys 100B models… let’s run it",
+      "video_id": "32k6DRcX4pA",
+      "duration": "27:34",
+      "view_count": 66000,
+      "upload_date": "2025-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "“With o1 you can code any app, just watch” - Pietro Schirano",
+      "video_id": "-qPeR9GnEzo",
+      "duration": "39:46",
+      "view_count": 58000,
+      "upload_date": "2025-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Get RICH by making AI images for companies – here’s how",
+      "video_id": "cfoRTXMtBKU",
+      "duration": "44:27",
+      "view_count": 13000,
+      "upload_date": "2025-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Build Anything with OpenAI o1, Here’s How",
+      "video_id": "J8nZu1RhXuc",
+      "duration": "1:00:37",
+      "view_count": 246000,
+      "upload_date": "2025-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "“AI is cool, but 98% of the Human Brain is unknown” - Artem Kirsanov",
+      "video_id": "m-vruXl3db8",
+      "duration": "1:03:09",
+      "view_count": 5500,
+      "upload_date": "2025-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Build Anything with Cursor, Here’s How",
+      "video_id": "C59LC1WJIbE",
+      "duration": "49:31",
+      "view_count": 56000,
+      "upload_date": "2024-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "\"I tested 400 AI Agents, these are the best\" - Adam Silverman",
+      "video_id": "z4QsBsO3SS0",
+      "duration": "26:34",
+      "view_count": 173000,
+      "upload_date": "2024-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "\"I need AI photos that look like me\" - Here's how",
+      "video_id": "LIk7GF0oeK8",
+      "duration": "22:18",
+      "view_count": 61000,
+      "upload_date": "2024-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Build Anything with LangGraph Studio, Here’s How",
+      "video_id": "oWHTXTIy3J4",
+      "duration": "16:38",
+      "view_count": 45000,
+      "upload_date": "2024-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Build Anything with Agent Zero, Here’s How",
+      "video_id": "AwGkl-Bvkok",
+      "duration": "30:30",
+      "view_count": 41000,
+      "upload_date": "2024-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "“Llama 4 will make you forget about ChatGPT” - John Coogan",
+      "video_id": "cbLqIo0jz9Y",
+      "duration": "48:26",
+      "view_count": 6300,
+      "upload_date": "2024-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "How I made AI Agents do my work for me – Agency Swarm",
+      "video_id": "Wgrc3y97i9w",
+      "duration": "12:38",
+      "view_count": 18000,
+      "upload_date": "2024-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Build Anything with Llama 3.1 Agents, Here’s How",
+      "video_id": "1SsPNc2zldM",
+      "duration": "1:00:31",
+      "view_count": 75000,
+      "upload_date": "2024-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "This 100% automatic AI Agent can do anything, just watch",
+      "video_id": "_Pionjv4hGc",
+      "duration": "1:19:48",
+      "view_count": 116000,
+      "upload_date": "2024-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "SearchGPT - OpenAI's attempt to copy Perplexity",
+      "video_id": "5lYuTnFPu5A",
+      "duration": "8:03",
+      "view_count": 5900,
+      "upload_date": "2024-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Build Anything with CrewAI, Here’s How",
+      "video_id": "mO4-V7Lmt7c",
+      "duration": "1:03:09",
+      "view_count": 21000,
+      "upload_date": "2024-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Automate Anything with Make.com, Here’s How",
+      "video_id": "FRyBCkJdCuE",
+      "duration": "43:48",
+      "view_count": 22000,
+      "upload_date": "2024-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "I completed Andrej Karpathy’s AI challenge (advanced)",
+      "video_id": "h0aWeR8pjc8",
+      "duration": "6:39:49",
+      "view_count": 11000,
+      "upload_date": "2024-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Learn Python in 7 Days with ChatGPT, Here’s How",
+      "video_id": "FLcDFRco6Eo",
+      "duration": "35:17",
+      "view_count": 16000,
+      "upload_date": "2024-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "the most powerful AI tool for coding - Claude Engineer",
+      "video_id": "tq9yN-j5o3M",
+      "duration": "28:01",
+      "view_count": 45000,
+      "upload_date": "2024-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Forget ChatGPT, This AI Tool Is Much Better!",
+      "video_id": "6z3ThwSwS9s",
+      "duration": "12:35",
+      "view_count": 12000,
+      "upload_date": "2024-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "AI Expert: “Automate half of your work with AI, here’s how”",
+      "video_id": "G5ZKVJScgfA",
+      "duration": "1:07:09",
+      "view_count": 11000,
+      "upload_date": "2024-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Build AI Agents with Docker, Here’s How",
+      "video_id": "AhPXGKG4RZ4",
+      "duration": "51:59",
+      "view_count": 121000,
+      "upload_date": "2024-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "AI Expert: “it’s not easy to work in AI, unless you do this”",
+      "video_id": "AhfRp4PbI9g",
+      "duration": "1:08:24",
+      "view_count": 6700,
+      "upload_date": "2024-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Watch how a Pro develops AI Agents in real-time",
+      "video_id": "kX2evgYiVoo",
+      "duration": "20:28",
+      "view_count": 26000,
+      "upload_date": "2024-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Build Anything with Voiceflow, Here’s How",
+      "video_id": "Nu_xerAtNCk",
+      "duration": "36:52",
+      "view_count": 22000,
+      "upload_date": "2024-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Make Money with GPTs, Here’s How",
+      "video_id": "zGczCf4sPHc",
+      "duration": "29:47",
+      "view_count": 21000,
+      "upload_date": "2024-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "How to get a job in AI (step by step)",
+      "video_id": "z_1egoV7-ak",
+      "duration": "14:04",
+      "view_count": 21000,
+      "upload_date": "2024-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Build Anything with Perplexity, Here’s How",
+      "video_id": "w_YRnA8RdnU",
+      "duration": "42:16",
+      "view_count": 254000,
+      "upload_date": "2024-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Make Money with AI Agents, Here's How",
+      "video_id": "0WMtJpaprZY",
+      "duration": "20:07",
+      "view_count": 34000,
+      "upload_date": "2024-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "13 months of AI lessons in 40 minutes",
+      "video_id": "hFlNEM6nff4",
+      "duration": "38:58",
+      "view_count": 23000,
+      "upload_date": "2024-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "OpenAI is getting SUED by Scarlett Johansson, here's why",
+      "video_id": "XQ8FGvvzZPE",
+      "duration": "8:03",
+      "view_count": 3400,
+      "upload_date": "2024-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "This Llama 3 is powerful and uncensored, let’s run it",
+      "video_id": "cTxENLLX1ho",
+      "duration": "14:58",
+      "view_count": 227000,
+      "upload_date": "2024-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Make Anything with ChatGPT, Here’s How",
+      "video_id": "ZrWhu7xkU_g",
+      "duration": "1:10:38",
+      "view_count": 83000,
+      "upload_date": "2024-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Google's Project Astra: The Future of AI Assistants",
+      "video_id": "QFy1UcYHEJk",
+      "duration": "41:21",
+      "view_count": 9900,
+      "upload_date": "2024-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "GPT-4o: The Most Powerful AI Model Is Now Free",
+      "video_id": "4I-INWzMaPM",
+      "duration": "26:23",
+      "view_count": 12000,
+      "upload_date": "2024-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Prompting Your AI Agents Just Got 5X Easier...",
+      "video_id": "8BeUKxY_QOs",
+      "duration": "19:55",
+      "view_count": 19000,
+      "upload_date": "2024-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "OpenAI finally revealed how ChatGPT works",
+      "video_id": "DFoTCEMpcBY",
+      "duration": "51:50",
+      "view_count": 7200,
+      "upload_date": "2024-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "The Dark Side of Sam Altman",
+      "video_id": "Zq_2xB-JBVY",
+      "duration": "9:09",
+      "view_count": 8700,
+      "upload_date": "2024-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Watch how a Pro builds AI Agents in real-time",
+      "video_id": "fkTlyuGh7jk",
+      "duration": "50:59",
+      "view_count": 58000,
+      "upload_date": "2024-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "AI Expert: Here’s how AI Agents 10x my productivity",
+      "video_id": "CtOGupq0r7M",
+      "duration": "54:09",
+      "view_count": 18000,
+      "upload_date": "2024-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Build AI Agents Smarter Than ChatGPT, Here’s How",
+      "video_id": "yWT8a47Gfd4",
+      "duration": "22:19",
+      "view_count": 23000,
+      "upload_date": "2024-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "AI Expert: ChatGPT is dumb, start making Agents instead",
+      "video_id": "kCDfmSCbnz4",
+      "duration": "46:47",
+      "view_count": 8800,
+      "upload_date": "2024-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "AI Agents are changing the world, let's build one from scratch",
+      "video_id": "93-9NHHgn84",
+      "duration": "12:40",
+      "view_count": 35000,
+      "upload_date": "2024-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "“If you don’t build AI Agents, you’ll be left behind.” - VRSEN",
+      "video_id": "wcA0E20KpbA",
+      "duration": "1:13:09",
+      "view_count": 16000,
+      "upload_date": "2024-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "“Llama 3 with Agents gives you Godlike power” - Pietro Schirano",
+      "video_id": "wfNNlz5zFAM",
+      "duration": "1:14:59",
+      "view_count": 26000,
+      "upload_date": "2024-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Build Anything with OpenAI Assistants, Here’s How",
+      "video_id": "qOyNqGclSV4",
+      "duration": "12:31",
+      "view_count": 53000,
+      "upload_date": "2024-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "\"The Agent wave is coming, start preparing now\" - Adam Silverman",
+      "video_id": "EDDtamlqEAU",
+      "duration": "26:42",
+      "view_count": 25000,
+      "upload_date": "2024-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "\"okay, but I want Llama 3 for my specific use case\" - Here's how",
+      "video_id": "pK8u4QfdLx0",
+      "duration": "24:20",
+      "view_count": 346000,
+      "upload_date": "2024-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Build Anything with Llama 3 Agents, Here’s How",
+      "video_id": "i-txsBoTJtI",
+      "duration": "12:23",
+      "view_count": 182000,
+      "upload_date": "2024-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Zuck just released Llama 3 and made history",
+      "video_id": "C4xL-apCINQ",
+      "duration": "17:02",
+      "view_count": 30000,
+      "upload_date": "2024-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "This New Robot from Boston Dynamics Is Unbelievable!",
+      "video_id": "yTUNwqkPTNA",
+      "duration": "10:57",
+      "view_count": 7300,
+      "upload_date": "2024-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "This AI Skill Will Put You Ahead of 98% of People",
+      "video_id": "NBgF8Fi1dNQ",
+      "duration": "30:19",
+      "view_count": 18000,
+      "upload_date": "2024-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "I tested Google's Agent Builder so you don't have to",
+      "video_id": "rCEoAP7HcO8",
+      "duration": "9:49",
+      "view_count": 38000,
+      "upload_date": "2024-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Build Anything with Local Agents, Here’s How",
+      "video_id": "a3EfYSJyFRE",
+      "duration": "14:24",
+      "view_count": 29000,
+      "upload_date": "2024-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Stop using ChatGPT, build Agents instead - Maya Akim",
+      "video_id": "fsIipBuM4Nc",
+      "duration": "1:28:47",
+      "view_count": 67000,
+      "upload_date": "2024-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Build Genius AI Agents with Prompt Engineering",
+      "video_id": "9uQ-i3z_g0c",
+      "duration": "12:15",
+      "view_count": 21000,
+      "upload_date": "2024-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Agents cannot be stopped, Experts say",
+      "video_id": "LSts2IDULAA",
+      "duration": "11:29",
+      "view_count": 18000,
+      "upload_date": "2024-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "AI Expert: Anyone can build Agents, here’s how",
+      "video_id": "IpvzXlUuxFk",
+      "duration": "53:22",
+      "view_count": 24000,
+      "upload_date": "2024-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Agents with GPT-5 are here, it’s about to get crazy",
+      "video_id": "4Qz4GfvjGLY",
+      "duration": "22:35",
+      "view_count": 49000,
+      "upload_date": "2024-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Self-Improving Agents are the future, let’s build one",
+      "video_id": "e24BlWvSLNM",
+      "duration": "34:03",
+      "view_count": 81000,
+      "upload_date": "2024-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "AI Agents are rising up, don’t get left behind",
+      "video_id": "jneXqgqdBg4",
+      "duration": "21:09",
+      "view_count": 10000,
+      "upload_date": "2024-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Sam Altman: \"AGI puts me at risk of being shot\"",
+      "video_id": "kJRK7FJmrLQ",
+      "duration": "15:46",
+      "view_count": 17000,
+      "upload_date": "2024-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Build Anything with AI Agents, Here's How",
+      "video_id": "AxnL5GtWVNA",
+      "duration": "29:49",
+      "view_count": 349000,
+      "upload_date": "2024-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Top Programmer: AGI in 2025, Devin is just the beginning",
+      "video_id": "ny9HE1Pi0Kw",
+      "duration": "1:19:42",
+      "view_count": 10000,
+      "upload_date": "2024-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Devin: World's Best AI Agent (the future is here)",
+      "video_id": "ZkcrLOg6lL4",
+      "duration": "25:12",
+      "view_count": 54000,
+      "upload_date": "2024-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "I convinced Elon Musk to open-source Grok",
+      "video_id": "30P0WEL1-zs",
+      "duration": "22:28",
+      "view_count": 12000,
+      "upload_date": "2024-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "AI Founder: OpenAI is Destroying Startups, Here’s Why",
+      "video_id": "gqcK9KnvJtM",
+      "duration": "1:44:12",
+      "view_count": 33000,
+      "upload_date": "2024-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "OpenAI in Danger: New AI Model Attacks GPT-4",
+      "video_id": "zu0n-kg1wmU",
+      "duration": "18:14",
+      "view_count": 13000,
+      "upload_date": "2024-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Claude 3: New AI model DESTROYS ChatGPT!",
+      "video_id": "oZstUXq9-0Y",
+      "duration": "16:40",
+      "view_count": 10000,
+      "upload_date": "2024-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "I was scared of AGI, until I realized this",
+      "video_id": "sZu_b9_0SF8",
+      "duration": "8:09",
+      "view_count": 7100,
+      "upload_date": "2024-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "How I Made an AI Assistant Do Research For Me",
+      "video_id": "39k4TYQG0iE",
+      "duration": "16:49",
+      "view_count": 4700,
+      "upload_date": "2024-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Make AI Images Worth Paying For (Midjourney Tutorial)",
+      "video_id": "Q2EVvoJBoA8",
+      "duration": "26:49",
+      "view_count": 5200,
+      "upload_date": "2024-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "AGI is almost here - Here’s How To Prepare",
+      "video_id": "Lv7NAFJguyQ",
+      "duration": "19:20",
+      "view_count": 17000,
+      "upload_date": "2024-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "OpenAI is losing control over ChatGPT...",
+      "video_id": "bQ5fctswLV8",
+      "duration": "6:21",
+      "view_count": 7400,
+      "upload_date": "2024-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "NEW AI MODEL: Google is going Open-Source now?!",
+      "video_id": "5sHdwtkTIlU",
+      "duration": "11:15",
+      "view_count": 2800,
+      "upload_date": "2024-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Build Anything With ChatGPT API, Here’s How",
+      "video_id": "qgT-quk3JEo",
+      "duration": "12:11",
+      "view_count": 216000,
+      "upload_date": "2024-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Advanced ChatGPT Guide for 2024 (Become a PRO!)",
+      "video_id": "4Ql515LQYiU",
+      "duration": "8:02",
+      "view_count": 4100,
+      "upload_date": "2024-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Sam Altman is flexing his new AI model on twitter",
+      "video_id": "VfrzPX3XF64",
+      "duration": "8:02",
+      "view_count": 10000,
+      "upload_date": "2024-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "so Google randomly dropped the best AI model ever?",
+      "video_id": "lUfyZ5CcUb0",
+      "duration": "13:55",
+      "view_count": 1900,
+      "upload_date": "2024-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Andrej Karpathy LEAVES OpenAI! Returning to Tesla?",
+      "video_id": "H2rgRB0ngn8",
+      "duration": "4:37",
+      "view_count": 4300,
+      "upload_date": "2024-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Sam Altman Talks GPT-5, Worst Fears, AGI, ChatGPT...",
+      "video_id": "sXHWzKJcSVc",
+      "duration": "9:11",
+      "view_count": 7800,
+      "upload_date": "2024-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Can AI code Tetris? Watch ChatGPT try",
+      "video_id": "DKwnUM_c1Xs",
+      "duration": "10:12",
+      "view_count": 5000,
+      "upload_date": "2024-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Google Gemini: Better Than ChatGPT?!",
+      "video_id": "4YTcl--Ox5o",
+      "duration": "13:04",
+      "view_count": 8000,
+      "upload_date": "2024-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "OpenAI is lying about ChatGPT, here’s the proof",
+      "video_id": "YPeUGEx4FyQ",
+      "duration": "9:33",
+      "view_count": 5000,
+      "upload_date": "2024-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Learn JavaScript with ChatGPT, here’s how",
+      "video_id": "eLUSUhYDVHo",
+      "duration": "4:16:36",
+      "view_count": 5000,
+      "upload_date": "2024-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Old Video Games vs. AI Upscaler",
+      "video_id": "2y1j3qlY0rg",
+      "duration": "9:04",
+      "view_count": 4700,
+      "upload_date": "2024-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "the Palworld AI situation is crazier than you think…",
+      "video_id": "XCW5Hh1Vxuk",
+      "duration": "14:08",
+      "view_count": 2000,
+      "upload_date": "2024-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "someone trolled Putin with AI on national television",
+      "video_id": "TGvZ1XFuRdo",
+      "duration": "14:46",
+      "view_count": 1500,
+      "upload_date": "2024-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Build Any Website With ChatGPT, Here’s How",
+      "video_id": "dXSfqzRW43I",
+      "duration": "1:28:42",
+      "view_count": 18000,
+      "upload_date": "2024-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "He Built a $450M Company In 3 Years, Here's How",
+      "video_id": "_vkqpeXCDQM",
+      "duration": "31:56",
+      "view_count": 66000,
+      "upload_date": "2024-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "How YouTubers Use ChatGPT to Get Millions of Views",
+      "video_id": "DPb2PfhZSrI",
+      "duration": "19:12",
+      "view_count": 2300,
+      "upload_date": "2024-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Tesla's New Robot Changes Everything, Here's Why",
+      "video_id": "T2gKsuyMPTk",
+      "duration": "13:29",
+      "view_count": 24000,
+      "upload_date": "2024-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Gemini - Did Google Just Achieve AGI?!",
+      "video_id": "PwKoAYwGqes",
+      "duration": "44:40",
+      "view_count": 7300,
+      "upload_date": "2024-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Sam Altman's Final Message to OpenAI",
+      "video_id": "lcNAOGlfFRw",
+      "duration": "23:20",
+      "view_count": 5500,
+      "upload_date": "2024-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Pika 1.0 - Insane AI Video Breakthrough!",
+      "video_id": "_5-_MKKOOA4",
+      "duration": "15:38",
+      "view_count": 14000,
+      "upload_date": "2024-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Sam and Greg are BACK! OpenAI Board FIRED",
+      "video_id": "pVp88optdGw",
+      "duration": "18:14",
+      "view_count": 21000,
+      "upload_date": "2024-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "OpenAI Is About To COLLAPSE (90% of employees leaving)",
+      "video_id": "qJ0muUQDZb0",
+      "duration": "23:43",
+      "view_count": 11000,
+      "upload_date": "2024-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Ilya Sutskever FINALLY Responds! Sam Altman Replies...",
+      "video_id": "golOcm0qdsE",
+      "duration": "7:16",
+      "view_count": 29000,
+      "upload_date": "2024-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Sam Altman WILL NOT join OpenAI, joining Microsoft instead!",
+      "video_id": "kQc2muuW-Ws",
+      "duration": "17:04",
+      "view_count": 29000,
+      "upload_date": "2024-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "SAM ALTMAN IS RETURNING TO OPENAI ?!?!??!",
+      "video_id": "_hqftql5Ufk",
+      "duration": "12:05",
+      "view_count": 18000,
+      "upload_date": "2024-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Who Is Mira Murati? - New OpenAI CEO",
+      "video_id": "ssYl11_pjuA",
+      "duration": "16:24",
+      "view_count": 20000,
+      "upload_date": "2024-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Why was Sam Altman fired? (It’s worse than you think)",
+      "video_id": "NhzbqTHRw4A",
+      "duration": "41:43",
+      "view_count": 33000,
+      "upload_date": "2024-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Sam Altman FIRED from OpenAI, new CEO coming",
+      "video_id": "iwCqC8Wdosc",
+      "duration": "9:21",
+      "view_count": 9800,
+      "upload_date": "2024-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Why your GPTs aren't getting any Chats",
+      "video_id": "FHUs99QAuXg",
+      "duration": "25:30",
+      "view_count": 2700,
+      "upload_date": "2024-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "GPT builder sucks, so I made a better one",
+      "video_id": "X8mdtbnEMFY",
+      "duration": "20:53",
+      "view_count": 10000,
+      "upload_date": "2024-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "How to build a multi-step GPT agent",
+      "video_id": "KobOs06yiss",
+      "duration": "27:46",
+      "view_count": 5000,
+      "upload_date": "2024-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "ELON MUSK - OpenAI will not build AGI. Tesla will.",
+      "video_id": "aHsunc60Xms",
+      "duration": "47:32",
+      "view_count": 24000,
+      "upload_date": "2024-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "How to build your own GPT agent",
+      "video_id": "MxV5BgsYPlE",
+      "duration": "17:22",
+      "view_count": 53000,
+      "upload_date": "2024-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "OpenAI DevDay in 10 Minutes (NEW GPT MODEL, AI AGENTS, CHATGPT UPDATE...)",
+      "video_id": "VmNBPqQXNgU",
+      "duration": "9:45",
+      "view_count": 19000,
+      "upload_date": "2024-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "24 nooby ChatGPT habits you need to ditch",
+      "video_id": "0jHpcxTEpeU",
+      "duration": "15:05",
+      "view_count": 3900,
+      "upload_date": "2024-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Build Anything With ChatGPT, Here’s How",
+      "video_id": "N_P4pJjVTKc",
+      "duration": "1:24:05",
+      "view_count": 1100000,
+      "upload_date": "2024-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Daniela Amodei: The Girl Behind Claude 3",
+      "video_id": "jMM29sxQliI",
+      "duration": "10:14",
+      "view_count": 6800,
+      "upload_date": "2024-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Elon Musk on ChatGPT, OpenAI, AGI, AI Danger...",
+      "video_id": "HLyEGlYjCfI",
+      "duration": "8:54",
+      "view_count": 3900,
+      "upload_date": "2024-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Wait, ChatGPT Can Make Animations?!",
+      "video_id": "dR8JMsYtq9w",
+      "duration": "8:30",
+      "view_count": 144000,
+      "upload_date": "2024-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Futuristic AI Robots That Actually Exist",
+      "video_id": "MNwM-VnTmEQ",
+      "duration": "9:22",
+      "view_count": 4600,
+      "upload_date": "2024-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Ilya Sutskever: The Genius Behind OpenAI",
+      "video_id": "zlRnTw77eaY",
+      "duration": "10:48",
+      "view_count": 58000,
+      "upload_date": "2024-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Big Tech’s Dirty Plan To END Open Source",
+      "video_id": "uxIY_jFpLLM",
+      "duration": "12:26",
+      "view_count": 2500,
+      "upload_date": "2024-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Sam Altman on AGI, Elon Musk, ChatGPT, Neuralink",
+      "video_id": "5VCioa_eaPk",
+      "duration": "12:39",
+      "view_count": 19000,
+      "upload_date": "2024-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Mustafa Suleyman: OpenAI's Biggest Threat",
+      "video_id": "QM8BJ9Vqhs0",
+      "duration": "10:57",
+      "view_count": 20000,
+      "upload_date": "2024-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Crazy AI News! ChatGPT, Gemini, DALL-E 3, Meta AI…",
+      "video_id": "AOaPPSdCtpA",
+      "duration": "9:43",
+      "view_count": 1900,
+      "upload_date": "2024-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "I Tried 100 Free AI Tools, These Are The Best",
+      "video_id": "NsfMOCjFQqA",
+      "duration": "8:16",
+      "view_count": 30000,
+      "upload_date": "2024-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "The Only AI Tutorial You'll Ever Need",
+      "video_id": "1N7RdsC_3Mw",
+      "duration": "13:29",
+      "view_count": 2100,
+      "upload_date": "2024-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "This New Feature Makes ChatGPT 3X Better",
+      "video_id": "ohpEYGqW0gI",
+      "duration": "10:26",
+      "view_count": 9400,
+      "upload_date": "2024-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "AI Pioneers Who Shocked The World",
+      "video_id": "6vUNairBecQ",
+      "duration": "12:13",
+      "view_count": 1200,
+      "upload_date": "2024-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Will AI Control The World?",
+      "video_id": "LrFUdR1fn8s",
+      "duration": "1:51:01",
+      "view_count": 1100,
+      "upload_date": "2023-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "15 New ChatGPT Plugins!",
+      "video_id": "eqWpPeTPS3w",
+      "duration": "8:27",
+      "view_count": 12000,
+      "upload_date": "2023-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Greg Brockman: OpenAI's Unknown President",
+      "video_id": "fpUy94y9qJE",
+      "duration": "9:06",
+      "view_count": 8300,
+      "upload_date": "2023-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "OpenAI Secrets You Didn't Know",
+      "video_id": "v8ygaLVZ-y8",
+      "duration": "13:01",
+      "view_count": 7100,
+      "upload_date": "2023-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Sam Altman’s Secret Interview",
+      "video_id": "ViMW5pM95Qo",
+      "duration": "17:19",
+      "view_count": 14000,
+      "upload_date": "2023-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Best ChatGPT Plugins For Learning",
+      "video_id": "hr7c9XWNqBY",
+      "duration": "10:35",
+      "view_count": 26000,
+      "upload_date": "2023-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Sam Altman Talks GPT-5, AGI, ChatGPT, OpenAI...",
+      "video_id": "Y2Xt7bJcg_M",
+      "duration": "11:48",
+      "view_count": 83000,
+      "upload_date": "2023-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "27 Essential ChatGPT Plugins",
+      "video_id": "1XnUtykdt1w",
+      "duration": "9:35",
+      "view_count": 96000,
+      "upload_date": "2023-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Why OpenAI Isn’t Open Anymore",
+      "video_id": "w2OLT0CpJeY",
+      "duration": "10:27",
+      "view_count": 7000,
+      "upload_date": "2023-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Does Congress Hate AI?",
+      "video_id": "XPGdVZtjjOM",
+      "duration": "11:39",
+      "view_count": 2900,
+      "upload_date": "2023-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "The Man OpenAI Fears The Most",
+      "video_id": "WgIlAB3cS6U",
+      "duration": "10:11",
+      "view_count": 388000,
+      "upload_date": "2023-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Sam Altman Talks AI, Elon Musk, ChatGPT, Google…",
+      "video_id": "FKSXoyvmcyM",
+      "duration": "13:17",
+      "view_count": 31000,
+      "upload_date": "2023-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Character.AI - The Next Big Thing",
+      "video_id": "pOg-eBsaVIY",
+      "duration": "11:31",
+      "view_count": 3500,
+      "upload_date": "2023-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Massive ChatGPT Update - Plugins!",
+      "video_id": "EKuYYFxrn0I",
+      "duration": "8:01",
+      "view_count": 22000,
+      "upload_date": "2023-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "50 Insane Single-Word Prompts For Midjourney",
+      "video_id": "VYByaFrk2gk",
+      "duration": "17:43",
+      "view_count": 4500,
+      "upload_date": "2023-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "GPT-5: The Next Era Of AI",
+      "video_id": "4kutenB9Er0",
+      "duration": "10:51",
+      "view_count": 15000,
+      "upload_date": "2023-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Will AI Destroy Bitcoin?",
+      "video_id": "ZwZdVtTW34M",
+      "duration": "8:09",
+      "view_count": 1100,
+      "upload_date": "2023-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "What Is LangChain? - Explained Simply",
+      "video_id": "5YHrnLoKn_w",
+      "duration": "6:19",
+      "view_count": 39000,
+      "upload_date": "2023-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "18 Concerning AI Facts",
+      "video_id": "BH_PSss_d7E",
+      "duration": "17:06",
+      "view_count": 2300,
+      "upload_date": "2023-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "12 New Jobs AI Will Create",
+      "video_id": "BQxXfgQXHA8",
+      "duration": "11:17",
+      "view_count": 941,
+      "upload_date": "2023-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "The Craziest AI Images Ever Made",
+      "video_id": "eUqkmjyfZvw",
+      "duration": "19:04",
+      "view_count": 2600,
+      "upload_date": "2023-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "15 ChatGPT Mistakes Beginners Make",
+      "video_id": "tdBBqg7EZyk",
+      "duration": "6:24",
+      "view_count": 2200,
+      "upload_date": "2023-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "20 Midjourney Mistakes Beginners Make",
+      "video_id": "8IlO6ONPoWc",
+      "duration": "10:59",
+      "view_count": 14000,
+      "upload_date": "2023-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "What Is AutoGPT? - Explained Simply",
+      "video_id": "ANW6fg2lIp0",
+      "duration": "4:26",
+      "view_count": 1700,
+      "upload_date": "2023-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "10X Your Productivity With ChatGPT",
+      "video_id": "zdIx1E64GcA",
+      "duration": "9:37",
+      "view_count": 985,
+      "upload_date": "2023-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "AI Basics: 30 Key Terms",
+      "video_id": "DGls3Q9pURI",
+      "duration": "15:06",
+      "view_count": 15000,
+      "upload_date": "2023-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "10 Ways AI Could End Humanity",
+      "video_id": "ivWb5ohuzOQ",
+      "duration": "12:14",
+      "view_count": 648,
+      "upload_date": "2023-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "How Do Billionaires See AI?",
+      "video_id": "g1uZQQLeoZs",
+      "duration": "35:46",
+      "view_count": 1800,
+      "upload_date": "2023-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "AI Basics: A Guide for Everyone",
+      "video_id": "O0Yx4uaH18w",
+      "duration": "11:44",
+      "view_count": 2600,
+      "upload_date": "2023-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "20 Jobs AI Will Replace",
+      "video_id": "0L8T3YrtHvY",
+      "duration": "10:48",
+      "view_count": 2700,
+      "upload_date": "2023-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Sam Altman - The Man Who Owns Silicon Valley",
+      "video_id": "1he_Izj8AHc",
+      "duration": "15:03",
+      "view_count": 1200000,
+      "upload_date": "2023-09-03",
+      "source": "videos_tab"
+    },
+    {
+      "title": "Hello World.",
+      "video_id": "XWO5_N3D62A",
+      "duration": "50",
+      "view_count": 5400,
+      "upload_date": "2023-09-03",
+      "source": "videos_tab"
+    }
+  ]
+}
