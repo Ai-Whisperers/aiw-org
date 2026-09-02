@@ -19,12 +19,22 @@ import json
 import shutil
 from pathlib import Path
 
-REPO = Path("/opt/data/agents")
+# --- AIW_ROOT path bootstrap (DEMIURGE-098) ---
+import sys as _sys_bootstrap_098
+from pathlib import Path as _Path_bootstrap_098
+_PY_PATHS_ROOT = _Path_bootstrap_098(__file__).resolve().parent.parent
+if str(_PY_PATHS_ROOT) not in _sys_bootstrap_098.path:
+    _sys_bootstrap_098.path.insert(0, str(_PY_PATHS_ROOT))
+from _paths import AGENTS, AIW_ROOT, STATE
+# --- end bootstrap ---
+
+
+REPO = AGENTS
 sys.path.insert(0, str(REPO / "scripts/memory"))
 
 from commitments import extract_commitments_from_signal, merge_commitments  # noqa: E402
 
-STATE = Path("/opt/data/state")
+STATE = STATE
 SIGNAL_QUEUE = STATE / "signal-queue.ndjson"
 COORD = REPO / "state" / "coord.json"
 
