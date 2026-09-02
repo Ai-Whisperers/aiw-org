@@ -2,4 +2,4 @@
 
 | Phase | Task | Status |
 |-------|------|--------|
-| Main | mark-seven-unrecoverable-stubs | pending |
+| Main | mark-seven-unrecoverable-stubs | done |
