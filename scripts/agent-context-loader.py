@@ -53,7 +53,26 @@ def find_prompt_files() -> list[Path]:
 
 
 def infer_parent_spec(prompt_path: Path) -> str:
-    """Infer the correct parent_spec for an agent based on its dept prefix."""
+    """Infer the correct parent_spec for an agent based on its dept prefix.
+
+    If the path is a symlink, resolve it first. This handles crossover
+    symlinks like ``marketing-content-mon-wed-fri/PROMPT.md`` which
+    points to a real file in another department (e.g.
+    ``03-sales-growth/marketing-content-producer/PROMPT.md``). Without
+    resolving, the audit sees the symlink's path-prefix ("marketing-
+    content-mon-wed-fri") which is NOT in DEPT_PREFIX_MAP and falls
+    through to the constitution fallback, mismatching the symlink
+    target's actual dept.
+
+    See DEMIURGE-126 for the test that catches this regression.
+    """
+    # If symlink, resolve to the actual dept
+    if prompt_path.is_symlink():
+        try:
+            resolved = prompt_path.resolve(strict=False)
+            prompt_path = resolved
+        except (OSError, RuntimeError):
+            pass  # fall through with original path if resolve fails
     # Find the top-level dept (e.g., "04-engineering" in "04-engineering/ai-safety-engineer/PROMPT.md")
     parts = prompt_path.relative_to(REPO).parts
     if parts[0].startswith("demiurge"):
