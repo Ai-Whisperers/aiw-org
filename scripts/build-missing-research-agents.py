@@ -18,7 +18,17 @@ Idempotent — skips if dir already exists.
 import sys
 from pathlib import Path
 
-REPO = Path("/opt/data/agents")
+# --- AIW_ROOT path bootstrap (DEMIURGE-098) ---
+import sys as _sys_bootstrap_098
+from pathlib import Path as _Path_bootstrap_098
+_PY_PATHS_ROOT = _Path_bootstrap_098(__file__).resolve().parent.parent
+if str(_PY_PATHS_ROOT) not in _sys_bootstrap_098.path:
+    _sys_bootstrap_098.path.insert(0, str(_PY_PATHS_ROOT))
+from _paths import AGENTS, AIW_ROOT
+# --- end bootstrap ---
+
+
+REPO = AGENTS
 RESEARCH_DIR = REPO / "05-research-education"
 
 # Each agent: (name, version, archetype, cluster, hard_stops, mission, composition, transfer_targets, monitor_cadence)
