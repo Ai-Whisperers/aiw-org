@@ -20,6 +20,16 @@ Safe to re-run (idempotent — skips if field already present).
 import sys
 from pathlib import Path
 
+# --- AIW_ROOT path bootstrap (DEMIURGE-098) ---
+import sys as _sys_bootstrap_098
+from pathlib import Path as _Path_bootstrap_098
+_PY_PATHS_ROOT = _Path_bootstrap_098(__file__).resolve().parent.parent
+if str(_PY_PATHS_ROOT) not in _sys_bootstrap_098.path:
+    _sys_bootstrap_098.path.insert(0, str(_PY_PATHS_ROOT))
+from _paths import AGENTS, AIW_ROOT
+# --- end bootstrap ---
+
+
 # Mapping agent → cluster
 CLUSTERS = {
     # Run (always-on monitors)
@@ -47,7 +57,7 @@ CLUSTERS = {
 }
 
 # Where to find PROMPT.md files
-AGENTS_REPO = Path("/opt/data/agents")
+AGENTS_REPO = AGENTS
 SEARCH_PATHS = [
     AGENTS_REPO / "04-engineering",
     AGENTS_REPO / "demiurge" / "agents",
