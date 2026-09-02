@@ -14,6 +14,16 @@ import re
 import sys
 from pathlib import Path
 
+# --- AIW_ROOT path bootstrap (DEMIURGE-098) ---
+import sys as _sys_bootstrap_098
+from pathlib import Path as _Path_bootstrap_098
+_PY_PATHS_ROOT = _Path_bootstrap_098(__file__).resolve().parent.parent
+if str(_PY_PATHS_ROOT) not in _sys_bootstrap_098.path:
+    _sys_bootstrap_098.path.insert(0, str(_PY_PATHS_ROOT))
+from _paths import AGENTS, AIW_ROOT
+# --- end bootstrap ---
+
+
 # Copy of the mapping from agent-context-loader.py
 DEPT_PREFIX_MAP = {
     "01-operations": "constitution/ORG-AGENTS.md",
@@ -25,7 +35,7 @@ DEPT_PREFIX_MAP = {
     "board-of-directors": "constitution/ORG-AGENTS.md",
 }
 
-REPO = Path("/opt/data/agents")
+REPO = AGENTS
 
 
 def find_prompt_files() -> list[Path]:
