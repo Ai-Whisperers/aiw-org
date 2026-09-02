@@ -22,6 +22,10 @@ import sys
 from pathlib import Path
 
 REPO = Path("/opt/data/agents-v2/aiw-org-clone")
+# Allow env var override (CI-safe; helps tests patch without subprocess gymnastics)
+import os as _os
+if "README_COUNTS_REPO" in _os.environ:
+    REPO = Path(_os.environ["README_COUNTS_REPO"]).resolve()
 LIVE = Path("/opt/data/agents")
 README = REPO / "README.md"
 

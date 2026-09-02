@@ -174,6 +174,7 @@ class TestCLIRun(unittest.TestCase):
 
     def test_check_detects_drift(self):
         """If README claims 999 PROMPT.md files but actual is 76, fail."""
+        import os
         import re
         readme = REPO / "README.md"
         original = readme.read_text()
@@ -185,9 +186,14 @@ class TestCLIRun(unittest.TestCase):
             self.skipTest("Couldn't mutate README; pattern not found")
         readme.write_text(mutated)
         try:
+            # Run the script with REPO pointed at the (mutated) clone
+            # so it reads the mutated README + counts clone PROMPT.md files
+            env = os.environ.copy()
+            env["README_COUNTS_REPO"] = str(REPO)
             r = subprocess.run(
                 [sys.executable, str(SCRIPT), "--check"],
-                capture_output=True, text=True, timeout=10)
+                capture_output=True, text=True, timeout=10, env=env,
+            )
             self.assertNotEqual(r.returncode, 0)
             self.assertIn("PROMPT.md", r.stdout)
             self.assertIn("999", r.stdout)
