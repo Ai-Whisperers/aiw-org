@@ -2,4 +2,4 @@
 
 | Phase | Task | Status |
 |-------|------|--------|
-| Main | audit-state-write-trust-window | pending |
+| Main | audit-state-write-trust-window | done |
