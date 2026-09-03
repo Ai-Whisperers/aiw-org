@@ -23,6 +23,8 @@ import sys
 import unittest
 from pathlib import Path
 
+import pytest
+
 SCRIPT = Path("/file/path/to/scripts/right-size-toolsets.py").parent / "scripts" / "right-size-toolsets.py"
 # Resolve actual path
 REPO = Path(__file__).parent.parent
@@ -94,6 +96,7 @@ class TestDryRunOutputStructure(unittest.TestCase):
         self.assertIn("Will right-size:", result.stdout)
         self.assertIn("Dry run: True", result.stdout)
 
+    @pytest.mark.slow  # integration: requires production state
     def test_output_shows_per_cron_diff(self):
         """At least the first few crons should be listed with before/after."""
         result = subprocess.run(

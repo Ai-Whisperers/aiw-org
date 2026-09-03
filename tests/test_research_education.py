@@ -96,6 +96,7 @@ def test_gap_closure_doc_exists():
     assert "8 dept gaps" in content.lower() or "Gap Closure Summary" in content
 
 
+@pytest.mark.slow  # integration: requires production state
 def test_9_new_research_crons_wired():
     """9 research-education cron entries should be wired."""
     cron_path = Path("/opt/data/.hermes/cron/jobs.json")

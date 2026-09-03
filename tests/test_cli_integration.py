@@ -74,6 +74,7 @@ def test_cost_optimize_runs():
     assert r.returncode in (0, 2)
 
 
+@pytest.mark.slow  # integration: requires production state
 def test_token_ledger_record_runs():
     """token-ledger.py record runs (we use a temp dir via env)."""
     r = _run("token-ledger.py", ["--help"], timeout=5)
@@ -162,6 +163,7 @@ def test_smoke_test_runs():
 test_smoke_test_runs = pytest.mark.slow(test_smoke_test_runs)
 
 
+@pytest.mark.slow  # integration: requires production state
 def test_no_critical_scripts_missing():
     """Sanity: critical scripts referenced by cron exist."""
     critical = [

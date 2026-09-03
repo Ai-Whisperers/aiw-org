@@ -122,6 +122,7 @@ def test_sync_cli_runs():
     assert "TOTAL" in r.stdout
 
 
+@pytest.mark.slow  # integration: requires production state
 def test_boundary_config_exists():
     """Boundary config.yaml exists at /opt/data/boundary/."""
     config = BOUNDARY / "config.yaml"
@@ -140,6 +141,7 @@ def test_boundary_spec_doc_exists():
     assert "boundary" in content.lower()
 
 
+@pytest.mark.slow  # integration: requires production state
 def test_2_boundary_crons_wired():
     """2 boundary cron entries should be wired."""
     cron_path = Path("/opt/data/.hermes/cron/jobs.json")

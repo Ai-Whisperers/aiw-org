@@ -26,6 +26,8 @@ import tempfile
 import unittest
 from pathlib import Path
 
+import pytest
+
 REPO = Path("/opt/data/agents-v2/aiw-org-clone")
 SCRIPT = REPO / "scripts" / "restore-prompt-bodies.py"
 
@@ -124,6 +126,7 @@ class TestSafetyContract(unittest.TestCase):
         self.assertEqual(result.returncode, 2)
         self.assertIn("refusing", result.stderr)
 
+    @pytest.mark.slow  # integration: requires production state
     def test_apply_with_force_exits_nonzero_if_unrecoverable(self):
         """End-to-end with --apply --force on the actual repo.
 
@@ -233,6 +236,7 @@ class TestBodyPreservationContract(unittest.TestCase):
                          f"expected 0 after DEMIURGE-095 + 320ffdc. "
                          f"Files: {[i['file'] for i in items]}")
 
+    @pytest.mark.slow  # integration: requires production state
     def test_restored_file_has_both_frontmatter_and_body(self):
         """A restored file must have BOTH the new frontmatter fields
         (e.g. max_output_tokens) AND body content (e.g. '# Mission' or similar)."""
