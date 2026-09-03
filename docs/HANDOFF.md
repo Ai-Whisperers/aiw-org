@@ -4,7 +4,7 @@
 > Required by AGENTS.md ("Before declaring work done — update HANDOFF.md").
 > Read this FIRST when starting a new session. Update LAST when ending.
 
-**Last updated:** 2026-09-03 (refreshed with PRs #6, #9, #10, #11, #12, #13)
+**Last updated:** 2026-09-03 (refreshed with PRs #6, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, revert of #19, and the symlink-loop bugfix that restored master CI green)
 **Maintainer:** AIW org (Ivan Weiss Van Der Pol)
 
 ---
@@ -48,15 +48,27 @@
 
 ## In progress
 
-- **CI hermeticity** ✅ landed via PR #11 (Sep 3). Master CI green.
-- **Cron pathology repair** ✅ landed via PRs #12, #13 (Sep 3):
+- **CI hermeticity** ✅ landed via PR #11. Master CI green.
+- **Cron pathology repair** ✅ landed via PRs #12, #13, #18 (Sep 3):
   - PR #12: `aiw-security-watchdog-30min` outbox path fixed
   - PR #13: `aiw-signal-indexer` cron-runner policy block fixed
-- **AIW_ROOT threading** — 15/107 scripts threaded (PRs #2, #6, #9 done). Resuming in next session.
-- **Operator-gated decisions** (not yet addressed; awaiting Ivan):
-  - DEMIURGE-113: provider for 79 dead crons (operator decision)
+  - PR #18: batch-fixed 22 additional path-blocked crons
+- **AIW_ROOT threading** — 15/107 scripts threaded (PRs #2, #6, #9). PR #19 was attempted but reverted due to a CI symlink-loop bug; the loop was broken by the subsequent symlink→real-file bugfix.
+- **Symlink-loop bugfix (this session)** ✅ — `scripts/cost-per-cron.py` and `scripts/token-cap.py` were committed as symlinks in PR #18, which created a CI loop (symlink → /opt/data/scripts → repo/scripts → symlink). Replaced with real files; CI now green.
+- **AIW token audit** ✅ landed via Ivan's autonomous session (commits `c015e80`, `a63d1c8`, `b213dd4`):
+  - 22 MiniMax-M3 watchdog agents replaced by `scripts/aiw-unified-monitor.py`
+  - 70 → 42 enabled MiniMax-M3 jobs
+  - 6 broken-429 weekly jobs paused (Cerebras billing)
+  - 3 broken-name jobs paused
+  - 23 workdir-fixed jobs
+  - 25 PATs stripped across /opt/data
+  - coord.json: 551 → 50 decisions, rest archived
+  - Live spend: ~$634/mo interactive (97% cached) + ~$32/mo cron ≈ **$680/mo total**
+- **Operator-gated decisions** (awaiting Ivan):
+  - DEMIURGE-113: provider for 79 dead crons
   - DEMIURGE-115: wire or delete `scripts/global-hard-stop-enforcer.py`
-  - ADR-0005 (PR #14 pending): libsodium blob disposition (quarantine / delete / commit-encrypted)
+  - ADR-0005: libsodium blob disposition (quarantine / delete / commit-encrypted); deadline 2026-10-03
+  - **litellm billing**: `primary` → Cerebras 402, `fast` → NIM 410, `reasoning` → NIM timeout (all dead). 4 jobs using `model=primary` are failing. Need operator decision: pay Cerebras, switch to MiniMax-M3, or disable.
 
 ---
 
