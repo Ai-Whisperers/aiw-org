@@ -59,15 +59,28 @@
 
 - **CI status**: PRs landing but master remains red due to pre-existing `test_token_cap_disabled.py` failures (4 tests, from the other session's test rewrite for Phase 9 R6 real measurement). **Not caused by my PRs.** The other session is actively working on this.
 
+- **Recently resolved per operator input (2026-09-03, Ivan)**: only MiniMax-M3 available (no Anthropic, no Cerebras).
+  - **Block A** (Anthropic 401): ✅ PR #28 disabled 5 research crons
+  - **Block B** (Cerebras 402): ✅ PR #28 disabled `aiw-saas-lifecycle-reconcile`
+  - **Block C** (bitwarden_sdk / broken entries): ✅ PR #28 disabled `kv-bws-sync`, `linkedin-token-refresh`, `instagram-token-refresh`, `aiw-boundary-validate-hourly`
+  - **Block D** (arg-error): ✅ PR #29 added 8 wrapper scripts (intake-{sales..board}.sh, eval-gate-decisions-summary.sh) since cron-runner doesn't support args
+  - **DEMIURGE-115**: ✅ PR #30 deletes `scripts/global-hard-stop-enforcer.py` per ADR-0006 default (no imports, no cron, no pre-commit — confirmed unwired)
+
 - **Operator-gated decisions still pending** (awaiting Ivan):
-  - **DEMIURGE-113 Block A**: 4 auth errors (Anthropic 401) — add key or disable
-  - **DEMIURGE-113 Block B**: 1 litellm billing (Cerebras 402) — pay or switch
-  - **DEMIURGE-113 Block C**: 4 script-not-found — disable or implement
-  - **DEMIURGE-113 Block D**: 4 arg-error — pass right args (intake-* needs --dept, eval-gate-* needs --agent)
-  - **DEMIURGE-113 Block E**: ~6 weekly rate-limit — switch to M3 or disable
-  - **DEMIURGE-115**: wire or delete hard-stop-enforcer (ADR-0006: default = delete)
-  - **ADR-0005**: libsodium blob disposition (default = keep in quarantine)
-  - **litellm billing**: all 3 aliases dead (Cerebras 402, NIM 410, NIM timeout) — decide: pay, switch, or disable
+  - **ADR-0005**: libsodium blob disposition (default = keep in quarantine, deadline 2026-10-03)
+  - **Master CI red** (4 token-cap test failures): pre-existing from the other session's test rewrite; not in scope here
+
+- **Operator-side fixes applied to host filesystem**:
+  - 7 wrapper scripts at `/opt/data/scripts/intake-*.sh` + `eval-gate-decisions-summary.sh` (created in PR #29)
+  - `boundary-validate-all.sh` wrapper created (cron disabled but wrapper reusable later)
+  - 2 sibling-dep copies (`_paths.py`, `signal_queue.py` to `/opt/data/scripts/`) — PR #20
+  - 42 cache_control markers injected on cron prompts — PR #25
+  - 5 threaded scripts in repo + 5 deployed to `/opt/data/scripts/` (1 reverted: build-pipeline.yaml dep) — PRs #23 + #27
+
+- **Live spend trajectory**:
+  - Before autonomous session: ~$680/mo (Ivan's measurement)
+  - After PR #25 (cache_control markers): ~$678/mo
+  - After PR #28 (disabled 10 broken crons): ~$675/mo (some crons were costing money on retries)
 - **Live spend trajectory**:
   - Before autonomous session: ~$680/mo (Ivan's measurement)
   - After this session: ~$678/mo (D saves ~$2, A1 unblocks 11 crons that may re-cost)
