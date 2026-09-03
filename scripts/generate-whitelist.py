@@ -29,7 +29,17 @@ import re
 from datetime import datetime, timezone
 from pathlib import Path
 
-ROOT = Path("/opt/data/agents")
+# --- AIW_ROOT path bootstrap (DEMIURGE-098) ---
+import sys as _sys_bootstrap_098
+from pathlib import Path as _Path_bootstrap_098
+_PY_PATHS_ROOT = _Path_bootstrap_098(__file__).resolve().parent.parent
+if str(_PY_PATHS_ROOT) not in _sys_bootstrap_098.path:
+    _sys_bootstrap_098.path.insert(0, str(_PY_PATHS_ROOT))
+from _paths import AGENTS, AIW_ROOT
+# --- end bootstrap ---
+
+
+ROOT = AGENTS
 OUTPUT = Path("/opt/data/state/dept-whitelists-defaults.jsonl")
 OUTPUT.parent.mkdir(parents=True, exist_ok=True)
 
