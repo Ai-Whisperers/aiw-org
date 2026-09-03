@@ -93,6 +93,7 @@ def test_curator_evolver_agents_exist():
     assert (REPO / "demiurge" / "agents" / "homunculus" / "PROMPT.md").exists()
 
 
+@pytest.mark.slow  # integration: requires production state
 def test_3_instinct_crons_wired():
     """3 instinct integration cron entries should be wired."""
     cron_path = Path("/opt/data/.hermes/cron/jobs.json")

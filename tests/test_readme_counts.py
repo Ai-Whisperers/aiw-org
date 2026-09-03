@@ -12,6 +12,8 @@ import sys
 import unittest
 from pathlib import Path
 
+import pytest
+
 REPO = Path(__file__).parent.parent
 SCRIPT = REPO / "scripts" / "readme-counts.py"
 
@@ -77,6 +79,7 @@ class TestMeasurementFunctions(unittest.TestCase):
         self.assertIsInstance(n, int)
         self.assertGreaterEqual(n, 0)
 
+    @pytest.mark.slow  # integration: requires production state
     def test_count_research_areas_returns_52(self):
         """The README claims 52; the script must agree."""
         n = self.mod.count_research_areas()

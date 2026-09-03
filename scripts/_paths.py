@@ -40,15 +40,17 @@ from pathlib import Path
 _AIW_ROOT = Path(os.environ.get("AIW_ROOT", "/opt/data")).resolve()
 
 # Core directory roots. Each is derived from AIW_ROOT so a single env var
-# repoints everything in a deployed instance.
+# repoints everything in a deployed instance. Paths are .resolve()d so
+# /opt/data/agents (a symlink in CI) and /opt/data/agents (a real dir in
+# production) compare equal in tests.
 AIW_ROOT: Path = _AIW_ROOT
-STATE: Path = _AIW_ROOT / "state"
-AGENTS: Path = _AIW_ROOT / "agents"
-CRON: Path = _AIW_ROOT / ".hermes" / "cron"
-WORK: Path = _AIW_ROOT / "agents-v2" / "work"
-HERMES: Path = _AIW_ROOT / ".hermes"
-SCHEMAS: Path = AGENTS / "schemas"
-OUTBOX: Path = _AIW_ROOT / "agents" / "outbox"
+STATE: Path = (_AIW_ROOT / "state").resolve()
+AGENTS: Path = (_AIW_ROOT / "agents").resolve()
+CRON: Path = (_AIW_ROOT / ".hermes" / "cron").resolve()
+WORK: Path = (_AIW_ROOT / "agents-v2" / "work").resolve()
+HERMES: Path = (_AIW_ROOT / ".hermes").resolve()
+SCHEMAS: Path = (_AIW_ROOT / "agents" / "schemas").resolve()
+OUTBOX: Path = (_AIW_ROOT / "agents" / "outbox").resolve()
 
 # Repo (where the code lives). Computed from this file's location.
 # scripts/_paths.py is at <REPO>/scripts/_paths.py, so REPO = parent.
