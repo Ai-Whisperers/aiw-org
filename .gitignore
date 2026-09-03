@@ -13,6 +13,9 @@
 # git's `*/` only matches a SINGLE directory level; `**/` matches any depth
 
 # Per-agent runtime output (outbox at any depth)
+# The double-star after outbox/ (**/*.md) catches files in nested
+# subdirs like outbox/signals/, outbox/scratch/, etc.
+**/outbox/**/*.md
 **/outbox/*.md
 **/outbox/*.bak
 **/outbox/.tick-*
@@ -23,6 +26,7 @@
 **/outbox/.daily.bak
 
 # Per-agent monitor notes (at any depth)
+**/monitor-notes/**/*.md
 **/monitor-notes/*.md
 **/monitor-notes/.coord-mirror-pre-*.bak
 **/monitor-notes/.funding-mirror-pre-*.bak
