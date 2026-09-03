@@ -23,8 +23,15 @@ import sys
 import unittest
 from pathlib import Path
 
+# Per Phase Kernel brief WS-2 item 3 + commit 35005e4:
+# token-cap.py in the repo is a deprecated stub (exits 0 always).
+# The operational copy at /opt/data/scripts/token-cap.py is the real
+# measurement version that cron actually runs. Tests target the
+# operational copy because that's what matters in production.
 REPO = Path(__file__).parent.parent
-SCRIPT = REPO / "scripts" / "token-cap.py"
+INREPO_SCRIPT = REPO / "scripts" / "token-cap.py"
+OPERATIONAL_SCRIPT = Path("/opt/data/scripts/token-cap.py")
+SCRIPT = OPERATIONAL_SCRIPT if OPERATIONAL_SCRIPT.exists() else INREPO_SCRIPT
 
 
 def load_module():
