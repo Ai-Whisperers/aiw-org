@@ -83,10 +83,15 @@ def test_token_ledger_record_runs():
 
 
 def test_token_cap_runs():
-    """token-cap.py runs against real ledger."""
+    """token-cap.py runs against real ledger.
+
+    Exit codes: 0=ok, 1=warning, 2=exceeded (all valid; cron reads last_status).
+    Token-cap was rewritten Phase 9 R6 to do real measurement, so the
+    output header changed from '[token-cap] DISABLED' to 'Token Cap (real-measured)'.
+    """
     r = _run("token-cap.py", [], timeout=10)
-    assert r.returncode in (0, 1)
-    assert "[token-cap]" in r.stdout
+    assert r.returncode in (0, 1, 2)
+    assert "Token Cap" in r.stdout or "[token-cap]" in r.stdout
 
 
 def test_commitments_extractor_runs():

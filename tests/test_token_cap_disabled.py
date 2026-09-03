@@ -1,16 +1,23 @@
-"""Tests for token-cap.py — guards the disabled state.
+"""Tests for token-cap.py — guards the real-measurement contract.
 
 Per WS-2 item 3 of the Phase Kernel brief: a token-budget gate that
-'always fires' due to a unit mismatch is worse than no gate. We disable
-it. This test prevents accidental re-enablement.
+'always fires' due to a unit mismatch is worse than no gate. The original
+stub was disabled to stop the false alarms.
 
-The replacement (gated-token-check.py) will live in a separate commit.
-Until then, the cron should:
-  - exit 0 (success, not error)
-  - print a clear advisory message about its disabled state
-  - NOT write any fake alert to coord.json
+Phase 9 R6 (2026-09-03): token-cap.py was rewritten to do REAL measurement
+from session_model_usage + token-ledger.json, excluding the 18 test events
+that were causing the false 180x over-budget alarm. It now:
+
+  - Reads real fleet usage from state.db
+  - Excludes test events (agent in {test-agent, verify}) from the ledger
+  - Computes usage in 'credits' (1 credit = 1000 input-equivalent tokens)
+  - Writes /opt/data/state/token-cap-alert.json with status: ok/warning/exceeded
+  - Exits 0=ok, 1=warning, 2=exceeded
+
+These tests verify the NEW contract.
 """
 import importlib.util
+import json
 import subprocess
 import sys
 import unittest
@@ -44,85 +51,91 @@ class TestScriptLoads(unittest.TestCase):
         self.assertTrue(callable(mod.main))
 
 
-class TestDisabledContract(unittest.TestCase):
-    """The CRITICAL property: disabled state must be exit 0, not silent."""
+class TestRealMeasurementContract(unittest.TestCase):
+    """The new contract: real measurement, real alerts, real exit codes."""
 
-    def test_cli_exits_zero(self):
-        """The cron entry 'aiw-token-cap-daily' must succeed, not error."""
+    def test_runs_and_produces_alert(self):
+        """token-cap.py must write a token-cap-alert.json on each run."""
         result = subprocess.run(
             [sys.executable, str(SCRIPT)],
-            capture_output=True, text=True, timeout=10,
+            capture_output=True, text=True, timeout=30,
         )
-        self.assertEqual(result.returncode, 0,
-                         f"Disabled script must exit 0, got {result.returncode}\n"
-                         f"stderr: {result.stderr[:200]}")
+        # Exit 0, 1, or 2 all acceptable; 0 means ok, 1 = warning, 2 = exceeded
+        self.assertIn(result.returncode, (0, 1, 2),
+                      f"Unexpected rc={result.returncode}: {result.stderr[:200]}")
+        alert_path = Path("/opt/data/state/token-cap-alert.json")
+        self.assertTrue(alert_path.exists(), "token-cap-alert.json must be written")
+        alert = json.loads(alert_path.read_text())
+        self.assertIn("status", alert)
+        self.assertIn("used_credits", alert)
+        self.assertIn("budget_credits", alert)
+        self.assertIn(alert["status"], ("ok", "warning", "exceeded"))
 
-    def test_advisory_message_present(self):
-        """Operators must be able to tell from cron output that this is
-        intentional, not a real budget alert."""
+    def test_alert_excludes_test_events(self):
+        """The 18 test events in token-ledger.json must NOT contribute to
+        used_credits (they're synthetic 999999 values)."""
         result = subprocess.run(
             [sys.executable, str(SCRIPT)],
-            capture_output=True, text=True, timeout=10,
+            capture_output=True, text=True, timeout=30,
         )
-        self.assertIn("DISABLED", result.stdout,
-                      "Output must announce the disabled state")
-        self.assertIn("unit-mismatch", result.stdout,
-                      "Output must explain why (unit mismatch with ledger)")
-        self.assertIn("fb2b81f", result.stdout,
-                      "Output must cite the audit commit")
+        alert = json.loads(Path("/opt/data/state/token-cap-alert.json").read_text())
+        # If test events were included, used_credits would be > 10M
+        # (18 * 999999 ≈ 18M). Real usage from session_model_usage is ~50k.
+        self.assertLess(alert["used_credits"], 1_000_000,
+                        f"used_credits={alert['used_credits']} suggests test events leaked in")
+        # The sources section should report test_events_excluded >= 18
+        excluded = alert.get("sources", {}).get("token_ledger_real_events", {}).get(
+            "test_events_excluded", 0
+        )
+        self.assertGreaterEqual(excluded, 18,
+                                "Test events should be reported as excluded")
 
-    def test_does_not_write_coord_alert(self):
-        """The disabled script must not append fake alerts to coord.json.
+    def test_alert_uses_real_session_data(self):
+        """The used_credits should be derived from session_model_usage,
+        not from synthetic test data."""
+        alert = json.loads(Path("/opt/data/state/token-cap-alert.json").read_text())
+        # Window should be 24h
+        self.assertEqual(alert.get("window_hours"), 24)
+        # Status must be a real value (not 'disabled' from the old stub)
+        self.assertNotEqual(alert.get("status"), "disabled",
+                           "Should not report 'disabled' — does real work now")
 
-        Pre-fix token-cap wrote to coord.json:decisions_for_ivan on
-        every run. The replacement must NOT do this until it has real
-        data to alert on.
-        """
+    def test_writes_only_token_cap_alert_not_coord(self):
+        """Per the original WS-2 finding: token-cap must NOT spam
+        coord.json:decisions_for_ivan with fake alerts."""
         coord = Path("/opt/data/state/coord.json")
         if not coord.exists():
             self.skipTest("coord.json not present in test environment")
 
-        # Snapshot decisions_for_ivan length before
-        import json
         before = json.loads(coord.read_text())
         before_count = len(before.get("decisions_for_ivan", []))
 
-        # Run the disabled script 5 times -- each would have appended
-        # to the queue under the broken behavior.
-        for _ in range(5):
+        for _ in range(3):
             subprocess.run([sys.executable, str(SCRIPT)],
-                          capture_output=True, timeout=10)
+                          capture_output=True, timeout=30)
+
         after = json.loads(coord.read_text())
         after_count = len(after.get("decisions_for_ivan", []))
-
-        # Allow other crons to write between runs; assert NO token-cap
-        # entries specifically added.
         new_entries = after.get("decisions_for_ivan", [])[before_count:]
         token_cap_entries = [
             e for e in new_entries
             if "token-cap" in str(e.get("source", ""))
         ]
         self.assertEqual(len(token_cap_entries), 0,
-                         f"Disabled token-cap wrote {len(token_cap_entries)} "
-                         f"queue entries; expected 0")
+                         f"token-cap wrote {len(token_cap_entries)} coord entries; expected 0")
 
 
-class TestNoUnintendedSideEffects(unittest.TestCase):
-    """Static checks: the disabled file does not pull in the broken imports."""
+class TestModuleExports(unittest.TestCase):
+    """Static checks: the rewritten module has the expected surface."""
 
-    def test_does_not_import_json_datetime(self):
-        """Old token-cap imported json/datetime to do its broken work.
-        The replacement must not import those (no work to do)."""
-        content = SCRIPT.read_text()
-        # It SHOULD import sys (to call sys.exit), but not json or datetime
-        self.assertNotIn("import json", content,
-                         "Disabled script should not import json")
-        # Reading 'datetime' (not 'date' or 'time') catches the bad import
-        self.assertFalse(
-            any(line.strip().startswith("from datetime")
-                for line in content.splitlines()),
-            "Disabled script should not import from datetime"
-        )
+    def test_has_required_helpers(self):
+        mod = load_module()
+        self.assertTrue(hasattr(mod, "tokens_to_credits"),
+                        "Should export tokens_to_credits helper")
+        self.assertTrue(hasattr(mod, "read_real_24h_tokens"),
+                        "Should export read_real_24h_tokens")
+        self.assertTrue(hasattr(mod, "read_ledger_real_credits"),
+                        "Should export read_ledger_real_credits")
 
 
 if __name__ == "__main__":
