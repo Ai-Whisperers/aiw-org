@@ -4,7 +4,7 @@
 > Required by AGENTS.md ("Before declaring work done — update HANDOFF.md").
 > Read this FIRST when starting a new session. Update LAST when ending.
 
-**Last updated:** 2026-09-01 (updated 2026-09-01T17:40Z with Round 9 changes)
+**Last updated:** 2026-09-03 (refreshed with PRs #6, #9, #10, #11, #12, #13)
 **Maintainer:** AIW org (Ivan Weiss Van Der Pol)
 
 ---
@@ -48,19 +48,51 @@
 
 ## In progress
 
-- **Adopt obra's "Use when..." frontmatter discipline** in next 3 PROMPT.md files Ivan writes (skill authoring convention).
-- **Wire `verification-before-completion` skill** into all future assistant outputs (the preamble-stall cure).
-- **Investigate `affaan-m/ECC` instincts YAML format** as a pattern for `curator-evolver` outputs (see Round 4 §2).
+- **CI hermeticity** ✅ landed via PR #11 (Sep 3). Master CI green.
+- **Cron pathology repair** ✅ landed via PRs #12, #13 (Sep 3):
+  - PR #12: `aiw-security-watchdog-30min` outbox path fixed
+  - PR #13: `aiw-signal-indexer` cron-runner policy block fixed
+- **AIW_ROOT threading** — 15/107 scripts threaded (PRs #2, #6, #9 done). Resuming in next session.
+- **Operator-gated decisions** (not yet addressed; awaiting Ivan):
+  - DEMIURGE-113: provider for 79 dead crons (operator decision)
+  - DEMIURGE-115: wire or delete `scripts/global-hard-stop-enforcer.py`
+  - ADR-0005 (PR #14 pending): libsodium blob disposition (quarantine / delete / commit-encrypted)
+
+---
+
+## Recently merged (last 7 days)
+
+| PR | Title | Lines | Date |
+|---|---|---|---|
+| #13 | fix(cron): signal-indexer script path | +188 | 2026-09-03 |
+| #12 | fix(cron): security-watchdog-30min outbox path | +195 | 2026-09-03 |
+| #11 | fix(ci): hermetic AIW_ROOT fixture | +77/-13 | 2026-09-03 |
+| #10 | docs(cron): salvage DEMIURGE-121 audit | +294/-0 | 2026-09-03 |
+| #9 | WS-3 step 5: thread 5 scripts via AIW_ROOT | +55/-5 | 2026-09-03 |
+| #6 | WS-3 step 4: thread 5 observability scripts | +56/-6 | 2026-09-03 |
+| #5 | WS-2 CI gate + readme-counts | (already merged Sep 2) | 2026-09-02 |
+| #4 | WS-research: YouTube fetcher + David Ondrej | (already merged Sep 2) | 2026-09-02 |
+| #3 | WS-1 finish: trust window audit + 7 stubs | (already merged Sep 2) | 2026-09-02 |
+| #2 | WS-3 step 1+2: AIW_ROOT helper | (already merged Sep 2) | 2026-09-02 |
 
 ---
 
 ## Known pitfalls / blockers
 
-1. **`scripts/observability/agent-tracer.py` had been silently no-op since some prior edit.** Fixed this session but worth flagging in any future audit of "why isn't this script running?".
-2. **`state/agent-traces.jsonl` went stale 2026-08-21** (before this session). Now has 181 entries after the tracer fix.
+1. **`scripts/observability/agent-tracer.py` had been silently no-op since some prior edit.** Fixed in 2026-09-01 session but worth flagging in any future audit of "why isn't this script running?".
+2. **`state/agent-traces.jsonl` went stale 2026-08-21** (before 2026-09-01 session). Now has 181 entries after the tracer fix.
 3. **Scanner blocks some obra skills with DANGEROUS verdict** (`writing-skills`, `using-superpowers`). Would need manual source audit before installing.
 4. **GitHub API rate limiting** limited some contributor-network queries. Future sessions should pre-cache via `gh api` with auth.
 5. **`state/coord.json` schema is free-form** — lacks the structured `commitments[]` array pattern from iPythoning's memory schema. Would need migration.
+6. **6 unscheduled scripts are correctly so** (per audit 2026-09-03):
+   - `restore-prompt-bodies.py` — CI-only (run by `.github/workflows/ci.yml`)
+   - `strict-schemas.py` — one-shot migration tool
+   - `lint-prompts.py` — CI-only
+   - `readme-counts.py` — CI-only
+   - `thread-aiw-root.py` — refactor helper, run by humans/subagents
+   - `results-collector.py` — invoked by other cron jobs or subagents, NOT standalone
+   Do NOT wire these to cron without changing their semantics first.
+7. **Cron drift trap** — `jobs.json` reverts between turns. The cron-sync.sh script auto-resolves drift but watch for it on multi-day sprints.
 
 ---
 
