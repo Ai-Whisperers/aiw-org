@@ -22,7 +22,28 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install pytest pyyaml
+          pip install pytest pyyaml croniter
+
+      # PR1 (DEMIURGE-099): Hermetic AIW_ROOT fixture.
+      # ~20 test modules hardcode Path('/opt/data/...') at module-import
+      # time. The GH Actions runner has no /opt/data, so the tests fail
+      # with FileNotFoundError. We populate /opt/data/state, /opt/data/agents,
+      # /opt/data/.hermes/cron, and /opt/data/.venv with empty fixtures so
+      # those Path() calls resolve. On a real production host where /opt/data
+      # already exists, tests/conftest.py detects this and is a no-op.
+      - name: Setup hermetic AIW_ROOT fixture
+        run: |
+          mkdir -p /tmp/aiw-fixture/state
+          mkdir -p /tmp/aiw-fixture/agents/scripts
+          mkdir -p /tmp/aiw-fixture/agents/demiurge/agents
+          mkdir -p /tmp/aiw-fixture/.hermes/cron
+          mkdir -p /tmp/aiw-fixture/.venv/bin
+          touch /tmp/aiw-fixture/.venv/bin/python3
+          echo '{"jobs": []}' > /tmp/aiw-fixture/.hermes/cron/jobs.json
+          export HERMETIC_AIW_ROOT=/tmp/aiw-fixture
+          # conftest.py auto-populates /opt/data from the fixture if /opt/data
+          # is empty. We don't pre-populate here because conftest is the
+          # single source of truth for the setup shape.
 
       - name: Run lint (PROMPT frontmatter + structure)
         run: |
@@ -36,6 +57,7 @@ jobs:
           # Conditional pytest.skip() in test bodies (for missing
           # preconditions) is allowed; bare @unittest.skip /
           # @pytest.mark.skip DECORATORS are not.
+          export HERMETIC_AIW_ROOT=/tmp/aiw-fixture
           python -m pytest tests/ -v --tb=short -m 'not slow'
 
       - name: R1 gate - any @skip decorator fails the build
@@ -55,7 +77,9 @@ jobs:
 
       - name: Body-preservation gate (PROMPT.md files >= 20 lines)
         run: |
-          python scripts/restore-prompt-bodies.py --verify || true
+          # PR1: was `|| true` (swallowed failures). Now fail loud so
+          # PROMPT-body regressions block the build.
+          python scripts/restore-prompt-bodies.py --verify
 
       - name: (Optional) Slow tests - run on schedule/manual dispatch
         if: github.event_name == 'workflow_dispatch' || contains(github.event.head_commit.message, '[run-slow]')
