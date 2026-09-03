@@ -33,11 +33,11 @@ jobs:
       - name: Setup hermetic AIW_ROOT fixture
         run: |
           REPO="$GITHUB_WORKSPACE"
+          # /opt/data doesn't exist on GH Actions Ubuntu runners. Create it.
+          mkdir -p /opt/data
           # /opt/data/agents -> REPO (so /opt/data/agents/scripts/X.py works)
-          if [ ! -e /opt/data/agents ]; then
-            ln -s "$REPO" /opt/data/agents
-            echo "Linked /opt/data/agents -> $REPO"
-          fi
+          ln -sfn "$REPO" /opt/data/agents
+          echo "Linked /opt/data/agents -> $REPO"
           # /opt/data/.venv/bin/python3 -> real python (some tests subprocess-run this)
           mkdir -p /opt/data/.venv/bin
           ln -sf "$(which python)" /opt/data/.venv/bin/python3
@@ -47,17 +47,13 @@ jobs:
           # /opt/data/state -> empty dir (tests check for files here)
           mkdir -p /opt/data/state
           # /opt/data/scripts -> REPO/scripts (some tests reference this)
-          if [ ! -e /opt/data/scripts ]; then
-            ln -s "$REPO/scripts" /opt/data/scripts
-            echo "Linked /opt/data/scripts -> $REPO/scripts"
-          fi
+          ln -sfn "$REPO/scripts" /opt/data/scripts
+          echo "Linked /opt/data/scripts -> $REPO/scripts"
           # /opt/data/agents-v2/aiw-org-clone/scripts -> REPO/scripts
           # (some restore-prompt-bodies tests look here)
           mkdir -p /opt/data/agents-v2/aiw-org-clone
-          if [ ! -e /opt/data/agents-v2/aiw-org-clone/scripts ]; then
-            ln -s "$REPO/scripts" /opt/data/agents-v2/aiw-org-clone/scripts
-            echo "Linked /opt/data/agents-v2/aiw-org-clone/scripts -> $REPO/scripts"
-          fi
+          ln -sfn "$REPO/scripts" /opt/data/agents-v2/aiw-org-clone/scripts
+          echo "Linked /opt/data/agents-v2/aiw-org-clone/scripts -> $REPO/scripts"
           ls -la /opt/data
 
       - name: Run lint (PROMPT frontmatter + structure)
