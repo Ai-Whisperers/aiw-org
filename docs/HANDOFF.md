@@ -275,6 +275,18 @@ See `/opt/data/profiles/ivan/plans/2026-09-01-aiw-research-round-4-upgrades-temp
 
 ---
 
+## Kanban deliverable — 2026-09-03 21:00Z (task t_0a292a93)
+
+**Filled 188 internal questions** — 90-min session with Kiki.
+
+- Source: `research/188-questions-for-ivan.md` (Erebus, 2026-08-13)
+- Output: `/opt/data/source-materials/internal-answers.md` (18 KB, 183 of 185 questions drafted, 21 marked `# TODO: ivan-review` for real data gaps)
+- Host-side path; same pattern as `/opt/data/scripts/` cron wrappers (PR #20, #29)
+- Coverage map at the bottom of the file: Priority A 70/70, B 65/65, C 37/37, D 13/13 — all sections drafted; only the 21 `TODO` markers need operator confirmation
+- Next: auto-generate SWOT / BCG / 12-month OKRs from this draft per Erebus' downstream spec
+
+---
+
 ## Phase 9 R4–R5 update (2026-09-01, 22:00 UTC)
 
 ### Risk mitigations shipped (5 risks from `board/risk-register-2026.md`)
