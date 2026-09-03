@@ -4,7 +4,7 @@
 > Required by AGENTS.md ("Before declaring work done — update HANDOFF.md").
 > Read this FIRST when starting a new session. Update LAST when ending.
 
-**Last updated:** 2026-09-03 (refreshed with PRs #6, #9, #10, #11, #12, #13, #14, #15, #16, #17, #18, revert of #19, and the symlink-loop bugfix that restored master CI green)
+**Last updated:** 2026-09-03 05:30Z (refreshed with PRs #20-#25 — Track A1-A4, B, D complete; C corrected)
 **Maintainer:** AIW org (Ivan Weiss Van Der Pol)
 
 ---
@@ -48,27 +48,29 @@
 
 ## In progress
 
-- **CI hermeticity** ✅ landed via PR #11. Master CI green.
-- **Cron pathology repair** ✅ landed via PRs #12, #13, #18 (Sep 3):
-  - PR #12: `aiw-security-watchdog-30min` outbox path fixed
-  - PR #13: `aiw-signal-indexer` cron-runner policy block fixed
-  - PR #18: batch-fixed 22 additional path-blocked crons
-- **AIW_ROOT threading** — 15/107 scripts threaded (PRs #2, #6, #9). PR #19 was attempted but reverted due to a CI symlink-loop bug; the loop was broken by the subsequent symlink→real-file bugfix.
-- **Symlink-loop bugfix (this session)** ✅ — `scripts/cost-per-cron.py` and `scripts/token-cap.py` were committed as symlinks in PR #18, which created a CI loop (symlink → /opt/data/scripts → repo/scripts → symlink). Replaced with real files; CI now green.
-- **AIW token audit** ✅ landed via Ivan's autonomous session (commits `c015e80`, `a63d1c8`, `b213dd4`):
-  - 22 MiniMax-M3 watchdog agents replaced by `scripts/aiw-unified-monitor.py`
-  - 70 → 42 enabled MiniMax-M3 jobs
-  - 6 broken-429 weekly jobs paused (Cerebras billing)
-  - 3 broken-name jobs paused
-  - 23 workdir-fixed jobs
-  - 25 PATs stripped across /opt/data
-  - coord.json: 551 → 50 decisions, rest archived
-  - Live spend: ~$634/mo interactive (97% cached) + ~$32/mo cron ≈ **$680/mo total**
-- **Operator-gated decisions** (awaiting Ivan):
-  - DEMIURGE-113: provider for 79 dead crons
-  - DEMIURGE-115: wire or delete `scripts/global-hard-stop-enforcer.py`
-  - ADR-0005: libsodium blob disposition (quarantine / delete / commit-encrypted); deadline 2026-10-03
-  - **litellm billing**: `primary` → Cerebras 402, `fast` → NIM 410, `reasoning` → NIM timeout (all dead). 4 jobs using `model=primary` are failing. Need operator decision: pay Cerebras, switch to MiniMax-M3, or disable.
+- **All planned tracks closed** (this session, PRs #20-#25):
+  - **A1** (cron sibling-dep auto-install): ✅ PR #20 (11 missing-dep crons fixed, 7+3)
+  - **A2** (DEMIURGE-113 provider decision): ✅ PR #21 — doc-only inventory; the "79 dead crons" was 32 actual, and the provider question applies to 1 cron (`aiw-saas-lifecycle-reconcile`)
+  - **A3** (DEMIURGE-115 hard-stop-enforcer): ✅ PR #22 — ADR-0006 with 3 disposition options, default = delete
+  - **A4** (ADR-0005 libsodium blob): ✅ already documented in PR #15; status quo (keep in quarantine)
+  - **B** (AIW_ROOT threading step 8): ✅ PR #23 — 5 more scripts threaded (20/107 total)
+  - **C** (profile-skill optimization): ✅ PR #24 — corrected the 126-skills claim; actual is 43, no per-load cost, optimization is moot
+  - **D** (cron prompt caching): ✅ PR #25 — 42 prompts now have `cache_control: ephemeral` markers; ~$2/mo estimated savings
+
+- **CI status**: PRs landing but master remains red due to pre-existing `test_token_cap_disabled.py` failures (4 tests, from the other session's test rewrite for Phase 9 R6 real measurement). **Not caused by my PRs.** The other session is actively working on this.
+
+- **Operator-gated decisions still pending** (awaiting Ivan):
+  - **DEMIURGE-113 Block A**: 4 auth errors (Anthropic 401) — add key or disable
+  - **DEMIURGE-113 Block B**: 1 litellm billing (Cerebras 402) — pay or switch
+  - **DEMIURGE-113 Block C**: 4 script-not-found — disable or implement
+  - **DEMIURGE-113 Block D**: 4 arg-error — pass right args (intake-* needs --dept, eval-gate-* needs --agent)
+  - **DEMIURGE-113 Block E**: ~6 weekly rate-limit — switch to M3 or disable
+  - **DEMIURGE-115**: wire or delete hard-stop-enforcer (ADR-0006: default = delete)
+  - **ADR-0005**: libsodium blob disposition (default = keep in quarantine)
+  - **litellm billing**: all 3 aliases dead (Cerebras 402, NIM 410, NIM timeout) — decide: pay, switch, or disable
+- **Live spend trajectory**:
+  - Before autonomous session: ~$680/mo (Ivan's measurement)
+  - After this session: ~$678/mo (D saves ~$2, A1 unblocks 11 crons that may re-cost)
 
 ---
 
