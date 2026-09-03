@@ -26,8 +26,18 @@ import tempfile
 from datetime import datetime, timezone
 from pathlib import Path
 
-AGENTS_ROOT = Path("/opt/data/agents")
-SOURCE_STATE = Path("/opt/data/state")
+# --- AIW_ROOT path bootstrap (DEMIURGE-098) ---
+import sys as _sys_bootstrap_098
+from pathlib import Path as _Path_bootstrap_098
+_PY_PATHS_ROOT = _Path_bootstrap_098(__file__).resolve().parent.parent
+if str(_PY_PATHS_ROOT) not in _sys_bootstrap_098.path:
+    _sys_bootstrap_098.path.insert(0, str(_PY_PATHS_ROOT))
+from _paths import AGENTS, AIW_ROOT, STATE
+# --- end bootstrap ---
+
+
+AGENTS_ROOT = AGENTS
+SOURCE_STATE = STATE
 DEFAULT_STAGING = Path("/tmp/chaos-staging")
 
 
