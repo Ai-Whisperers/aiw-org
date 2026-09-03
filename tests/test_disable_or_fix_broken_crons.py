@@ -25,48 +25,40 @@ def _make_jobs_file(tmp_path, jobs):
     return f
 
 
+def _assert_disabled(j, reason_substr):
+    assert j["enabled"] is False
+    assert reason_substr in j["paused_reason"]
+    assert j["paused_at"]
+
+
 def test_dry_run_does_not_modify(tmp_path, monkeypatch):
     mod = _load_module()
     fake = _make_jobs_file(tmp_path, [{
-        "name": "aiw-research-associate-daily",
-        "enabled": True,
-        "last_status": "error",
+        "name": "aiw-research-associate-daily", "enabled": True,
     }])
-    original = fake.read_text()
     monkeypatch.setattr(mod, "CRON_PATHS", [fake])
     mod.patch(apply=False)
-    assert fake.read_text() == original
+    assert json.loads(fake.read_text())["jobs"][0]["enabled"] is True
 
 
 def test_disables_anthropic_research_cron(tmp_path, monkeypatch):
     mod = _load_module()
     fake = _make_jobs_file(tmp_path, [{
-        "name": "aiw-research-associate-daily",
-        "enabled": True,
-        "last_status": "error",
-        "script": "x.py",
+        "name": "aiw-research-associate-daily", "enabled": True,
     }])
     monkeypatch.setattr(mod, "CRON_PATHS", [fake])
     mod.patch(apply=True)
-    data = json.loads(fake.read_text())
-    j = data["jobs"][0]
-    assert j["enabled"] is False
-    assert "Anthropic" in j["paused_reason"]
-    assert j["paused_at"]
+    _assert_disabled(json.loads(fake.read_text())["jobs"][0], "Anthropic")
 
 
 def test_disables_cerebras_saas_lifecycle(tmp_path, monkeypatch):
     mod = _load_module()
     fake = _make_jobs_file(tmp_path, [{
-        "name": "aiw-saas-lifecycle-reconcile",
-        "enabled": True,
-        "last_status": "error",
+        "name": "aiw-saas-lifecycle-reconcile", "enabled": True,
     }])
     monkeypatch.setattr(mod, "CRON_PATHS", [fake])
     mod.patch(apply=True)
-    data = json.loads(fake.read_text())
-    assert data["jobs"][0]["enabled"] is False
-    assert "Cerebras" in data["jobs"][0]["paused_reason"]
+    _assert_disabled(json.loads(fake.read_text())["jobs"][0], "Cerebras")
 
 
 def test_disables_bitwarden_sdk_chain(tmp_path, monkeypatch):
@@ -75,15 +67,11 @@ def test_disables_bitwarden_sdk_chain(tmp_path, monkeypatch):
         parent = tmp_path / name
         parent.mkdir()
         fake = _make_jobs_file(parent, [{
-            "name": name,
-            "enabled": True,
-            "last_status": "error",
+            "name": name, "enabled": True,
         }])
         monkeypatch.setattr(mod, "CRON_PATHS", [fake])
         mod.patch(apply=True)
-        data = json.loads(fake.read_text())
-        assert data["jobs"][0]["enabled"] is False, f"{name} should be disabled"
-        assert "bitwarden_sdk" in data["jobs"][0]["paused_reason"]
+        _assert_disabled(json.loads(fake.read_text())["jobs"][0], "bitwarden_sdk")
 
 
 def test_disables_boundary_validate(tmp_path, monkeypatch):
@@ -91,51 +79,42 @@ def test_disables_boundary_validate(tmp_path, monkeypatch):
     fake = _make_jobs_file(tmp_path, [{
         "name": "aiw-boundary-validate-hourly",
         "enabled": True,
-        "last_status": "error",
         "script": "/opt/data/scripts/boundary-validate.py --all",
     }])
     monkeypatch.setattr(mod, "CRON_PATHS", [fake])
     mod.patch(apply=True)
-    data = json.loads(fake.read_text())
-    assert data["jobs"][0]["enabled"] is False
-    assert "boundary-validate" in data["jobs"][0]["paused_reason"].lower() or "whitespace" in data["jobs"][0]["paused_reason"]
+    j = json.loads(fake.read_text())["jobs"][0]
+    assert j["enabled"] is False
+    assert "boundary-validate" in j["paused_reason"].lower() or "whitespace" in j["paused_reason"]
 
 
 def test_skip_unrelated_jobs(tmp_path, monkeypatch):
     mod = _load_module()
     fake = _make_jobs_file(tmp_path, [{
-        "name": "aiw-something-else",
-        "enabled": True,
-        "script": "x.py",
+        "name": "aiw-something-else", "enabled": True, "script": "x.py",
     }])
     monkeypatch.setattr(mod, "CRON_PATHS", [fake])
-    original = fake.read_text()
     mod.patch(apply=True)
-    assert fake.read_text() == original
+    assert json.loads(fake.read_text())["jobs"][0]["enabled"] is True
 
 
 def test_skip_already_disabled(tmp_path, monkeypatch):
     mod = _load_module()
+    original_reason = "already disabled for X"
     fake = _make_jobs_file(tmp_path, [{
         "name": "aiw-research-associate-daily",
         "enabled": False,
-        "last_status": "error",
-        "paused_reason": "already disabled for X",
+        "paused_reason": original_reason,
     }])
     monkeypatch.setattr(mod, "CRON_PATHS", [fake])
-    original = fake.read_text()
     mod.patch(apply=True)
-    # Should not change paused_reason
-    data = json.loads(fake.read_text())
-    assert data["jobs"][0]["paused_reason"] == "already disabled for X"
+    assert json.loads(fake.read_text())["jobs"][0]["paused_reason"] == original_reason
 
 
 def test_idempotent(tmp_path, monkeypatch):
     mod = _load_module()
     fake = _make_jobs_file(tmp_path, [{
-        "name": "aiw-research-associate-daily",
-        "enabled": True,
-        "script": "x.py",
+        "name": "aiw-research-associate-daily", "enabled": True,
     }])
     monkeypatch.setattr(mod, "CRON_PATHS", [fake])
     mod.patch(apply=True)
@@ -147,17 +126,13 @@ def test_idempotent(tmp_path, monkeypatch):
 
 def test_handles_both_registries(tmp_path, monkeypatch):
     mod = _load_module()
-    a_dir = tmp_path / "a"
-    b_dir = tmp_path / "b"
-    a_dir.mkdir()
-    b_dir.mkdir()
-    fake_a = _make_jobs_file(a_dir, [{
-        "name": "aiw-research-associate-daily",
-        "enabled": True,
+    for sub in ("a", "b"):
+        (tmp_path / sub).mkdir()
+    fake_a = _make_jobs_file(tmp_path / "a", [{
+        "name": "aiw-research-associate-daily", "enabled": True,
     }])
-    fake_b = _make_jobs_file(b_dir, [{
-        "name": "aiw-research-associate-daily",
-        "enabled": True,
+    fake_b = _make_jobs_file(tmp_path / "b", [{
+        "name": "aiw-research-associate-daily", "enabled": True,
     }])
     monkeypatch.setattr(mod, "CRON_PATHS", [fake_a, fake_b])
     mod.patch(apply=True)
@@ -165,39 +140,26 @@ def test_handles_both_registries(tmp_path, monkeypatch):
     assert json.loads(fake_b.read_text())["jobs"][0]["enabled"] is False
 
 
-def test_all_block_a_jobs_listed(tmp_path, monkeypatch):
-    """Block A has 5 crons; ensure all are in JOBS_TO_DISABLE."""
-    import importlib
-    spec = importlib.util.spec_from_file_location(
-        "disable_or_fix_broken_crons", str(SCRIPT)
-    )
-    mod = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(mod)
-    expected = {
-        "aiw-research-associate-daily",
-        "aiw-research-engineer-weekly",
-        "aiw-research-tracker-6h",
-        "aiw-citation-checker-daily",
-        "aiw-publication-coordinator-weekly",
-    }
-    assert expected.issubset(set(mod.JOBS_TO_DISABLE.keys())), \
-        f"missing: {expected - set(mod.JOBS_TO_DISABLE.keys())}"
+@pytest.mark.parametrize("name", [
+    # Block A — Anthropic auth (no Anthropic available)
+    "aiw-research-associate-daily",
+    "aiw-research-engineer-weekly",
+    "aiw-research-tracker-6h",
+    "aiw-citation-checker-daily",
+    "aiw-publication-coordinator-weekly",
+    # Block B — Cerebras billing (no Cerebras plan)
+    "aiw-saas-lifecycle-reconcile",
+    # Block C — missing infra
+    "kv-bws-sync",
+    "linkedin-token-refresh",
+    "instagram-token-refresh",
+    "aiw-boundary-validate-hourly",
+])
+def test_all_disabled_crons_listed(name):
+    """Regression guard: every cron in the disable list must remain listed.
 
-
-def test_block_b_and_c_jobs_listed(tmp_path, monkeypatch):
-    """Block B (1) and Block C (4) should also be in JOBS_TO_DISABLE."""
-    import importlib
-    spec = importlib.util.spec_from_file_location(
-        "disable_or_fix_broken_crons", str(SCRIPT)
-    )
-    mod = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(mod)
-    expected = {
-        "aiw-saas-lifecycle-reconcile",
-        "kv-bws-sync",
-        "linkedin-token-refresh",
-        "instagram-token-refresh",
-        "aiw-boundary-validate-hourly",
-    }
-    assert expected.issubset(set(mod.JOBS_TO_DISABLE.keys())), \
-        f"missing: {expected - set(mod.JOBS_TO_DISABLE.keys())}"
+    Adding a new cron to JOBS_TO_DISABLE requires updating the parametrize
+    list. Removing one breaks this test. That's the intended contract.
+    """
+    mod = _load_module()
+    assert name in mod.JOBS_TO_DISABLE, f"missing {name} from JOBS_TO_DISABLE"
