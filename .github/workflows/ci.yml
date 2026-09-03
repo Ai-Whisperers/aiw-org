@@ -26,28 +26,39 @@ jobs:
 
       # PR1 (DEMIURGE-099): Hermetic AIW_ROOT fixture.
       # ~20 test modules hardcode Path('/opt/data/...') at module-import
-      # time. The GH Actions runner has no /opt/data, so the tests fail
-      # with FileNotFoundError. We populate /opt/data/state, /opt/data/agents,
-      # /opt/data/.hermes/cron, and /opt/data/.venv with empty fixtures so
-      # those Path() calls resolve. On a real production host where /opt/data
-      # already exists, tests/conftest.py detects this and is a no-op.
+      # time AND run subprocess commands against paths like
+      # /opt/data/agents/scripts/X.py. Solution: populate the various
+      # /opt/data/* subdirs as symlinks to either the repo (for code)
+      # or empty fixtures (for state).
       - name: Setup hermetic AIW_ROOT fixture
-        env:
-          HERMETIC_AIW_ROOT: /tmp/aiw-fixture
         run: |
-          mkdir -p /tmp/aiw-fixture/state
-          mkdir -p /tmp/aiw-fixture/agents/scripts
-          mkdir -p /tmp/aiw-fixture/agents/demiurge/agents
-          mkdir -p /tmp/aiw-fixture/.hermes/cron
-          mkdir -p /tmp/aiw-fixture/.venv/bin
-          touch /tmp/aiw-fixture/.venv/bin/python3
-          echo '{"jobs": []}' > /tmp/aiw-fixture/.hermes/cron/jobs.json
-          # Export so subsequent steps (and pytest) inherit HERMETIC_AIW_ROOT.
-          # tests/conftest.py reads it to populate /opt/data/ when empty.
-          echo "HERMETIC_AIW_ROOT=/tmp/aiw-fixture" >> "$GITHUB_ENV"
-          # conftest.py auto-populates /opt/data from the fixture if /opt/data
-          # is empty. We don't pre-populate here because conftest is the
-          # single source of truth for the setup shape.
+          REPO="$GITHUB_WORKSPACE"
+          # /opt/data/agents -> REPO (so /opt/data/agents/scripts/X.py works)
+          if [ ! -e /opt/data/agents ]; then
+            ln -s "$REPO" /opt/data/agents
+            echo "Linked /opt/data/agents -> $REPO"
+          fi
+          # /opt/data/.venv/bin/python3 -> real python (some tests subprocess-run this)
+          mkdir -p /opt/data/.venv/bin
+          ln -sf "$(which python)" /opt/data/.venv/bin/python3
+          # /opt/data/.hermes/cron/jobs.json -> empty jobs.json
+          mkdir -p /opt/data/.hermes/cron
+          echo '{"jobs": []}' > /opt/data/.hermes/cron/jobs.json
+          # /opt/data/state -> empty dir (tests check for files here)
+          mkdir -p /opt/data/state
+          # /opt/data/scripts -> REPO/scripts (some tests reference this)
+          if [ ! -e /opt/data/scripts ]; then
+            ln -s "$REPO/scripts" /opt/data/scripts
+            echo "Linked /opt/data/scripts -> $REPO/scripts"
+          fi
+          # /opt/data/agents-v2/aiw-org-clone/scripts -> REPO/scripts
+          # (some restore-prompt-bodies tests look here)
+          mkdir -p /opt/data/agents-v2/aiw-org-clone
+          if [ ! -e /opt/data/agents-v2/aiw-org-clone/scripts ]; then
+            ln -s "$REPO/scripts" /opt/data/agents-v2/aiw-org-clone/scripts
+            echo "Linked /opt/data/agents-v2/aiw-org-clone/scripts -> $REPO/scripts"
+          fi
+          ls -la /opt/data
 
       - name: Run lint (PROMPT frontmatter + structure)
         run: |
