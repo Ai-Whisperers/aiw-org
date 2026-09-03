@@ -65,11 +65,17 @@ def count_cron_jobs() -> int:
     The canonical cron registry is at /opt/data/.hermes/cron/jobs.json
     (NOT /opt/data/agents/.hermes/). The /agents path is a placeholder.
     """
-    cron_paths = [
+    # README_COUNTS_CRON env override (CI + test hermeticity).
+    # Prepended to the lookup list so a test can point at a fixture
+    # without monkey-patching module globals.
+    cron_paths = []
+    if "README_COUNTS_CRON" in _os.environ:
+        cron_paths.append(Path(_os.environ["README_COUNTS_CRON"]))
+    cron_paths.extend([
         Path("/opt/data/.hermes/cron/jobs.json"),  # canonical
         LIVE / ".hermes" / "cron" / "jobs.json",   # fallback
         REPO / ".hermes" / "cron" / "jobs.json",   # repo-clone fallback
-    ]
+    ])
     for cron_file in cron_paths:
         if cron_file.exists():
             try:

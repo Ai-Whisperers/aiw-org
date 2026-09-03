@@ -168,10 +168,20 @@ class TestCLIRun(unittest.TestCase):
         self.assertIn("--check", r.stdout)
 
     def test_check_returns_zero(self):
-        """If README is in sync, --check exits 0."""
+        """If README is in sync, --check exits 0.
+
+        Points the script at the bundled fixture (tests/fixtures/cron-jobs-168.json)
+        via README_COUNTS_CRON so the test is hermetic — independent of whether
+        the host has a real /opt/data/.hermes/cron/jobs.json that would shadow
+        the count.
+        """
+        import os
+        env = os.environ.copy()
+        env["README_COUNTS_CRON"] = str(REPO / "tests" / "fixtures" / "cron-jobs-168.json")
         r = subprocess.run(
             [sys.executable, str(SCRIPT), "--check"],
-            capture_output=True, text=True, timeout=10)
+            capture_output=True, text=True, timeout=10, env=env,
+        )
         self.assertEqual(r.returncode, 0,
                          f"--check failed:\n{r.stdout}\n{r.stderr}")
 
