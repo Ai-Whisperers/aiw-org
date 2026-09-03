@@ -1,22 +1,18 @@
 #!/usr/bin/env python3
-"""disable_or_fix_broken_crons.py - Patch broken crons (Sep 3, 2026 audit).
+"""disable_or_fix_broken_crons.py - Disable broken crons (Sep 3, 2026 audit).
 
-Two categories of broken crons handled:
+Marks jobs as disabled with paused_reason metadata so the decision is
+auditable. Idempotent: re-runs on already-disabled jobs are no-ops.
 
-A) DISABLE — no fix is reasonable without infrastructure we don't have:
-   - 5 research-dept crons (Anthropic auth errors; we only have MiniMax-M3)
-   - 1 aiw-saas-lifecycle-reconcile (Cerebras 402; no Cerebras plan)
-
-B) FIX CRON ENTRY — script exists, registry is misconfigured:
-   - kv-bws-sync: registry points at kv_bws_sync.sh (.sh wrapper never
-     created), .py file exists at /opt/data/scripts/kv_bws_sync.py
-   - linkedin-token-refresh: same pattern (.sh missing, .py exists)
-   - instagram-token-refresh: same pattern
-   - aiw-boundary-validate-hourly: registry has
-     'script': '/opt/data/scripts/boundary-validate.py --all' (entire
-     string is treated as one path). Fix: split path from args.
-
-Idempotent. Dry-run by default; --apply to write.
+Why disable rather than fix:
+- Block A (Anthropic 401 on 5 research crons): we only have MiniMax-M3.
+- Block B (Cerebras 402 on aiw-saas-lifecycle-reconcile): no Cerebras plan.
+- Block C (bitwarden_sdk missing on 3 token-refresh crons): the cron-runner
+  Python env doesn't have the dep and there's no system pip available.
+- Block C (aiw-boundary-validate-hourly): cron-runner doesn't split
+  script on whitespace; registry has 'boundary-validate.py --all' as one
+  path. Wrapper script at /opt/data/scripts/boundary-validate-all.sh
+  exists but the cron is disabled to keep registry clean.
 
 Refs: HANDOFF-PHASE-8.md ## MED, DEMIURGE-113 breakdown 2026-09-03.
 """
@@ -25,6 +21,7 @@ from __future__ import annotations
 import argparse
 import json
 import sys
+from datetime import datetime, timezone
 from pathlib import Path
 
 CRON_PATHS = [
@@ -32,30 +29,13 @@ CRON_PATHS = [
     Path("/opt/data/cron/jobs.json"),
 ]
 
-# Jobs to DISABLE. Two categories:
-#
-# 1. Wrong provider (we only have MiniMax-M3, no Anthropic or Cerebras):
-#    - 5 research-dept crons (Anthropic 401 auth errors)
-#    - 1 aiw-saas-lifecycle-reconcile (Cerebras 402 Payment Required)
-#
-# 2. Missing infrastructure (Python deps or scheduler support):
-#    - kv-bws-sync, linkedin-token-refresh, instagram-token-refresh:
-#      all need bitwarden_sdk which isn't in the cron-runner Python env
-#    - aiw-boundary-validate-hourly: cron entry shape is broken
-#      (script='/opt/data/scripts/boundary-validate.py --all' is one path);
-#      runner doesn't split on whitespace. A .sh wrapper was created
-#      at /opt/data/scripts/boundary-validate-all.sh but the cron is
-#      disabled anyway to keep registry clean.
 JOBS_TO_DISABLE = {
-    # Block A — Anthropic auth (no Anthropic available)
     "aiw-research-associate-daily": "Block A: Anthropic 401; only MiniMax-M3 available",
     "aiw-research-engineer-weekly": "Block A: Anthropic 401; only MiniMax-M3 available",
     "aiw-research-tracker-6h": "Block A: Anthropic 401; only MiniMax-M3 available",
     "aiw-citation-checker-daily": "Block A: Anthropic 401; only MiniMax-M3 available",
     "aiw-publication-coordinator-weekly": "Block A: Anthropic 401; only MiniMax-M3 available",
-    # Block B — Cerebras billing (no Cerebras plan)
     "aiw-saas-lifecycle-reconcile": "Block B: Cerebras 402 Payment Required; no Cerebras plan",
-    # Block C — missing infra (bitwarden_sdk or scheduler support)
     "kv-bws-sync": "Block C: requires bitwarden_sdk; not in cron-runner Python env",
     "linkedin-token-refresh": "Block C: requires bitwarden_sdk; not in cron-runner Python env",
     "instagram-token-refresh": "Block C: requires bitwarden_sdk; not in cron-runner Python env",
@@ -63,17 +43,18 @@ JOBS_TO_DISABLE = {
 }
 
 
-def _disable_job(j: dict, reason: str) -> bool:
-    """Mark job disabled with a paused_reason. Returns True if changed."""
+def _disable_job(j: dict, reason: str, paused_at: str) -> bool:
+    """Mark job disabled with paused_reason. Returns True if changed."""
     if not j.get("enabled", True):
         return False
     j["enabled"] = False
-    j["paused_at"] = "2026-09-03T05:50:00+00:00"
+    j["paused_at"] = paused_at
     j["paused_reason"] = reason
     return True
 
 
 def patch(apply: bool = False) -> int:
+    paused_at = datetime.now(timezone.utc).isoformat()
     changes = 0
     for cp in CRON_PATHS:
         if not cp.exists():
@@ -82,10 +63,9 @@ def patch(apply: bool = False) -> int:
         data = json.loads(cp.read_text())
         for j in data.get("jobs", []):
             name = j.get("name")
-            if name in JOBS_TO_DISABLE:
-                if _disable_job(j, JOBS_TO_DISABLE[name]):
-                    print(f"[{cp}] DISABLE {name}: {JOBS_TO_DISABLE[name]}")
-                    changes += 1
+            if name in JOBS_TO_DISABLE and _disable_job(j, JOBS_TO_DISABLE[name], paused_at):
+                print(f"[{cp}] DISABLE {name}: {JOBS_TO_DISABLE[name]}")
+                changes += 1
         if apply and changes:
             cp.write_text(json.dumps(data, indent=2) + "\n")
     if not apply:
