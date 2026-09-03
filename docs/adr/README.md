@@ -14,6 +14,7 @@
 | [0003](0003-handoff-boundary-integrity.md) | Adopt "Handoff Boundary Integrity" rule from Boundary Metadata Collapse research (arXiv 2026) | 2026-09-01 | Accepted | Ivan + Hermes session `20260901_134405_00cab4` |
 | [0004](0004-tier-2-decisions-batch-2026-09-01.md) | Tier-2 Decision Batch (8 calls: taxonomy / naming / merge / R1 / Formspree / Start-Up Chile / open-source / public-repo) | 2026-09-01 | Accepted | Ivan + Hermes session `20260901_175348_46e9b0` |
 | [0005](0005-libsodium-blob-disposition.md) | Disposition of libsodium secretbox blob `a1d64864-77f9-4e6a-8d6e-b4a90137189a` (quarantine / delete / commit-encrypted) | 2026-09-03 | **Proposed — awaiting Ivan** | Ivan (operator-gated) |
+| [0006](0006-hard-stop-enforcer-disposition.md) | Disposition of `scripts/global-hard-stop-enforcer.py` (delete / lint-only / wire-soft) | 2026-09-03 | **Proposed — awaiting Ivan** | Ivan (operator-gated) |
 
 ---
 
@@ -36,4 +37,4 @@
 ---
 
 **Maintainer:** AIW org
-**Last updated:** 2026-09-03
+**Last updated:** 2026-09-03 (added ADR-0006)
