@@ -194,8 +194,10 @@ class TestBackwardCompatibility(unittest.TestCase):
         os.environ.pop("AIW_ROOT", None)
         paths = reload_paths()
 
-        # Simulate: a script with its own ROOT
-        ROOT = Path("/opt/data/agents")
+        # Simulate: a script with its own ROOT. ROOT.resolve() so the
+        # equality check works whether /opt/data/agents is a real dir
+        # (production) or a symlink (CI hermetic fixture).
+        ROOT = Path("/opt/data/agents").resolve()
         self.assertEqual(paths.AGENTS, ROOT)
 
     def test_no_circular_imports(self):
