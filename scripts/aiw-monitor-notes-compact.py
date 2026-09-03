@@ -23,17 +23,7 @@ import sys
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
-# --- AIW_ROOT path bootstrap (DEMIURGE-098) ---
-import sys as _sys_bootstrap_098
-from pathlib import Path as _Path_bootstrap_098
-_PY_PATHS_ROOT = _Path_bootstrap_098(__file__).resolve().parent.parent
-if str(_PY_PATHS_ROOT) not in _sys_bootstrap_098.path:
-    _sys_bootstrap_098.path.insert(0, str(_PY_PATHS_ROOT))
-from _paths import AGENTS, AIW_ROOT
-# --- end bootstrap ---
-
-
-AGENTS_DIR = AGENTS
+AGENTS_DIR = Path("/opt/data/agents")
 DATE_RE = re.compile(r"^(\d{4}-\d{2}-\d{2})")
 TTL_DAYS = 7
 NOW = datetime.now(timezone.utc)
