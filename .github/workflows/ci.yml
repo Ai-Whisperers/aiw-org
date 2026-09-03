@@ -32,6 +32,8 @@ jobs:
       # those Path() calls resolve. On a real production host where /opt/data
       # already exists, tests/conftest.py detects this and is a no-op.
       - name: Setup hermetic AIW_ROOT fixture
+        env:
+          HERMETIC_AIW_ROOT: /tmp/aiw-fixture
         run: |
           mkdir -p /tmp/aiw-fixture/state
           mkdir -p /tmp/aiw-fixture/agents/scripts
@@ -40,7 +42,9 @@ jobs:
           mkdir -p /tmp/aiw-fixture/.venv/bin
           touch /tmp/aiw-fixture/.venv/bin/python3
           echo '{"jobs": []}' > /tmp/aiw-fixture/.hermes/cron/jobs.json
-          export HERMETIC_AIW_ROOT=/tmp/aiw-fixture
+          # Export so subsequent steps (and pytest) inherit HERMETIC_AIW_ROOT.
+          # tests/conftest.py reads it to populate /opt/data/ when empty.
+          echo "HERMETIC_AIW_ROOT=/tmp/aiw-fixture" >> "$GITHUB_ENV"
           # conftest.py auto-populates /opt/data from the fixture if /opt/data
           # is empty. We don't pre-populate here because conftest is the
           # single source of truth for the setup shape.
@@ -57,7 +61,9 @@ jobs:
           # Conditional pytest.skip() in test bodies (for missing
           # preconditions) is allowed; bare @unittest.skip /
           # @pytest.mark.skip DECORATORS are not.
-          export HERMETIC_AIW_ROOT=/tmp/aiw-fixture
+          #
+          # HERMETIC_AIW_ROOT comes from $GITHUB_ENV (set by the
+          # "Setup hermetic AIW_ROOT fixture" step above).
           python -m pytest tests/ -v --tb=short -m 'not slow'
 
       - name: R1 gate - any @skip decorator fails the build
