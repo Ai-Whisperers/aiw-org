@@ -48,15 +48,17 @@ Agent:
 
 Agent participates in these governed relationships (see [METAMODEL.md](../../enterprise-framework/METAMODEL.md)):
 
+**Source of truth:** Active [RoleAssignment](../../enterprise-framework/entities/role-assignment.md) records at `organization_instance` layer govern `holds` links — including `authority_level`, `scope`, `effective_from`/`effective_until`, `conflict_rules`, and mandatory `accountable_human_id`. The `roles[]` field is a **convenience denormalization** for queries; update it when RoleAssignment records change.
+
 | Relationship | Direction | Target | Cardinality | Denormalized field |
 |--------------|-----------|--------|-------------|-------------------|
-| `holds` | Agent → Role | Role id | many_to_many | `roles[]` |
+| `holds` | Agent → Role | Role id | many_to_many | `roles[]` (via RoleAssignment) |
 | `belongs_to` | Agent → Department | Department id | many_to_many | `departments[]` |
 | `performs` | Cadence → Role | Role id | many_to_many | via `cadence` |
 | `has` | Agent → Soul | Soul id | one_to_one | `soul` |
 | `has` | Agent → Memory | Memory id | one_to_one | `memory` |
 
-**Role changes:** Retire the `holds` Relationship, create a new one, update `roles[]`. Do not change Agent `id` or Soul `id`.
+**Role changes:** Retire the RoleAssignment and its `holds` Relationship, create new records, update `roles[]`. Do not change Agent `id` or Soul `id`.
 
 ## Soul
 

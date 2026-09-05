@@ -951,6 +951,27 @@ used_in:
 ```
 
 ```yaml
+term: role_assignment
+category: org_structure
+definition: >
+  A time-bound, governed record linking an actor (human, agent, or team) to a Role
+  at organization_instance layer. Carries scope, authority_level, effective dates,
+  conflict_rules, and mandatory accountable_human_id. Source of truth for holds
+  relationships; Agent.roles[] and Role.agent_assignments[] are convenience fields.
+properties:
+  authority_level: "advise | propose | decide | approve | execute | audit"
+  actor_type: "human | agent | team"
+  status: "proposed | active | suspended | retired"
+not_to_be_confused_with:
+  role: "Catalog definition of a function; role_assignment is who holds it when."
+  relationship: "Governed link; role_assignment is the assignment record that materializes holds."
+used_in:
+  - "docs/enterprise-framework/entities/role-assignment.md"
+  - "docs/demiurge/schemas/agent-soul.md"
+  - "docs/demiurge/schemas/role-department.md"
+```
+
+```yaml
 term: function
 category: roles
 definition: >
@@ -1328,6 +1349,52 @@ not_to_be_confused_with:
   risk: "Exposure; control reduces risk."
 used_in:
   - "docs/enterprise-framework/entities/governance.md"
+```
+
+```yaml
+term: counteracting_control
+category: governance
+definition: >
+  A deliberate control pairing where a primary role (maker, operator, proposer)
+  is checked by a counteracting role sharing the same objective but producing
+  independent evidence. Not adversarial — enables early error detection without
+  merging identity or accountability. Modeled via ControlAssignment records.
+not_to_be_confused_with:
+  control: "Enterprise safeguard entity; counteracting_control is the pairing pattern."
+  hard_stop: "Soul-level prompt constraint; may be documented but not enforced without a gate."
+used_in:
+  - "docs/enterprise-framework/CONTROLS.md"
+  - "docs/enterprise-framework/CONTROL-MAP.md"
+```
+
+```yaml
+term: independence_requirement
+category: governance
+definition: >
+  Minimum separation between primary and counteracting roles in a ControlAssignment.
+  Values: none (same actor allowed), separate_role (different roles), separate_agent
+  (different actor_id per case), human (human must approve consequential impact).
+not_to_be_confused_with:
+  authority_level: "What an assignment may do; independence is who may not combine roles."
+used_in:
+  - "docs/enterprise-framework/CONTROLS.md"
+  - "docs/enterprise-framework/entities/role-assignment.md"
+```
+
+```yaml
+term: maker_checker
+category: governance
+definition: >
+  Counteracting control pattern where a maker creates an artifact or state change
+  and a checker validates before commit. Base pattern for builder–quality-gate,
+  state-writer–schema-validator, and researcher–citation-checker pairs. Requires
+  independent evidence — checker must not rely solely on maker summary.
+not_to_be_confused_with:
+  counteracting_control: "General pairing model; maker_checker is one named pattern."
+  eval_gate: "Automated quality gate; may implement maker_checker for agent output."
+used_in:
+  - "docs/enterprise-framework/CONTROLS.md"
+  - "docs/enterprise-framework/CONTROL-MAP.md"
 ```
 
 ---

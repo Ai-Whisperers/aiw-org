@@ -20,8 +20,10 @@ Role:
   tools_required: string[]
   cadence_hint: string      # e.g. "Mon/Wed/Fri 09:00 PYT"
   status: enum              # active | skeleton | deferred
-  agent_assignments: string[]  # agent ids currently holding this role
+  agent_assignments: string[]  # convenience — agent ids holding this role; see RoleAssignment
 ```
+
+**Source of truth:** [RoleAssignment](../../enterprise-framework/entities/role-assignment.md) records govern who holds this role, with scope, authority, effective dates, and human accountability. `agent_assignments[]` is a **convenience denormalization** — sync from active RoleAssignment records.
 
 ### Entity envelope mapping (Role)
 
@@ -42,8 +44,9 @@ Role:
 |--------------|-----------|--------|-------------|-------------------|
 | `belongs_to` | Role → Department | `department_id` | many_to_one | `department_id` |
 | `holds` (inverse) | Agent → Role | Agent id | many_to_many | `agent_assignments[]` |
+| RoleAssignment | Actor → Role | assignment record | many_to_many | governs `holds` + `authority_level`, `effective_from`/`effective_until` |
 
-**Agent↔Role many-to-many:** Multiple agents may hold the same role; one agent may hold multiple roles. Governed `holds` Relationships are source of truth; `agent_assignments[]` and `Agent.roles[]` are denormalized convenience fields.
+**Agent↔Role many-to-many:** Multiple agents may hold the same role; one agent may hold multiple roles. [RoleAssignment](../../enterprise-framework/entities/role-assignment.md) records are the governed source of truth; `agent_assignments[]` and `Agent.roles[]` are denormalized convenience fields.
 
 ## Department
 
