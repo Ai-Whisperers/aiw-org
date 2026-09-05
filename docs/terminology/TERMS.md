@@ -1131,6 +1131,157 @@ used_in:
 
 ---
 
+## 8. Enterprise entity catalog
+
+Terms for business entities beyond the agent-centric DEMIURGE model. Full schemas: [`docs/enterprise-framework/entities/`](../enterprise-framework/entities/). All conform to the Entity envelope in [`METAMODEL.md`](../enterprise-framework/METAMODEL.md).
+
+```yaml
+term: customer
+category: enterprise_entity
+definition: >
+  An external party that receives value from the organization — individual, team,
+  or organization. May hold contracts and consume products or services. Distinct
+  from internal agents or departments.
+not_to_be_confused_with:
+  partner: "Collaborates with AIW; may not be a paying customer."
+  user: "Informal term; customer is the governed entity type."
+used_in:
+  - "docs/enterprise-framework/entities/value-market.md"
+```
+
+```yaml
+term: product
+category: enterprise_entity
+definition: >
+  A packaged offering that solves defined customer problems for target segments.
+  Has lifecycle stage, owner role, acceptance policy, and commercial terms refs.
+  May include multiple services; distinct from a single service or generic offering.
+not_to_be_confused_with:
+  service: "A discrete capability delivered; product bundles services and positioning."
+  offering: "Commercial wrapper (SKU, bundle, tier); may reference product + contract."
+used_in:
+  - "docs/enterprise-framework/entities/value-market.md"
+```
+
+```yaml
+term: service
+category: enterprise_entity
+definition: >
+  A discrete capability or deliverable the organization provides — consulting,
+  automation, content, support. May be included in one or more products.
+  Has inputs, outputs, and quality criteria.
+not_to_be_confused_with:
+  product: "Market-facing package; service is a component of delivery."
+  capability: "Internal ability to perform work; service is outward-facing delivery."
+used_in:
+  - "docs/enterprise-framework/entities/value-market.md"
+```
+
+```yaml
+term: capability
+category: enterprise_entity
+definition: >
+  An organizational ability to achieve an outcome — what the org can do, not how
+  it does it on a given day. Stable over time; realized by processes, people, and
+  systems. Example: "content production", "client onboarding".
+not_to_be_confused_with:
+  process: "Repeatable work flow producing an outcome; capability is the ability."
+  role: "A responsibility assignment; capability is org-level competence."
+  service: "External deliverable; capability may be internal-only."
+used_in:
+  - "docs/enterprise-framework/entities/work.md"
+```
+
+```yaml
+term: process
+category: enterprise_entity
+definition: >
+  Repeatable work that transforms inputs into outputs and produces a defined
+  outcome. Has trigger, activities, roles, and measures. Distinct from a single
+  workflow run or one-off task.
+not_to_be_confused_with:
+  workflow: "Ordered coordination of activities for a process or case instance."
+  procedure: "Prescribed method within a process; more granular than process."
+  capability: "Ability; process is how capability is exercised."
+used_in:
+  - "docs/enterprise-framework/entities/work.md"
+```
+
+```yaml
+term: data asset
+category: enterprise_entity
+definition: >
+  A governed information resource with defined ownership, classification, quality
+  expectations, and lifecycle. May comprise datasets, record types, and data
+  elements. Distinct from ephemeral signals or operational artifacts.
+not_to_be_confused_with:
+  artifact: "Agent-produced durable object; data asset is governed information stock."
+  dataset: "A bounded collection within a data asset."
+  source: "External feed catalog entry; data asset is internal governed stock."
+used_in:
+  - "docs/enterprise-framework/entities/information-data.md"
+```
+
+```yaml
+term: system
+category: enterprise_entity
+definition: >
+  A bounded collection of applications, components, infrastructure, and interfaces
+  that delivers a business or technical function. Has owner, boundaries, and
+  dependencies. Example: "Hermes orchestration", "LiteLLM proxy stack".
+not_to_be_confused_with:
+  application: "A deployable software unit within a system."
+  agent: "An AI worker; may use systems but is not a system."
+  tool: "A utility an agent invokes; narrower scope than system."
+used_in:
+  - "docs/enterprise-framework/entities/technology.md"
+```
+
+```yaml
+term: policy
+category: enterprise_entity
+definition: >
+  A mandatory organizational rule or constraint — what must or must not be done.
+  Has owner, scope, effective dates, and links to standards and controls.
+  Distinct from principles (guidance) and procedures (how-to).
+not_to_be_confused_with:
+  standard: "Normative specification; policy mandates compliance with standards."
+  principle: "Guiding belief; policy is enforceable rule."
+  control: "Mechanism that enforces or verifies policy adherence."
+used_in:
+  - "docs/enterprise-framework/entities/governance.md"
+```
+
+```yaml
+term: risk
+category: enterprise_entity
+definition: >
+  An uncertain event or condition that, if it occurs, has positive or negative
+  effect on objectives. Has likelihood, impact, owner, and treatment (accept,
+  mitigate, transfer, avoid). Linked to controls and obligations.
+not_to_be_confused_with:
+  control: "Mitigation mechanism; risk is the exposure."
+  obligation: "External requirement; risk is internal uncertainty assessment."
+used_in:
+  - "docs/enterprise-framework/entities/governance.md"
+```
+
+```yaml
+term: control
+category: enterprise_entity
+definition: >
+  A safeguard that enforces policy, detects deviation, or corrects after failure.
+  Types: preventive (stops before harm), detective (identifies after), corrective
+  (remediates). Has owner, frequency, and evidence expectations.
+not_to_be_confused_with:
+  policy: "Rule; control implements or verifies the rule."
+  risk: "Exposure; control reduces risk."
+used_in:
+  - "docs/enterprise-framework/entities/governance.md"
+```
+
+---
+
 ## Planned v1.1 terms
 
 Terms listed in DEMIURGE-077 plan scope but deferred to a follow-up pass or DEMIURGE-078:
@@ -1157,6 +1308,7 @@ Add here first when defined; do not define locally in schemas or tickets.
 | Operational | 9 |
 | Roles | 4 |
 | Metamodel | 10 |
-| **Total** | **76** |
+| Enterprise entity catalog | 10 |
+| **Total** | **86** |
 
 Terms marked `[PENDING IVAN REVIEW]`: urgency tier, formality level, tone, directionality, notification, alert.
