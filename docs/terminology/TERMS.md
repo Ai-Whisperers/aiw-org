@@ -3,7 +3,7 @@
 > **This file is authoritative. Add here first, use elsewhere second.**
 >
 > DEMIURGE-077 — Terminology Library v1
-> Last updated: 2026-08-29
+> Last updated: 2026-09-05
 
 All agents, rules, prompts, schemas, and tickets defer to this file for definitions. No local redefinitions. No implicit meanings.
 
@@ -993,6 +993,144 @@ used_in:
 
 ---
 
+## 7. Metamodel
+
+> **Source:** [METAMODEL.md](../enterprise-framework/METAMODEL.md) — AIW-02 Core Entity Metamodel.
+
+```yaml
+term: entity
+category: metamodel
+definition: >
+  A governed object conforming to the common Entity envelope: identity, lifecycle,
+  governance, evidence, standard alignment, and version fields. Type-specific
+  schemas (Agent, Role, Department, etc.) extend this baseline with their own
+  properties. See METAMODEL.md for the full envelope definition.
+not_to_be_confused_with:
+  relationship: "A link between two entities; entity is a node, relationship is an edge."
+used_in:
+  - "docs/enterprise-framework/METAMODEL.md"
+```
+
+```yaml
+term: relationship
+category: metamodel
+definition: >
+  A first-class governed link between two entities. Has relationship_type, source_id,
+  target_id, direction, cardinality, lifecycle_status, authority_ref, and evidence_refs.
+  Used when governance, evidence, or lifecycle must attach to the link independently
+  of the endpoint entities. See METAMODEL.md for the full schema.
+not_to_be_confused_with:
+  entity: "A node in the object graph; relationship is the governed edge."
+used_in:
+  - "docs/enterprise-framework/METAMODEL.md"
+  - "docs/demiurge/domain-model.md"
+```
+
+```yaml
+term: concept_definition
+category: metamodel
+definition: >
+  Modeling layer 1 — the abstract type or concept (e.g. the idea of "Role").
+  Answers "what is this type of thing?" Counts at this layer must not be combined
+  with other layers.
+not_to_be_confused_with:
+  reference_model_item: "Layer 2 — a specific catalog entry, not the abstract type."
+used_in:
+  - "docs/enterprise-framework/METAMODEL.md"
+```
+
+```yaml
+term: reference_model_item
+category: metamodel
+definition: >
+  Modeling layer 2 — a governed catalog entry that instantiates a concept_definition
+  (e.g. product-owner role in the AIW role catalog). Answers "what governed entry
+  defines it?"
+not_to_be_confused_with:
+  organization_instance: "Layer 3 — who holds it in this org, not the catalog entry."
+used_in:
+  - "docs/enterprise-framework/METAMODEL.md"
+```
+
+```yaml
+term: organization_instance
+category: metamodel
+definition: >
+  Modeling layer 3 — a company-specific realization of a reference_model_item
+  (e.g. agent hera-marketing-lead holding product-owner). Answers "who or what
+  holds it in this org?"
+not_to_be_confused_with:
+  runtime_deployment: "Layer 4 — how it executes right now, not the org assignment."
+used_in:
+  - "docs/enterprise-framework/METAMODEL.md"
+```
+
+```yaml
+term: runtime_deployment
+category: metamodel
+definition: >
+  Modeling layer 4 — a live execution artifact (e.g. Hermes cron assignment,
+  cadence slot). Answers "how is it executed right now?" Maps to Cadence in the
+  DEMIURGE domain model.
+not_to_be_confused_with:
+  cadence: "Schedule definition; runtime_deployment is the active execution binding."
+  organization_instance: "Layer 3 — org assignment, not runtime execution."
+used_in:
+  - "docs/enterprise-framework/METAMODEL.md"
+  - "docs/demiurge/schemas/feedback-kpi-cadence.md"
+```
+
+```yaml
+term: holds
+category: metamodel
+definition: >
+  Relationship type: an actor (typically Agent) carries a role or responsibility.
+  Cardinality many_to_many — multiple agents per role, one agent across multiple roles.
+not_to_be_confused_with:
+  assigned_to: "Work or task allocation; holds is role/responsibility carriage."
+  performs: "Runtime execution via cadence; holds is org-level assignment."
+used_in:
+  - "docs/enterprise-framework/METAMODEL.md"
+  - "docs/demiurge/schemas/agent-soul.md"
+  - "docs/demiurge/schemas/role-department.md"
+```
+
+```yaml
+term: performs
+category: metamodel
+definition: >
+  Relationship type: a runtime_deployment (Cadence) executes a role function.
+  Links layer 4 to layer 2/3. Distinct from holds, which is org-level assignment.
+used_in:
+  - "docs/enterprise-framework/METAMODEL.md"
+```
+
+```yaml
+term: realizes
+category: metamodel
+definition: >
+  Relationship type: an organization_instance or runtime_deployment connects to
+  its reference_model_item or concept_definition. Example: catalog role product-owner
+  realized by agent assignment.
+used_in:
+  - "docs/enterprise-framework/METAMODEL.md"
+```
+
+```yaml
+term: supports
+category: metamodel
+definition: >
+  Relationship type: an actor assists a role holder without replacing accountability.
+  Example: agent supports human Product Owner for backlog grooming.
+not_to_be_confused_with:
+  holds: "Full role carriage; supports is auxiliary assistance."
+  accountable_for: "RACI accountable party; supports does not carry accountability."
+used_in:
+  - "docs/enterprise-framework/METAMODEL.md"
+```
+
+---
+
 ## Planned v1.1 terms
 
 Terms listed in DEMIURGE-077 plan scope but deferred to a follow-up pass or DEMIURGE-078:
@@ -1018,6 +1156,7 @@ Add here first when defined; do not define locally in schemas or tickets.
 | Documents & knowledge | 14 |
 | Operational | 9 |
 | Roles | 4 |
-| **Total** | **66** |
+| Metamodel | 10 |
+| **Total** | **76** |
 
 Terms marked `[PENDING IVAN REVIEW]`: urgency tier, formality level, tone, directionality, notification, alert.

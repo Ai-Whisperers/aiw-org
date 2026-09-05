@@ -1,6 +1,7 @@
 # Schema: Role + Department
 
 > DEMIURGE-003
+> **Metamodel:** Field mappings to the common Entity envelope — [METAMODEL.md](../../enterprise-framework/METAMODEL.md).
 
 ## Role
 
@@ -21,6 +22,28 @@ Role:
   status: enum              # active | skeleton | deferred
   agent_assignments: string[]  # agent ids currently holding this role
 ```
+
+### Entity envelope mapping (Role)
+
+| Entity field | Role field | Notes |
+|--------------|------------|-------|
+| `id` | `id` | Catalog entry at `reference_model_item` layer |
+| `entity_type` | `"Role"` | Fixed type discriminator |
+| `name` | `title` | Human-readable role title |
+| `definition` | `responsibilities[]` | Concatenated or primary responsibility |
+| `purpose` | — | Derived from department mission + responsibilities |
+| `lifecycle.status` | `status` | Maps: active, skeleton→draft, deferred |
+| `governance.accountable_id` | — | Typically dept head or human owner |
+| `evidence_refs` | `source_basis[]` | Source ids grounding this role |
+
+### Relationship mapping (Role)
+
+| Relationship | Direction | Target | Cardinality | Denormalized field |
+|--------------|-----------|--------|-------------|-------------------|
+| `belongs_to` | Role → Department | `department_id` | many_to_one | `department_id` |
+| `holds` (inverse) | Agent → Role | Agent id | many_to_many | `agent_assignments[]` |
+
+**Agent↔Role many-to-many:** Multiple agents may hold the same role; one agent may hold multiple roles. Governed `holds` Relationships are source of truth; `agent_assignments[]` and `Agent.roles[]` are denormalized convenience fields.
 
 ## Department
 
@@ -45,6 +68,29 @@ Department:
   status: enum              # skeleton | active | deferred
   promotion_trigger: string # for Tier 3, when to activate fully
 ```
+
+### Entity envelope mapping (Department)
+
+| Entity field | Department field | Notes |
+|--------------|------------------|-------|
+| `id` | `id` | Org unit at `organization_instance` layer |
+| `entity_type` | `"Department"` | Fixed type discriminator |
+| `name` | `name` | Department display name |
+| `definition` | `mission` | One-sentence mission statement |
+| `purpose` | `mission` | Same as definition for departments |
+| `lifecycle.status` | `status` | Maps: skeleton→draft, active, deferred |
+| `governance.accountable_id` | `head_human` | ivan, kiki, or agent:id |
+| `governance.owner_id` | `head_human` | Dept lead accountability |
+
+### Relationship mapping (Department)
+
+| Relationship | Direction | Target | Cardinality | Denormalized field |
+|--------------|-----------|--------|-------------|-------------------|
+| `contains` | Department → Role | Role id | one_to_many | `roles[]` |
+| `belongs_to` (inverse) | Role → Department | Department id | many_to_one | Role.`department_id` |
+| `belongs_to` | Agent → Department | Agent id | many_to_many | `agents[]` |
+
+**Agent↔Department many-to-many:** One agent may serve multiple departments; one department has multiple agents. Governed `belongs_to` Relationships are source of truth; `agents[]` and `Agent.departments[]` are denormalized.
 
 ## SignalType (department-level contract)
 

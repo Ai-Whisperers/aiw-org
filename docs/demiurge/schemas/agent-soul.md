@@ -1,6 +1,7 @@
 # Schema: Agent + Soul + Skill + Tool
 
 > DEMIURGE-001
+> **Metamodel:** Field mappings to the common Entity envelope — [METAMODEL.md](../../enterprise-framework/METAMODEL.md).
 
 ## Agent
 
@@ -28,6 +29,35 @@ Agent:
 - `name`: single mythological or memorable name, human-assigned
 - One name per agent; role changes do not require rename
 
+### Entity envelope mapping (Agent)
+
+| Entity field | Agent field | Notes |
+|--------------|-------------|-------|
+| `id` | `id` | Stable; never encodes current role |
+| `entity_type` | `"Agent"` | Fixed type discriminator |
+| `schema_version` | — | Schema file version when formalized |
+| `name` | `name` | Memorable agent name |
+| `definition` | — | Derived from soul archetype + roles |
+| `purpose` | — | Dept/role mission statement |
+| `lifecycle.status` | `status` | Maps: draft, active, paused→suspended, deprecated→retired |
+| `governance.owner_id` | — | Typically dept lead or human owner |
+| `evidence_refs` | — | Eval gate results, ADR refs |
+| `created_at` / `updated_at` | — | Operational timestamps |
+
+### Relationship mapping (Agent)
+
+Agent participates in these governed relationships (see [METAMODEL.md](../../enterprise-framework/METAMODEL.md)):
+
+| Relationship | Direction | Target | Cardinality | Denormalized field |
+|--------------|-----------|--------|-------------|-------------------|
+| `holds` | Agent → Role | Role id | many_to_many | `roles[]` |
+| `belongs_to` | Agent → Department | Department id | many_to_many | `departments[]` |
+| `performs` | Cadence → Role | Role id | many_to_many | via `cadence` |
+| `has` | Agent → Soul | Soul id | one_to_one | `soul` |
+| `has` | Agent → Memory | Memory id | one_to_one | `memory` |
+
+**Role changes:** Retire the `holds` Relationship, create a new one, update `roles[]`. Do not change Agent `id` or Soul `id`.
+
 ## Soul
 
 Immutable identity kernel (Hermes concept). Separate from operational memory.
@@ -45,6 +75,18 @@ Soul:
   created_at: iso8601
   updated_at: iso8601
 ```
+
+Soul is a **versioned sub-component** of Agent (proposed — see [METAMODEL.md](../../enterprise-framework/METAMODEL.md) open questions). Maps partially to Entity envelope via parent Agent; `Soul.version` tracks identity evolution independently of operational memory.
+
+### Entity envelope mapping (Soul)
+
+| Entity field | Soul field | Notes |
+|--------------|------------|-------|
+| `id` | `id` | Matches parent Agent id (1:1) |
+| `entity_type` | `"Soul"` | Sub-component, not standalone org instance |
+| `schema_version` | `version` | Semver; bumped on character evolution |
+| `lifecycle.status` | — | Governed via parent Agent lifecycle |
+| `updated_at` | `updated_at` | Last soul revision timestamp |
 
 ### HardStop (embedded in Soul)
 

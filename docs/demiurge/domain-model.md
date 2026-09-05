@@ -2,6 +2,7 @@
 
 > **Status:** `proposed` — DEMIURGE-008 pending approval ([REVIEW-domain-model.md](REVIEW-domain-model.md)).
 > Every agent, department, and signal is an instance of these objects.
+> **Metamodel:** Common entity envelope and relationship model — [METAMODEL.md](../enterprise-framework/METAMODEL.md).
 
 ## Object graph
 
@@ -31,6 +32,39 @@ erDiagram
     Channel ||--o| MessageBoard : surfaces
     Artifact }o--o| Signal : referenced_by
 ```
+
+## Governed relationships (explicit)
+
+The ER diagram above shows cardinality. The following table names the governed `relationship_type` from [METAMODEL.md](../enterprise-framework/METAMODEL.md). Inline schema fields are denormalized convenience; Relationship records are source of truth when lifecycle or evidence must attach.
+
+| Source | relationship_type | Target | Cardinality | Schema reference |
+|--------|-------------------|--------|-------------|------------------|
+| Agent | `has` | Soul | one_to_one | [agent-soul.md](schemas/agent-soul.md) |
+| Agent | `has` | Memory | one_to_one | [memory.md](schemas/memory.md) |
+| Agent | `holds` | Role | many_to_many | `Agent.roles[]` ↔ `Role.agent_assignments[]` |
+| Agent | `belongs_to` | Department | many_to_many | `Agent.departments[]` ↔ `Department.agents[]` |
+| Agent | `uses` | Skill | many_to_many | `Agent.skills[]` |
+| Agent | `uses` | Tool | many_to_many | `Agent.tools[]` |
+| Agent | `runs_on` | Cadence | one_to_one | `Agent.cadence` |
+| Cadence | `performs` | Role | many_to_many | runtime_deployment layer |
+| Role | `belongs_to` | Department | many_to_one | `Role.department_id` |
+| Department | `contains` | Role | one_to_many | `Department.roles[]` |
+| Department | `grounded_in` | Source | many_to_many | Source catalog |
+| Department | `measures` | KPI | many_to_many | Dept KPIs |
+| Agent | `creates` | Artifact | many_to_many | Episodic memory |
+| Signal | `sent_by` | Agent | many_to_one | Signal sender |
+| Signal | `assigned_to` | Agent | many_to_many | Signal recipients |
+
+### Agent ↔ Role many-to-many
+
+- Multiple agents may hold the same role (e.g. two code reviewers).
+- One agent may hold roles in multiple departments (e.g. Engineering reviewer + Research curator).
+- Agent `id` does not encode role; role changes retire/create `holds` Relationships without renaming the agent.
+
+### Agent ↔ Department many-to-many
+
+- One agent may serve multiple departments via `belongs_to` Relationships.
+- `Department.agents[]` and `Agent.departments[]` are denormalized mirrors.
 
 ## Hermes alignment
 
