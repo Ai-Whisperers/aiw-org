@@ -110,12 +110,24 @@ Entity:
 
 ### StandardAlignment (embedded)
 
+Full registry and governance rules: [STANDARDS.md](STANDARDS.md). Catalog entries: [standards/catalog.yaml](standards/catalog.yaml).
+
+When embedded on an Entity, `standard_id` references a catalog entry; remaining fields may be copied or narrowed to entity scope.
+
 ```yaml
 StandardAlignment:
-  standard_id: string           # e.g. ISO-27001, RACI, ITIL
-  clause_ref: string            # specific section or control
-  alignment_status: aligned | partial | gap | not_applicable
-  evidence_ref: string | null
+  standard_id: string           # catalog key, e.g. dublin-core, w3c-prov-o
+  title: string
+  issuing_body: string
+  version: string
+  source_url: uri
+  scope: string[]               # clauses, controls, or AIW profile areas in use
+  conformance: exact | profiled | adapted | inspired | not_applicable
+  mapped_entities: string[]     # entity types or schema ids using this standard
+  deviation_reason: string | null
+  decision_ref: string          # ADR, ticket, or approval record
+  owner_id: string
+  reviewed_at: iso8601
 ```
 
 ### Lifecycle states
@@ -352,3 +364,4 @@ Documented as stubs — not blockers for this ticket.
 | [role-department.md](../demiurge/schemas/role-department.md) | Role/Department field mapping to Entity envelope |
 | [TERMS.md](../terminology/TERMS.md) | Authoritative term definitions including relationship types |
 | [GOVERNANCE.md](GOVERNANCE.md) | Lifecycle states and approval binding |
+| [STANDARDS.md](STANDARDS.md) | External standards registry and conformance posture |

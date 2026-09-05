@@ -72,7 +72,13 @@ Literature scanner and community scanner agents write to:
 | community | Reddit r/marketing, HN, Indie Hackers |
 | blog | Lenny's Newsletter, Reforge, HubSpot blog |
 | framework | Jobs-to-be-Done, GROW, SPIN Selling |
-| standard | ITIL, DORA, ISO where relevant |
+| standard | ITIL, DORA, ISO editions — see governed catalog below |
+
+### Standard type and the standards registry
+
+When `Source.type` is `standard`, the source should map to a `standard_id` in [standards/catalog.yaml](../../enterprise-framework/standards/catalog.yaml). Listing a standard as a Source **does not** imply organizational conformance; check the catalog entry's `conformance` field (`exact`, `profiled`, `adapted`, `inspired`, `not_applicable`).
+
+Authoritative registry: [STANDARDS.md](../../enterprise-framework/STANDARDS.md).
 
 ## Validation checklist
 

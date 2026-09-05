@@ -995,7 +995,7 @@ used_in:
 
 ## 7. Metamodel
 
-> **Source:** [METAMODEL.md](../enterprise-framework/METAMODEL.md) — AIW-02 Core Entity Metamodel.
+> **Source:** [METAMODEL.md](../enterprise-framework/METAMODEL.md) — AIW-02 Core Entity Metamodel. Standards: [STANDARDS.md](../enterprise-framework/STANDARDS.md) — AIW-03.
 
 ```yaml
 term: entity
@@ -1129,6 +1129,56 @@ used_in:
   - "docs/enterprise-framework/METAMODEL.md"
 ```
 
+```yaml
+term: standard_alignment
+category: metamodel
+definition: >
+  A governed record of how AIW uses an external standard: standard_id, version,
+  scope, conformance level, mapped entities, deviation reason, owner, and review
+  date. Embedded on Entity.standard_alignments[] or listed in
+  docs/enterprise-framework/standards/catalog.yaml. Not a synonym for compliance.
+not_to_be_confused_with:
+  conformance: "The posture field within a standard_alignment record."
+  evidence_ref: "Link to proof; standard_alignment is the full alignment record."
+used_in:
+  - "docs/enterprise-framework/METAMODEL.md"
+  - "docs/enterprise-framework/STANDARDS.md"
+  - "docs/enterprise-framework/standards/catalog.yaml"
+```
+
+```yaml
+term: conformance
+category: metamodel
+definition: >
+  Posture toward an external standard within a standard_alignment. Levels:
+  exact (implements cited edition without material deviation); profiled (documented
+  subset or extension); adapted (material deviation with rationale); inspired
+  (conceptual alignment only); not_applicable (referenced, not adopted). Only
+  exact with evidence supports an external compliance claim.
+not_to_be_confused_with:
+  standard_alignment: "Full record; conformance is one field."
+  alignment_status: "Deprecated term; use conformance."
+used_in:
+  - "docs/enterprise-framework/STANDARDS.md"
+  - "docs/enterprise-framework/standards/catalog.yaml"
+```
+
+```yaml
+term: deviation
+category: metamodel
+definition: >
+  A documented departure from an external standard's normative requirements.
+  Material deviations require deviation_reason, owner_id, and decision_ref (ADR or
+  approved ticket). Valid reasons include AI-agent execution constraints,
+  disproportionate complexity, licensing limits, or inapplicable scale. "AIW-specific"
+  alone is insufficient.
+not_to_be_confused_with:
+  conformance: "Posture label; deviation is the rationale when posture is adapted or profiled with gaps."
+used_in:
+  - "docs/enterprise-framework/STANDARDS.md"
+  - "docs/enterprise-framework/standards/catalog.yaml"
+```
+
 ---
 
 ## Planned v1.1 terms
@@ -1156,7 +1206,7 @@ Add here first when defined; do not define locally in schemas or tickets.
 | Documents & knowledge | 14 |
 | Operational | 9 |
 | Roles | 4 |
-| Metamodel | 10 |
-| **Total** | **76** |
+| Metamodel | 13 |
+| **Total** | **79** |
 
 Terms marked `[PENDING IVAN REVIEW]`: urgency tier, formality level, tone, directionality, notification, alert.

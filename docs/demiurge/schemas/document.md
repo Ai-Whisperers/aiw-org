@@ -28,12 +28,12 @@ flowchart LR
 DocumentEnvelope:
   id: string                   # uuid
   schema_version: string       # e.g. "1.0" — versioned from day one
-  dc_type: string              # Dublin Core type (see mapping below)
+  dc_type: string              # Dublin Core type (catalog: dublin-core, conformance: profiled)
   document_type: string        # system type (see extending document types)
   title: string
   body: string                 # markdown or plain text; binary refs via storage_uri
   author_id: string            # agent-id or human:ivan
-  source_id: string            # provenance (W3C PROV-O inspired)
+  source_id: string            # provenance (catalog: w3c-prov-o, conformance: profiled)
   storage_uri: string          # optional path or URL for original file (recording, PDF)
   artifact_id: string          # optional link to Artifact in artifacts.md
   created_at: iso8601
@@ -44,7 +44,7 @@ DocumentEnvelope:
     urgency: string            # P0 | P1 | P2 | P3 | unknown
 
   derived:
-    urgency: string              # P0 | P1 | P2 | P3 — ITIL aligned
+    urgency: string              # P0 | P1 | P2 | P3 — catalog: itil-urgency, conformance: adapted
     urgency_confidence: float    # 0.0–1.0
     audience: string[]
     audience_confidence: float
@@ -90,7 +90,7 @@ Rules:
 
 ## Dublin Core mapping
 
-`dc_type` uses [Dublin Core](https://www.dublincore.org/specifications/dublin-core/dcmi-terms/) type vocabulary where applicable. `document_type` is the org-specific refinement.
+`dc_type` uses Dublin Core type vocabulary per catalog entry `dublin-core` (`conformance: profiled`). See [standards/catalog.yaml](../../enterprise-framework/standards/catalog.yaml). `document_type` is the org-specific refinement.
 
 | document_type | dc_type | Notes |
 |---------------|---------|-------|
@@ -129,7 +129,7 @@ Decision:
   document_id: string
   summary: string
   rationale: string
-  daci:                      # DACI-inspired roles where inferable
+  daci:                      # DACI-inspired roles (catalog: daci, conformance: inspired)
     driver: string
     approver: string
     contributor: string
@@ -145,17 +145,20 @@ Nugget:
   confidence: float
 ```
 
-## Prior art references
+## Standard alignments
 
-| Concern | Standard / tool | Use in this system |
-|---------|-----------------|-------------------|
-| Document identity | Dublin Core | `dc_type`, envelope identity fields |
-| Provenance | W3C PROV-O | `source_id`, lineage to parent recording/transcript |
-| Urgency | ITIL P0–P3 | `given.urgency`, `derived.urgency` |
-| Classification | LLM structured extraction | Classifier agent |
-| Terminology | SKOS (W3C) | `terminology_compliance_score` vs DEMIURGE-077 TERMS |
-| Readability | Flesch-Kincaid | `language_quality_score` normalization |
-| Catalog / retrieval | RAG dual-index (BM25 + vector) | Archivist Phase 3 target |
+Authoritative registry: [STANDARDS.md](../../enterprise-framework/STANDARDS.md). This schema references catalog `standard_id` values; conformance levels are not compliance claims unless `exact` with evidence.
+
+| Concern | standard_id | conformance | Use in this system |
+|---------|-------------|-------------|-------------------|
+| Document identity | `dublin-core` | profiled | `dc_type`, envelope identity fields |
+| Provenance | `w3c-prov-o` | profiled | `source_id`, lineage to parent recording/transcript |
+| Urgency | `itil-urgency` | adapted | `given.urgency`, `derived.urgency` (P0–P3) |
+| Classification | — | — | Classifier agent (LLM structured extraction; no external standard) |
+| Terminology | `w3c-skos` | adapted | `terminology_compliance_score` vs DEMIURGE-077 TERMS |
+| Readability | — | — | `language_quality_score` (Flesch-Kincaid normalization; not catalogued) |
+| Decision roles | `daci` | inspired | `Decision.daci` on mined decisions |
+| Catalog / retrieval | `w3c-dcat-3` | inspired | Archivist Phase 3 target; dual-index RAG |
 
 ## Dependency on DEMIURGE-077
 

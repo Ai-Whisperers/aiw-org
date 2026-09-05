@@ -1,0 +1,280 @@
+# AIW governed standards catalog
+# Schema: docs/enterprise-framework/STANDARDS.md
+# Do not reproduce copyrighted standard text in this file.
+
+catalog_version: "1.0.0"
+last_reviewed: "2026-09-05"
+
+standards:
+  - standard_id: dublin-core
+    title: Dublin Core Metadata Terms
+    issuing_body: DCMI
+    version: "DCMI Terms / ISO 15836"
+    source_url: https://www.dublincore.org/specifications/dublin-core/dcmi-terms/
+    scope:
+      - document identity (dc_type)
+      - envelope type vocabulary
+    conformance: profiled
+    mapped_entities:
+      - DocumentEnvelope
+      - docs/demiurge/schemas/document.md
+    deviation_reason: AIW uses a minimal dc_type subset; not full Dublin Core application profile
+    decision_ref: tickets/John/2026-09-05_201002-aiw-03-standards-registry.md
+    owner_id: human:ivan
+    reviewed_at: "2026-09-05T00:00:00Z"
+
+  - standard_id: w3c-prov-o
+    title: PROV-O — The PROV Ontology
+    issuing_body: W3C
+    version: "2013-04-30 REC"
+    source_url: https://www.w3.org/TR/prov-o/
+    scope:
+      - source_id lineage
+      - document provenance to parent recording/transcript
+    conformance: profiled
+    mapped_entities:
+      - DocumentEnvelope
+      - Source
+    deviation_reason: PROV roles modeled via source_id and relationships; full PROV-O graph not materialized
+    decision_ref: tickets/John/2026-09-05_201002-aiw-03-standards-registry.md
+    owner_id: human:ivan
+    reviewed_at: "2026-09-05T00:00:00Z"
+
+  - standard_id: w3c-skos
+    title: SKOS Simple Knowledge Organization System
+    issuing_body: W3C
+    version: "2009-08-18 REC"
+    source_url: https://www.w3.org/TR/skos-reference/
+    scope:
+      - terminology governance vs TERMS.md
+      - terminology_compliance_score on documents
+    conformance: adapted
+    mapped_entities:
+      - docs/terminology/TERMS.md
+      - DocumentEnvelope.derived.terminology_compliance_score
+    deviation_reason: TERMS.md is authoritative flat registry; SKOS relations (broader/narrower) deferred
+    decision_ref: tickets/John/2026-09-05_201002-aiw-03-standards-registry.md
+    owner_id: human:ivan
+    reviewed_at: "2026-09-05T00:00:00Z"
+
+  - standard_id: w3c-dcat-3
+    title: DCAT Version 3
+    issuing_body: W3C
+    version: "2024-08-13 REC"
+    source_url: https://www.w3.org/TR/vocab-dcat-3/
+    scope:
+      - data catalog reference model (future catalog/RAG index alignment)
+    conformance: inspired
+    mapped_entities:
+      - SourceCatalog
+    deviation_reason: null
+    decision_ref: tickets/John/2026-09-05_201002-aiw-03-standards-registry.md
+    owner_id: human:ivan
+    reviewed_at: "2026-09-05T00:00:00Z"
+
+  - standard_id: itil-urgency
+    title: ITIL urgency priority model (P0–P3 adaptation)
+    issuing_body: Axelos / PeopleCert
+    version: "ITIL 4 practice-aligned (urgency tiers only)"
+    source_url: https://www.axelos.com/best-practice-solutions/itil
+    scope:
+      - given.urgency and derived.urgency on DocumentEnvelope
+      - P0 | P1 | P2 | P3 vocabulary
+    conformance: adapted
+    mapped_entities:
+      - DocumentEnvelope
+      - docs/terminology/TERMS.md
+    deviation_reason: AIW uses four-tier urgency for agent routing; not full ITIL incident management
+    decision_ref: tickets/John/2026-09-05_201002-aiw-03-standards-registry.md
+    owner_id: human:ivan
+    reviewed_at: "2026-09-05T00:00:00Z"
+
+  - standard_id: daci
+    title: DACI decision accountability pattern
+    issuing_body: General management practice
+    version: "pattern (no formal edition)"
+    source_url: https://www.atlassian.com/team-playbook/plays/daci
+    scope:
+      - Decision.daci roles on mined decisions
+      - governance accountability hints
+    conformance: inspired
+    mapped_entities:
+      - Decision
+      - docs/demiurge/schemas/document.md
+    deviation_reason: null
+    decision_ref: tickets/John/2026-09-05_201002-aiw-03-standards-registry.md
+    owner_id: human:ivan
+    reviewed_at: "2026-09-05T00:00:00Z"
+
+  - standard_id: raci
+    title: RACI responsibility assignment matrix
+    issuing_body: General management practice
+    version: "pattern (no formal edition)"
+    source_url: https://www.projectmanagement.com/wikis/RACI
+    scope:
+      - Relationship types accountable_for, consulted_by, informs
+      - Entity.governance fields
+    conformance: inspired
+    mapped_entities:
+      - Relationship
+      - Entity
+    deviation_reason: null
+    decision_ref: tickets/John/2026-09-05_201002-aiw-03-standards-registry.md
+    owner_id: human:ivan
+    reviewed_at: "2026-09-05T00:00:00Z"
+
+  - standard_id: apqc-pcf
+    title: APQC Process Classification Framework
+    issuing_body: APQC
+    version: "PCF 7.4"
+    source_url: https://www.apqc.org/process-frameworks
+    scope:
+      - process taxonomy reference for work entities
+      - gap analysis against canonical process catalogue
+    conformance: inspired
+    mapped_entities:
+      - docs/enterprise-framework/entities/work.md
+    deviation_reason: null
+    decision_ref: tickets/John/2026-09-05_201002-aiw-03-standards-registry.md
+    owner_id: human:ivan
+    reviewed_at: "2026-09-05T00:00:00Z"
+    license_note: APQC PCF has usage restrictions; map identifiers only, no reproduction of PCF text
+
+  - standard_id: omg-bpmn-2.0.2
+    title: Business Process Model and Notation (BPMN)
+    issuing_body: OMG
+    version: "2.0.2"
+    source_url: https://www.omg.org/spec/BPMN/2.0.2/
+    scope:
+      - workflow notation reference for process documentation
+    conformance: inspired
+    mapped_entities:
+      - docs/enterprise-framework/entities/work.md
+    deviation_reason: null
+    decision_ref: tickets/John/2026-09-05_201002-aiw-03-standards-registry.md
+    owner_id: human:ivan
+    reviewed_at: "2026-09-05T00:00:00Z"
+
+  - standard_id: opengroup-archimate
+    title: ArchiMate Enterprise Architecture Modeling Language
+    issuing_body: The Open Group
+    version: "3.2"
+    source_url: https://www.opengroup.org/archimate-forum/archimate-overview
+    scope:
+      - cross-layer reference model (business, application, technology)
+    conformance: inspired
+    mapped_entities:
+      - docs/enterprise-framework/entities/technology.md
+      - docs/enterprise-framework/METAMODEL.md
+    deviation_reason: null
+    decision_ref: tickets/John/2026-09-05_201002-aiw-03-standards-registry.md
+    owner_id: human:ivan
+    reviewed_at: "2026-09-05T00:00:00Z"
+
+  - standard_id: iso-iec-11179-1-2023
+    title: "ISO/IEC 11179-1:2023 — Metadata registries framework"
+    issuing_body: ISO/IEC
+    version: "2023"
+    source_url: https://www.iso.org/standard/78914.html
+    scope:
+      - metadata registry concepts for entity and terminology governance
+    conformance: inspired
+    mapped_entities:
+      - Entity
+      - docs/terminology/TERMS.md
+    deviation_reason: null
+    decision_ref: tickets/John/2026-09-05_201002-aiw-03-standards-registry.md
+    owner_id: human:ivan
+    reviewed_at: "2026-09-05T00:00:00Z"
+    license_note: ISO store terms apply; reference edition only, no normative text copied
+
+  - standard_id: iso-15489
+    title: "ISO 15489 — Records management"
+    issuing_body: ISO
+    version: "2016"
+    source_url: https://www.iso.org/standard/62542.html
+    scope:
+      - records retention reference (not implemented)
+    conformance: not_applicable
+    mapped_entities: []
+    deviation_reason: null
+    decision_ref: tickets/John/2026-09-05_201002-aiw-03-standards-registry.md
+    owner_id: human:ivan
+    reviewed_at: "2026-09-05T00:00:00Z"
+    license_note: reference only
+
+  - standard_id: iso-iec-27001
+    title: "ISO/IEC 27001 — Information security management"
+    issuing_body: ISO/IEC
+    version: "2022"
+    source_url: https://www.iso.org/standard/27001
+    scope:
+      - security control framework reference (not certified)
+    conformance: not_applicable
+    mapped_entities: []
+    deviation_reason: null
+    decision_ref: tickets/John/2026-09-05_201002-aiw-03-standards-registry.md
+    owner_id: human:ivan
+    reviewed_at: "2026-09-05T00:00:00Z"
+    license_note: reference only; no ISO 27001 conformance claim
+
+  - standard_id: iso-iec-27701
+    title: "ISO/IEC 27701 — Privacy information management"
+    issuing_body: ISO/IEC
+    version: "2019"
+    source_url: https://www.iso.org/standard/71670.html
+    scope:
+      - privacy extension reference (not certified)
+    conformance: not_applicable
+    mapped_entities: []
+    deviation_reason: null
+    decision_ref: tickets/John/2026-09-05_201002-aiw-03-standards-registry.md
+    owner_id: human:ivan
+    reviewed_at: "2026-09-05T00:00:00Z"
+    license_note: reference only; no ISO 27701 conformance claim
+
+  - standard_id: json-schema-2020-12
+    title: JSON Schema
+    issuing_body: JSON Schema
+    version: "2020-12"
+    source_url: https://json-schema.org/draft/2020-12/json-schema-core.html
+    scope:
+      - schema design for governed entities and API payloads
+    conformance: profiled
+    mapped_entities:
+      - Entity envelope design
+      - docs/enterprise-framework/METAMODEL.md
+    deviation_reason: Documentation-first YAML schemas; not all entities have machine-readable JSON Schema artifacts yet
+    decision_ref: tickets/John/2026-09-05_201002-aiw-03-standards-registry.md
+    owner_id: human:ivan
+    reviewed_at: "2026-09-05T00:00:00Z"
+
+  - standard_id: openapi
+    title: OpenAPI Specification
+    issuing_body: OpenAPI Initiative
+    version: "3.1.0"
+    source_url: https://spec.openapis.org/oas/v3.1.0
+    scope:
+      - REST interface description where applicable
+    conformance: profiled
+    mapped_entities: []
+    deviation_reason: Applied per service; not org-wide OpenAPI mandate
+    decision_ref: tickets/John/2026-09-05_201002-aiw-03-standards-registry.md
+    owner_id: human:ivan
+    reviewed_at: "2026-09-05T00:00:00Z"
+
+  - standard_id: asyncapi
+    title: AsyncAPI Specification
+    issuing_body: AsyncAPI Initiative
+    version: "3.0.0"
+    source_url: https://www.asyncapi.com/docs/reference/specification/v3.0.0
+    scope:
+      - event and async interface description where applicable
+    conformance: profiled
+    mapped_entities:
+      - Signal
+      - docs/demiurge/schemas/signal-channel.md
+    deviation_reason: Applied per channel; signal schemas may predate AsyncAPI artifacts
+    decision_ref: tickets/John/2026-09-05_201002-aiw-03-standards-registry.md
+    owner_id: human:ivan
+    reviewed_at: "2026-09-05T00:00:00Z"
