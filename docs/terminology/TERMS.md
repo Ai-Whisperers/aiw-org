@@ -9,6 +9,24 @@ All agents, rules, prompts, schemas, and tickets defer to this file for definiti
 
 ---
 
+## Governance and versioning
+
+This library is a **governed framework artifact** (DEMIURGE-077). Lifecycle rules: [`docs/enterprise-framework/GOVERNANCE.md`](../enterprise-framework/GOVERNANCE.md). Gate status: [`docs/enterprise-framework/APPROVALS.md`](../enterprise-framework/APPROVALS.md).
+
+### Change rules
+
+1. **Add here first** — new or changed terms are defined in this file before use elsewhere.
+2. **No local redefinitions** — schemas, prompts, and tickets reference terms by name only.
+3. **Breaking term changes** — renaming a term, narrowing a definition, or splitting one term into two requires an ADR when runtime or schema behavior depends on the old meaning.
+4. **Version header** — the `Last updated` line and DEMIURGE ticket reference track document revision; formal `approved_commit` is recorded in the approval index when Ivan signs the gate.
+5. **Pending review** — until DEMIURGE-077 sign-off is complete, treat this file as `proposed`, not `approved`, regardless of coverage.
+
+### Term entry format
+
+Each term uses a YAML block with `term`, `category`, `definition`, optional `not_to_be_confused_with`, and `used_in`. New entries follow the same structure.
+
+---
+
 ## 1. Org structure
 
 ```yaml

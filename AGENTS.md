@@ -67,6 +67,21 @@ For Hermes skill/plugin changes:
 
 ---
 
+## Enterprise framework governance
+
+Framework models, terminology, and review gates follow [`docs/enterprise-framework/GOVERNANCE.md`](docs/enterprise-framework/GOVERNANCE.md). Canonical gate index: [`docs/enterprise-framework/APPROVALS.md`](docs/enterprise-framework/APPROVALS.md).
+
+**Before changing core entities:**
+
+1. **Terminology-first** — add or update terms in `docs/terminology/TERMS.md` before schemas, prompts, or tickets.
+2. **ADR for breaking changes** — entity, relationship, or enumeration changes that break consumers require an ADR in `docs/adr/`.
+3. **Migration notes** — when an approved schema version changes, document what consumers must update.
+4. **Human authority** — changes to approvers or sign-off rules need a dated review gate, not a silent edit.
+
+**Forbidden:** Calling a model `locked`, `complete`, or `approved` while its gate in APPROVALS.md is still `proposed`. AI-generated approval summaries are not evidence of human sign-off.
+
+---
+
 ## Git discipline
 
 - **Forbidden: `git add -A`** — use `git add -u` or per-file `git add <path>`. New files must be explicitly added.

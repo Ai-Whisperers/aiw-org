@@ -1,8 +1,9 @@
 # DEMIURGE-008 — Domain Model Review
 
-> **Status**: PENDING APPROVAL  
-> **Reviewers**: Ivan, John  
+> **Status**: PENDING APPROVAL (`lifecycle: proposed`)
+> **Reviewers**: Ivan, John
 > **Blocks**: Sprint 1+
+> **review_target_commit**: `4b74290981e60b04fed044e420a93442bb0766ac`
 
 ## Artifacts to review
 

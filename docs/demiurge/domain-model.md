@@ -1,6 +1,7 @@
 # DEMIURGE Domain Model
 
-> Locked Sprint 0. Every agent, department, and signal is an instance of these objects.
+> **Status:** `proposed` — DEMIURGE-008 pending approval ([REVIEW-domain-model.md](REVIEW-domain-model.md)).
+> Every agent, department, and signal is an instance of these objects.
 
 ## Object graph
 

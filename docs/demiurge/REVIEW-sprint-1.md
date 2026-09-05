@@ -1,7 +1,8 @@
 # DEMIURGE-015 — Sprint 1 Review
 
-**Status**: PENDING APPROVAL  
+**Status**: PENDING APPROVAL (`lifecycle: proposed`)
 **Reviewers**: Ivan, John
+**review_target_commit**: `4b74290981e60b04fed044e420a93442bb0766ac`
 
 ## Artifacts
 

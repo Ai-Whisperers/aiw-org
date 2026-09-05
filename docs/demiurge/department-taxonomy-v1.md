@@ -1,5 +1,7 @@
 # Department Taxonomy v2
 
+> **File path:** `department-taxonomy-v1.md` (stable link target; internal schema version is **v2**).
+> **Status:** `proposed` — DEMIURGE-015 pending approval ([REVIEW-sprint-1.md](REVIEW-sprint-1.md)).
 > DEMIURGE-011 — seeds agents-v2 functional area taxonomy
 > DEMIURGE-070 — add missing depts, fix status drift, restore original-20 entries
 
